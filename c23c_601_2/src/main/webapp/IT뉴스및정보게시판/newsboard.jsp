@@ -7,9 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div>
-		프론트 페이지 테스트1
-	</div>
 
 </body>
 </html>
