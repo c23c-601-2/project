@@ -8,29 +8,39 @@
 <html>
 <style>
 .container {
-	border: 1px solid black;
+	/* border: 1px solid black; */
+	display: flex;
+	flex-direction: row;
+	width: 100%;
 }
-header {
-	border: 1px solid black;
-	height: 100px;
-}
+
 .verticalmain {
 	border: 1px solid black;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 }
+
 .mainsearch {
 	border: 1px solid black;
-	width: 25%
+	width: 600px;
+	display: flex;
+	flex-direction: row;
 }
+
+#map {
+	width: 100%;
+}
+
 .mainmap {
 	width: 50%;
 }
+
 .mainright {
 	border: 1px solid black;
 	width: 25%
 }
+
 .boxrow {
 	margin: 10px;
 	height: 300px;
@@ -40,12 +50,14 @@ header {
 	justify-content: space-between;
 	background-color: ffffea;
 }
+
 .boxleft {
 	width: 49%;
 	border: 1px solid blue;
 	/* margin-right: 2px; */
 	background-color: #F8F8C1;
 }
+
 .boxright {
 	width: 49%;
 	border: 1px solid blue;
@@ -66,25 +78,42 @@ header {
 	crossorigin="anonymous">
 <link rel="stylesheet"
 	href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=07c74fda752bcdd18b45e54e39e95411"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+	integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!-- services와 clusterer, drawing 라이브러리 불러오기 -->
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services,clusterer,drawing"></script>
+<script type="text/javascript" src="./js/menu.js"></script>
 </head>
 <body>
-	<h1>지도 입니다.</h1>
-	<%@ include file="menu.jsp"%>
-	<div class="mainsearch">
-		검색창
-	</div>
+	<div class="container">
+		<%@ include file="menu.jsp"%>
+		<!-- <div class="mainsearch">검색창</div> -->
+			<div class="mainsearch">
+						<form action="./login" method="post">
+							<img alt="login" src="./img/search.png" width="24px;">
+							<input type="text" name="id" placeholder="상호명을 입력하세요.">
+							<button type="reset">지우기</button>
+							<button type="submit">입력하기</button>
+							<div id="errorMSG"></div>
+						</form>
+			</div>
+		<div id="map" style="width: 1200px; height: 100vh;">
+			<script>
+				var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+				mapOption = {
+					center : new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+					level : 3
+				// 지도의 확대 레벨
+				};
 
-	<!-- Bootstrap core JS-->
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-	<!-- Core theme JS-->
-	<script src="js/scripts.js"></script>
-	<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-	<!-- * *                               SB Forms JS                               * *-->
-	<!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-	<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-	<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+				// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+				var map = new kakao.maps.Map(mapContainer, mapOption);
+			</script>
+		</div>
+	</div>
 </body>
 </html>
