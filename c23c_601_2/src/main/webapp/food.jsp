@@ -20,7 +20,6 @@
 							<input type="text" name="id" placeholder="상호명을 입력하세요.">
 							<button type="reset">지우기</button>
 							<button type="submit">입력하기</button>
-							
 							<div id="errorMSG"></div>
 						</form>
 			</div>
