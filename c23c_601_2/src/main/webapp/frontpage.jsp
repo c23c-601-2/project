@@ -37,7 +37,6 @@ header {
 .boxrow {
 	margin: 10px;
 	height: 300px;
-	border: 1px solid red;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
