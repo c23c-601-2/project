@@ -55,14 +55,16 @@ header {
 	align-items: center;
     
 }
-.youtubrlink a {
+.youtubelink a {
+	color: inherit;
 	text-decoration: none;
+	font-weight: bold;
 }
 
 .youtubelink img {
     margin-right: 10px; /* 이미지와 텍스트 사이 여백을 조절 */
  }
-.youtubeleft {
+.youtubeplay {
 	height: 90%;
 	width: 100%
 	
@@ -104,15 +106,18 @@ header {
 						<div class="youtubelink">
 							<img src="./assets/img/youtube.png" alt="유투브"> <a href="https://www.youtube.com/@poseidon5349/featured" target="_blank">선생님 유투브</a>
 						</div>
-						<div class = "youtubeleft">
+						<div class ="youtubeplay">
 							<iframe  width="100%" height="100%" src="https://www.youtube.com/embed/YkVyu_uXB3Y" frameborder="0" allowfullscreen></iframe>
 						</div>
 					</div>
 					
 					<div class="youtuberightbox">
-						<div>
+						<div class="youtubelink">
+							<img src="./assets/img/youtube.png" alt="유투브"> <a href="https://www.youtube.com/@codingnoodle" target="_blank">추천 유투브</a>
 						</div>
-						<iframe width="100%" height="100%" src="https://www.youtube.com/embed/ti00Z0S-haE" frameborder="0" allowfullscreen></iframe>
+						<div class ="youtubeplay">
+							<iframe width="100%" height="100%" src="https://www.youtube.com/embed/ti00Z0S-haE" frameborder="0" allowfullscreen></iframe>
+						</div>
 					</div>
 				</div>
 				<div class="boxrow">
