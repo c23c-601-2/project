@@ -21,17 +21,33 @@ header {
 }
 .mainleft {
 	border: 1px solid black;
-	width: 10%
+	width: 24%
 }
 .menu {
-	border: 1px solid black;
+	border: 1px solid red;
 }
+.no-bullet {
+	/* 동글뱅이 지우는 법 */
+	margin-top: 40px;
+	list-style-type: none;
+	padding: 10px;
+}
+.no-bullet li {
+	display: flex;
+	align-items: center;
+	margin-bottom: 20px;
+	font-size: 20px;
+}
+.no-bullet li img {
+	margin-right: 10px;
+}
+
 .maincenter {
 	width: 100%;
 }
 .mainright {
 	border: 1px solid black;
-	width: 10%
+	width: 12%
 }
 
 .boxrow {
@@ -90,14 +106,26 @@ header {
 </style>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>601 FrontPage</title>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+<script type="text/javascript" src="./js/frontmenu.js"></script>
 </head>
 <body>
 	<div class="container">
 		<header> 헤더부분 </header>
 		<div class="verticalmain">
 			<div class="mainleft">
-			왼쪽 메뉴
+				<div class="menu">
+					<nav>
+						<ul class = no-bullet>
+							<li onclick="url('./instagram')"><img src="./assets/img/instagram.png" alt="601스타그램" width="40" height="auto" > 601스타그램</li>
+							<li onclick="url('./restaurant')"><img src="./assets/img/restaurant.png" alt="601맛집" width="40" height="auto" > 601맛집</li>
+							<li onclick="url('./jobinfo')"><img src="./assets/img/jobinfo.png" alt="601취업 정보" width="40" height="auto" > 601취업정보</li>
+							<li></li>
+							<li></li>
+						</ul>
+					</nav>
+				</div>
 			</div>
 			<div class="maincenter">
 				<div class="boxrow">
