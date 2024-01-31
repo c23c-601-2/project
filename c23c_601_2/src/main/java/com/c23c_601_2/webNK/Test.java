@@ -30,7 +30,7 @@ public class Test extends HttpServlet {
             Document document = Jsoup.connect(url).get();
 
             // 웹페이지에서 원하는 데이터 추출 (예: 기사 제목)
-            Elements headlines = document.select("h2.headline");
+            Elements headlines = document.select("<div class=\"sa_text\">");
 
             // 추출한 데이터를 클라이언트에게 전송
             out.println("<html><head><title>News Headlines</title></head><body>");
