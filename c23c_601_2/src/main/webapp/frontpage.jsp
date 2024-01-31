@@ -180,7 +180,7 @@ footer {
 					<div class="boxleft">
 						<img src="./assets/img/ad.png" alt="광고" width="100%" height="100%" > 
 					</div>
-					<div class="boxright">두 번째 박스</div>
+					<div class="boxright">두 번째 박스2</div>
 				</div>
 				<div class="boxrow">
 					<div class="boxleft">세 번째 박스</div>
