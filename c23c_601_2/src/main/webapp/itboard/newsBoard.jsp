@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,23 +24,24 @@ body {
 <body>
 	<div class="maintitle">
 		<h1>601하하</h1>
-	</div>
-	<h1 class="alltitle">전체 뉴스</h1>
-	<table class="table">
+		</div>
+	<table class="table" border="1">
+	<caption class="caption">전체 뉴스</caption>
+	<caption class="caption1">출처 : 네이버</caption>
 		<tr>
 			<th>번호</th>
 			<th>제목</th>
 			<th>날짜</th>
-			<th>조회수</th>
 		</tr>
-
-		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-		</tr>
-
+		<c:forEach items="${headlines}" var="h" varStatus="status">
+    <tr>
+        <td>${status.index + 1}</td>
+        <td onclick="window.location.href='${headlines2[status.index]}'">${h}</td>
+    </tr>
+    <c:foreEach items="${headlines3}" var="h2">
+    	<td>${h2}</td>
+    	</c:foreEach>
+</c:forEach>
 	</table>
 </body>
 </html>
