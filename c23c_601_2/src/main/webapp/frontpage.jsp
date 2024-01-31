@@ -127,7 +127,7 @@ header {
 					<nav>
 						<ul class = no-bullet>
 							<li onclick="url('./instagram')"><img src="./assets/img/instagram.png" alt="601스타그램" width="40" height="auto" > 601스타그램</li>
-							<li onclick="url('./food')"><img src="./assets/img/restaurant.png" alt="601맛집" width="40" height="auto" > 601맛집</li>
+							<li onclick="url('./food')"><img src="./assets/img/restaurant.jpg" alt="601맛집" width="40" height="auto" > 601맛집</li>
 							<li onclick="url('./jobinfo')"><img src="./assets/img/jobnews.png" alt="601취업 정보" width="40" height="auto" > 601취업정보</li>
 							<li></li>
 							<li></li>
