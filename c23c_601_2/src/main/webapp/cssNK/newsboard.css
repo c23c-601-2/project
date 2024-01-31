@@ -1,0 +1,19 @@
+@charset "UTF-8";
+
+.maintitle{
+	color : white;
+	text-align: center;
+	width: 50%;
+	margin : 0 auto;
+	margin-top : 150px;
+	background-color: black;
+}
+
+.table{
+	text-align: center;
+	width:60%;
+	margin : 0 auto;
+	margin-top : 50px;
+	border-collapse: collapse;
+	border-bottom: 1px solid gray;
+}
