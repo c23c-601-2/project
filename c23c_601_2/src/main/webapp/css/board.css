@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+table {
+	width: 500px;
+	height: 400px;
+	border-collapse: collapse;
+}
+
+tr:hover {
+	background-color: #E6E6FA;
+}
+
+th {
+	background-color: #E6E6FA;
+	border-bottom: 2px solid black;
+}
+
+td {
+	text-align: center;
+}
+
+.title {
+	text-align: left;
+}
