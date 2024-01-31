@@ -12,6 +12,8 @@
 header {
 	border: 1px solid black;
 	height: 100px;
+	text-align: center; /* 수평 가운데 정렬 */
+  	/* line-height: 100px; */
 }
 .verticalmain {
 	border: 1px solid black;
@@ -112,14 +114,17 @@ header {
 </head>
 <body>
 	<div class="container">
-		<header> 헤더부분 </header>
+		<header>
+			<img src="./assets/img/mainHeaderImg.png" alt="601스타그램" width="100" height="auto" >
+				
+		</header>
 		<div class="verticalmain">
 			<div class="mainleft">
 				<div class="menu">
 					<nav>
 						<ul class = no-bullet>
 							<li onclick="url('./instagram')"><img src="./assets/img/instagram.png" alt="601스타그램" width="40" height="auto" > 601스타그램</li>
-							<li onclick="url('./restaurant')"><img src="./assets/img/restaurant.png" alt="601맛집" width="40" height="auto" > 601맛집</li>
+							<li onclick="url('./food')"><img src="./assets/img/restaurant.png" alt="601맛집" width="40" height="auto" > 601맛집</li>
 							<li onclick="url('./jobinfo')"><img src="./assets/img/jobinfo.png" alt="601취업 정보" width="40" height="auto" > 601취업정보</li>
 							<li></li>
 							<li></li>
