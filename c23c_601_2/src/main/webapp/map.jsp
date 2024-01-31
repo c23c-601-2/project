@@ -64,13 +64,14 @@
 	/* margin-left: 2px; */
 	background-color: #F8F8C1;
 }
+
 </style>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- 부트스트랩 -->
 <title>Map</title>
 <link href="./css/menu.css?ver=0.12" rel="stylesheet" />
+<link href="./css/add.css?ver=0.12" rel="stylesheet" />
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -91,7 +92,6 @@
 <body>
 	<div class="container">
 		<%@ include file="menu.jsp"%>
-		<!-- <div class="mainsearch">검색창</div> -->
 			<div class="mainsearch">
 						<form action="./login" method="post">
 							<img alt="login" src="./img/search.png" width="24px;">
@@ -99,8 +99,12 @@
 							<button type="reset">지우기</button>
 							<button type="submit">입력하기</button>
 							<div id="errorMSG"></div>
+						<div class="ad1">광고1</div><hr>
+						<div class="ad2">광고2</div><hr>
+						<h3>ㅁㅁ님을 위한 오늘의 추천 Pick !</h3>
 						</form>
 			</div>
+			
 		<div id="map" style="width: 1200px; height: 100vh;">
 			<script>
 				var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
