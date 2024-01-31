@@ -128,6 +128,7 @@ header {
 							<li onclick="url('./jobinfo')"><img src="./assets/img/jobinfo.png" alt="601취업 정보" width="40" height="auto" > 601취업정보</li>
 							<li></li>
 							<li></li>
+							
 						</ul>
 					</nav>
 				</div>
