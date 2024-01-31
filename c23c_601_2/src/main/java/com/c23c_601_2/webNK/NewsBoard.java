@@ -20,9 +20,12 @@ public class NewsBoard extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         ItboardDAO dao = new ItboardDAO();
-        List<String> headlines = dao.headLines();
-        
+        List<String> headlines = dao.newsTitle();
+        List<String> headlines2 = dao.newsUrl();
+        List<String> headlines3 = dao.newsDate();
         request.setAttribute("headlines", headlines);
+        request.setAttribute("headlines2", headlines2);
+        request.setAttribute("headlines3", headlines3);
         
         RequestDispatcher rd = request.getRequestDispatcher("/itboard/newsBoard.jsp");
         rd.forward(request, response);
