@@ -4,34 +4,46 @@
 <html>
 <style>
 .container {
-	border: 1px solid red;
 	margin: 0 auto;
-	width: 60%
+	width: 1115px;
+	/* width: 60%; */
+	background-color: #F5ECE4;
 }
 
 header {
-	border: 1px solid black;
 	height: 100px;
+	text-align: center; /* 수평 가운데 정렬 */
+  	/* line-height: 100px; */
 }
 .verticalmain {
-	border: 1px solid black;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+	
 }
 .mainleft {
-	border: 1px solid black;
-	width: 10%
+	width: 25%
 }
 .menu {
-	border: 1px solid black;
 }
+.no-bullet {
+	/* 동글뱅이 지우는 법 */
+	margin-top: 40px;
+	list-style-type: none;
+	padding: 10px;
+}
+.no-bullet li {
+	display: flex;
+	align-items: center;
+	margin-bottom: 20px;
+	font-size: 20px;
+}
+.no-bullet li img {
+	margin-right: 10px;
+}
+
 .maincenter {
 	width: 100%;
-}
-.mainright {
-	border: 1px solid black;
-	width: 10%
 }
 
 .boxrow {
@@ -76,28 +88,53 @@ header {
 
 .boxleft {
 	width: 50%;
-	border: 1px solid blue;
 	margin-right: 2px;
 	background-color: #F8F8C1;
 }
 
 .boxright {
 	width: 50%;
-	border: 1px solid blue;
 	margin-left: 2px;
 	background-color: #F8F8C1;
+}
+.mainright {
+	width: 18%
+}
+.account {
+	background-color: #FFDC9F;
+	paddin: 2px;
+}
+.rightAd {
+	margin-top: 10px;
+	padding: 3px;	
 }
 </style>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>601 FrontPage</title>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+<script type="text/javascript" src="./js/frontmenu.js"></script>
 </head>
 <body>
 	<div class="container">
-		<header> 헤더부분 </header>
+		<header>
+			<img src="./assets/img/mainHeaderImg.png" alt="601 게시판 아이콘" width="100" height="auto" >
+			<img src="./assets/img/mainLogo.png" alt="601 게시판 로고" width="auto" height="100%" >
+		</header>
 		<div class="verticalmain">
 			<div class="mainleft">
-			왼쪽 메뉴
+				<div class="menu">
+					<nav>
+						<ul class = no-bullet>
+							<li onclick="url('./instagram')"><img src="./assets/img/instagram.png" alt="601스타그램" width="40" height="auto" > 601스타그램</li>
+							<li onclick="url('./food')"><img src="./assets/img/restaurant.jpg" alt="601맛집" width="40" height="auto" > 601맛집</li>
+							<li onclick="url('./jobinfo')"><img src="./assets/img/jobnews.png" alt="601취업 정보" width="40" height="auto" > 601취업정보</li>
+							<li></li>
+							<li></li>
+							
+						</ul>
+					</nav>
+				</div>
 			</div>
 			<div class="maincenter">
 				<div class="boxrow">
@@ -120,7 +157,9 @@ header {
 					</div>
 				</div>
 				<div class="boxrow">
-					<div class="boxleft">첫 번째 박스</div>
+					<div class="boxleft">
+						<img src="./assets/img/ad.png" alt="광고" width="100%" height="100%" > 
+					</div>
 					<div class="boxright">두 번째 박스</div>
 				</div>
 				<div class="boxrow">
@@ -128,7 +167,19 @@ header {
 					<div class="boxright">네 번째 박스</div>
 				</div>
 			</div>
-			<div class="mainright">오른쪽 메뉴</div>
+			<div class="mainright">
+				<div class="account">
+					<div>
+						<input type="hidden" name="_csrf" value="1358311e-a772-408c-8f71-a0ba45d9107a"/>
+						<input type="text" autocapitalize="off" placeholder="아이디" name="userId" value="" class="input_id" spellcheck="false">
+						<input type="password" placeholder="비밀번호" name="userPassword" value="" class="input_pw" spellcheck="false">
+						
+					</div>
+				</div>
+				<div class = rightAd>
+					<img src="./assets/img/ad_right.png" alt="오른쪽 광고 배너" width="100%" height="auto" >
+				</div>
+			</div>
 		</div>
 	</div>
 </body>
