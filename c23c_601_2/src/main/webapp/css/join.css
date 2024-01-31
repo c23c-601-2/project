@@ -29,3 +29,12 @@ article{
 	background-color: white;
 	padding-top:15px;
 }
+
+.joinName{
+	margin-left:25px;
+	float : right;
+}
+
+.mname .mpw2 .memail .mphone .postCode .selectAddr .detailAddr .joinComplete .joinBack {
+	width: 100%;
+}
