@@ -10,18 +10,56 @@ import org.jsoup.select.Elements;
 
 public class ItboardDAO {
 	 
-	public List<String> headLines() {
+	public List<String> newsTitle() {
 		List<String> headlines = new ArrayList<>();
 
         try {
             String url = "https://news.naver.com/breakingnews/section/105/283";
             Document document = Jsoup.connect(url).get();
-            Elements headlinesElements = document.select("div.sa_text > a");
+            Elements headlinesElements = document.select("strong.sa_text_strong");
             headlinesElements.forEach(headline -> headlines.add(headline.text()));
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         return headlines;
     }
+	
+	public List<String> newsUrl() {
+		List<String> headlines2 = new ArrayList<>();
+		
+		try {
+            String url = "https://news.naver.com/breakingnews/section/105/283";
+            Document document = Jsoup.connect(url).get();
+            
+            Elements headlines1 = document.select("div.sa_text > a.sa_text_title");
+            headlines1.forEach(headline -> {
+                String hrefValue = headline.attr("href");
+                headlines2.add(hrefValue);
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return headlines2;
+    }
+
+	public List<String> newsDate() {
+		List<String> headlines3 = new ArrayList<String>();
+		
+		try {
+            String url = "https://news.naver.com/breakingnews/section/105/283";
+            Document document = Jsoup.connect(url).get();
+            
+            Elements headlines1 = document.select("div.sa_text > a.sa_text_title");
+            headlines1.forEach(headline -> {
+                String hrefValue = headline.attr("href");
+                headlines3.add(hrefValue);
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return headlines3;
+	}
+	
 }
