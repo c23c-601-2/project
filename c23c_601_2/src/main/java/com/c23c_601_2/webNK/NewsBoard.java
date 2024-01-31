@@ -1,6 +1,9 @@
 package com.c23c_601_2.webNK;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,10 +19,14 @@ public class NewsBoard extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		AdminDAO dao = new AdminDAO();
+		List<Map<String, Object>> list = dao.ipList();
+		
+		request.setAttribute("list", list;
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		
 	}
 
 }
