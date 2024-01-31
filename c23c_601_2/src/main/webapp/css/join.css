@@ -8,7 +8,12 @@
 .mainStyle{
 	width:100%;
 	height:100vh;
-	background-color: grey;
+	background-color: #F2F2F2;
+	
+	/* 가운데정렬 */
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 article{
@@ -21,7 +26,6 @@ article{
 	margin: 0 auto;
 	text-align: center;
 	width: 700px;
-	height:500px;
 	background-color: white;
 	padding-top:15px;
 }
