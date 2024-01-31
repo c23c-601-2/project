@@ -3,9 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
 <!DOCTYPE html>
 <html>
+
 <style>
 .container {
 	/* border: 1px solid black; */
@@ -23,7 +23,7 @@
 
 .mainsearch {
 	border: 1px solid black;
-	width: 600px;
+	width: calc(600px - 200px);
 	display: flex;
 	flex-direction: row;
 }
@@ -64,47 +64,35 @@
 	/* margin-left: 2px; */
 	background-color: #F8F8C1;
 }
-
 </style>
+
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Map</title>
-<link href="./css/menu.css?ver=0.12" rel="stylesheet" />
-<link href="./css/add.css?ver=0.12" rel="stylesheet" />
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
-	crossorigin="anonymous">
+<title>식당 지도</title>
 <link rel="stylesheet"
 	href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=07c74fda752bcdd18b45e54e39e95411"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
-	integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
-	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<!-- services와 clusterer, drawing 라이브러리 불러오기 -->
 <script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services,clusterer,drawing"></script>
-<script type="text/javascript" src="./js/menu.js"></script>
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=07c74fda752bcdd18b45e54e39e95411"></script>
+<link href="./css/menu.css?ver=0.12" rel="stylesheet" />
+<link href="./css/add.css?ver=0.12" rel="stylesheet" />
 </head>
 <body>
+	<h1>식당 지도 입니다.</h1>
 	<div class="container">
 		<%@ include file="menu.jsp"%>
-			<div class="mainsearch">
-						<form action="./login" method="post">
-							<img alt="login" src="./img/search.png" width="24px;">
-							<input type="text" name="id" placeholder="상호명을 입력하세요.">
-							<button type="reset">지우기</button>
-							<button type="submit">입력하기</button>
-							<div id="errorMSG"></div>
-						<div class="ad1">광고1</div><hr>
-						<div class="ad2">광고2</div><hr>
-						<h3>ㅁㅁ님을 위한 오늘의 추천 Pick !</h3>
-						</form>
-			</div>
-			
+		<div class="mainsearch">
+			<div>
+			<form action="./food" method="post">
+				<img alt="login" src="./img/search.png" width="24px;"> <input
+					type="text" name="id" placeholder="음식점 상호를 입력하세요.">
+				<button type="reset">지우기</button>
+				<button type="submit">입력하기</button>
+				<div id="errorMSG"></div><hr>
+			<div class="ad1">광고1</div><hr>
+			<div class="ad2">광고2</div><hr>
+			<h3>ㅁㅁ님을 위한 오늘의 추천 Pick !</h3>
+			</form></div>
+		</div>
 		<div id="map" style="width: 1200px; height: 100vh;">
 			<script>
 				var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
