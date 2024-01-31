@@ -6,7 +6,8 @@
 .container {
 	border: 1px solid red;
 	margin: 0 auto;
-	width: 60%
+	width: 60%;
+	background-color: #F5ECE4;
 }
 
 header {
@@ -20,6 +21,7 @@ header {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+	
 }
 .mainleft {
 	border: 1px solid black;
@@ -115,8 +117,8 @@ header {
 <body>
 	<div class="container">
 		<header>
-			<img src="./assets/img/mainHeaderImg.png" alt="601스타그램" width="100" height="auto" >
-				
+			<img src="./assets/img/mainHeaderImg.png" alt="601 게시판 아이콘" width="100" height="auto" >
+			<img src="./assets/img/mainLogo.png" alt="601 게시판 로고" width="auto" height="100%" >
 		</header>
 		<div class="verticalmain">
 			<div class="mainleft">
