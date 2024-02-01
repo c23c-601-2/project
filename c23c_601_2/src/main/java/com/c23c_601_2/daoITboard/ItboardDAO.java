@@ -1,4 +1,4 @@
-package com.c23c_601_2.daoNK;
+package com.c23c_601_2.daoITboard;
 
 import java.io.IOException;
 import java.util.ArrayList;
