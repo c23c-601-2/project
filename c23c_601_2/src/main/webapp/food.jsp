@@ -23,7 +23,8 @@
 
 .mainsearch {
 	border: 1px solid black;
-	width: calc(600px - 200px);
+	margin-left: 200px;
+	width: 400px;
 	display: flex;
 	flex-direction: row;
 }
@@ -64,6 +65,15 @@
 	/* margin-left: 2px; */
 	background-color: #F8F8C1;
 }
+
+.write {
+	width: 280px;
+}
+
+.writeBtn {
+	margin-right: 0;
+	margin-left: auto;
+}
 </style>
 
 <head>
@@ -82,23 +92,67 @@
 		<%@ include file="menu.jsp"%>
 		<div class="mainsearch">
 			<div>
-			<form action="./food" method="post">
-				<img alt="login" src="./img/search.png" width="24px;"> <input
-					type="text" name="id" placeholder="음식점 상호를 입력하세요.">
-				<button type="reset">지우기</button>
-				<button type="submit">입력하기</button>
-				<div id="errorMSG"></div><hr>
-			<div class="ad1">광고1</div><hr>
-			<div class="ad2">광고2</div><hr>
-			<h3>ㅁㅁ님을 위한 오늘의 추천 Pick !</h3>
-			</form></div>
+				<form action="./board" method="post">
+					<img alt="login" src="./img/search.png" width="24px;"> <input
+						type="text" name="id" placeholder="음식점 상호를 입력하세요.">
+					<button type="submit">검색하기</button>
+					<!-- <button type="submit">등록하기</button> -->
+					<div id="errorMSG"></div>
+					<hr>
+					<div class="ad1">광고1</div>
+					<hr>
+					<div class="ad2">광고2</div>
+					<hr>
+					<h3>ㅁㅁ님을 위한 오늘의 추천 Pick !</h3>
+					<hr>
+					ㅁㅁ
+					<div>
+						<table class="write">
+							<h2>음식점 리스트</h2>
+							<div class="writeBtn">
+								<button type="write1()">후기 등록하기</button>
+								<script type="text/javascript">
+									function write1() {
+										if (confirm("정말 글쓰기를 실행하실겁니까?")) {
+											alert("아앗.")
+											location.href = "./write.jsp";
+										} else {
+											alert("휴, 다행입니다. 원복합니다.")
+										}
+									}
+								</script>
+							</div>
+							<thead>
+								<tr>
+									<th>가게 이름</th>
+									<th>후기 내용</th>
+									<th>좋아요 / 싫어요</th>
+									<th>별점</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${list }" var="row">
+									<tr>
+										<td class="d2">${row.food_title }</td>
+										<td class="d3">${row.food_content }</td>
+										<td class="d1">${row.food_like }/ ${row.food_dislike }</td>
+										<td class="d1">${row.food_degree }</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+
+					</div>
+
+				</form>
+			</div>
 		</div>
 		<div id="map" style="width: 1200px; height: 100vh;">
 			<script>
 				var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 				mapOption = {
-					center : new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-					level : 3
+					center : new kakao.maps.LatLng(37.5571, 126.9460), // 지도의 중심좌표
+					level : 2
 				// 지도의 확대 레벨
 				};
 

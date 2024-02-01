@@ -100,6 +100,14 @@
 							<button type="submit">입력하기</button>
 							<div id="errorMSG"></div>
 						<div class="ad1">광고1</div><hr>
+						<div class = "youtubeleftbox">
+						<div class="youtubelink">
+							<img src="./assets/img/youtube.png" alt="유투브"> <a href="https://www.youtube.com/@poseidon5349/featured" target="_blank">선생님 유투브</a>
+						</div>
+						<div class ="youtubeplay">
+							<iframe  width="100%" height="100%" src="https://www.youtube.com/watch?v=s6KlHFI9fBY" frameborder="0" allowfullscreen></iframe>
+						</div>
+					</div>
 						<div class="ad2">광고2</div><hr>
 						<h3>ㅁㅁ님을 위한 오늘의 추천 Pick !</h3>
 						</form>
@@ -109,7 +117,7 @@
 			<script>
 				var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 				mapOption = {
-					center : new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+					center : new kakao.maps.LatLng(37.5571, 126.9460), // 지도의 중심좌표
 					level : 3
 				// 지도의 확대 레벨
 				};
