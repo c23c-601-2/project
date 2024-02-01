@@ -6,12 +6,13 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class PdsDAO extends AbstractDAO{
+public class PdsDAO extends com.c23c_601_2.daoGR.AbstractDAO{
 	public boolean insert(PdsDTO dto){
 	    boolean flag = false;
 	    
+	    
 	    try {
-	        Connection con = db.getConnection();
+	    	Connection con = db.getConnection();
 	        StringBuilder sql = new StringBuilder();
 	        
 	        sql.append("INSERT INTO tb_pds(wname, subject, passwd, filename, filesize, regdate) ");

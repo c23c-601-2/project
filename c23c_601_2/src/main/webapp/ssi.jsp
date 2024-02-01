@@ -8,11 +8,11 @@
 <%@ page import="com.oreilly.servlet.*" %>
 <%@ page import="com.oreilly.servlet.multipart.*" %>
 
-<%@page import="com.c23c_601_2.iBoard.*"%>
-<%@page import="com.c23c_601_2.iBoard.PdsDTO"%>
+<%@page import="com.c23c_601_2.daoGR.*"%>
+<%@page import="com.c23c_601_2.daoGR.PdsDTO"%>
 
-<jsp:useBean id="dao" class="com.c23c_601_2.iBoard.PdsDAO"></jsp:useBean>
-<jsp:useBean id="dto" class="com.c23c_601_2.iBoard.PdsDTO"></jsp:useBean>
+<jsp:useBean id="dao" class="com.c23c_601_2.daoGR.PdsDAO"></jsp:useBean>
+<jsp:useBean id="dto" class="com.c23c_601_2.daoGR.PdsDTO"></jsp:useBean>
 
 
 <% request.setCharacterEncoding("UTF-8");%>

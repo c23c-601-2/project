@@ -9,6 +9,7 @@ public class PdsDTO {
 	 private int readcnt;
 	 private String filename;
 	 private long filesize;
+	 private String imagePath;
 	 
 	 public PdsDTO(){}
 
@@ -82,6 +83,14 @@ public class PdsDTO {
 				+ subject + ", regdate=" + regdate + ", passwd=" + passwd
 				+ ", readcnt=" + readcnt + ", filename=" + filename
 				+ ", filesize=" + filesize + "]";
+	}
+
+	public String getImagePath() {
+		return imagePath;
+	}
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
 	}
 	
 }//class end
