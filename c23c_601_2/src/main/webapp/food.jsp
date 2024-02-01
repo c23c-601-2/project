@@ -105,17 +105,17 @@
 					<hr>
 					<h3>ㅁㅁ님을 위한 오늘의 추천 Pick !</h3>
 					<hr>
-					ㅁㅁ
+					
 					<div>
 						<table class="write">
 							<h2>음식점 리스트</h2>
-							<div class="writeBtn">
+							<div>
 								<button type="write1()">후기 등록하기</button>
 								<script type="text/javascript">
 									function write1() {
-										if (confirm("정말 글쓰기를 실행하실겁니까?")) {
+										if (confirm("영수증 지참하신거 맞으시죠?")) {
 											alert("아앗.")
-											location.href = "./write.jsp";
+											location.href = "./board.jsp";
 										} else {
 											alert("휴, 다행입니다. 원복합니다.")
 										}

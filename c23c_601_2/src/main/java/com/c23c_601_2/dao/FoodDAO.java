@@ -41,13 +41,13 @@ public class FoodDAO extends AbDAO{
 //		return list;
 //	}
 
-	public List<Map<String, Object>> foolList() {
+	public List<Map<String, Object>> foodList() {
 		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
 		Connection con = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "SELECT food_title, food_content, food_like, food_dislike, food_degree " +
-	             "FROM foodmap";
+	             "FROM foodmap LIMIT 0,5";
 		
 		try {
 			pstmt = con.prepareStatement(sql);

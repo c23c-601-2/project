@@ -28,7 +28,7 @@ public class Food extends HttpServlet {
 		FoodDAO dao = new FoodDAO();
 		FoodDTO dto = new FoodDTO();
 		List<java.util.Map<String, Object>> list = null;
-		list= dao.foolList();
+		list= dao.foodList();
 
 		request.setAttribute("list", list);
 		// 서블릿을 통과한 "list"를 jsp로 넘겨준다.
