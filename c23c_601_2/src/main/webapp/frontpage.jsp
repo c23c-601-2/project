@@ -209,7 +209,7 @@ footer {
 					<a href="/service/cs/policy" target="_blank">책임의 한계와 법적고지</a>
 					<a href="/service/cs/teenager" target="_blank">청소년 보호정책</a>
 				</div>
-				<p style="margin: 8px">Copyright <strong>©601 2조입니다</strong> All rights reserved.</p>
+				<p style="margin: 8px">Copyright <strong>©601 2조</strong> All rights reserved.</p>
 			</div>
 		</footer>
 	</div>
