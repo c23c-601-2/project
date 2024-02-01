@@ -17,3 +17,29 @@
 	border-collapse: collapse;
 	border-bottom: 1px solid gray;
 }
+.head{
+	width:50%;
+	margin : 0 auto;
+}
+.caption{
+	width:60%;
+	margin-right: auto;
+	margin-left : 0;
+	text-align: left;
+	font-size: 2em;
+}
+.caption1{
+	width:60%;
+	margin-right : 0;
+	margin-left : auto;
+	text-align: right;
+}
+
+.newssource{
+	margin-left : auto;
+	margin-right : 0;
+}
+.newssource:hover {
+    text-decoration: underline;
+    color: yellow;
+}
