@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/studyBoard")
 public class StudyBoard extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
 	
     public StudyBoard() {
         super();
