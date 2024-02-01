@@ -75,7 +75,7 @@
 <script type="text/javascript">
 
 $(function(){
-	
+	/*  */
 	
 	$('#address').click(function(){
 		selectAddress();
