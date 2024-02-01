@@ -10,7 +10,7 @@ import com.c23c_601_2.db.DBConnection;
 public class AbstractDAO {
 	DBConnection db = DBConnection.getInstance();
 	
-	void close(ResultSet rs, PreparedStatement pstmt, Connection con) {
+	public void close(ResultSet rs, PreparedStatement pstmt, Connection con) {
 		if(rs != null) {
 			try {
 				rs.close();
