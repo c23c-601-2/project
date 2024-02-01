@@ -75,7 +75,7 @@
 <script type="text/javascript">
 
 $(function(){
-	
+	/* 안녕 */
 	
 	$('#address').click(function(){
 		selectAddress();
