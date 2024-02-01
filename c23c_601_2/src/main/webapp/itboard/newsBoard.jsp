@@ -35,12 +35,10 @@ body {
 		</tr>
 		<c:forEach items="${headlines}" var="h" varStatus="status">
     <tr>
-        <td>${status.index + 1}</td>
-        <td onclick="window.location.href='${headlines2[status.index]}'">${h}</td>
+        <td>${status.count}</td>
+        <td class = "newssource"onclick="window.location.href='${headlines2[status.index]}'">${h}</td>
+    	<td >${headlines3[status.index]}</td>
     </tr>
-    <c:foreEach items="${headlines3}" var="h2">
-    	<td>${h2}</td>
-    	</c:foreEach>
 </c:forEach>
 	</table>
 </body>
