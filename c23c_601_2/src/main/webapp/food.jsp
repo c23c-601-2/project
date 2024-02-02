@@ -85,7 +85,20 @@
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=07c74fda752bcdd18b45e54e39e95411"></script>
 <link href="./css/menu.css?ver=0.12" rel="stylesheet" />
 <link href="./css/add.css?ver=0.12" rel="stylesheet" />
+<script type="text/javascript" src="./js/menu.js"></script>
 </head>
+
+<script type="text/javascript">
+	function write1() {
+		if (confirm("영수증 지참하신거 맞으시죠?")) {
+			alert("ㅇㅇ")
+			location.href = "./board.jsp";
+		} else {
+			alert("휴, 다행입니다. 원복합니다.")
+		}
+	}
+</script>
+
 <body>
 	<h1>식당 지도 입니다.</h1>
 	<div class="container">
@@ -105,22 +118,12 @@
 					<hr>
 					<h3>ㅁㅁ님을 위한 오늘의 추천 Pick !</h3>
 					<hr>
-					
+
 					<div>
 						<table class="write">
-							<h2>음식점 리스트</h2>
+							<h2>후기 리스트</h2>
 							<div>
-								<button type="write1()">후기 등록하기</button>
-								<script type="text/javascript">
-									function write1() {
-										if (confirm("영수증 지참하신거 맞으시죠?")) {
-											alert("아앗.")
-											location.href = "./board.jsp";
-										} else {
-											alert("휴, 다행입니다. 원복합니다.")
-										}
-									}
-								</script>
+								<button onclick="url('./board')">후기 게시판으로</button>
 							</div>
 							<thead>
 								<tr>
@@ -135,7 +138,7 @@
 									<tr>
 										<td class="d2">${row.food_title }</td>
 										<td class="d3">${row.food_content }</td>
-										<td class="d1">${row.food_like }/ ${row.food_dislike }</td>
+										<td class="d1">${row.food_like }/${row.food_dislike }</td>
 										<td class="d1">${row.food_degree }</td>
 									</tr>
 								</c:forEach>
@@ -143,7 +146,6 @@
 						</table>
 
 					</div>
-
 				</form>
 			</div>
 		</div>
@@ -154,8 +156,8 @@
 					center : new kakao.maps.LatLng(37.5571, 126.9460), // 지도의 중심좌표
 					level : 2
 				// 지도의 확대 레벨
+				
 				};
-
 				// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 				var map = new kakao.maps.Map(mapContainer, mapOption);
 			</script>
