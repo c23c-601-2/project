@@ -33,6 +33,13 @@
     </table>
 	</form>
 <!-- 본문끝 -->
+           <button onclick="redirectToPdsList()" id="list_button">글 목록</button>
+
+<script>
+  function redirectToPdsList() {
+    window.location.href = './pdsList.jsp';
+  }
+</script>
 
 
 <script>

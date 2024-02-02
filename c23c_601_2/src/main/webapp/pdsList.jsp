@@ -3,7 +3,6 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ include file="ssi.jsp" %>
 <link href="./css/imageList.css" rel="stylesheet">
-<link href="./css/imageCommon.css" rel="stylesheet">
 <%-- <header>
 	<%@ include file="header.jsp"%>
 </header> --%>
@@ -20,14 +19,14 @@
         /* PdsDTO dto; */ // 반복문 밖에서 선언
 %>
 전체 글 개수 : <%= list.size() %> <br>
-<table class="list_table">
+<!-- <table class="list_table">
     <tr>
         <th>제목</th>
         <th>사진</th>
         <th>작성자</th>
         <th>조회수</th>
         <th>작성일</th>
-    </tr>
+    </tr> -->
 <%
         for (int idx = 0; idx < list.size(); idx++) {
             dto = list.get(idx); // 이미 선언된 변수를 사용
@@ -45,38 +44,30 @@
                 }
             }
             if (dto.getFilename() != null) {
-    %>
+                %>
 
-    <tr>
-        <td><%=dto.getSubject()%></td>
-        <td><img src="<%= request.getContextPath() + "/webapp/storage/" + dto.getFilename() %>" width="50"></td>
-		<td><%=dto.getWname()%></td>
-        <td><%=dto.getReadcnt()%></td>
-        <td><%=formattedRegdate%></td> 
-    </tr>
+<div class="post">
+  <div class="post-image-container">
+    <img class="post-image" src="<%= request.getContextPath() + "/webapp/storage/" + dto.getFilename() %>" alt="Post Image">
+  </div>
+  <div class="post-info">
+    <span class="post-writer"><%=dto.getWname()%></span>
+    <div class="post-details">
+      <h4 class="post-subject"><%=dto.getSubject()%></h4>
+      <span class="post-date"><%=formattedRegdate%></span>
+      <span class="post-readcnt"><%=dto.getReadcnt()%></span>
+    </div>
+  </div>
+  <div class="post-content">
+    </div>
+</div>
+
+
     <%
             }
         }// for end
-        out.println("</table>");
+        // out.println("</table>");
         
     }// if 
     %>
     
-<body>
-        <section id="container">
-            <header id="header">
-                <section class="inner">   
-                </section>
-            </header>
-        </section>
-		<section id="container">
-            <header id="header">
-                <section class="inner">
-                    <h1 class="logo">
-                        <a href="index.html">
-                        </a>
-                    </h1>
-                </section>
-            </header>
-        </section>
-</body>
