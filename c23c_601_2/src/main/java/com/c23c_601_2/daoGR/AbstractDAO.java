@@ -1,4 +1,4 @@
-package com.c23c_601_2.dao;
+package com.c23c_601_2.daoGR;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,9 +8,10 @@ import java.sql.SQLException;
 import com.c23c_601_2.db.DBConnection;
 
 public class AbstractDAO {
+	
 	DBConnection db = DBConnection.getInstance();
 	
-	public void close(ResultSet rs, PreparedStatement pstmt, Connection con) {
+	void close(ResultSet rs, PreparedStatement pstmt, Connection con) {
 		if(rs != null) {
 			try {
 				rs.close();

@@ -15,9 +15,10 @@
 <body>
 	<div class="container">
 		<%@ include file="header.jsp" %>
+		<%@ include file="nav.jsp" %>
 		<div class="verticalmain">
 			<div class="mainleft">
-				<div class="menu">
+				<!-- <div class="menu">
 					<nav>
 						<ul class = no-bullet>
 							<li onclick="url('./instagram.jsp')"><img src="./assets/img/instagram.png" alt="601스타그램" width="40" height="auto" > 601스타그램</li>
@@ -29,7 +30,7 @@
 							
 						</ul>
 					</nav>
-				</div>
+				</div> -->
 				<div>
 					
     			</div>

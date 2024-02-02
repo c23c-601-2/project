@@ -1,4 +1,4 @@
-package com.c23c_601_2.webNK;
+package com.c23c_601_2.webITboard;
 
 import java.io.IOException;
 import java.util.List;
@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.c23c_601_2.daoNK.ItboardDAO;
+import com.c23c_601_2.daoITboard.ItboardDAO;
 
-@WebServlet("/itboad/newsBoard")
+@WebServlet("/newsBoard")
 public class NewsBoard extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -27,7 +27,7 @@ public class NewsBoard extends HttpServlet {
         request.setAttribute("headlines2", headlines2);
         request.setAttribute("headlines3", headlines3);
         
-        RequestDispatcher rd = request.getRequestDispatcher("/itboard/newsBoard.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/newsBoard.jsp");
         rd.forward(request, response);
     }
 
