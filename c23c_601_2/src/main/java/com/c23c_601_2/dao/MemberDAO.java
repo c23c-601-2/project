@@ -10,7 +10,7 @@ public class MemberDAO extends AbstractDAO{
 	
 	public int insertMember(MemberDTO dto) {
 		int result = 0;
-		Connection conn = db.getConn();
+		Connection conn = db.getConnection();
 		PreparedStatement pstmt= null;
 		String sql = "INSERT INTO member (mid,mpw,mname,memail,mphone,maddress) VALUES (?,?,?,?,?,?)";
 		
