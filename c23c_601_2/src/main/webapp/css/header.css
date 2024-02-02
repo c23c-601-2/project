@@ -1,5 +1,6 @@
 @charset "UTF-8";
 header {
+	background-color: #F5ECE4;
 	height: 100px;
 	text-align: center; /* 수평 가운데 정렬 */
   	/* line-height: 100px; */
