@@ -1,8 +1,14 @@
 package com.c23c_601_2.dto;
 
 public class MemberDTO {
-	private int mno,mgrade;
+	private int mno,mgrade,count;
 	private String mid,mname,mpw,memail,mphone,maddress,mdate;
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
 	public int getMno() {
 		return mno;
 	}
