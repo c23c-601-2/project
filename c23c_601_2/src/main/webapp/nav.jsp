@@ -7,6 +7,8 @@ nav {
 	align-items: center;
 	justify-content: space-between;
 	height: auto;
+	background-color: #F5ECE4;
+	border: 1px solid #F5ECE4;
 }
 
 nav > ul {
@@ -14,6 +16,8 @@ nav > ul {
 	flex-wrap: wrap;
 	align-items: center;
 	justify-content: center;
+	margin: 8px 0 16px 0;
+	background-color: #F5ECE4;
 	
 }
  
@@ -89,8 +93,8 @@ li {
 a {
 	text-decoration: none;
 	color: inherit;
-	font-size: 22px;
-	background-color: #F5ECE4;
+	font-size: 18px;
+	/* background-color: #F5ECE4; */
 }
 
 a:-webkit-any-link {
@@ -101,7 +105,7 @@ a:-webkit-any-link {
 	<ul>
 		<li>	
 			<div class="menu">
-				<a style="" href=/instagram.jsp><img src="./assets/img/instagram.png" alt="601스타그램" width="40" height="auto" style="margin-right: 10px;">601스타그램</a>
+				<a style="" href=/pdsList.jsp><img src="./assets/img/instagram.png" alt="601스타그램" width="34" height="auto" style="margin-right: 10px;">601스타그램</a>
 				<div class="dropdownBtn">
 					<i class="fa-solid fa-caret-up"> </i>
 				</div>	
@@ -109,7 +113,7 @@ a:-webkit-any-link {
 		</li>
 		<li>	
 			<div class="menu">
-				<a style="" href=/food.jsp><img src=".//assets/img/restaurant.jpg" alt="601맛집" width="40" height="auto" style="margin-right: 10px;">601맛집</a>
+				<a style="" href=/food.jsp><img src=".//assets/img/restaurant.jpg" alt="601맛집" width="34" height="auto" style="margin-right: 10px;">601맛집</a>
 				<div class="dropdownBtn">
 					<i class="fa-solid fa-caret-up"> </i>
 				</div>	
@@ -117,7 +121,7 @@ a:-webkit-any-link {
 		</li>
 		<li>
 			<div class="menu">
-				<a style="" ><img src=".//assets/img/jobnews.png" alt="601취업정보" width="40" height="auto" style="margin-right: 10px;">601취업정보</a>
+				<a style="" ><img src=".//assets/img/jobnews.png" alt="601취업정보" width="34" height="auto" style="margin-right: 10px;">601취업정보</a>
 				<div class="dropdownBtn">
 					<i class="fa-solid fa-caret-up"> </i>
 				</div>	
@@ -133,7 +137,7 @@ a:-webkit-any-link {
 		</li>
 		<li>	
 			<div class="menu">
-				<a style="" href=/join><img src=".//assets/img/login.png" alt="로그인" width="40" height="auto" style="margin-right: 10px;">로그인</a>
+				<a style="" href=/join><img src=".//assets/img/login.png" alt="로그인" width="34" height="auto" style="margin-right: 10px;">로그인</a>
 				<div class="dropdownBtn">
 					<i class="fa-solid fa-caret-up"> </i>
 				</div>	

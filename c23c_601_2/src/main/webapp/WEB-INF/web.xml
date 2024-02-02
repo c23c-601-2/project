@@ -38,8 +38,8 @@
 		<auth-constraint>
 			<role-name>nobody</role-name>
 		</auth-constraint>
-	</security-constraint> -->
-
+	</security-constraint>
+ -->
 	<security-role>
 		<description>
 Nobody should be in this role so JSP files are protected
