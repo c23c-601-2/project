@@ -137,7 +137,7 @@ a:-webkit-any-link {
 		</li>
 		<li>	
 			<div class="menu">
-				<a style="" href=/join><img src=".//assets/img/login.png" alt="로그인" width="34" height="auto" style="margin-right: 10px;">로그인</a>
+				<a style="" href=/login><img src=".//assets/img/login.png" alt="로그인" width="34" height="auto" style="margin-right: 10px;">로그인</a>
 				<div class="dropdownBtn">
 					<i class="fa-solid fa-caret-up"> </i>
 				</div>	

@@ -47,7 +47,7 @@
 	
 	}
 	.btndiv{
-		padding-bottom: 15px;
+		padding-bottom: 20px;
 	}
 	.box{
 		width: 100%;
@@ -71,9 +71,21 @@
 	.joindiv a:active {
 	  color : #2E64FE
 	}
+	
+	.id-alert{
+		margin-bottom: 10px;
+		font-weight: bold;
+		color:red;
+		font-size:15px;
+		/* 가운데정렬 */
+		display: flex;
+		justify-content: center;		
+		align-items: center;
+	}
 </style>
 <script type="text/javascript">
 	$(function(){
+		$('.id-alert').hide();
 		
 		var key = getCookie("idChk"); //user1
 		if(key!=""){
@@ -86,7 +98,6 @@
 		
 		
 		
-		$('.id-alert').hide();
 		
 		$("#join").click(function(){
 			window.location.replace("./join");
@@ -102,6 +113,38 @@
 			
 			let id = $('#id').val();
 			let pw = $('#pw').val();
+			
+			if(id.length ==0){
+				
+				$('.id-alert').show();
+				$('.id-alert').html("<div>아이디를 입력해주세요.</div>");
+				
+				
+			}else if(pw.length ==0){
+
+				$('.id-alert').show();
+				$('.id-alert').html("<div>비밀번호를 입력해주세요.</div>");
+				
+			} else {
+				$.ajax({
+					url:'/login',
+					type:'post',
+					dataType:'text',
+					data:{'id':id,'pw':pw},
+					success:function(result){
+						if(result==1){
+							$('.id-alert').hide();
+							window.location.replace("./frontpage");
+						} else{
+							$('.id-alert').html("<div>아이디 또는 비밀번호를 잘못 입력했습니다.</div>");
+						}
+					},
+					error:function(result){
+						alert("실패");
+					}
+					
+				});
+			}
 			
 			
 			
