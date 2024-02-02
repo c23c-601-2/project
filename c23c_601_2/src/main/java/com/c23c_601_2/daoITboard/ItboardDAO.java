@@ -1,4 +1,4 @@
-package com.c23c_601_2.daoNK;
+package com.c23c_601_2.daoITboard;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -50,12 +50,8 @@ public class ItboardDAO {
 		try {
             String url = "https://news.naver.com/breakingnews/section/105/283";
             Document document = Jsoup.connect(url).get();
-            
-            Elements headlines1 = document.select("div.sa_text > a.sa_text_title");
-            headlines1.forEach(headline -> {
-                String hrefValue = headline.attr("href");
-                headlines3.add(hrefValue);
-            });
+            Elements headlines1 = document.select("div.sa_text_datetime");
+            headlines1.forEach(headline -> headlines3.add(headline.text()));
         } catch (IOException e) {
             e.printStackTrace();
         }
