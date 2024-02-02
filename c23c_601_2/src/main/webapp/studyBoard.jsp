@@ -1,5 +1,6 @@
 <%@page import="java.util.Date"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%><!-- core = c -->
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -23,29 +24,29 @@
 		<div class="main">
 			<div class="mainStyle">
 				<article>
-							<table class="table">
-								<tr>
-									<th>번호</th>
-									<th>제목</th>
-									<th>글쓴이</th>
-									<th>날짜</th>
-									<th>조회수</th>
-								</tr>
-								<c:forEach items="${list }" var="row">
-									<tr>
-										<td>${row.studyboard_no}</td>
-										<td>${row.studyboard_title}</td>
-										<td>${row.studyboard_write}</td>
-										<td>${row.studyboard_date}</td>
-										<td>${row.studyboard_count}</td>
-									</tr>
-								</c:forEach>
-							</table>
+					<table class="table">
+						<tr>
+							<th>번호</th>
+							<th>제목</th>
+							<th>글쓴이</th>
+							<th>날짜</th>
+							<th>조회수</th>
+						</tr>
+						<c:forEach items="${list }" var="row">
+							<tr>
+								<td>${row.studyboard_no}</td>
+								<td>${row.studyboard_title}</td>
+								<td>${row.studyboard_write}</td>
+								<td>${row.studyboard_date}</td>
+								<td>${row.studyboard_count}</td>
+							</tr>
+						</c:forEach>
+					</table>
+					<button onclick="url('./studyWrite')">글쓰기</button>
 				</article>
 			</div>
 		</div>
-		<footer>
-		</footer>
+		<footer> </footer>
 	</div>
 </body>
 </html>
