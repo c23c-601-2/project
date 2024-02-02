@@ -234,7 +234,7 @@ $(function(){
 							type:'post',
 							data:join,
 							success:function(){
-								window.location.replace("http://localhost/c23c_601_2/");
+								window.location.replace(".frontpage");
 							},
 							error:function(){
 								alert("실패");
