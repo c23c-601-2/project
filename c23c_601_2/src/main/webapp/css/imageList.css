@@ -1,35 +1,61 @@
-@charset "UTF-8";
-
-body{
-    background: #fafafa;
-}
-#header{
-    width: 100%; /*공중 부양*/
-    position: absolute;/*맨 위로 위치*/
-    z-index: 999;/*absolute의 경우 최소 x축 1개, y축 1개 필요*/
-    left: 0;
-    top: 0;
-    background: white;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
-#header  .inner{/*inner 내 컨텐츠를 넣으면 안에 값이 들어옴*/
-    width: 975px;
-    height: 77px;/*높이 값은 header내의 자식들에게 줌*/
-    margin: 0 auto; /*가운데 정렬*/
+/* 게시물 컨테이너 */
+.post {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  align-items: center; /* 이미지 중앙 정렬 */
 }
 
-/* ---------------------------------------- */
-.h3{
-	font-size: 50px;
-	color : green;
-	
-	
-}
-.list_table{
-	width: 1200px;
-	height: 595px;
-	border-collapse: collapse;
-	align-items:center;
-	margin: 0 auto;	
+/* 이미지 컨테이너 */
+.post-image-container {
+  text-align: center;
+  align-items: center;
 }
 
+/* 이미지 */
+.post-image {
+  width: 500px;
+  height: 500px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+/* 게시물 정보 */
+.post-info {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline; /* 이름, 내용, 작성일 세로 정렬 */
+}
+
+/* 작성자 이름 */
+.post-writer {
+  text-align: left;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+/* 게시물 제목 */
+.post-subject {
+	text-align: left;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+/* 게시물 작성일 및 조회수 */
+.post-details {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #888;
+}
+
+/* 게시물 내용 */
+.post-content {
+	text-align: left;
+  margin-top: 10px;
+  line-height: 1.5;
+}
