@@ -32,6 +32,7 @@
 <body>
 	<div class="container">
 		<%@ include file="header.jsp"%>
+		<%@ include file="nav.jsp" %>
 		<div>
 			<div>
 				<article>
@@ -52,6 +53,7 @@
 							<button type="submit">등록하기</button>
 						</form>
 					</div>
+					
 				</article>
 				<button onclick="url('./board')">게시판으로</button>
 			</div>
@@ -59,8 +61,28 @@
 	</div>
 </body>
 <script>
-	$(document).ready(function() {
-		$('#summernote').summernote();
-	});
+    $(document).ready(function() {
+        $('#summernote').summernote();
+        checkLength();
+    });
+    function checkLength() {
+        var maxLength = 50;
+        var currentLength = $('#summernote').val().length;
+        var remainingLength = maxLength - currentLength;
+        $('#charCount').text(remainingLength + ' characters remaining');
+
+        // Disable form submission if content exceeds maxLength
+        if (currentLength > maxLength) {
+            $('#charCount').css('color', 'red');
+            $('button[type="submit"]').prop('disabled', true);
+        } else {
+            $('#charCount').css('color', 'black');
+            $('button[type="submit"]').prop('disabled', false);
+        }
+    }
+    function validateForm() {
+        // You can add additional validation logic here if needed
+        return $('#summernote').val().length <= 50;
+    }
 </script>
 </html>

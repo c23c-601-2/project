@@ -75,14 +75,12 @@ public class FoodDAO extends AbDAO{
 	}
 
 	public int write(FoodDTO dto) {
-		int result = 0; // 해당 행이 몇개가 반영 됬는지 알려줌
+		int result = 0; 
 
 		Connection con = db.getConnection();
 		PreparedStatement pstmt = null;
 		String sql = "INSERT INTO foodmap (food_title, food_content, grade) "
-				+ "VALUES(?,?,?)"; // 수정완
-		// 서브쿼리를 써서 유추해서 가져옴
-		// 괄호를 썼기때문에 먼저 계산후에 입력된다
+				+ "VALUES(?,?,?)"; 
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, dto.getTitle());
