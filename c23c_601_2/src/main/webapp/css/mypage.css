@@ -1,0 +1,29 @@
+@charset "UTF-8";
+/* 전체 폼 */
+.mypage{
+	width:100%;
+	height:100vh;
+	background-color: #F2F2F2;
+}
+
+
+/* 주문내역,댓글내역 */
+.orderform{
+	background-color: white;
+	margin:0px 63px;
+}
+
+/* 주문내역 폼 */
+.order{
+	
+}
+
+/* 댓글내역 폼 */
+.comment{
+	
+}
+
+/* 회원정보 폼 */
+.myinfo{
+	
+}
