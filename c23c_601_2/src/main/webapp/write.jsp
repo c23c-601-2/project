@@ -65,6 +65,7 @@
         $('#summernote').summernote();
         checkLength();
     });
+    
     function checkLength() {
         var maxLength = 50;
         var currentLength = $('#summernote').val().length;
