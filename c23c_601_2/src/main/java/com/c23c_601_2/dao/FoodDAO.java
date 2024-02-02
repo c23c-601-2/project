@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.c23c_601_2.dto.FoodDTO;
+
 public class FoodDAO extends AbDAO{
 
 //	public List<FoodDTO> foolList(FoodDTO foodDTO) {
@@ -46,7 +48,7 @@ public class FoodDAO extends AbDAO{
 		Connection con = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT food_title, food_content, food_like, food_dislike, food_degree " +
+		String sql = "SELECT food_no, food_title, food_content, food_like, food_dislike, food_degree " +
 	             "FROM foodmap LIMIT 0,5";
 		
 		try {
@@ -55,6 +57,7 @@ public class FoodDAO extends AbDAO{
 			
 			while(rs.next()) {
 	            Map<String, Object> dto = new HashMap<String, Object>();
+	            dto.put("no", rs.getString("food_no"));
 	            dto.put("food_title", rs.getString("food_title"));
 	            dto.put("food_content",rs.getString("food_content"));
 	            dto.put("food_like", rs.getInt("food_like"));
@@ -68,5 +71,12 @@ public class FoodDAO extends AbDAO{
 			close(rs, pstmt, con);
 		}
 		return list;
+	}
+
+	public int write(FoodDTO dto) {
+		
+		
+		
+		return 0;
 	}
 }
