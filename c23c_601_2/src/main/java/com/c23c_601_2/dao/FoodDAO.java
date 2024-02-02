@@ -13,42 +13,12 @@ import com.c23c_601_2.dto.FoodDTO;
 
 public class FoodDAO extends AbDAO{
 
-//	public List<FoodDTO> foolList(FoodDTO foodDTO) {
-//		List<FoodDTO> list = new ArrayList<FoodDTO>();
-//		// db정보
-//		Connection con = db.getConnection();
-//		PreparedStatement pstmt = null;
-//		ResultSet rs = null;
-//		String sql = "SELECT food_title, food_content, food_like, food_dislike, food_degree " +
-//	             "FROM foodmap";
-//		
-//		try {
-//			pstmt = con.prepareStatement(sql);
-//			rs = pstmt.executeQuery();
-//			
-//			while(rs.next()) {
-//	            FoodDTO dto = new FoodDTO();
-//	            dto.setTitle(rs.getString("food_title"));
-//	            dto.setContent(rs.getString("food_content"));
-//	            dto.setLike(rs.getInt("food_like"));
-//	            dto.setDislike(rs.getInt("food_dislike"));
-//	            dto.setDegree(rs.getFloat("food_degree"));
-//	            list.add(dto);
-//	         }
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}finally{
-//			close(rs, pstmt, con);
-//		}
-//		return list;
-//	}
-
 	public List<Map<String, Object>> foodList() {
 		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
 		Connection con = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT food_no, food_title, food_content, food_like, food_dislike, food_degree " +
+		String sql = "SELECT food_no, food_title, food_content, food_date, food_like, food_dislike, grade " +
 	             "FROM foodmap LIMIT 0,5";
 		
 		try {
@@ -60,10 +30,41 @@ public class FoodDAO extends AbDAO{
 	            dto.put("no", rs.getString("food_no"));
 	            dto.put("food_title", rs.getString("food_title"));
 	            dto.put("food_content",rs.getString("food_content"));
+	            dto.put("food_content",rs.getString("food_date"));
 	            dto.put("food_like", rs.getInt("food_like"));
 	            dto.put("food_dislike", rs.getInt("food_dislike"));
-	            dto.put("food_degree", rs.getFloat("food_degree"));
+	            dto.put("grade", rs.getInt("grade"));
 	            list.add(dto);
+	         }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs, pstmt, con);
+		}
+		return list;
+	}
+	public List<FoodDTO> foodListAll(int page) {
+		List<FoodDTO> list = new ArrayList<FoodDTO>();
+		Connection con = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT food_no, food_title, food_content, food_date, food_like, food_dislike, grade " +
+	             "FROM foodmap LIMIT ?, 10";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, (page - 1) * 10);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+	            FoodDTO e = new FoodDTO();
+	            e.setNo(rs.getInt("food_no"));
+	            e.setTitle(rs.getString("food_title"));
+	            e.setContent(rs.getString("food_content"));
+	            e.setDate(rs.getString("food_date"));
+	            e.setLike(rs.getInt("food_like"));
+	            e.setDislike(rs.getInt("food_dislike"));
+	            e.setGrade(rs.getInt("grade"));
+	            list.add(e);
 	         }
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -74,9 +75,48 @@ public class FoodDAO extends AbDAO{
 	}
 
 	public int write(FoodDTO dto) {
-		
-		
-		
-		return 0;
+		int result = 0; // 해당 행이 몇개가 반영 됬는지 알려줌
+
+		Connection con = db.getConnection();
+		PreparedStatement pstmt = null;
+		String sql = "INSERT INTO foodmap (food_title, food_content, grade) "
+				+ "VALUES(?,?,?)"; // 수정완
+		// 서브쿼리를 써서 유추해서 가져옴
+		// 괄호를 썼기때문에 먼저 계산후에 입력된다
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, dto.getTitle());
+			pstmt.setString(2, dto.getContent());
+			pstmt.setInt(3, dto.getGrade());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(null, pstmt, con);
+		}
+		return result;
+	}
+	
+	public int totalCount() {
+		int result = 0;
+		Connection con = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT COUNT(*) FROM foodmap";
+
+		try {
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				result= rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs, pstmt, con);
+		}
+
+		return result;
 	}
 }
