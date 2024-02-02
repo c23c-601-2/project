@@ -48,5 +48,13 @@ from direct access.
 		<role-name>nobody</role-name>
 	</security-role>
 
+	<!-- <servlet>
+        <servlet-name>ChatServer</servlet-name>
+        <servlet-class>com.c23c_601_2.web.ChatServer</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ChatServer</servlet-name>
+        <url-pattern>/chat</url-pattern>
+    </servlet-mapping> -->
 
 </web-app>
