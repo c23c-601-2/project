@@ -55,8 +55,6 @@ function pdsCheck(f){
         return false;
     }//if end
     
-    //2) 제목 (굳이 안 만들어도 될 것 같음)
-    
     //3) 비밀번호는 4~15자 이내
     var passwd=f.passwd.value;
     passwd=passwd.trim();
@@ -96,4 +94,3 @@ function pdsCheck(f){
   		return true;
                 
 }//pdsCheck() end
-</script>
