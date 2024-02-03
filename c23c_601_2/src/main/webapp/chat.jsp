@@ -17,6 +17,8 @@
 	function submitFunction() {
 		var chatName = $('#chatName').val();
 		var chatContent = $('#chatContent').val();
+		alert(chatName);
+		alert(chatContent);
 		$.ajax({
 			type: "POST",
 			url: "./chatSubmitServlet",
@@ -31,6 +33,7 @@
 					alert('이름과 내용을 정확히 입력하세요.');
 				} else {
 					alert('데이터베이스 오류가 발생했습니다.');
+					alert(result);
 				}
 			}
 		});
