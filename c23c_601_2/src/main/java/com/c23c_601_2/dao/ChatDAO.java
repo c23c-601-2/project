@@ -1,29 +1,17 @@
-package com.c23c_601_2.chat;
+package com.c23c_601_2.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-public class ChatDAO {
+import com.c23c_601_2.dto.ChatDTO;
+
+public class ChatDAO extends AbstractDAO {
 	
-	private Connection conn;
-	
-	public ChatDAO() {
-		try {
-			String dbURL = "jdbc:mysql://localhost:3306/ANONYMOUSCHAT";
-			String dbID = "root";
-			String dbPassword = "root";
-			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public ArrayList<Chat> getChatList(String nowTime) {
-		ArrayList<Chat> chatList = null;
+	public ArrayList<ChatDTO> getChatList(String nowTime) {
+		Connection conn = db.getConnection();
+		ArrayList<ChatDTO> chatList = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String SQL = "SELECT * FROM CHAT WHERE chatTime > ? ORDER BY chatTime";
@@ -31,9 +19,9 @@ public class ChatDAO {
 			pstmt =conn.prepareStatement(SQL);
 			pstmt.setString(1, nowTime);
 			rs = pstmt.executeQuery();
-			chatList = new ArrayList<Chat>();
+			chatList = new ArrayList<ChatDTO>();
 			while(rs.next()) {
-				Chat chat = new Chat();
+				ChatDTO chat = new ChatDTO();
 				chat.setChatName(rs.getString("chatName"));
 				chat.setChatContent(rs.getString("chatContent"));
 				chat.setChatTime(rs.getString("chatTime"));
@@ -52,15 +40,22 @@ public class ChatDAO {
 		return chatList;
 	}
 	
-	public int sunmit(String chatName, String chatContent) {
+	public int submit(String chatName, String chatContent) {
+		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String SQL = "INSERT INTO CHAT VALUES (?, ?, now())";
+		String SQL = "INSERT INTO chat VALUES (?, ?, now())";
+		int result = 0;
 		try {
-			pstmt =conn.prepareStatement(SQL);
+			System.out.println("sql: " + SQL);
+			System.out.println("chatname: " + chatName);
+			System.out.println("chatcontent: " + chatContent);
+			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, chatName);
 			pstmt.setString(2, chatContent);
-			return pstmt.executeUpdate();
+			result = pstmt.executeUpdate(); 
+			System.out.println("result: " + result);
+			return result;
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -73,5 +68,6 @@ public class ChatDAO {
 		}
 		return -1;
 	}
-	
+		
+
 }

@@ -56,5 +56,13 @@ from direct access.
         <servlet-name>ChatServer</servlet-name>
         <url-pattern>/chat</url-pattern>
     </servlet-mapping> -->
-
+	<servlet>
+		<servlet-name>ChatSubmitServlet</servlet-name>
+		<servlet-class>com.c23c_601_2.web.ChatSubmitServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ChatSubmitServlet</servlet-name>
+		<url-pattern>/chatSubmitServlet/*</url-pattern>
+	</servlet-mapping>
+	
 </web-app>

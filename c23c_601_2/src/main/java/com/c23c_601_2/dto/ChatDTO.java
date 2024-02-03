@@ -1,6 +1,6 @@
-package com.c23c_601_2.chat;
+package com.c23c_601_2.dto;
 
-public class Chat {
+public class ChatDTO {
 
 	String chatName;
 	String chatContent;
@@ -24,4 +24,5 @@ public class Chat {
 	public void setChatTime(String chatTime) {
 		this.chatTime = chatTime;
 	}
+
 }
