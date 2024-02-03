@@ -2,9 +2,8 @@ package com.c23c_601_2.dto;
 
 public class FoodDTO {
 	
-	private int no, like, dislike;
-	private float degree;
-	private String title, content;
+	private int no, like, dislike, grade;
+	private String title, content, date;
 	
 	public int getNo() {
 		return no;
@@ -24,12 +23,6 @@ public class FoodDTO {
 	public void setDislike(int dislike) {
 		this.dislike = dislike;
 	}
-	public float getDegree() {
-		return degree;
-	}
-	public void setDegree(float degree) {
-		this.degree = degree;
-	}
 	public String getTitle() {
 		return title;
 	}
@@ -41,6 +34,18 @@ public class FoodDTO {
 	}
 	public void setContent(String content) {
 		this.content = content;
+	}
+	public int getGrade() {
+		return grade;
+	}
+	public void setGrade(int grade) {
+		this.grade = grade;
+	}
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String date) {
+		this.date = date;
 	}
 
 }
