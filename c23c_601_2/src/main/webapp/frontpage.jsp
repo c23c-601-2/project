@@ -18,6 +18,7 @@
 		<%@ include file="nav.jsp" %>
 		<div class="verticalmain">
 			<div class="mainleft">
+				<%@ include file="chat.jsp" %>
 				<!-- <div class="menu">
 					<nav>
 						<ul class = no-bullet>

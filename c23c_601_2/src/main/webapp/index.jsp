@@ -26,15 +26,20 @@
 			},
 			success: function(result) {
 				if (result == 1) {
-					alert('전송에 성공했습니다.');
+					autoClosingAlert('#successMessage', 2000);
 				} else if (result == 0){
-					alert('이름과 내용을 정확히 입력하세요.');
+					autoClosingAlert('#dangerMessage', 2000);
 				} else {
-					alert('데이터베이스 오류가 발생했습니다.');
+					autoClosingAlert('#warningMessage', 2000);
 				}
 			}
 		});
 		$('#chatContent').val('');
+	}
+	function autoClosingAlert(selector, delay) {
+		var alert = $(selector).alert();
+		alert.show();
+		wimdow.setTimeout(function() {alert.hide()}, delay);
 	}
 </script>
 </head>
@@ -110,6 +115,15 @@
 				</div>
 			</div>
 		</div>
+		<div class="alert alert-success" id="successMessage" style="display: none;">
+			<strong>메세지 전송에 성공했습니다.</strong>
+		</div>
+		<div class="alert alert-danger" id="dangerMessage" style="display: none;">
+			<strong>이름과 내용을 모두 입력해 주세요.</strong>
+		</div>
+		<div class="alert alert-warning" id="warningMessage" style="display: none;">
+			<strong>데이터베이스 오류가 발생했습니다.</strong>
+		</div>		
 	</div>
 </body>
 </html>
