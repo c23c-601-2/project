@@ -75,7 +75,7 @@ $(function() {
 		<div class="main">
 			<div class="mainStyle">
 				<article>
-					<form action="./write" method="post">
+					<form action="./board">
 						<div class="search">
 							가게이름 검색하기 :<input type="text" id="search">
 							<button id="searchBtn">검색</button>
@@ -97,7 +97,7 @@ $(function() {
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach items="${list1 }" var="row">
+									<c:forEach items="${list1}" var="row">
 										<tr>
 											<td class="d1">${row.no }</td>
 											<td class="d3">${row.title }</td>
@@ -157,7 +157,6 @@ $(function() {
 							</div>
 						</c:when>
 						<c:otherwise>
-							<!-- 거짓일 때 -->
 							<h1>출력할 값이 없습니다.</h1>
 						</c:otherwise>
 					</c:choose>
