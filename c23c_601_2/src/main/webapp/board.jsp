@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <!DOCTYPE html>
 <html>
 
@@ -32,6 +33,15 @@ tbody>tr>td {
 }
 </style>
 <script>
+$(function() {
+	$('#searchBtn').click(function() {
+		let search = $('#search').val();
+		location.href = "./board?search=" + search;
+	});
+	
+	
+	
+});
 </script>
 </head>
 <body>
@@ -41,20 +51,23 @@ tbody>tr>td {
 		<div class="main">
 			<div class="mainStyle">
 				<article>
+					<div class="search">
+						가게이름 검색하기 :<input type="text" id="search">
+						<button id="searchBtn">검색</button>
+					</div>
 				<c:choose>
 						<c:when test="${fn:length(list) gt 0 }">
-					가게 검색하기 : <input type="text" id="text">
-					<button type="submit">검색</button>
 					<table>
 						<thead>
 							<tr>
 								<th class="d1">번호</th>
 								<th class="d2">가게 이름</th>
 								<th class="d3">후기 내용</th>
+								<th class="d1">작성자</th>
 								<th class="d1">날짜</th>
 								<th class="d1">좋아요</th>
 								<th class="d1">싫어요</th>
-								<th class="d2">별점</th>
+								<th class="d2">평점</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -63,17 +76,23 @@ tbody>tr>td {
 									<td class="d1">${row.no }</td>
 									<td class="d3">${row.title }</td>
 									<td class="d3">${row.content }</td>
+									<td class="d1">${row.write }</td>
 									<td class="d1">${row.date }</td>
 									
 									<td class="d1">${row.like }<c:if
-											test="${sessionScope.mid ne null }">
-											<img alt="up" src="./img/up.jpg" width="15px;">
+											test="${sessionScope.mid ge null }">
+											<button>
+											 	<img alt="up" src="./img/up.jpg" width="15px;">
+											</button>
+											
 										</c:if>
 									</td>
 
 									<td class="d1">${row.dislike }<c:if
-											test="${sessionScope.mid ne null }">
+											test="${sessionScope.mid ge null }">
+											<button>
 											<img alt="down" src="./img/down.jpg" width="15px;">
+											</button>
 										</c:if>
 									</td>
 
