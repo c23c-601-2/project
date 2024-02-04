@@ -31,6 +31,8 @@ tbody>tr>td {
 	text-align: center;
 }
 </style>
+<script>
+</script>
 </head>
 <body>
 	<div class="container">
