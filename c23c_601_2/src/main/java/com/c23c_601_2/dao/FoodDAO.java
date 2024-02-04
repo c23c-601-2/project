@@ -80,13 +80,14 @@ public class FoodDAO extends AbDAO{
 
 		Connection con = db.getConnection();
 		PreparedStatement pstmt = null;
-		String sql = "INSERT INTO foodmap (food_title, food_content, grade) "
-				+ "VALUES(?,?,?)"; 
+		String sql = "INSERT INTO foodmap (food_title, food_content, food_write, grade) VALUES (?, ?, (SELECT mid FROM member WHERE mid=?), ?)";
+ 
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, dto.getTitle());
 			pstmt.setString(2, dto.getContent());
-			pstmt.setInt(3, dto.getGrade());
+			pstmt.setString(3, dto.getMid());
+			pstmt.setInt(4, dto.getGrade());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
