@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@page import="java.util.Date"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -7,42 +8,54 @@
 <html>
 
 <style>
-
 .container {
 	margin: 0 auto;
-	width: 1115px;
-	/* width: 60%; */
+	width: 1500px;
 	background-color: #F5ECE4;
 }
 
 .verticalmain {
-	/* display: flex;
-	flex-direction: row; */
-	justify-content: space-between;
-	
+	display: flex;
+	flex-direction: row;
+	width: 1300px;
+	/* justify-content: space-between; */
+	/* border-collapse: collapse; */
+}
+.chatJinsu{
+	width: 20%;
+	border-collapse: collapse;
+	/* border: 5px solid red; */
 }
 
 .mainsearch {
-   border: 1px solid black;
-   /* margin-left: 200px; */
-   width: 1200px;
-   display: flex;
-   flex-direction: row;
+	left: 170px;
+	width: 80%;
+	border: 5px solid back;	
+	/* border-collapse: collapse; */
+	display: flex;
+	flex-direction: row;
 }
 
 #map {
-   width: 100%;
-}
-
-.mainmap {
-   width: 50%;
+	width: 50%;
 }
 
 .mainright {
-   border: 1px solid black;
-   width: 25%
+	border: 1px solid black;
+	width: 25%
 }
 
+.d1{
+	width: 10%;
+}
+
+.d2{
+	width: 20%;
+}
+
+.d3{
+	width: 30%;
+}
 
 </style>
 
@@ -50,19 +63,20 @@
 <meta charset="UTF-8">
 <title>식당 지도</title>
 <link rel="stylesheet"
-   href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+	href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <script type="text/javascript"
-   src="//dapi.kakao.com/v2/maps/sdk.js?appkey=07c74fda752bcdd18b45e54e39e95411"></script>
-   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=07c74fda752bcdd18b45e54e39e95411&libraries=services"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=07c74fda752bcdd18b45e54e39e95411=services,clusterer,drawing"></script>
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=07c74fda752bcdd18b45e54e39e95411"></script>
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=07c74fda752bcdd18b45e54e39e95411&libraries=services"></script>
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=07c74fda752bcdd18b45e54e39e95411=services,clusterer,drawing"></script>
 <link href="./css/menu.css?ver=0.12" rel="stylesheet" />
 <link href="./css/add.css?ver=0.12" rel="stylesheet" />
-<link href="./css/frontpage.css" rel="stylesheet"/>
+<link href="./css/frontpage.css" rel="stylesheet" />
 <script type="text/javascript" src="./js/menu.js"></script>
 </head>
 
 <script type="text/javascript">
-
 $(function() {
 	$('#searchTitle').click(function() {
 		let search = $('#search').val();
@@ -70,59 +84,84 @@ $(function() {
 		window.location.href = "https://map.kakao.com/link/search/카카오";
 
 	});
-
+	
+	$('.recommendBtn').click(function() {
+		let no = $(this).val();
+		alert("123");
+		$.ajax({
+			url : './recommendFood',
+			type     : 'post',
+			dataType : 'text',
+			data     : {'no' : no },
+			success  : function(result){
+				if(result == 1){
+					
+				}else{
+					alert("11문제가 발생햇습니다.");
+				}
+			},
+			error    : function(error){
+				alert("에러 : " + error);
+			}
+		});
+	});
+	
+});
 </script>
 
 <body>
-   <div class="container">
-      <%@ include file="header.jsp"%>
-      <%@ include file="nav.jsp" %>
-      <div class="mainsearch">
-         <div style="width: 380px">
-            <form action="./food" method="post">
-               <img alt="login" src="./img/search.png" width="24px;">
-               <input type="text" name="search" placeholder="음식점 상호를 입력하세요.">
-               <button type="submit" id="searchTitle">검색하기</button>
-             </form>
-               <div id="errorMSG"></div>
-               <hr>
-               <div class="ad1">광고1</div>
-               <hr>
-               <div class="ad2">광고2</div>
-               <hr>
-               <h3>
-               ${sessionScope.mname }님을 위한 오늘의 추천
-               </h3>
-               <hr>	
-               <div>
-                  <table class="write">
-                     <h2>후기 리스트</h2>
-                     <div>
-                        <button onclick="url('./board')">후기 게시판으로</button>
-                     </div>
-                     <thead>
-                        <tr>
-                           <th>가게 이름</th>
-                           <th>후기 내용</th>
-                           <th>좋아요 / 싫어요</th>
-                           <th>별점</th>
-                        </tr>
-                     </thead>
-                     <tbody>
-                        <c:forEach items="${list }" var="row">
-                           <tr>
-                              <td class="d2">${row.title }</td>
-                              <td class="d3">${row.content }</td>
-                              <td class="d1">${row.like }/${row.dislike }</td>
-                              <td class="d1">${row.grade }</td>
-                           </tr>
-                        </c:forEach>
-                     </tbody>
-                  </table>
-               </div>
-         </div>
-       <div id="map" style="width: 1200px; height: 100vh;">
-        <script>
+	<div class="container">
+		<%@ include file="header.jsp"%>
+		<%@ include file="nav.jsp"%>
+
+		<div class="verticalmain">
+			<div class="chatJinsu">
+				<%@ include file="chat.jsp"%>
+			</div>
+			<div class="mainsearch">
+				<div><form action="./food" method="post">
+						<img alt="login" src="./img/search.png" width="24px;"> <input
+							type="text" name="search" placeholder="음식점 상호를 입력하세요.">
+						<button type="submit" id="searchTitle">검색하기</button>
+					</form>
+					<div id="errorMSG"></div>
+					<hr>
+					<div class="ad1">광고1</div>
+					<hr>
+					<div class="ad2">광고2</div>
+					<hr>
+					<h3>${sessionScope.mname }님을위한 오늘의 추천</h3>
+					<button id="recommendBtn" var="row">추천메뉴 클릭</button>
+					<hr>
+					<div>
+						<table class="write">
+							<h2>후기 리스트</h2>
+							<div>
+								<button onclick="url('./board')">후기 게시판으로</button>
+							</div>
+							<thead>
+								<tr style="font-size: 16px">
+									<th>가게 이름</th>
+									<th>후기 내용</th>
+									<th>좋아요 / 싫어요</th>
+									<th>별점</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${list }" var="row">
+									<tr>
+										<td class="d3">${row.title }</td>
+										<td class="d3">${row.content }</td>
+										<td class="d2">${row.like }/${row.dislike }</td>
+										<td class="d2">${row.grade }</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div id="map" style="width: 800px; height: 100vh;">
+				<script>
      // 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
         var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 
@@ -177,9 +216,10 @@ $(function() {
         }
         
          </script>
-      </div>
-      </div>
-     
-   </div>
+			</div>
+			</div>
+			
+		</div>
+	</div>
 </body>
 </html>

@@ -1,10 +1,11 @@
-package com.c23c_601_2.daoGR;
+package com.c23c_601_2.web;
 import java.io.IOException;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,6 +22,17 @@ public class CommentServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		// 댓글 출력부
+        CommentDAO commentDAO = new CommentDAO();
+        List<CommentDTO> loadCommentList = commentDAO.getCommentList();
+
+        // 댓글 목록을 request에 설정
+        request.setAttribute("commentList", loadCommentList);
+
+        // 댓글 목록을 출력하는 JSP 페이지로 포워딩
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/imgList.jsp");
+        dispatcher.forward(request, response);
 	}
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -37,11 +49,11 @@ public class CommentServlet extends HttpServlet {
         
      // 댓글을 데이터베이스에 추가
         CommentDAO dao = new CommentDAO();
-        List<CommentDTO> commentList = new ArrayList<>();
+        //List<CommentDTO> commentList = new ArrayList<>();
 		
-		if(commentList.size() > 0) {
-			request.setAttribute("commentList", commentList);
-		}
+		//if(commentList.size() > 0) {
+		//	request.setAttribute("commentList", commentList);
+		//}
 		// 저장하기
 		CommentDTO dto = new CommentDTO();
 		dto.setComment(commentContent);
@@ -55,6 +67,12 @@ public class CommentServlet extends HttpServlet {
 		System.out.println("처리결과 : " + result);
 		
 		response.sendRedirect("./imgList");
+		
+		//댓글 출력부
+		CommentDAO commentDAO = new CommentDAO();
+		List<CommentDTO> loadCommentList = commentDAO.getCommentList();
+		
+		request.setAttribute("commentList", loadCommentList);
     }
 }
 

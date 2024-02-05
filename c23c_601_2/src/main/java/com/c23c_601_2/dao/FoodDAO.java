@@ -161,8 +161,8 @@ public class FoodDAO extends AbDAO{
 	      String sql = "SELECT food_title, food_content, food_like, food_dislike, grade "
 	            + " FROM foodmap"
 	            + " WHERE food_title LIKE CONCAT('%', ?, '%')"
-	            + " ORDER BY food_like";
-	      
+	            + " ORDER BY food_like"
+	            + " LIMIT 0, 10";
 	      try {
 	         pstmt = con.prepareStatement(sql);
 	         pstmt.setString(1, parameter);
