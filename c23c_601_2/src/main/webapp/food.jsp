@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="java.util.Date"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -7,24 +7,25 @@
 <html>
 
 <style>
+
 .container {
-   /* border: 1px solid black; */
-   display: flex;
-   flex-direction: row;
-   width: 100%;
+	margin: 0 auto;
+	width: 1115px;
+	/* width: 60%; */
+	background-color: #F5ECE4;
 }
 
 .verticalmain {
-   border: 1px solid black;
-   display: flex;
-   flex-direction: row;
-   justify-content: space-between;
+	/* display: flex;
+	flex-direction: row; */
+	justify-content: space-between;
+	
 }
 
 .mainsearch {
    border: 1px solid black;
-   margin-left: 200px;
-   width: 400px;
+   /* margin-left: 200px; */
+   width: 1200px;
    display: flex;
    flex-direction: row;
 }
@@ -42,38 +43,7 @@
    width: 25%
 }
 
-.boxrow {
-   margin: 10px;
-   height: 300px;
-   border: 1px solid red;
-   display: flex;
-   flex-direction: row;
-   justify-content: space-between;
-   background-color: ffffea;
-}
 
-.boxleft {
-   width: 49%;
-   border: 1px solid blue;
-   /* margin-right: 2px; */
-   background-color: #F8F8C1;
-}
-
-.boxright {
-   width: 49%;
-   border: 1px solid blue;
-   /* margin-left: 2px; */
-   background-color: #F8F8C1;
-}
-
-.write {
-   width: 280px;
-}
-
-.writeBtn {
-   margin-right: 0;
-   margin-left: auto;
-}
 </style>
 
 <head>
@@ -87,6 +57,7 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=07c74fda752bcdd18b45e54e39e95411=services,clusterer,drawing"></script>
 <link href="./css/menu.css?ver=0.12" rel="stylesheet" />
 <link href="./css/add.css?ver=0.12" rel="stylesheet" />
+<link href="./css/frontpage.css" rel="stylesheet"/>
 <script type="text/javascript" src="./js/menu.js"></script>
 </head>
 
@@ -107,7 +78,7 @@ $(function() {
       <%@ include file="header.jsp"%>
       <%@ include file="nav.jsp" %>
       <div class="mainsearch">
-         <div>
+         <div style="width: 380px">
             <form action="./food" method="post">
                <img alt="login" src="./img/search.png" width="24px;">
                <input type="text" name="search" placeholder="음식점 상호를 입력하세요.">
@@ -119,8 +90,10 @@ $(function() {
                <hr>
                <div class="ad2">광고2</div>
                <hr>
-               <h3>ㅁㅁ님을 위한 오늘의 추천 Pick !</h3>
-               <hr>
+               <h3>
+               ${sessionScope.mname }님을 위한 오늘의 추천
+               </h3>
+               <hr>	
                <div>
                   <table class="write">
                      <h2>후기 리스트</h2>
@@ -148,8 +121,7 @@ $(function() {
                   </table>
                </div>
          </div>
-      </div>
-      <div id="map" style="width: 1200px; height: 100vh;">
+       <div id="map" style="width: 1200px; height: 100vh;">
         <script>
      // 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
         var infowindow = new kakao.maps.InfoWindow({zIndex:1});
@@ -203,35 +175,11 @@ $(function() {
                 infowindow.open(map, marker);
             });
         }
-        /*
-        // 지도에 마커를 표시하는 함수입니다
-        function displayMarker11(place) {
-            
-            // 마커를 생성하고 지도에 표시합니다
-            var marker = new kakao.maps.Marker({
-                map: map,
-                position: new kakao.maps.LatLng(place.y, place.x) 
-            });
-            
-            // 마커에 클릭이벤트를 등록합니다
-            kakao.maps.event.addListener(marker, 'click', function() {
-                // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
-                infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
-                infowindow.open(map, marker);
-            });
-	        */
         
-            /* var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-            mapOption = {
-               center : new kakao.maps.LatLng(37.5571, 126.9460), // 지도의 중심좌표
-               level : 2
-            // 지도의 확대 레벨
-            
-            };
-            // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-            var map = new kakao.maps.Map(mapContainer, mapOption); */
          </script>
       </div>
+      </div>
+     
    </div>
 </body>
 </html>
