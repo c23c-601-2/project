@@ -16,7 +16,7 @@
 	<!-- 본문시작 pdsList.jsp-->
 	<h3 class="h3">Instagram 601</h3>
 	<p>
-		<a href="pdsForm.jsp">글쓰기</a>
+		<a href="imgForm.jsp">글쓰기</a>
 	</p>
 
 	<script>
