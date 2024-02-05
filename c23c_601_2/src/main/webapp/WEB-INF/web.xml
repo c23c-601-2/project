@@ -29,7 +29,7 @@
 		</error-page>
 		
 		
-	<!-- <security-constraint>
+	<security-constraint>
 		<display-name>JSP Protection</display-name>
 		<web-resource-collection>
 			<web-resource-name>SecureJSPPages</web-resource-name>
@@ -38,8 +38,8 @@
 		<auth-constraint>
 			<role-name>nobody</role-name>
 		</auth-constraint>
-	</security-constraint> -->
-
+	</security-constraint>
+ 
 	<security-role>
 		<description>
 Nobody should be in this role so JSP files are protected
@@ -48,5 +48,29 @@ from direct access.
 		<role-name>nobody</role-name>
 	</security-role>
 
-
+	<!-- <servlet>
+        <servlet-name>ChatServer</servlet-name>
+        <servlet-class>com.c23c_601_2.web.ChatServer</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ChatServer</servlet-name>
+        <url-pattern>/chat</url-pattern>
+    </servlet-mapping> -->
+	<servlet>
+		<servlet-name>ChatSubmitServlet</servlet-name>
+		<servlet-class>com.c23c_601_2.web.ChatSubmitServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ChatSubmitServlet</servlet-name>
+		<url-pattern>/chatSubmitServlet/*</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>ChatListServlet</servlet-name>
+		<servlet-class>com.c23c_601_2.web.ChatListServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ChatListServlet</servlet-name>
+		<url-pattern>/chatListServlet/*</url-pattern>
+	</servlet-mapping>
+	
 </web-app>

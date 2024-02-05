@@ -105,7 +105,7 @@
 		<%@ include file="menu.jsp"%>
 		<div class="mainsearch">
 			<div>
-				<form action="./board" method="post">
+				<form action="./food" method="post">
 					<img alt="login" src="./img/search.png" width="24px;"> <input
 						type="text" name="id" placeholder="음식점 상호를 입력하세요.">
 					<button type="submit">검색하기</button>
@@ -118,7 +118,7 @@
 					<hr>
 					<h3>ㅁㅁ님을 위한 오늘의 추천 Pick !</h3>
 					<hr>
-
+					</form>
 					<div>
 						<table class="write">
 							<h2>후기 리스트</h2>
@@ -144,9 +144,7 @@
 								</c:forEach>
 							</tbody>
 						</table>
-
 					</div>
-				</form>
 			</div>
 		</div>
 		<div id="map" style="width: 1200px; height: 100vh;">

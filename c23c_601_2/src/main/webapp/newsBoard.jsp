@@ -28,6 +28,7 @@ body {
 <body>
 <div class="container">
 		<%@ include file="./header.jsp"%>
+		<%@ include file="nav.jsp" %>
 		</div>
 	<div class="maintitle">
 		<h1>601하하</h1>
