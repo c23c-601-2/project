@@ -105,7 +105,7 @@ a:-webkit-any-link {
 	<ul>
 		<li>	
 			<div class="menu">
-				<a style="" href=/pdsList.jsp><img src="./assets/img/instagram.png" alt="601스타그램" width="34" height="auto" style="margin-right: 10px;">601스타그램</a>
+				<a style="color: inherit; text-decoration: none;" href=/pdsList><img src="./assets/img/instagram.png" alt="601스타그램" width="34" height="auto" style="margin-right: 10px;">601스타그램</a>
 				<div class="dropdownBtn">
 					<i class="fa-solid fa-caret-up"> </i>
 				</div>	
@@ -113,7 +113,7 @@ a:-webkit-any-link {
 		</li>
 		<li>	
 			<div class="menu">
-				<a style="" href=/food.jsp><img src=".//assets/img/restaurant.jpg" alt="601맛집" width="34" height="auto" style="margin-right: 10px;">601맛집</a>
+				<a style="color: inherit; text-decoration: none;" href=/food><img src=".//assets/img/restaurant.jpg" alt="601맛집" width="34" height="auto" style="margin-right: 10px;">601맛집</a>
 				<div class="dropdownBtn">
 					<i class="fa-solid fa-caret-up"> </i>
 				</div>	
@@ -137,7 +137,7 @@ a:-webkit-any-link {
 		</li>
 		<li>	
 			<div class="menu">
-				<a style="" href=/join><img src=".//assets/img/login.png" alt="로그인" width="34" height="auto" style="margin-right: 10px;">로그인</a>
+				<a style="color: inherit; text-decoration: none;" href=/login><img src=".//assets/img/login.png" alt="로그인" width="34" height="auto" style="margin-right: 10px;">로그인</a>
 				<div class="dropdownBtn">
 					<i class="fa-solid fa-caret-up"> </i>
 				</div>	

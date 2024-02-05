@@ -9,6 +9,34 @@ import com.c23c_601_2.dto.MemberDTO;
 
 public class MemberDAO extends AbstractDAO{
 	
+	public MemberDTO compareId(MemberDTO dto) {
+		MemberDTO dto2 = new MemberDTO();
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT COUNT(*) AS count, mid, mname FROM member WHERE mid =? AND mpw =?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dto.getMid());
+			pstmt.setString(2, dto.getMpw());
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				dto2.setMid(rs.getString("mid"));
+				dto2.setMname(rs.getString("mname"));
+				dto2.setCount(rs.getInt("count"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return dto2;
+	}
+	
+	
 	public int idCheck(String id) {
 		int result = 0;
 		
