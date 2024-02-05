@@ -38,6 +38,12 @@ public class Board extends HttpServlet {
 		request.setAttribute("list", list);
 		
 		List<FoodDTO> list1 = null;
+<<<<<<< HEAD
+		if(request.getParameter("search") == null) {
+			list1= dao.foodListAll(page);
+		} else {			
+			list1 = dao.foodListAll(request.getParameter("search"));
+			System.out.println(request.getParameter("search"));
 		
 		HttpSession session = request.getSession();
 		if(session.getAttribute("mid") != null && session.getAttribute("mname") != null) { // 로그인 햇을 때, count up
@@ -61,7 +67,13 @@ public class Board extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
 			rd.forward(request, response);
 		}
+		request.setAttribute("list1", list1);
 		
+		int totalCount = dao.totalCount();
+		request.setAttribute("totalCount", totalCount);
+
+		RequestDispatcher rd = request.getRequestDispatcher("/board.jsp");
+		rd.forward(request, response);
 	}
 		
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
