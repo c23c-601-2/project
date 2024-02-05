@@ -113,7 +113,6 @@ public class ChatDAO extends AbstractDAO {
 				}
 				chat.setChatTime(rs.getString("chatTime").substring(0, 11) + " " + timeType + " " + chatTime + ":" + rs.getString("chatTime").substring(14, 16) + "");
 				chatList.add(chat);
-				System.out.println("while문 한 바퀴 끝");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
