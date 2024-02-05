@@ -48,7 +48,7 @@ public class CommentServlet extends HttpServlet {
 		int result = dao.commentWrite(dto);
 		System.out.println("처리결과 : " + result);
 		
-		response.sendRedirect("./pdsList.jsp");
+		response.sendRedirect("./imgList.jsp");
     }
 }
 
