@@ -39,32 +39,61 @@ tbody>tr>td {
 </style>
 <script>
 $(function() {
+	function toLogin() {
+		var mid = "${sessionScope.mid}";
+        alert("로그인 후 이용해 주세요");
+        location.href = "./login";
+    }
+	
 	$('#searchBtn').click(function() {
 		let search = $('#search').val();
+		alert(search);
 		location.href = "./board?search=" + search;
 	});
+	
 	$('.checkmid').click(function() {
-        var mid = "${sessionScope.mid}";
         if (!mid) {
-            alert("로그인 후 이용해 주세요");
+        	toLogin();
         } else {
             window.location.href = "./write";
         }
     });
+	
 	$('.likeBtn').click(function() {
-        var mid = "${sessionScope.mid}";
-        if (mid == null) {
-            alert("로그인 후 이용해 주세요");
-            location.href = "./login"
-        }
-    });
+	    let no = $(this).child('.likeBtnno').val();
+	    let like = $(this).child('.likeBtnlike').val();
+	    let mid = "${sessionScope.mid}";
+	    if (!mid) {
+	        toLogin();
+	    } else {
+	        $.ajax({
+	            url: './likeUp',
+	            type: 'post',
+	            dataType: 'text',
+	            data: { no: no, mid: mid, like: like },
+	            success: function(result) {
+	                if (result == 1) {
+	                    $(this).remove();
+	                } else {
+	                    alert("문제가 발생했습니다. 관리자에게 문의하세요.");
+	                }
+	            } else{
+	            	alert("문제가 발생했습니다. 관리자에게 문의하세요.");
+	            }
+	        });
+	    }
+	});
+	
 	$('.dislikeBtn').click(function() {
         var mid = "${sessionScope.mid}";
-        if (mid = null) {
-            alert("로그인 후 이용해 주세요");
-            location.href = "./login"
+        if (!mid) {
+        	toLogin();
         }
     });
+	
+	$
+	
+	
 });
 </script>
 </head>
@@ -77,12 +106,12 @@ $(function() {
 				<article>
 					<form action="./board">
 						<div class="search">
-							가게이름 검색하기 :<input type="text" id="search">
+							가게이름 검색하기 :<input type="text" name="search">
 							<button id="searchBtn">검색</button>
 						</div>
 					</form>
 					<c:choose>
-						<c:when test="${fn:length(list) gt 0 }">
+						<c:when test="${fn:length(list1) gt 0 }">
 							<table>
 								<thead>
 									<tr>
@@ -97,16 +126,18 @@ $(function() {
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach items="${list1}" var="row">
+									<c:forEach items="${list1}" var="row" varStatus="s">
 										<tr>
-											<td class="d1">${row.no }</td>
+											<td class="d1">${s.index }</td>
 											<td class="d3">${row.title }</td>
 											<td class="d3">${row.content }</td>
 											<td class="d1">${row.write }</td>
 											<td class="d1">${row.date }</td>
 
-											<td class="d1">${row.like }
-													<button class="likeBtn">
+											<td class="likeBtn">${row.like }
+													<input type="hidden" class="likeBtnno" value="${row.no}">
+													<input type="hidden" class="likeBtnlike" value="${row.like}">
+													<button onclick="url('./likeUp')">
 														<img alt="up" src="./img/up.jpg" width="15px;">
 													</button>
 											</td>
@@ -142,7 +173,9 @@ $(function() {
 							</c:if>
 
 							<div class="paging">
-								<button onclick="paging(1)">⏮️</button>
+								<button onclick="paging(1)"
+									<c:if test="${page lt 2}">disabled="disabled"</c:if>
+								>⏮️</button>
 								<button
 									<c:if test="${page - 10 lt 1 }">disabled="disabled"</c:if>
 									onclick="paging(${page - 10 })">◀️</button>
