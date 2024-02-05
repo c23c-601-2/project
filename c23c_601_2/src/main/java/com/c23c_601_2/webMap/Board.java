@@ -34,7 +34,7 @@ public class Board extends HttpServlet {
 		
 		List<java.util.Map<String, Object>> list = null;
 		list = dao.foodList();
-		//request.setAttribute("list", list);
+		request.setAttribute("list", list);
 		
 		List<FoodDTO> list1 = null;
 		if(request.getParameter("search") == null) {
@@ -42,10 +42,7 @@ public class Board extends HttpServlet {
 		} else {			
 			list1 = dao.foodListAll(request.getParameter("search"));
 			System.out.println(request.getParameter("search"));
-			//System.out.println(list1.get(0).getTitle());
-			System.out.println("list1 +" + list1);
 		}
-		//request.setAttribute("list1", list1);
 		request.setAttribute("list1", list1);
 		
 		int totalCount = dao.totalCount();
@@ -53,7 +50,6 @@ public class Board extends HttpServlet {
 
 		RequestDispatcher rd = request.getRequestDispatcher("/board.jsp");
 		rd.forward(request, response);
-
 	}
 		
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

@@ -6,7 +6,88 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <!DOCTYPE html>
 <html>
+<head>
+<meta charset="UTF-8">
+<title>후기 게시판</title>
+<link href="./css/add.css?ver=0.12" rel="stylesheet" />
+<script type="text/javascript" src="./js/menu.js"></script>
 
+<script>
+$(function() {
+		var mid = "${sessionScope.mid}";
+	function toLogin() {
+        alert("로그인 후 이용해 주세요");
+        location.href = "./login";
+    }
+	
+	$('#searchBtn').click(function() {
+		let search = $('#search').val();
+		alert(search);
+		location.href = "./board?search=" + search;
+	});
+	
+	$('.checkmid').click(function() {
+        if (mid === null || mid === "") {
+        	toLogin();
+        } else {
+            window.location.href = "./write";
+        }
+    });
+	
+	$('.likeBtn').click(function() {
+		alert("test1");
+		let no = $(this).children('.likeBtnno').val();
+	    if (mid == null || mid == "") {
+	        toLogin();
+	    } else {
+	        $.ajax({
+	            url: './likeUp',
+	            type: 'post',
+	            dataType: 'text',
+	            data: {'no' : no},
+	            success: function(result) {
+	                if (result == 1) {
+	                	location.reload();
+	                    alert("성공했습니다");
+	                } else {
+	                    alert("1문제가 발생했습니다. 관리자에게 문의하세요.");
+	                }
+	            },
+	            error : function(error){
+		            alert("2문제가 발생했습니다. 관리자에게 문의하세요.");
+		            }   
+	            }); 
+	        }
+	});
+	
+	$('.dislikeBtn').off('click').on('click', function() {
+		alert("test2");
+		let no = $(this).children('.dislikeBtnno').val();
+	    if (mid == null || mid == "") {
+	        toLogin();
+	    } else {
+	        $.ajax({
+	            url: './disLikeUp',
+	            type: 'post',
+	            dataType: 'text',
+	            data: {'no' : no},
+	            success: function(result) {
+	                if (result == 1) {
+	                	location.reload();
+	                    alert("썽공");
+	                } else {
+	                    alert("3문제가 발생했습니다. 관리자에게 문의하세요.");
+	                }
+	            },
+	            error : function(error){
+		            alert("4문제가 발생했습니다. 관리자에게 문의하세요.");
+		            }   
+	            }); 
+	        }
+	});
+	
+});
+</script>
 <style>
 .d1 {
 	width: 10%;
@@ -24,78 +105,10 @@
 	width: 50%;
 	margin: 0 auto;
 }
-</style>
-
-
-<head>
-<meta charset="UTF-8">
-<title>후기 게시판</title>
-<link href="./css/add.css?ver=0.12" rel="stylesheet" />
-<script type="text/javascript" src="./js/menu.js"></script>
-<style>
 tbody>tr>td {
 	text-align: center;
 }
 </style>
-<script>
-$(function() {
-	function toLogin() {
-		var mid = "${sessionScope.mid}";
-        alert("로그인 후 이용해 주세요");
-        location.href = "./login";
-    }
-	
-	$('#searchBtn').click(function() {
-		let search = $('#search').val();
-		alert(search);
-		location.href = "./board?search=" + search;
-	});
-	
-	$('.checkmid').click(function() {
-        if (!mid) {
-        	toLogin();
-        } else {
-            window.location.href = "./write";
-        }
-    });
-	
-	$('.likeBtn').click(function() {
-	    let no = $(this).child('.likeBtnno').val();
-	    let like = $(this).child('.likeBtnlike').val();
-	    let mid = "${sessionScope.mid}";
-	    if (!mid) {
-	        toLogin();
-	    } else {
-	        $.ajax({
-	            url: './likeUp',
-	            type: 'post',
-	            dataType: 'text',
-	            data: { no: no, mid: mid, like: like },
-	            success: function(result) {
-	                if (result == 1) {
-	                    $(this).remove();
-	                } else {
-	                    alert("문제가 발생했습니다. 관리자에게 문의하세요.");
-	                }
-	            } else{
-	            	alert("문제가 발생했습니다. 관리자에게 문의하세요.");
-	            }
-	        });
-	    }
-	});
-	
-	$('.dislikeBtn').click(function() {
-        var mid = "${sessionScope.mid}";
-        if (!mid) {
-        	toLogin();
-        }
-    });
-	
-	$
-	
-	
-});
-</script>
 </head>
 <body>
 	<div class="container">
@@ -128,7 +141,7 @@ $(function() {
 								<tbody>
 									<c:forEach items="${list1}" var="row" varStatus="s">
 										<tr>
-											<td class="d1">${s.index }</td>
+											<td class="d1">${row.no }</td>
 											<td class="d3">${row.title }</td>
 											<td class="d3">${row.content }</td>
 											<td class="d1">${row.write }</td>
@@ -136,13 +149,13 @@ $(function() {
 
 											<td class="likeBtn">${row.like }
 													<input type="hidden" class="likeBtnno" value="${row.no}">
-													<input type="hidden" class="likeBtnlike" value="${row.like}">
-													<button onclick="url('./likeUp')">
+													<button class="likeBtn">
 														<img alt="up" src="./img/up.jpg" width="15px;">
 													</button>
 											</td>
 
-											<td class="d1">${row.dislike }
+											<td class="dislikeBtn">${row.dislike }
+													<input type="hidden" class="dislikeBtnno" value="${row.no}">
 													<button class="dislikeBtn">
 														<img alt="down" src="./img/down.jpg" width="15px;">
 													</button>

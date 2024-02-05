@@ -9,7 +9,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.c23c_601_2.dto.DisLikeCountDTO;
 import com.c23c_601_2.dto.FoodDTO;
+import com.c23c_601_2.dto.LikeCountDTO;
 
 public class FoodDAO extends AbDAO{
 
@@ -48,8 +50,7 @@ public class FoodDAO extends AbDAO{
 		Connection con = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT food_no, food_title, food_content, food_write, food_date, food_like, food_dislike, grade " +
-	             "FROM foodmap LIMIT ?, 10";
+		String sql = "SELECT food_no, food_title, food_content, food_write, food_date, food_like, food_dislike, grade FROM foodmapview LIMIT ?, 10";
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, (page - 1) * 10);
@@ -80,7 +81,7 @@ public class FoodDAO extends AbDAO{
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "SELECT food_no, food_title, food_content, food_write, food_date, food_like, food_dislike, grade"
-	            + " FROM foodmap"
+	            + " FROM foodmapview"
 	            + " WHERE food_title LIKE CONCAT('%', ?, '%')";
 
 		try {
@@ -137,9 +138,10 @@ public class FoodDAO extends AbDAO{
 	      PreparedStatement pstmt = null;
 	      ResultSet rs = null;
 	      String sql = "SELECT food_title, food_content, food_like, food_dislike, grade "
-	            + " FROM foodmap"
-	            + " WHERE food_title LIKE CONCAT('%', ?, '%')"
-	            + " ORDER BY food_like";
+	               + " FROM foodmap"
+	               + " WHERE food_title LIKE CONCAT('%', ?, '%')"
+	               + " ORDER BY food_like"
+	               + " LIMIT 0, 10";
 	      
 	      try {
 	         pstmt = con.prepareStatement(sql);
@@ -185,22 +187,40 @@ public class FoodDAO extends AbDAO{
 
 		return result;
 	}
-	public void likeUp(FoodDTO dto) {
+	public int likeUp(LikeCountDTO dto) {
+		int result = 0;
 		Connection con = db.getConnection();
 		PreparedStatement pstmt = null;
-		String sql = "INSERT INTO likecount (lno, lmid, like) VALUES(?,?,?)";
+		String sql = "INSERT INTO likecount (lno, lmid) VALUES(?,?)";
 		
 		try {
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, dto.getNo());
-			pstmt.setString(2, dto.getMid());
-			pstmt.setInt(3, dto.getLike());
-			pstmt.executeUpdate();
+			pstmt.setInt(1, dto.getLno());
+			pstmt.setString(2, dto.getLmid());
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(null, pstmt, con);
 		}
+		return result;
 	}
-	
+	public int dislikeUp(DisLikeCountDTO dto) {
+		int result = 0 ;
+		Connection con = db.getConnection();
+		PreparedStatement pstmt = null;
+		String sql = "INSERT INTO dislikecount (dno, dmid) VALUES(?,?)";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, dto.getDno());
+			pstmt.setString(2, dto.getDmid());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(null, pstmt, con);
+		}
+		return result;
+	}
 }

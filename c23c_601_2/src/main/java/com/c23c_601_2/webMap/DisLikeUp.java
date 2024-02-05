@@ -3,24 +3,23 @@ package com.c23c_601_2.webMap;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 
 import com.c23c_601_2.dao.FoodDAO;
+import com.c23c_601_2.dto.DisLikeCountDTO;
 import com.c23c_601_2.dto.LikeCountDTO;
 import com.c23c_601_2.util.Util;
 
-@WebServlet("/likeUp")
-public class LikeUp extends HttpServlet {
+@WebServlet("/disLikeUp")
+public class DisLikeUp extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public LikeUp() {
+    public DisLikeUp() {
         super();
     }
 
@@ -32,7 +31,7 @@ public class LikeUp extends HttpServlet {
 		
 		int result = 0 ;
 		System.out.println(result);
-		LikeCountDTO dto = new LikeCountDTO();
+		DisLikeCountDTO dto = new DisLikeCountDTO();
 		FoodDAO dao = new FoodDAO();
 		
 		String no = request.getParameter("no");
@@ -40,9 +39,9 @@ public class LikeUp extends HttpServlet {
 		String mid = (String)session.getAttribute("mid");
 		System.out.println(mid);
 		
-		dto.setLno(Integer.parseInt(no));
-		dto.setLmid(mid);
-		result = dao.likeUp(dto);
+		dto.setDno(Util.str2Int2(no));
+		dto.setDmid(mid);
+		result = dao.dislikeUp(dto);
 		System.out.println(result);
 		
 		PrintWriter pw = response.getWriter();
