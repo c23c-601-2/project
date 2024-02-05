@@ -128,8 +128,7 @@
 		<c:forEach items="${commentList}" var="comment">
 			<div class="comment">
 				<div class="chead">
-					<div class="cname">${comment.mname}님</div>
-					<div class="cdate">${comment.regdate}</div>
+					<div class="cname">${comment.mno}님</div>
 				</div>
 				<div class="ccomment">${comment.comment}</div>
 			</div>
