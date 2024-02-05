@@ -36,7 +36,7 @@
                 // 새로운 댓글을 목록에 추가
                 for (var i = 0; i < commentList.length; i++) {
                     var comment = commentList[i];
-                    var newComment = '<li>' + comment.mname + '님: ' + comment.comment + '</li>';
+                    var newComment = '<li>' + comment.mid + '님: ' + comment.comment + '</li>';
                     $("#comment-list").append(newComment);
                 }
             },
@@ -107,7 +107,7 @@
 			<ul id="comment-list">
 				<!-- 댓글 목록을 출력하는 부분 -->
 				<c:forEach items="${commentList}" var="comment">
-					<li>${comment.mname}님:${comment.comment}</li>
+					<li>${comment.mid}님:${comment.comment}</li>
 				</c:forEach>
 			</ul>
 			<!-- 댓글쓰는 창을 여기다가 만들어주겠습니다. 댓글내용, 누가, 어느, 2024-01-22 -->
@@ -128,7 +128,7 @@
 		<c:forEach items="${commentList}" var="comment">
 			<div class="comment">
 				<div class="chead">
-					<div class="cname">${comment.mno}님</div>
+					<div class="cname">${comment.mid}님</div>
 				</div>
 				<div class="ccomment">${comment.comment}</div>
 			</div>

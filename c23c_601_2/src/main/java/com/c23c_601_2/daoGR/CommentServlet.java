@@ -2,6 +2,7 @@ package com.c23c_601_2.daoGR;
 import java.io.IOException;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -29,17 +30,22 @@ public class CommentServlet extends HttpServlet {
 
         System.out.println("-------");
         // 클라이언트에서 전송한 댓글 내용과 게시물 번호 가져오기
+        
         String pdsnoStr = request.getParameter("pdsno"); // 글 번호
         String commentContent = request.getParameter("commentContent");
         System.out.println(commentContent + " : " + pdsnoStr);
         
      // 댓글을 데이터베이스에 추가
         CommentDAO dao = new CommentDAO();
-        
+        List<CommentDTO> commentList = new ArrayList<>();
+		
+		if(commentList.size() > 0) {
+			request.setAttribute("commentList", commentList);
+		}
 		// 저장하기
 		CommentDTO dto = new CommentDTO();
 		dto.setComment(commentContent);
-		dto.setCno(com.c23c_601_2.util.Util.str2Int(pdsnoStr));
+		dto.setMid(pdsnoStr);
 		
 		HttpSession session = request.getSession();
 		dto.setMid((String)session.getAttribute("mid"));
@@ -48,7 +54,7 @@ public class CommentServlet extends HttpServlet {
 		int result = dao.commentWrite(dto);
 		System.out.println("처리결과 : " + result);
 		
-		response.sendRedirect("./imgList.jsp");
+		response.sendRedirect("./imgList");
     }
 }
 
