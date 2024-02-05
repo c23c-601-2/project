@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <!DOCTYPE html>
 <html>
 
@@ -18,6 +19,11 @@
 .d3 {
 	width: 30%;
 }
+
+.mainstyle {
+	width: 50%;
+	margin: 0 auto;
+}
 </style>
 
 
@@ -31,56 +37,92 @@ tbody>tr>td {
 	text-align: center;
 }
 </style>
+<script>
+$(function() {
+	$('#searchBtn').click(function() {
+		let search = $('#search').val();
+		location.href = "./board?search=" + search;
+	});
+	$('.checkmid').click(function() {
+        var mid = "${sessionScope.mid}";
+        if (!mid) {
+            alert("로그인 후 이용해 주세요");
+        } else {
+            window.location.href = "./write";
+        }
+    });
+	$('.likeBtn').click(function() {
+        var mid = "${sessionScope.mid}";
+        if (mid == null) {
+            alert("로그인 후 이용해 주세요");
+            location.href = "./login"
+        }
+    });
+	$('.dislikeBtn').click(function() {
+        var mid = "${sessionScope.mid}";
+        if (mid = null) {
+            alert("로그인 후 이용해 주세요");
+            location.href = "./login"
+        }
+    });
+});
+</script>
 </head>
 <body>
 	<div class="container">
 		<%@ include file="header.jsp"%>
-		<%@ include file="nav.jsp" %>
+		<%@ include file="nav.jsp"%>
 		<div class="main">
 			<div class="mainStyle">
 				<article>
-				<c:choose>
+					<form action="./board">
+						<div class="search">
+							가게이름 검색하기 :<input type="text" id="search">
+							<button id="searchBtn">검색</button>
+						</div>
+					</form>
+					<c:choose>
 						<c:when test="${fn:length(list) gt 0 }">
-					가게 검색하기 : <input type="text" id="text">
-					<button type="submit">검색</button>
-					<table>
-						<thead>
-							<tr>
-								<th class="d1">번호</th>
-								<th class="d2">가게 이름</th>
-								<th class="d3">후기 내용</th>
-								<th class="d1">날짜</th>
-								<th class="d1">좋아요</th>
-								<th class="d1">싫어요</th>
-								<th class="d2">별점</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach items="${list1 }" var="row">
-								<tr>
-									<td class="d1">${row.no }</td>
-									<td class="d3">${row.title }</td>
-									<td class="d3">${row.content }</td>
-									<td class="d1">${row.date }</td>
-									
-									<td class="d1">${row.like }<c:if
-											test="${sessionScope.mid ne null }">
-											<img alt="up" src="./img/up.jpg" width="15px;">
-										</c:if>
-									</td>
+							<table>
+								<thead>
+									<tr>
+										<th class="d1">번호</th>
+										<th class="d2">가게 이름</th>
+										<th class="d3">후기 내용</th>
+										<th class="d1">작성자</th>
+										<th class="d1">날짜</th>
+										<th class="d1">좋아요</th>
+										<th class="d1">싫어요</th>
+										<th class="d2">평점</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${list1}" var="row">
+										<tr>
+											<td class="d1">${row.no }</td>
+											<td class="d3">${row.title }</td>
+											<td class="d3">${row.content }</td>
+											<td class="d1">${row.write }</td>
+											<td class="d1">${row.date }</td>
 
-									<td class="d1">${row.dislike }<c:if
-											test="${sessionScope.mid ne null }">
-											<img alt="down" src="./img/down.jpg" width="15px;">
-										</c:if>
-									</td>
+											<td class="d1">${row.like }
+													<button class="likeBtn">
+														<img alt="up" src="./img/up.jpg" width="15px;">
+													</button>
+											</td>
 
-									<td class="d1">${row.grade }</td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-					
+											<td class="d1">${row.dislike }
+													<button class="dislikeBtn">
+														<img alt="down" src="./img/down.jpg" width="15px;">
+													</button>
+											</td>
+
+											<td class="d1">${row.grade }</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+
 							<c:set var="totalPage" value="${totalCount / 10 }" />
 							<fmt:parseNumber integerOnly="true" value="${totalPage }"
 								var="totalPage" />
@@ -115,12 +157,13 @@ tbody>tr>td {
 							</div>
 						</c:when>
 						<c:otherwise>
-							<!-- 거짓일 때 -->
 							<h1>출력할 값이 없습니다.</h1>
 						</c:otherwise>
 					</c:choose>
-					<button onclick="url('./write')">후기 쓰기</button>
-					<br> ${sessionScope.mid}님 반갑습니다.
+							<button class="checkmid" onclick="url('./write')">글쓰기</button>
+					<c:if test="${sessionScope.mid ne null }">
+						<br> ${sessionScope.mid}님 반갑습니다.
+					</c:if>
 				</article>
 			</div>
 		</div>

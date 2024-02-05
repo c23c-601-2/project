@@ -3,7 +3,7 @@ package com.c23c_601_2.dto;
 public class FoodDTO {
 	
 	private int no, like, dislike, grade;
-	private String title, content, date;
+	private String title, content, date, write, mid;
 	
 	public int getNo() {
 		return no;
@@ -46,6 +46,18 @@ public class FoodDTO {
 	}
 	public void setDate(String date) {
 		this.date = date;
+	}
+	public String getWrite() {
+		return write;
+	}
+	public void setWrite(String write) {
+		this.write = write;
+	}
+	public String getMid() {
+		return mid;
+	}
+	public void setMid(String mid) {
+		this.mid = mid;
 	}
 
 }

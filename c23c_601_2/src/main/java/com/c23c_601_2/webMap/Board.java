@@ -26,30 +26,33 @@ public class Board extends HttpServlet {
 			throws ServletException, IOException {
 		System.out.println("sdfsd");
 		request.setCharacterEncoding("UTF-8");
+		FoodDAO dao = new FoodDAO();
 		int page = 1;
 		if (request.getParameter("page") != null && request.getParameter("page") != "") {
 			page = Util.str2Int2(request.getParameter("page"));
 		}
-		// DAO랑 연결
-		FoodDAO dao = new FoodDAO();
+		
 		List<java.util.Map<String, Object>> list = null;
 		list = dao.foodList();
-		
 		request.setAttribute("list", list);
-		// 서블릿을 통과한 "list"를 jsp로 넘겨준다.
 		
-		FoodDTO dto = new FoodDTO();
-		List<FoodDTO> list1 = dao.foodListAll(page);
-		
-		list1= dao.foodListAll(page);
+		List<FoodDTO> list1 = null;
+		if(request.getParameter("search") != null ) {
+			list1 = dao.foodListAll(request.getParameter("search"));
+			request.setAttribute("list1", list1);
+			System.out.println("list1 +" + list1);
+			RequestDispatcher rd = request.getRequestDispatcher("/board.jsp");
+			rd.forward(request, response);
+		} else {			
+			list1= dao.foodListAll(page);
+			request.setAttribute("list1", list1);
+			RequestDispatcher rd = request.getRequestDispatcher("/board.jsp");
+			rd.forward(request, response);
+
+		}
 		
 		int totalCount = dao.totalCount();
-		
-		request.setAttribute("list1", list1);
 		request.setAttribute("totalCount", totalCount);
-		
-		RequestDispatcher rd = request.getRequestDispatcher("/board.jsp");
-		rd.forward(request, response);
 	}
 		
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
