@@ -1,8 +1,8 @@
 package com.c23c_601_2.daoGR;
 
 public class CommentDTO {
-	private int cno, board_no, clike, mno, del;
-	private String comment, mid, mname, cdate, ip, Regdate;
+	private int cno, clike, mno, del;
+	private String comment, mid, mname, cdate,  Regdate;
 
 	public int getCno() {
 		return cno;
@@ -12,13 +12,6 @@ public class CommentDTO {
 		this.cno = cno;
 	}
 
-	public int getBoard_no() {
-		return board_no;
-	}
-
-	public void setBoard_no(int board_no) {
-		this.board_no = board_no;
-	}
 
 	public int getClike() {
 		return clike;
@@ -68,13 +61,6 @@ public class CommentDTO {
 		this.mid = mid;
 	}
 
-	public String getIp() {
-		return ip;
-	}
-
-	public void setIp(String ip) {
-		this.ip = ip;
-	}
 
 	public int getDel() {
 		return del;
@@ -90,6 +76,11 @@ public class CommentDTO {
 
 	public void setRegdate(String regdate) {
 		Regdate = regdate;
+	}
+
+	public void setCno(String pdsnoStr) {
+		// TODO Auto-generated method stub
+		
 	}
 
 
