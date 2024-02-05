@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <style>
 nav {
 	/*display: flex;*/ /* 열면 왼쪽으로 가버림 */
@@ -146,9 +147,13 @@ a:-webkit-any-link {
 				</div>	
 			</div>
 			<ul class="active" style="padding: 0; ">
+				<c:choose><c:when test="${sessionScope.mname eq null }">
 				<li style="background-color: #FFDC9F; border: 1px solid red;">
 					<a style="background-color: #FFDC9F; color: inherit; text-decoration: none;" href="/login"> 로그인 </a>
-				</li >
+				</li ></c:when><c:otherwise>
+				<li style="background-color: #FFDC9F; border: 1px solid blue;">
+					<a style="background-color: #FFDC9F; color: inherit; text-decoration: none;" href="/logout"> 로그아웃 </a>
+				</li></c:otherwise></c:choose>
 				<li style="background-color: #FFDC9F; border: 1px solid red">
 					<a style="background-color: #FFDC9F; color: inherit; text-decoration: none;" href="/join"> 회원가입 </a>
 				</li>
