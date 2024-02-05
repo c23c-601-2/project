@@ -49,12 +49,9 @@ public class ChatListServlet extends HttpServlet {
 		ChatDAO chatDAO = new ChatDAO();
 		ArrayList<ChatDTO> chatList = chatDAO.getChatList(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
 		for(int i = 0; i < chatList.size(); i++) {
-			System.out.println(chatList.get(i).getChatContent());
 			result.append("[{\"value\": \"" + chatList.get(i).getChatName() + "\"},");
 			result.append("{\"value\": \"" + chatList.get(i).getChatContent() + "\"},");
 			result.append("{\"value\": \"" + chatList.get(i).getChatTime() + "\"}]");
-			System.out.println("cn : " + chatList.get(i).getChatName());
-			System.out.println("cl : " + chatList.get(i).getChatContent());
 			if(i != chatList.size() - 1) result.append(",");
 		}
 		result.append("], \"last\":\"" + chatList.get(chatList.size() -1).getChatID() +"\"}");
@@ -69,7 +66,6 @@ public class ChatListServlet extends HttpServlet {
 		ChatDAO chatDAO = new ChatDAO();
 		ArrayList<ChatDTO> chatList = chatDAO.getChatListByRecent(10);
 		for(int i = 0; i < chatList.size(); i++) {
-			System.out.println(chatList.get(i).getChatContent());
 			result.append("[{\"value\": \"" + chatList.get(i).getChatName() + "\"},");
 			result.append("{\"value\": \"" + chatList.get(i).getChatContent() + "\"},");
 			result.append("{\"value\": \"" + chatList.get(i).getChatTime() + "\"}]");
@@ -88,9 +84,7 @@ public class ChatListServlet extends HttpServlet {
 		result.append("{\"result\":[");
 		ChatDAO chatDAO = new ChatDAO();
 		ArrayList<ChatDTO> chatList = chatDAO.getChatListByRecent(chatID);
-		System.out.println("불러운 chatList의 사이즈 : " + chatList.size());
 		for(int i = 0; i < chatList.size(); i++) {
-			System.out.println(chatList.get(i).getChatContent());
 			result.append("[{\"value\": \"" + chatList.get(i).getChatName() + "\"},");
 			result.append("{\"value\": \"" + chatList.get(i).getChatContent() + "\"},");
 			result.append("{\"value\": \"" + chatList.get(i).getChatTime() + "\"}]");
