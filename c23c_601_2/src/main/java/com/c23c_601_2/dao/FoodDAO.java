@@ -153,5 +153,40 @@ public class FoodDAO extends AbDAO{
 		return result;
 	}
 	
+	public List<Map<String, Object>> searchList(String parameter) {
+	      List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
+	      Connection con = db.getConnection();
+	      PreparedStatement pstmt = null;
+	      ResultSet rs = null;
+	      String sql = "SELECT food_title, food_content, food_like, food_dislike, grade "
+	            + " FROM foodmap"
+	            + " WHERE food_title LIKE CONCAT('%', ?, '%')"
+	            + " ORDER BY food_like";
+	      
+	      try {
+	         pstmt = con.prepareStatement(sql);
+	         pstmt.setString(1, parameter);
+	         rs = pstmt.executeQuery();
+	         
+	         while(rs.next()) {
+	            Map<String, Object> dto = new HashMap<String, Object>();
+	            dto.put("title", rs.getString("food_title"));
+	            dto.put("content", rs.getString("food_title"));
+	            dto.put("like", rs.getInt("food_like"));
+	            dto.put("dislike", rs.getInt("food_dislike"));
+	            dto.put("grade", rs.getInt("grade"));
+	            list.add(dto);
+	         }
+	         
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      }finally {
+	         close(rs, pstmt, con);
+	      }
+	      
+	      return list;
+	   }
+
+	
 	
 }

@@ -36,26 +36,25 @@ public class Login extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
 		String id = request.getParameter("id");
-		String pw = request.getParameter("pw");
-		HttpSession session = request.getSession();
-		
-		MemberDAO dao = new MemberDAO();
-		MemberDTO dto = new MemberDTO();
-		
-		dto.setMid(id);
-		dto.setMpw(pw);
-		dto = dao.compareId(dto);
-		
-		
-		if(dto.getCount() == 1) {
-			session.setAttribute("mid", dto.getMid());
-			session.setAttribute("mname", dto.getMid());
-		}
-		
-		PrintWriter prw = response.getWriter();
-		prw.print(dto.getCount());
-	}
+	      String pw = request.getParameter("pw");
+	      HttpSession session = request.getSession();
+	      
+	      MemberDAO dao = new MemberDAO();
+	      MemberDTO dto = new MemberDTO();
+	      
+	      dto.setMid(id);
+	      dto.setMpw(pw);
+	      dto = dao.compareId(dto);
+	      
+	      
+	      if(dto.getCount() == 1) {
+	         session.setAttribute("mid", dto.getMid());
+	         session.setAttribute("mname", dto.getMid());
+	      }
+	      
+	      PrintWriter prw = response.getWriter();
+	      prw.print(dto.getCount());
 
+}
 }
