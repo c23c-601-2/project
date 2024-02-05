@@ -2,10 +2,17 @@ package com.c23c_601_2.dto;
 
 public class ChatDTO {
 
+	int chatID;
 	String chatName;
 	String chatContent;
 	String chatTime;
 	
+	public int getChatID() {
+		return chatID;
+	}
+	public void setChatID(int chatID) {
+		this.chatID = chatID;
+	}
 	public String getChatName() {
 		return chatName;
 	}
