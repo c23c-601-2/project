@@ -35,7 +35,6 @@ public class Board extends HttpServlet {
 			page = Util.str2Int2(request.getParameter("page"));
 		}
 		
-		
 		List<java.util.Map<String, Object>> list = null;
 		list = dao.foodList();
 		request.setAttribute("list", list);
