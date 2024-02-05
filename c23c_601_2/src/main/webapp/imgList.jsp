@@ -16,7 +16,7 @@
 	<!-- 본문시작 pdsList.jsp-->
 	<h3 class="h3">Instagram 601</h3>
 	<p>
-		<a href="imgForm.jsp">글쓰기</a>
+		<a href="./imgForm">글쓰기</a>
 	</p>
 
 	<script>
@@ -49,7 +49,38 @@
     }
 </script>
 
+<script>
+// 2024-01-24
+	$("#comment-button").click(function(){
+		let comment = $("#commentcontent").val();
+		/* let bno = ${detail.no }; */
+		if(content.length < 5){
+			alert("댓글은 다섯글자 이상으로 적어주세요.");
+			$("#commentcontent").focus();
+		} else {
+			let form = $('<form></form>');
+			form.attr('name', 'form');
+			form.attr('method', 'post');
+			form.attr('action', './imgList'); /* 어디로..? */
+			form.append($('<input/>', {type:'hidden', name:'commentcontent', value:comment}));//json
+			/* form.append($('<input/>', {type:'hidden', name:'bno', value:bno})); */
+			form.appendTo("body");
+			form.submit();
+		}
+	});//댓글쓰기 동적생성 끝
+	
+	//id="commentcontent"
+	//id="comment-btn"
+	//댓글쓰기 창에 쓸 수 있는 글자 표시해주고 넘어가면 더이상 입력 불가로 바꾸기
+	$("#commentcontent").keyup(function(){
+        let text = $(this).val();
+        if(text.length > 100){alert("100자 넘었어요.");$(this).val(text.substr(0, 100));}
+        $("#comment-btn").text("글쓰기 " + text.length +  "/100");
+     });
+	
+});
 
+</script>
 	<%
 	ArrayList<PdsDTO> list = dao.list();
 	if (list == null || list.isEmpty()) {
@@ -113,7 +144,7 @@
 			<!-- 댓글쓰는 창을 여기다가 만들어주겠습니다. 댓글내용, 누가, 어느, 2024-01-22 -->
 			<div class="comment-write">
 				<div class="comment-form">
-					<!-- form태그 필요없음. 위에서 동작가능 -->
+				
 					<textarea id="commentcontent" name="commentcontent"></textarea>
 					<button id="comment-button"
 						onclick="addComment(<%=dto.getPdsno()%>)">댓글쓰기</button>

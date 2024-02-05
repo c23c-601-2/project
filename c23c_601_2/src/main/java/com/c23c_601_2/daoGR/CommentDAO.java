@@ -19,6 +19,7 @@ public class CommentDAO extends AbstractDAO {
 	            // 댓글을 데이터베이스에 추가하는 SQL 쿼리
 	            String sql = "INSERT INTO tb_comments (comment) VALUES (?)";
 	            System.out.println("comment : " + dto.getComment());
+	            
 	            pstmt = conn.prepareStatement(sql);
 	            pstmt.setString(1, dto.getComment());
 	            //pstmt.setInt(2, dto.getMno());
@@ -58,6 +59,7 @@ public class CommentDAO extends AbstractDAO {
 		            comment.setComment(rs.getString("comment"));
 		            System.out.println("시각 : " + rs.getString("regdate"));
 		            System.out.println("댓글 : " + rs.getString("comment"));
+		            
 		            commentList.add(comment);
 		        }
 

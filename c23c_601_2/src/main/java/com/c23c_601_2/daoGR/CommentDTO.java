@@ -1,8 +1,8 @@
 package com.c23c_601_2.daoGR;
 
 public class CommentDTO {
-	private int cno, clike, mno, del;
-	private String comment, mid, mname, cdate,  Regdate;
+	private int cno, clike, mno, del, Pdsno;
+	private String comment, mid, mname, cdate,  Regdate ;
 
 	public int getCno() {
 		return cno;
@@ -78,10 +78,15 @@ public class CommentDTO {
 		Regdate = regdate;
 	}
 
-	public void setCno(String pdsnoStr) {
-		// TODO Auto-generated method stub
-		
+
+	public int getPdsno() {
+		return Pdsno;
 	}
+
+	public void setPdsno(int pdsno) {
+		Pdsno = pdsno;
+	}
+
 
 
 }
