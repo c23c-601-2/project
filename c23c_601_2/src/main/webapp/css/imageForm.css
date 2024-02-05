@@ -1,0 +1,70 @@
+@charset "UTF-8";
+
+.h3{ /* 사진 올리기 */
+	text-align : center;
+	color: green;
+	font-size: 50px;
+}
+.form_table{ 
+	width: 1200px;
+	height: 595px;
+	border-collapse: collapse;
+	align-items:center;
+	margin: 0 auto;	
+}
+
+#wname, #content{ /* 이름 */
+	font-size: xx-large;
+	color: blue;
+}
+
+/* #content{ 내용
+	
+}
+
+#pw{ 비밀번호
+	
+}
+
+
+#filename{ 첨부파일
+	
+} */
+
+#submit_button{ 
+	  width: 100px;
+  padding: 7px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  background-color: #8E44EC;
+  cursor: pointer;
+  outline: none;
+  margin: 10px;
+}
+#reset_button{ 
+	  width: 100px;
+  padding: 7px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  background-color: #8E44EC;
+  cursor: pointer;
+  outline: none;
+  margin: 10px;
+} 
+
+#list_button{ 
+	  width: 100px;
+  padding: 7px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  background-color: #8E44EC;
+  cursor: pointer;
+  outline: none;
+  margin: 10px;
+} 

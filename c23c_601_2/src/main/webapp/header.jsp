@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<link href="./css/header.css" rel="stylesheet"/>    
 
     <header>
 			<img src="./assets/img/mainHeaderImg.png" alt="601 게시판 아이콘" width="100" height="auto" >

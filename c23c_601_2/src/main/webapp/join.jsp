@@ -7,19 +7,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="styleSheet" href="./css/join.css?ver=1.1">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-<title>회원 가입</title>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
 	integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
 	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<title>회원 가입</title>
+
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
-
-
 <style type="text/css">
+
 	.address{
 		display: flex;
   		align-items: center;
@@ -67,157 +66,207 @@
 		color:red;
 		padding:5px 0px 0px 5px;
 	}
-	.pw-alert{
+	.pw-alert .email-alert .phone-alert{
 		width: 626px;
 	}
+
 </style>
 
 <script type="text/javascript">
 
 $(function(){
-	/* 안녕 */
+	
+	$('#joinBack').click(function(){
+		 history.back();
+	})
+	
+	let flag = new Array();
+
+	flag[0] = false;
+	flag[1] = false;
+	flag[2] = false;
+	flag[3] = false;
+	
 	
 	$('#address').click(function(){
 		selectAddress();
 	});
-	$('.id-alert, .pw-alert, .name-alert, .idbox, .namebox').hide();
+	$('.id-alert, .pw-alert, .name-alert, .email-alert, .phone-alert').hide();
 	
 	//id focus가 벗어났을경우
 	$('#mid').blur(function() {
 		let id = $('#mid').val();
 		
-		if(id.length == 0){
-			$('.id-alert,.idbox').show();
+		const regExp = /^[a-z0-9]{5,15}$/;
+		
+		if(!regExp.test(id)){
+			$('.id-alert').show();
+			$('.id-alert').html('<p class="alert idbox">아이디는 영문자 5글자 이상이고 특수문자가 없어야합니다.</p>');
 			$('#mid').focus();
 			return false;
 		} else {
-			flag[0] = true;
 			$('.id-alert').hide();
+			flag[0] = true;
+			ableBtn(flag);
 		}
     });
 	
 	//id focus가 벗어났을경우
 	$('#mname').blur(function() {
 		let name = $('#mname').val();
+		const regExp = /^[가-힣]{2,10}$/;
 		
-		if(name.length == 0){
-			$('.id-alert,.namebox').show();
+		if(!regExp.test(name)){
+			$('.id-alert').show();
+			$('.id-alert').html('<p class="alert idbox">올바른 이름을 입력해주세요.</p>');
 			$('#mname').focus();
 			return false;
 		} else {
-			flag[1] = true;
 			$('.id-alert').hide();
+			flag[1] = true;
+			ableBtn(flag);
 		}
     });
 	
-	//id focus가 벗어났을경우
+	//pw1 focus가 벗어났을경우
 	$('#mpw1').blur(function() {
 		let pw1 = $('#mpw1').val();
+		let reg = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/
 		
-		if(pw1.length == 0){
+		if(!reg.test(pw1)){
 			$('.pw-alert').show();
+			$('.pw-alert').html('<p class="alert">영문, 숫자, 특수문자 포함 8자리 이상을 입력해 주세요.</p>');
 			$('#mpw1').focus();
 			return false;
 		} else {
-			flag[2] = true;
 			$('.pw-alert').hide();
+			flag[2] = true;
+			ableBtn(flag);
 		}
     });
 	
-	//id focus가 벗어났을경우
+	//pw2 focus가 벗어났을경우
 	$('#mpw2').blur(function() {
 		let pw2 = $('#mpw2').val();
 		
 		if(pw2.length == 0){
 			$('.pw-alert').show();
+			$('.pw-alert').html('<p class="alert">영문, 숫자, 특수문자 포함 8자리 이상을 입력해 주세요.</p>');
 			$('#mpw2').focus();
 			return false;
 		} else {
-			flag[3] = true;
 			$('.pw-alert').hide();
+			flag[3] = true;
+			ableBtn(flag);
 		}
     });
 	
-	if(flag[0]== true && flag[1]== true && flag[2]== true && flag[3]== true ){
-		$('#joinComplete').removeAttr('disabled');
-	} else {
-		$('#joinComplete').attr('disabled','disabled');
-	}
+	//pw2 focus가 벗어났을경우
+	$('#mphone').blur(function() {
+		let phone = $('#mphone').val();
+		 const expHpText = /^\d{3}-\d{3,4}-\d{4}$/;
+		 
+		if(!expHpText.test(phone)){
+			$('.phone-alert').show();
+			$('#mphone').focus();
+			return false;
+		} else {
+			$('.phone-alert').hide();
+		}
+    });
+	
+	//pw2 focus가 벗어났을경우
+	$('#memail').blur(function() {
+		let email = $('#memail').val();
+		const expEmailText = /^[A-Za-z-0-9\-\.]+@[A-Ja-z-0-9\-\.]+\.[A-Ja-z-0-9]+$/;
+		  
+		if(!expEmailText.test(email)){
+			$('.email-alert').show();
+			$('#memail').focus();
+			return false;
+		} else {
+			$('.email-alert').hide();
+		}
+    });
+	
 	
 	$('#joinComplete').click(function(){
+		$('#mid')
 		let id = $('#mid').val();
 		let pw1 = $('#mpw1').val();
 		let pw2 = $('#mpw2').val();
-		let name = $('#mname').val();
-		
-		if(id.length == 0){
-			$('.id-alert').show();
-			$('#mid').focus();
-			return false;
-		} else {
-			$('.id-alert').hide();
-		}
-		
-		if(pw1.length < 8){
+		if(pw1 != pw2){
 			$('.pw-alert').show();
-			$('#mpw1').focus();
+			$('.pw-alert').html('<p class="alert">서로 다른 비밀번호입니다. 다시입력해주세요.</p>');
 			return false;
-		} else {
-			$('.pw-alert').hide();
+		} else{
+			$.ajax({
+				url:'./idCheck',
+				type:'post',
+				dataType:'text',
+				data:{'id':id},
+				success:function(result){
+					if(result ==1){
+						/* 
+							<div class="box rounded mb-3">
+								<p class="alert">필수 값을 입력해주세요.</p>
+							</div> */
+						$('.resultbox').html("<p class='alert'>이미 가입되어있는 아이디입니다.</p>");
+						$('#joinComplete').attr("disabled","disabled");
+						$('#mid').focus();
+						return false;
+					}else{
+						//postCode" selectAddr detailAddr
+						let join = {
+							'id': $('#mid').val(),
+							'pw': $('#mpw1').val(),
+							'name': $('#mname').val(),
+							'email' : $('#memail').val(),
+							'phone' : $('#mphone').val(),
+							'postCode' : $('#postCode').val(),
+							'selectAddr' :$('#selectAddr').val(),
+							'detailAddr' : $('#detailAddr').val()
+						}
+						
+						
+						$.ajax({
+							url:'./join',
+							type:'post',
+							data:join,
+							success:function(){
+								window.location.replace(".frontpage");
+							},
+							error:function(){
+								alert("실패");
+							}
+						});
+					}
+					
+				},
+				error:function(){
+					alert("실패");
+				}
+			});
+			
 		}
-		
-		
-		if(pw2.length == 0){
-			$('.id-alert').show();
-		}
-		if(name.length == 0){
-			$('.id-alert').show();
-		}
-		
-		//postCode" selectAddr detailAddr
-		let join = {
-			'id': $('#mid').val(),
-			'pw': $('#mpw1').val(),
-			'name': $('#mname').val(),
-			'email' : $('#memail').val(),
-			'phone' : $('#mphone').val(),
-			'postCode' : $('#postCode').val(),
-			'selectAddr' :$('#selectAddr').val(),
-			'detailAddr' : $('#detailAddr').val()
-		}
-		
-		
-		$.ajax({
-			url:'./join',
-			type:'post',
-			data:join,
-			success:function(){
-				alert("성공");
-			},
-			error:function(){
-				alert("실패");
-			}
-		});
 	});
 	
 	
 	
 })
 
-//체크
-function check(){
-	let id = $('#mid').val();
-	const regExp = /^[a-z0-9]{5,15}$/;
-	
-	if(id.length <= 5 || !regExp.test(id)){
-		$('#mid').val("");
-		$('#mid').html('<input type="text" class="form-control" placeholder="아이디는 영문자 5글자 이상이고 특수문자가 없어야합니다." id="mid">');
-		
-	} else{
-		alert("hi");
+function ableBtn(flag){
+	if(flag[0]== true && flag[1]== true && flag[2]== true && flag[3]== true ){
+		$('#joinComplete').removeAttr('disabled');
+		/* 
+							<div class="resultbox box rounded mb-3">
+								<p class="alert">필수 값을 입력해주세요.</p>
+							</div> */
+		$('.resultbox').hide();
+	} else {
+		$('#joinComplete').attr('disabled','disabled');
 	}
 }
-
 
 
 //주소창 팝업
@@ -268,8 +317,7 @@ function selectAddress() {
 								<input type="text" class="form-control" placeholder="이름" id="mname">
 							</div>
 							<div class="id-alert box rounded mt-3">
-								<p class="alert idbox">올바른 아이디를 입력해주세요</p>
-								<p class="alert namebox">올바른 이름을 입력해주세요</p>
+								<p class="alert idbox"></p>
 							</div>
 						</div>
 						
@@ -284,17 +332,22 @@ function selectAddress() {
 							</div>
 						</div>
 						<div class="pw-alert box rounded mb-3">
-							<p class="alert">올바른 비밀번호를 입력해주세요</p>
 						</div>
 						<div class="last">
 							<div class = "mb-3">
 							<label>이메일</label>
-							  <input type="text" class="form-control" placeholder="c23c@example.com"  id="memail" >
+							  <input type="text" class="form-control mb-2" placeholder="c23c@example.com"  id="memail" >
+							  <div class="email-alert box rounded mb-3">
+								<p class="alert">올바른 이메일을 입력해주세요.</p>
+							  </div>	
 							</div>
 							
 							<div class = "mb-3">
 							  <label>휴대폰 번호</label>
-							  <input type="text" class="form-control" id="mphone">
+							  <input type="text" class="form-control mb-2" id="mphone">
+							  <div class="phone-alert box rounded mb-3">
+								<p class="alert">올바른 전화번호를 입력해주세요.</p>
+							  </div>	
 							</div>
 							
 							<div class = "mb-3">
@@ -314,7 +367,7 @@ function selectAddress() {
 							  <label>상세 주소</label>
 							  <input type="text" class="form-control" placeholder="상세주소" id="detailAddr">
 							</div>
-							<div class="box rounded mb-3">
+							<div class="resultbox box rounded mb-3">
 								<p class="alert">필수 값을 입력해주세요.</p>
 							</div>
 							
