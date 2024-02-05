@@ -17,11 +17,13 @@ public class CommentDAO extends AbstractDAO {
 	        
 	        try {
 	            // 댓글을 데이터베이스에 추가하는 SQL 쿼리
-	            String sql = "INSERT INTO tb_comments (comment, mid) VALUES (?, ?)";
+	            String sql = "INSERT INTO tb_comments (comment) VALUES (?)";
+	            System.out.println("comment : " + dto.getComment());
 	            pstmt = conn.prepareStatement(sql);
 	            pstmt.setString(1, dto.getComment());
-	            pstmt.setInt(2, dto.getMno());
-	            pstmt.executeUpdate();
+	            //pstmt.setInt(2, dto.getMno());
+	            result = pstmt.executeUpdate();
+	            
 
 	        } catch (SQLException e) {
 	            e.printStackTrace();
