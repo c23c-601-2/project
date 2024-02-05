@@ -9,17 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/pdsList")
-public class PdsList extends HttpServlet {
+@WebServlet("/imgList")
+public class imgList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public PdsList() {
+    public imgList() {
         super();
         // TODO Auto-generated constructor stub
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("pdsList.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("imgList.jsp");
 		rd.forward(request, response);
 	}
 
