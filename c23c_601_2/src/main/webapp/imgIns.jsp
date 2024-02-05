@@ -39,7 +39,7 @@ try {
         String fileSystemName = mr.getFilesystemName(fileName);
 
         // 이미지 파일 경로 저장
-        String imagePath = "/webapp/storage/" + fileSystemName; // 예시 경로, 실제로는 업로드된 경로로 수정해야 함
+        String imagePath = "/webapp/storage/" + fileSystemName; 
         dto.setFilename(fileSystemName);
         dto.setImagePath(imagePath); // 이미지 파일 경로 저장
     }
@@ -53,8 +53,9 @@ try {
         if (flag) {
             out.println("<script>");
             out.println("	alert('사진을 추가했습니다.')");
-            out.println("	location.href='pdsList.jsp';");
+            out.println("	location.href='imgList.jsp';");
             out.println("</script>");
+            out.println("<img src=\"" + dto.getImagePath() + "\" alt=\"Uploaded Image\">");
         } else {
             out.println("<p>사진 추가 실패 T.T</p>");
             out.println("<p><a href='javascript:history.back();'>[다시시도]</a></p>");
