@@ -4,7 +4,7 @@
 <link href="./css/imageForm.css" rel="stylesheet">
 <!-- 본문시작 pdsForm.jsp -->
 	<h3 class="h3"> * 사진 올리기 * </h3>
-    <form name="photoForm" method="post" enctype="multipart/form-data" action="pdsIns.jsp" onsubmit="return pdsCheck(this)">
+    <form name="photoForm" method="post" enctype="multipart/form-data" action="imgIns" onsubmit="return pdsCheck(this)">
     <table class="form_table">
     	<tr>
           <th>이름</th>
@@ -37,7 +37,7 @@
 
 <script>
   function redirectToPdsList() {
-    window.location.href = './pdsList.jsp';
+    window.location.href = './imgList.jsp';
   }
 </script>
 

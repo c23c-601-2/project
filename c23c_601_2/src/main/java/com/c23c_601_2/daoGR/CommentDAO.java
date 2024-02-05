@@ -7,21 +7,23 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class CommentDAO extends AbstractDAO {
 
-	 public void addComment(int postId, String content) {
-	        Connection conn = null;
+	 public int commentWrite(CommentDTO dto) {
+	        Connection conn = db.getConnection();
 	        PreparedStatement pstmt = null;
-
+	        int result = 0;
+	        
 	        try {
-	            conn = db.getConnection();
-
 	            // 댓글을 데이터베이스에 추가하는 SQL 쿼리
-	            String sql = "INSERT INTO tb_comments (content, postId) VALUES (?, ?)";
+	            String sql = "INSERT INTO tb_comments (comment) VALUES (?)";
+	            System.out.println("comment : " + dto.getComment());
 	            pstmt = conn.prepareStatement(sql);
-	            pstmt.setString(1, content);
-	            pstmt.setInt(2, postId);
-	            pstmt.executeUpdate();
+	            pstmt.setString(1, dto.getComment());
+	            //pstmt.setInt(2, dto.getMno());
+	            result = pstmt.executeUpdate();
+	            
 
 	        } catch (SQLException e) {
 	            e.printStackTrace();
@@ -29,28 +31,28 @@ public class CommentDAO extends AbstractDAO {
 	            close(null, pstmt, conn);
 	            
 	        }
+	        return result;
 	    }
 
 
 	 public List<CommentDTO> getCommentList(int pdsno) {
-		    Connection conn = null;
+		    Connection conn = db.getConnection();
 		    PreparedStatement pstmt = null;
 		    ResultSet rs = null;
 
 		    List<CommentDTO> commentList = new ArrayList<>();
 
-		    try {
-		        conn = db.getConnection();  // Connection 객체 초기화 추가
+		    String sql = "SELECT mid, regdate, comment FROM tb_comments WHERE pdsno = ? AND mid=(SELECT mid FROM member)" ;
 
+		    try {
 		        // 특정 게시물(pdsno)에 대한 댓글을 데이터베이스에서 가져오기
-		        String sql = "SELECT mname, regdate, comment FROM tb_comments WHERE pdsno = ? ORDER BY regdate DESC";
 		        pstmt = conn.prepareStatement(sql);
 		        pstmt.setInt(1, pdsno);
 		        rs = pstmt.executeQuery();
 
 		        while (rs.next()) {
 		            CommentDTO comment = new CommentDTO();
-		            comment.setMname(rs.getString("mname"));
+		            comment.setMname(rs.getString("mid"));
 		            comment.setRegdate(rs.getString("regdate"));
 		            comment.setComment(rs.getString("comment"));
 
@@ -65,4 +67,5 @@ public class CommentDAO extends AbstractDAO {
 
 		    return commentList;
 		}
+
 }
