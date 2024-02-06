@@ -34,9 +34,9 @@ $(function() {
         }
     });
 	
-	$('.likeBtn').click(function() {
+	$('.likeBtn1').click(function() {
 		alert("test1");
-		let no = $(this).children('.likeBtnno').val();
+		let no = $(this).siblings('.likeBtnno').val();
 	    if (mid == null || mid == "") {
 	        toLogin();
 	    } else {
@@ -60,9 +60,9 @@ $(function() {
 	        }
 	});
 	
-	$('.dislikeBtn').off('click').on('click', function() {
+	$('.dislikeBtn1').off('click').on('click', function() {
 		alert("test2");
-		let no = $(this).children('.dislikeBtnno').val();
+		let no = $(this).siblings('.dislikeBtnno').val();
 	    if (mid == null || mid == "") {
 	        toLogin();
 	    } else {
@@ -149,14 +149,14 @@ tbody>tr>td {
 
 											<td class="likeBtn">${row.like }
 													<input type="hidden" class="likeBtnno" value="${row.no}">
-													<button class="likeBtn">
+													<button class="likeBtn1">
 														<img alt="up" src="./img/up.jpg" width="15px;">
 													</button>
 											</td>
 
 											<td class="dislikeBtn">${row.dislike }
 													<input type="hidden" class="dislikeBtnno" value="${row.no}">
-													<button class="dislikeBtn">
+													<button class="dislikeBtn1">
 														<img alt="down" src="./img/down.jpg" width="15px;">
 													</button>
 											</td>
