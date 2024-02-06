@@ -112,7 +112,7 @@ a:-webkit-any-link {
 	<ul>
 		<li>	
 			<div class="menu">
-				<a style="color: inherit; text-decoration: none;" href=/imgList><img src="./assets/img/instagram.png" alt="601스타그램" width="34" height="auto" style="margin-right: 10px;">601스타그램</a>
+				<a style="color: inherit; text-decoration: none;" href=/newsBoard><img src="./assets/img/jobnews.png" alt="601스타그램" width="34" height="auto" style="margin-right: 10px;">뉴스</a>
 				<div class="dropdownBtn">
 					<i class="fa-solid fa-caret-up"> </i>
 				</div>	
@@ -126,7 +126,15 @@ a:-webkit-any-link {
 				</div>	
 			</div>
 		</li>
-		<li>
+		<li>	
+			<div class="menu">
+				<a style="color: inherit; text-decoration: none;" href=/imgList><img src="./assets/img/instagram.png" alt="601스타그램" width="34" height="auto" style="margin-right: 10px;">601스타그램</a>
+				<div class="dropdownBtn">
+					<i class="fa-solid fa-caret-up"> </i>
+				</div>	
+			</div>
+		</li>
+		<!-- <li>
 			<div class="menu">
 				<a style="" ><img src=".//assets/img/jobnews.png" alt="601취업정보" width="34" height="auto" style="margin-right: 10px;">601취업정보</a>
 				<div class="dropdownBtn">
@@ -141,7 +149,7 @@ a:-webkit-any-link {
 					<a style="border: 1px solid black; background-color: #FFDC9F;" href="/join">🏛️알렉산드리아 도서관</a>
 				</li>
 			</ul>
-		</li>
+		</li> -->
 		<li>	
 			<div class="menu">
 				<a style="color: inherit; text-decoration: none;" href=/login><img src=".//assets/img/login.png" alt="로그인" width="34" height="auto" style="margin-right: 10px;">로그인</a>
