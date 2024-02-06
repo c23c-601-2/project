@@ -47,19 +47,16 @@
          $.ajax({
             type: "post",
             url: "./commentServlet", // CommentServlet 또는 CommentController와 같은 서버 측 핸들러 URL
-            dataType : 'text',
+            dataType : 'json',
             data: {"pdsno": pdsno, "commentContent": commentContent
             },
             success: function (result) {
                 // 서버에서 성공적으로 응답을 받았을 때 실행되는 코드
                 // 새로운 댓글을 목록에 추가
-               if(result==1){
-	               		var newContents = "<li>${sessionScope.mid}님 : " +commentContent+"</li>";
-	               		$('#comment-list'+pdsno).append(newContents);
-	                
-               }else{
-            	   alert("실패");
-               }
+                
+	            var newContents = "<li>"+result.mid+" : " +result.comment+"</li>";
+	            $('#comment-list'+pdsno).append(newContents);
+	          
             },
             error: function (error) {
                 // 서버에서 오류 응답을 받았을 때 실행되는 코드
@@ -140,7 +137,7 @@
 				ccomment = cdao.getCommentList(dto.getPdsno());
 				%>
 				<c:forEach items="<%=ccomment%>" var="comment">
-					<li>${comment.cname}님:${comment.comment}</li>
+					<li>${comment.mid}님:${comment.comment}</li>
 				</c:forEach>
 			</ul>
 
