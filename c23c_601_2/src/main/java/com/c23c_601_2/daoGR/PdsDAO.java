@@ -47,7 +47,7 @@ public class PdsDAO extends com.c23c_601_2.daoGR.AbstractDAO{
 	    	Connection con= db.getConnection();
 	        StringBuilder sql=new StringBuilder();
 	        
-	        sql.append(" SELECT pdsno, wname, subject, readcnt, regdate, filename ");
+	        sql.append(" SELECT pdsno, wname, subject, readcnt, regdate, filename, filesize ");
 	        sql.append(" FROM tb_pds ");
 	        sql.append(" ORDER BY regdate DESC ");
 	        
@@ -63,6 +63,8 @@ public class PdsDAO extends com.c23c_601_2.daoGR.AbstractDAO{
 			dto.setReadcnt(rs.getInt("readcnt"));
 			dto.setFilename(rs.getString("filename"));
 			dto.setRegdate(rs.getString("regdate"));
+			dto.setFilesize(rs.getInt("filesize")); // 파일사이즈 int로 추가..?
+
 			list.add(dto);
 	            }while(rs.next());
 	        }else{

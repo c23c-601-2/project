@@ -23,22 +23,14 @@ public class imgList extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 댓글 출력부
-        CommentDAO commentDAO = new CommentDAO();
-        List<CommentDTO> loadCommentList = commentDAO.getCommentList();
 
-        // 댓글 목록을 request에 설정
-        request.setAttribute("commentList", loadCommentList);
-
-        // 댓글 목록을 출력하는 JSP 페이지로 포워딩
-        //RequestDispatcher dispatcher = request.getRequestDispatcher("/imgList.jsp");
-        //dispatcher.forward(request, response);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("imgList.jsp");
 		rd.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	request.setCharacterEncoding("UTF-8");
 	}
 
 }

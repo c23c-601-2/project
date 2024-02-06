@@ -1,70 +1,75 @@
 @charset "UTF-8";
 
-.h3{ /* 사진 올리기 */
-	text-align : center;
+.h3 { /* 사진 올리기 */
+	text-align: center;
 	color: green;
 	font-size: 50px;
 }
-.form_table{ 
-	width: 1200px;
+
+.form_table {
+	width: 800px;
 	height: 595px;
 	border-collapse: collapse;
-	align-items:center;
-	margin: 0 auto;	
+	align-items: center;
+	margin: 0 auto;
+	/* background-color: pink; */
 }
 
-#wname, #content{ /* 이름 */
+th {
+	text-align: center;
+	padding: 25px;
+}
+
+td {
+	align-items: left;
+}
+
+textarea {
+	width: 500px;
+}
+
+#wname, #content { /* 이름 */
 	font-size: xx-large;
 	color: blue;
 }
 
-/* #content{ 내용
-	
+#wname {
+	width: 500px;
 }
 
-#pw{ 비밀번호
-	
+.button-container {
+	text-align: center; /* 부모 요소를 가운데 정렬 */
 }
 
-
-#filename{ 첨부파일
-	
-} */
-
-#submit_button{ 
-	  width: 100px;
-  padding: 7px;
-  border: none;
-  border-radius: 5px;
-  color: white;
-  font-weight: bold;
-  background-color: #8E44EC;
-  cursor: pointer;
-  outline: none;
-  margin: 10px;
+#submit_button, #reset_button {
+	width: 100px;
+	padding: 7px;
+	border: none;
+	border-radius: 5px;
+	color: white;
+	font-weight: bold;
+	cursor: pointer;
+	outline: none;
+	display: inline-block; /* 인라인 블록 요소로 배치 */
+	margin: 10px; /* 버튼 간격을 조절하세요 */
 }
-#reset_button{ 
-	  width: 100px;
-  padding: 7px;
-  border: none;
-  border-radius: 5px;
-  color: white;
-  font-weight: bold;
-  background-color: #8E44EC;
-  cursor: pointer;
-  outline: none;
-  margin: 10px;
-} 
 
-#list_button{ 
-	  width: 100px;
-  padding: 7px;
-  border: none;
-  border-radius: 5px;
-  color: white;
-  font-weight: bold;
-  background-color: #8E44EC;
-  cursor: pointer;
-  outline: none;
-  margin: 10px;
-} 
+#submit_button {
+	background-color: #400000;
+}
+
+#reset_button {
+	background-color: black;
+}
+
+#list_button {
+	width: 100px;
+	padding: 7px;
+	border: none;
+	border-radius: 5px;
+	color: white;
+	font-weight: bold;
+	background-color: black;
+	outline: none;
+	align-items: right;
+}
