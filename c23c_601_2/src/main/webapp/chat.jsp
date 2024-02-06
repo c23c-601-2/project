@@ -71,7 +71,7 @@
 					'<div class="media-body">' +
 					'<h4 style="color: #8E7C68" class="media-heading">' +
 					chatName +
-					'<span style="font-size: 0.7em; " class="pull-right">' +
+					'<span style="font-size: 0.9em; " class="pull-right">' +
 					" " + chatTime + 
 					'</span>' +
 					'</h4>' +
