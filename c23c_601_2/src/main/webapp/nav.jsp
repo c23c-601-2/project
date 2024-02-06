@@ -53,6 +53,7 @@ nav > ul > li > ul {
 	display: none;
 	width: auto;
 	text-align: center;
+	border: 2px solid #ED7458;
 }
 
 nav > ul > li > ul > li {
@@ -60,6 +61,8 @@ nav > ul > li > ul > li {
 	align-items: center;
 	justify-content: start;
 	padding-left: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
 }
 
 nav:hover > ul > li:hover > ul {
@@ -146,15 +149,15 @@ a:-webkit-any-link {
 					<i class="fa-solid fa-caret-up"> </i>
 				</div>	
 			</div>
-			<ul class="active" style="padding: 0; ">
+			<ul class="active" style="padding: 0;">
 				<c:choose><c:when test="${sessionScope.mname eq null }">
-				<li style="background-color: #FFDC9F; border: 1px solid red;">
+				<li style="background-color: #FFDC9F;">
 					<a style="background-color: #FFDC9F; color: inherit; text-decoration: none;" href="/login"> 로그인 </a>
 				</li ></c:when><c:otherwise>
-				<li style="background-color: #FFDC9F; border: 1px solid blue;">
+				<li style="background-color: #FFDC9F;">
 					<a style="background-color: #FFDC9F; color: inherit; text-decoration: none;" href="/logout"> 로그아웃 </a>
 				</li></c:otherwise></c:choose>
-				<li style="background-color: #FFDC9F; border: 1px solid red">
+				<li style="background-color: #FFDC9F;">
 					<a style="background-color: #FFDC9F; color: inherit; text-decoration: none;" href="/join"> 회원가입 </a>
 				</li>
 			</ul>
