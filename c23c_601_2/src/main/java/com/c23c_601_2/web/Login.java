@@ -40,6 +40,7 @@ public class Login extends HttpServlet {
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
 		HttpSession session = request.getSession();
+		PrintWriter prw = response.getWriter();
 		
 		MemberDAO dao = new MemberDAO();
 		MemberDTO dto = new MemberDTO();
@@ -50,11 +51,11 @@ public class Login extends HttpServlet {
 		
 		
 		if(dto.getCount() == 1) {
+			dao.lastLogin(dto.getMid());
 			session.setAttribute("mid", dto.getMid());
 			session.setAttribute("mname", dto.getMid());
 		}
 		
-		PrintWriter prw = response.getWriter();
 		prw.print(dto.getCount());
 	}
 
