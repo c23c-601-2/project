@@ -21,9 +21,8 @@
 
 	<script>
     function addComment(pdsno) {
-    	alert("댓글쓰기??");
         var commentContent = document.getElementById("commentcontent").value;
-
+        alert(pdsno);
         // AJAX를 사용하여 서버에 댓글 추가 요청 보내기
         $.ajax({
             type: "post",
@@ -31,14 +30,17 @@
             dataType : 'text',
             data: {"pdsno": pdsno, "commentContent": commentContent
             },
-            success: function (commentList) {
+            success: function (result) {
                 // 서버에서 성공적으로 응답을 받았을 때 실행되는 코드
                 // 새로운 댓글을 목록에 추가
-                for (var i = 0; i < commentList.length; i++) {
-                    var comment = commentList[i];
-                    var newComment = '<li>' + comment.mid + '님: ' + comment.comment + '</li>';
-                    $("#comment-list").append(newComment);
-                }
+               if(result==1){
+	               		var newContents = "<li>"+pdsno+"님 : " +commentContent+"</li>";
+	               		$('#comment-list').append(newContents);
+	                
+               }else{
+            	   alert("실패");
+               }
+                
             },
             error: function (error) {
                 // 서버에서 오류 응답을 받았을 때 실행되는 코드
@@ -50,24 +52,6 @@
 </script>
 
 <script>
-// 2024-01-24
-	$("#comment-button").click(function(){
-		let comment = $("#commentcontent").val();
-		/* let bno = ${detail.no }; */
-		if(content.length < 5){
-			alert("댓글은 다섯글자 이상으로 적어주세요.");
-			$("#commentcontent").focus();
-		} else {
-			let form = $('<form></form>');
-			form.attr('name', 'form');
-			form.attr('method', 'post');
-			form.attr('action', './imgList'); /* 어디로..? */
-			form.append($('<input/>', {type:'hidden', name:'commentcontent', value:comment}));//json
-			/* form.append($('<input/>', {type:'hidden', name:'bno', value:bno})); */
-			form.appendTo("body");
-			form.submit();
-		}
-	});//댓글쓰기 동적생성 끝
 	
 	//id="commentcontent"
 	//id="comment-btn"
@@ -82,23 +66,17 @@
 
 </script>
 	<%
+	CommentDAO cdao = new CommentDAO();
+	List<CommentDTO> ccomment =  null;
 	ArrayList<PdsDTO> list = dao.list();
 	if (list == null || list.isEmpty()) {
-		out.println("관련 자료 없음 T.T");
+		out.println("관련 자료 없음");
 	} else {
 		/* PdsDTO dto; */ // 반복문 밖에서 선언
 	%>
 	전체 글 개수 :
 	<%=list.size()%>
 	<br>
-	<!-- <table class="list_table">
-    <tr>
-        <th>제목</th>
-        <th>사진</th>
-        <th>작성자</th>
-        <th>조회수</th>
-        <th>작성일</th>
-    </tr> -->
 	<%
 	for (int idx = 0; idx < list.size(); idx++) {
 		dto = list.get(idx); // 이미 선언된 변수를 사용
@@ -137,8 +115,13 @@
 		<div class="post-comment">
 			<ul id="comment-list">
 				<!-- 댓글 목록을 출력하는 부분 -->
-				<c:forEach items="${commentList}" var="comment">
-					<li>${comment.mid}님:${comment.comment}</li>
+				<!-- dao.getCOMMECT -->
+				<%
+				ccomment =  cdao.getCommentList(dto.getPdsno());
+				
+				%>
+				<c:forEach items="<%=ccomment %>" var="comment">
+					<li> ${pdsno}님:${comment.comment}</li>
 				</c:forEach>
 			</ul>
 			<!-- 댓글쓰는 창을 여기다가 만들어주겠습니다. 댓글내용, 누가, 어느, 2024-01-22 -->
@@ -153,18 +136,6 @@
 		</div>
 	</div>
 
-
-	<!-- 댓글 출력창 -->
-	<div class="comments">
-		<c:forEach items="${commentList}" var="comment">
-			<div class="comment">
-				<div class="chead">
-					<div class="cname">${comment.mid}님</div>
-				</div>
-				<div class="ccomment">${comment.comment}</div>
-			</div>
-		</c:forEach>
-	</div>
 
 	<%
 	}
