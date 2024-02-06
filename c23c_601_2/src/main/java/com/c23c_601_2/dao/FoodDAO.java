@@ -149,10 +149,10 @@ public class FoodDAO extends AbDAO{
 	         
 	         while(rs.next()) {
 	            Map<String, Object> dto = new HashMap<String, Object>();
-	            dto.put("title", rs.getString("food_title"));
-	            dto.put("content", rs.getString("food_title"));
-	            dto.put("like", rs.getInt("food_like"));
-	            dto.put("dislike", rs.getInt("food_dislike"));
+	            dto.put("food_title", rs.getString("food_title"));
+	            dto.put("food_content", rs.getString("food_content"));
+	            dto.put("food_like", rs.getInt("food_like"));
+	            dto.put("food_dislike", rs.getInt("food_dislike"));
 	            dto.put("grade", rs.getInt("grade"));
 	            list.add(dto);
 	         }
