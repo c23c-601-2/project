@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,21 +29,41 @@
 	height: 100vh;
 }
 .orderform{
-	padding:0px;
+	padding:10px;
 	margin:0px;
 	width: 600px;
-	border: 1px solid; 
 	float:left;
 }
 
 .myinfo{
-	padding:0px;
-	margin:0px;
+	padding :15px;
 	width: 600px;
-	border: 1px solid;
 	float:left;
 }
+.order{
+	padding :5px;
+}
+table{
+	margin:0 auto;
+	width: 100%;
+}
+tr {
+	border-bottom: 1px solid;
+}
+td{
+
+	padding : 5px;
+	height:3px;
+}
+.paging{
+	padding-top: 10px;
+	text-align: center;
+}
+.btn{
+	border: 0px;
+}
 </style>
+
 </head>
 <body>
 	<div class="main">
@@ -52,29 +73,57 @@
 				
 				<div class="orderform">
 					<div class="order">
-						주문내역
+						<p style="font-weight:bold;">작성한 게시글</p>
 						<hr>
-						<table>
-							<thead>
-								<tr>
-									<td>일자</td>
-									<td>제목</td>
-									<td>글쓴이</td>
-									<td>type</td>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach items="${detail }" var="detail" >								
+						<div class="boardtable">
+							<table>
+								<thead>
 									<tr>
-										<td>${detail.date }</td>
-										<td>${detail.title }</td>
-										<td>${detail.write }</td>
-										<td>${detail.type }</td>
+										<td>일자</td>
+										<td>제목</td>
+										<td>글쓴이</td>
+										<td>type</td>
 									</tr>
-								</c:forEach>
+								</thead>
+								<tbody id="tablebody">
+									<c:forEach items="${detail }" var="de" >								
+										<tr>
+											<td>${de.regdate }</td>
+											<td>${de.subject }</td>
+											<td>${de.mid }</td>
+											<td>${de.type }</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+						<c:set value="${totalcount / 5 }" var="totalPage"/>
+						<fmt:parseNumber integerOnly="true" value="${totalPage }" var="totalPage"  />
+						<c:if test="${totalcount %5 gt 0 }">
+							<c:set value="${totalPage +1 }" var="totalPage"/>
+						</c:if>
+						
+						<c:set value="1" var="startPage"/>
+						<c:if test="${page gt 3 }">
+							<c:set value="${page -3}" var="startPage"/>
+						</c:if>
+						<c:set value="${startPage +4 }" var="endPage"/>
+						<c:if test="${endPage gt totalPage }">							
+							<c:set value="${totalPage }" var="endPage"/>
+						</c:if>
+						
+						<div class="paging">
+							<button <c:if test="${page eq 1 }"> disabled="disabled"</c:if> class="btn" id="fisrtpage">&lt;&lt;</button>
+							<button <c:if test="${page -5 lt 1 }"> disabled="disabled" </c:if> class="btn" id="jumpminuspage">&lt;</button>
 							
-							</tbody>
-						</table>
+							<c:forEach begin="${startPage }" end="${endPage}" var="num">
+								<input type="hidden" value="${num }">
+								<button class="pagebtn btn">${num }</button>
+							</c:forEach>
+							
+							<button <c:if test="${page + 5 gt endPage }"> disabled="disabled" </c:if> class="btn" id="jumppage">&gt;</button>
+							<button <c:if test="${page eq endPage }"> disabled="disabled"</c:if> class="btn" id="lastpage">&gt;&gt;</button>
+						</div>
 					</div>
 					
 					<div class="comment">
@@ -120,5 +169,70 @@
 			</article>
 		</div>
 	</div>
+	<script type="text/javascript">
+		$(function(){
+			$('#fisrtpage').click(function(){
+				let startpage = ${startPage};		
+				
+				$.ajax({
+					url:'./mypage',
+					type:'post',
+					dataType:'json',
+					data:{'page':startpage},
+					success:function(result){
+						$('#tablebody').html("");
+						let newline ="";
+						for(let i =0; i< result.length;i++){
+							newline ="<tr><td>"+result[i].regdate+"</td><td>"+result[i].subject+"</td><td>"+result[i].mid+"</td><td>"+result[i].type+"</td></tr>";
+							
+							$('#tablebody').append(newline);
+						}
+					},
+					error:function(){
+						alert("실패");
+					}
+				});
+				
+			});
+			
+			
+			$('.pagebtn').click(function(){
+				let page = $(this).prev().val();		
+				$.ajax({
+					url:'./mypage',
+					type:'post',
+					dataType:'json',
+					data:{'page':page},
+					success:function(result){
+						$('#tablebody').html("");
+						let newline ="";
+						for(let i =0; i< result.length;i++){
+							newline ="<tr><td>"+result[i].regdate+"</td><td>"+result[i].subject+"</td><td>"+result[i].mid+"</td><td>"+result[i].type+"</td></tr>";
+							
+							$('#tablebody').append(newline);
+						}
+					},
+					error:function(){
+						alert("실패");
+					}
+				});
+				
+			});
+			
+			
+		});
+	</script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
