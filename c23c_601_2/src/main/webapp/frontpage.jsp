@@ -53,16 +53,14 @@
 						</div>
 					</div>
 				</div>
-				<div class="boxrow">
-					<div class="boxleft">
-						<img src="./assets/img/ad.png" alt="광고" width="100%" height="100%" > 
+				<div class="boxrow2">
+					<div class="boxrow2title">
+						<a href="/newsBoard" target="_blank">
+						<img src="./assets/img/jobnews.png" alt="뉴스" height="20"; style="margin-right: 10px; vertical-align: middle;">뉴스
+						</a>
 					</div>
-					<div class="boxright">
-						<div class="sixzeroonwstagram">
-							제목	
-						</div>
-						<iframe src="https://tcpschool.com/ajax/intro" style="width:100%; flex: 1">
-						</iframe>
+					<div class="boxrow2content">
+						<%@ include file="frontNewsBoard.jsp" %>
 					</div>
 				</div>
 				<div class="boxrow">

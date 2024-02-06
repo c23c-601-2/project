@@ -252,14 +252,14 @@
 							<thead>
 								<tr style="font-size: 16px">
 									<th>가게 이름</th>
-									<th>후기 내용</th>
+									<th>좋아요 / 싫어요</th>
 								</tr>
 							</thead>
 							<tbody>
 								<c:forEach items="${list }" var="row">
 									<tr>
 										<td class="d2">${row.food_title }</td>
-										<td class="d3">${row.food_content }</td>
+										<td class="d3">${row.food_like } / ${row.food_dislike }</td>
 									</tr>
 								</c:forEach>
 							</tbody>
