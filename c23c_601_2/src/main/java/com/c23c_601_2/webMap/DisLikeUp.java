@@ -30,14 +30,11 @@ public class DisLikeUp extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		int result = 0 ;
-		System.out.println(result);
 		DisLikeCountDTO dto = new DisLikeCountDTO();
 		FoodDAO dao = new FoodDAO();
 		
 		String no = request.getParameter("no");
-		System.out.println(no);
 		String mid = (String)session.getAttribute("mid");
-		System.out.println(mid);
 		
 		dto.setDno(Util.str2Int2(no));
 		dto.setDmid(mid);

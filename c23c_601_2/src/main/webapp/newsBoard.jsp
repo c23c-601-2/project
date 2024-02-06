@@ -30,9 +30,6 @@ body {
 		<%@ include file="./header.jsp"%>
 		<%@ include file="nav.jsp" %>
 		</div>
-	<div class="maintitle">
-		<h1>601하하</h1>
-		</div>
 	<table class="table" border="1">
 	<caption class="caption">전체 뉴스</caption>
 	<caption class="caption1">출처 : 네이버</caption>
