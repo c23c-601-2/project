@@ -281,4 +281,23 @@ public class FoodDAO extends AbDAO{
 		
 		return result;
 	}
+	public int UpdateContent(FoodDTO dto) {
+		int result = 0;
+		Connection con = db.getConnection();
+		PreparedStatement pstmt = null;
+		String sql = "UPDATE foodmap SET food_content = ? WHERE food_no = ?";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, dto.getContent());
+			pstmt.setInt(2, dto.getNo());
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(null, pstmt, con);
+		}
+		
+		return result;
+	}
 }
