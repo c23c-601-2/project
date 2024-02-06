@@ -12,6 +12,33 @@ import com.c23c_601_2.dto.TotalboardDTO;
 
 public class MemberDAO extends AbstractDAO{
 	
+	//totalpage 
+	public int totalcount(String mid) {
+		int result =0;
+		
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "SELECT COUNT(*) AS count FROM totalboard WHERE mid = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mid);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt("count");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return result;
+	}
+	
+	
+	//totalboard 출력
 	public List<TotalboardDTO> detailBoard(String mid,int page){
 		List<TotalboardDTO> list = new ArrayList<TotalboardDTO>();
 		
@@ -20,13 +47,13 @@ public class MemberDAO extends AbstractDAO{
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "SELECT mid,subject,regdate,type FROM totalboard "
-				+ "WHERE mno = (SELECT mno FROM member WHERE mid =?) "
-				+ "LIMIT ?, 3";
+				+ "WHERE mid =? "
+				+ "LIMIT ?, 5";
 		
 		try {
 			pstmt= conn.prepareStatement(sql);
 			pstmt.setString(1, mid);
-			pstmt.setInt(2, (page-1)*3);
+			pstmt.setInt(2, (page-1)*5);
 			rs= pstmt.executeQuery();
 			
 			while(rs.next()) {
