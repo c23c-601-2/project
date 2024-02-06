@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.c23c_601_2.dao.FoodDAO;
 import com.c23c_601_2.dto.FoodDTO;
@@ -27,7 +28,9 @@ public class Board extends HttpServlet {
 		System.out.println("sdfsd");
 		request.setCharacterEncoding("UTF-8");
 		FoodDAO dao = new FoodDAO();
+		HttpSession session = request.getSession();
 		int page = 1;
+		
 		if (request.getParameter("page") != null && request.getParameter("page") != "") {
 			page = Util.str2Int2(request.getParameter("page"));
 		}
@@ -37,22 +40,18 @@ public class Board extends HttpServlet {
 		request.setAttribute("list", list);
 		
 		List<FoodDTO> list1 = null;
-		if(request.getParameter("search") != null ) {
-			list1 = dao.foodListAll(request.getParameter("search"));
-			request.setAttribute("list1", list1);
-			System.out.println("list1 +" + list1);
-			RequestDispatcher rd = request.getRequestDispatcher("/board.jsp");
-			rd.forward(request, response);
-		} else {			
+		if(request.getParameter("search") == null) {
 			list1= dao.foodListAll(page);
-			request.setAttribute("list1", list1);
-			RequestDispatcher rd = request.getRequestDispatcher("/board.jsp");
-			rd.forward(request, response);
-
+		} else {			
+			list1 = dao.foodListAll(request.getParameter("search"));
 		}
+		request.setAttribute("list1", list1);
 		
 		int totalCount = dao.totalCount();
 		request.setAttribute("totalCount", totalCount);
+
+		RequestDispatcher rd = request.getRequestDispatcher("/board.jsp");
+		rd.forward(request, response);
 	}
 		
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

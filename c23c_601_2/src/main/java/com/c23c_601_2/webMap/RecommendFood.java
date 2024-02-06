@@ -9,23 +9,30 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/map")
-public class Map extends HttpServlet {
+@WebServlet("/recommendFood")
+public class RecommendFood extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public Map() {
+    public RecommendFood() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/map.jsp");
+		
+		
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/recommendFood");
 	    rd.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
+		
+		System.out.println("no");
+		
+		
 	}
 
 }
