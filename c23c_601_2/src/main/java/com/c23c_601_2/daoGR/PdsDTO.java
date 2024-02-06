@@ -1,5 +1,7 @@
 package com.c23c_601_2.daoGR;
 
+import java.util.Base64;
+
 public class PdsDTO {
 	 private int pdsno;    
 	 private String wname;
@@ -12,8 +14,24 @@ public class PdsDTO {
 	 private String imagePath;
 	 private String type;
 	 private byte[] imageData;
+	 private String base64ImageData;
 	 
-	 public byte[] getImageData() {
+	 public void encodeImageDataToBase64() {
+	        if (imageData != null) {
+	            String encodedImageData = Base64.getEncoder().encodeToString(imageData);
+	            this.base64ImageData = encodedImageData;
+	        }
+	    }
+	 
+	 public String getBase64ImageData() {
+		return base64ImageData;
+	}
+
+	public void setBase64ImageData(String base64ImageData) {
+		base64ImageData = base64ImageData;
+	}
+
+	public byte[] getImageData() {
 		return imageData;
 	}
 

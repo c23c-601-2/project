@@ -53,6 +53,7 @@ nav > ul > li > ul {
 	display: none;
 	width: auto;
 	text-align: center;
+	border: 2px solid #ED7458;
 }
 
 nav > ul > li > ul > li {
@@ -60,6 +61,8 @@ nav > ul > li > ul > li {
 	align-items: center;
 	justify-content: start;
 	padding-left: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
 }
 
 nav:hover > ul > li:hover > ul {
@@ -109,7 +112,7 @@ a:-webkit-any-link {
 	<ul>
 		<li>	
 			<div class="menu">
-				<a style="color: inherit; text-decoration: none;" href=/imgList><img src="./assets/img/instagram.png" alt="601스타그램" width="34" height="auto" style="margin-right: 10px;">601스타그램</a>
+				<a style="color: inherit; text-decoration: none;" href=/newsBoard><img src="./assets/img/jobnews.png" alt="601스타그램" width="34" height="auto" style="margin-right: 10px;">뉴스</a>
 				<div class="dropdownBtn">
 					<i class="fa-solid fa-caret-up"> </i>
 				</div>	
@@ -123,7 +126,15 @@ a:-webkit-any-link {
 				</div>	
 			</div>
 		</li>
-		<li>
+		<li>	
+			<div class="menu">
+				<a style="color: inherit; text-decoration: none;" href=/imgList><img src="./assets/img/instagram.png" alt="601스타그램" width="34" height="auto" style="margin-right: 10px;">601스타그램</a>
+				<div class="dropdownBtn">
+					<i class="fa-solid fa-caret-up"> </i>
+				</div>	
+			</div>
+		</li>
+		<!-- <li>
 			<div class="menu">
 				<a style="" ><img src=".//assets/img/jobnews.png" alt="601취업정보" width="34" height="auto" style="margin-right: 10px;">601취업정보</a>
 				<div class="dropdownBtn">
@@ -138,7 +149,7 @@ a:-webkit-any-link {
 					<a style="border: 1px solid black; background-color: #FFDC9F;" href="/join">🏛️알렉산드리아 도서관</a>
 				</li>
 			</ul>
-		</li>
+		</li> -->
 		<li>	
 			<div class="menu">
 				<a style="color: inherit; text-decoration: none;" href=/login><img src=".//assets/img/login.png" alt="로그인" width="34" height="auto" style="margin-right: 10px;">로그인</a>
@@ -146,15 +157,15 @@ a:-webkit-any-link {
 					<i class="fa-solid fa-caret-up"> </i>
 				</div>	
 			</div>
-			<ul class="active" style="padding: 0; ">
+			<ul class="active" style="padding: 0;">
 				<c:choose><c:when test="${sessionScope.mname eq null }">
-				<li style="background-color: #FFDC9F; border: 1px solid red;">
+				<li style="background-color: #FFDC9F;">
 					<a style="background-color: #FFDC9F; color: inherit; text-decoration: none;" href="/login"> 로그인 </a>
 				</li ></c:when><c:otherwise>
-				<li style="background-color: #FFDC9F; border: 1px solid blue;">
+				<li style="background-color: #FFDC9F;">
 					<a style="background-color: #FFDC9F; color: inherit; text-decoration: none;" href="/logout"> 로그아웃 </a>
 				</li></c:otherwise></c:choose>
-				<li style="background-color: #FFDC9F; border: 1px solid red">
+				<li style="background-color: #FFDC9F;">
 					<a style="background-color: #FFDC9F; color: inherit; text-decoration: none;" href="/join"> 회원가입 </a>
 				</li>
 			</ul>

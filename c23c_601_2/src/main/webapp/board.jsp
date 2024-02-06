@@ -10,6 +10,7 @@
 <meta charset="UTF-8">
 <title>후기 게시판</title>
 <link href="./css/add.css?ver=0.12" rel="stylesheet" />
+<link href="./css/.css?ver=0.12" rel="stylesheet" />
 <script type="text/javascript" src="./js/menu.js"></script>
 
 <script>
@@ -22,7 +23,6 @@ $(function() {
 	
 	$('#searchBtn').click(function() {
 		let search = $('#search').val();
-		alert(search);
 		location.href = "./board?search=" + search;
 	});
 	
@@ -35,7 +35,6 @@ $(function() {
     });
 	
 	$('.likeBtn1').click(function() {
-		alert("test1");
 		let no = $(this).siblings('.likeBtnno').val();
 	    if (mid == null || mid == "") {
 	        toLogin();
@@ -48,20 +47,18 @@ $(function() {
 	            success: function(result) {
 	                if (result == 1) {
 	                	location.reload();
-	                    alert("성공했습니다");
 	                } else {
-	                    alert("1문제가 발생했습니다. 관리자에게 문의하세요.");
+	                    alert("이미 추천하셨습니다!");
 	                }
 	            },
 	            error : function(error){
-		            alert("2문제가 발생했습니다. 관리자에게 문의하세요.");
+		            alert("문제가 발생했습니다. 관리자에게 문의하세요.");
 		            }   
 	            }); 
 	        }
 	});
 	
-	$('.dislikeBtn1').off('click').on('click', function() {
-		alert("test2");
+	$('.dislikeBtn1').click(function() {
 		let no = $(this).siblings('.dislikeBtnno').val();
 	    if (mid == null || mid == "") {
 	        toLogin();
@@ -74,13 +71,12 @@ $(function() {
 	            success: function(result) {
 	                if (result == 1) {
 	                	location.reload();
-	                    alert("썽공");
 	                } else {
-	                    alert("3문제가 발생했습니다. 관리자에게 문의하세요.");
+	                    alert("또 싫어할 수 없습니다.관리자에게 문의하세요.");
 	                }
 	            },
 	            error : function(error){
-		            alert("4문제가 발생했습니다. 관리자에게 문의하세요.");
+		            alert("문제가 발생했습니다. 관리자에게 문의하세요.");
 		            }   
 	            }); 
 	        }
@@ -102,18 +98,30 @@ $(function() {
 }
 
 .mainstyle {
-	width: 50%;
+	width: 90%;
 	margin: 0 auto;
 }
 tbody>tr>td {
 	text-align: center;
 }
+
+.container{
+	display:flex;
+}
 </style>
 </head>
 <body>
-	<div class="container">
+	<div>
 		<%@ include file="header.jsp"%>
+	</div>
+	<div>
 		<%@ include file="nav.jsp"%>
+		</div>
+	<div class="container">
+	<div class= "chat">
+		<%@ include file="chat.jsp" %>
+		</div>
+		
 		<div class="main">
 			<div class="mainStyle">
 				<article>
@@ -141,7 +149,7 @@ tbody>tr>td {
 								<tbody>
 									<c:forEach items="${list1}" var="row" varStatus="s">
 										<tr>
-											<td class="d1">${row.no }</td>
+											<td class="d1">${s.index+1 }</td>
 											<td class="d3">${row.title }</td>
 											<td class="d3">${row.content }</td>
 											<td class="d1">${row.write }</td>

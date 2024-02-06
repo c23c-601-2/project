@@ -42,6 +42,7 @@ public class Write extends HttpServlet {
 
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
+		title= Util.removeTag(title);
 		int grade = Util.str2Int(request.getParameter("grade"));
 
 		FoodDTO dto = new FoodDTO();
