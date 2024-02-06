@@ -2,7 +2,7 @@ package com.c23c_601_2.daoGR;
 
 public class CommentDTO {
 	private int cno, clike, mno, del, Pdsno;
-	private String comment, mid, mname, cdate,  Regdate ;
+	private String comment, mid, mname, cdate, cname,  Regdate ;
 
 	public int getCno() {
 		return cno;
@@ -85,6 +85,14 @@ public class CommentDTO {
 
 	public void setPdsno(int pdsno) {
 		Pdsno = pdsno;
+	}
+
+	public String getCname() {
+		return cname;
+	}
+
+	public void setCname(String cname) {
+		this.cname = cname;
 	}
 
 

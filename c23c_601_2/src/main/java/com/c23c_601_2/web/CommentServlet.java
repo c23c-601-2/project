@@ -65,9 +65,11 @@ public class CommentServlet extends HttpServlet {
 		 * CommentDAO commentDAO = new CommentDAO(); List<CommentDTO> loadCommentList =
 		 * commentDAO.getCommentList(Integer.parseInt(pdsnoStr));
 		 */
-		
+		HttpSession session = request.getSession();
+		request.setAttribute("mid", (String)session.getAttribute("mid"));
+		request.setAttribute("mname", (String) session.getAttribute("mname"));
 		request.setAttribute("commentList", dao.getCommentList(Integer.parseInt(pdsnoStr)));
-
+		
 		PrintWriter pw = response.getWriter();
 		pw.print(result);
 	}
