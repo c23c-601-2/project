@@ -1,14 +1,14 @@
 @charset "UTF-8";
-.wrap {
+/* .wrap {
 	width: 175px;
 	height: 100vh;
 	display: flex;
 	position: fixed;
-    left: 0; /* 화면 왼쪽에 고정 */
-    width: 200px; /* 요소의 너비 */
-    height: 100%; /* 화면 높이만큼의 높이를 가짐 */
-    background-color: #f0f0f0; /* 배경색 */
-    z-index: 999; /* 다른 요소 위에 표시되도록 설정 */
+    left: 0; 화면 왼쪽에 고정
+    width: 200px; 요소의 너비
+    height: 100%; 화면 높이만큼의 높이를 가짐
+    background-color: #f0f0f0; 배경색
+    z-index: 999; 다른 요소 위에 표시되도록 설정
 }
 .menu {
 	height: 100vh;
@@ -22,8 +22,8 @@
 	background-color: #333333;
 	color: white;
 	padding-left: 20px;
-}
-nav{
+} */
+/* nav{
 	margin-top: 50px;
 }
 nav ul{
@@ -46,4 +46,4 @@ nav > ul > li {
 nav > ul > li:hover{
 	background-color: #333333;
 	color: white; 
-}
+} */

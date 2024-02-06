@@ -16,14 +16,13 @@
 	<!-- 본문시작 pdsList.jsp-->
 	<h3 class="h3">Instagram 601</h3>
 	<p>
-		<a href="pdsForm.jsp">글쓰기</a>
+		<a href="./imgForm">글쓰기</a>
 	</p>
 
 	<script>
     function addComment(pdsno) {
-    	alert("댓글쓰기??");
         var commentContent = document.getElementById("commentcontent").value;
-
+        alert(pdsno);
         // AJAX를 사용하여 서버에 댓글 추가 요청 보내기
         $.ajax({
             type: "post",
@@ -31,14 +30,17 @@
             dataType : 'text',
             data: {"pdsno": pdsno, "commentContent": commentContent
             },
-            success: function (commentList) {
+            success: function (result) {
                 // 서버에서 성공적으로 응답을 받았을 때 실행되는 코드
                 // 새로운 댓글을 목록에 추가
-                for (var i = 0; i < commentList.length; i++) {
-                    var comment = commentList[i];
-                    var newComment = '<li>' + comment.mname + '님: ' + comment.comment + '</li>';
-                    $("#comment-list").append(newComment);
-                }
+               if(result==1){
+	               		var newContents = "<li>"+pdsno+"님 : " +commentContent+"</li>";
+	               		$('#comment-list').append(newContents);
+	                
+               }else{
+            	   alert("실패");
+               }
+                
             },
             error: function (error) {
                 // 서버에서 오류 응답을 받았을 때 실행되는 코드
@@ -49,25 +51,32 @@
     }
 </script>
 
+<script>
+	
+	//id="commentcontent"
+	//id="comment-btn"
+	//댓글쓰기 창에 쓸 수 있는 글자 표시해주고 넘어가면 더이상 입력 불가로 바꾸기
+	$("#commentcontent").keyup(function(){
+        let text = $(this).val();
+        if(text.length > 100){alert("100자 넘었어요.");$(this).val(text.substr(0, 100));}
+        $("#comment-btn").text("글쓰기 " + text.length +  "/100");
+     });
+	
+});
 
+</script>
 	<%
+	CommentDAO cdao = new CommentDAO();
+	List<CommentDTO> ccomment =  null;
 	ArrayList<PdsDTO> list = dao.list();
 	if (list == null || list.isEmpty()) {
-		out.println("관련 자료 없음 T.T");
+		out.println("관련 자료 없음");
 	} else {
 		/* PdsDTO dto; */ // 반복문 밖에서 선언
 	%>
 	전체 글 개수 :
 	<%=list.size()%>
 	<br>
-	<!-- <table class="list_table">
-    <tr>
-        <th>제목</th>
-        <th>사진</th>
-        <th>작성자</th>
-        <th>조회수</th>
-        <th>작성일</th>
-    </tr> -->
 	<%
 	for (int idx = 0; idx < list.size(); idx++) {
 		dto = list.get(idx); // 이미 선언된 변수를 사용
@@ -106,14 +115,19 @@
 		<div class="post-comment">
 			<ul id="comment-list">
 				<!-- 댓글 목록을 출력하는 부분 -->
-				<c:forEach items="${commentList}" var="comment">
-					<li>${comment.mname}님:${comment.comment}</li>
+				<!-- dao.getCOMMECT -->
+				<%
+				ccomment =  cdao.getCommentList(dto.getPdsno());
+				
+				%>
+				<c:forEach items="<%=ccomment %>" var="comment">
+					<li> ${pdsno}님:${comment.comment}</li>
 				</c:forEach>
 			</ul>
 			<!-- 댓글쓰는 창을 여기다가 만들어주겠습니다. 댓글내용, 누가, 어느, 2024-01-22 -->
 			<div class="comment-write">
 				<div class="comment-form">
-					<!-- form태그 필요없음. 위에서 동작가능 -->
+				
 					<textarea id="commentcontent" name="commentcontent"></textarea>
 					<button id="comment-button"
 						onclick="addComment(<%=dto.getPdsno()%>)">댓글쓰기</button>
@@ -122,18 +136,6 @@
 		</div>
 	</div>
 
-
-	<!-- 댓글 출력창 -->
-	<div class="comments">
-		<c:forEach items="${commentList}" var="comment">
-			<div class="comment">
-				<div class="chead">
-					<div class="cname">${comment.mno}님</div>
-				</div>
-				<div class="ccomment">${comment.comment}</div>
-			</div>
-		</c:forEach>
-	</div>
 
 	<%
 	}

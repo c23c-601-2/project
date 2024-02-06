@@ -3,17 +3,17 @@
 <!DOCTYPE html>
 <link href="./css/imageForm.css" rel="stylesheet">
 <!-- 본문시작 pdsForm.jsp -->
-	<h3 class="h3"> * 사진 올리기 * </h3>
-    <form name="photoForm" method="post" enctype="multipart/form-data" action="pdsIns.jsp" onsubmit="return pdsCheck(this)">
+	<h3 class="h3"> 이미지 </h3>
+    <form name="photoForm" method="post" enctype="multipart/form-data" action="imgIns.jsp" onsubmit="return pdsCheck(this)">
     <table class="form_table">
     	<tr>
           <th>이름</th>
-          <td><input type="text" id="wname" name="wname" size="20" maxlength="100" required autofocus></td>
+          <td><input type="text" id="wname" name="wname" size="20" maxlength="30" required autofocus></td>
         </tr>
         <tr>
           <th>내용</th>
           <td>
-          	<textarea rows="5" cols="30" id="content" name="subject"></textarea>
+          	<textarea rows="5" cols="10" id="content" name="subject"></textarea>
           </td>
         </tr>
         <tr>
@@ -25,19 +25,23 @@
           <td><input type="file" id="filename" name="filename"></td>
         </tr>
         <tr>
-          <td colspan="2">
+          <td colspan="2" align="center">
+        <div class= "button2">
           	<input type="submit" id="submit_button" value="전송">
             <input type="reset" id="reset_button" value="취소">
           </td>
+          </div>
         </tr>
     </table>
 	</form>
-<!-- 본문끝 -->
+		<div style="text-align: right; margin : 10px 500px 0 0;">
            <button onclick="redirectToPdsList()" id="list_button">글 목록</button>
+        </div>
+<!-- 본문끝 -->
 
 <script>
   function redirectToPdsList() {
-    window.location.href = './pdsList.jsp';
+    window.location.href = './imgList';
   }
 </script>
 

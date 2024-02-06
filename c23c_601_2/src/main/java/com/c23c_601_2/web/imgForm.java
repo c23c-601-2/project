@@ -1,4 +1,4 @@
-package com.c23c_601_2.webMap;
+package com.c23c_601_2.web;
 
 import java.io.IOException;
 
@@ -9,23 +9,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/map")
-public class Map extends HttpServlet {
+@WebServlet("/imgForm")
+public class imgForm extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public Map() {
+    public imgForm() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		
-		RequestDispatcher rd = request.getRequestDispatcher("/map.jsp");
-	    rd.forward(request, response);
+		RequestDispatcher rd = request.getRequestDispatcher("imgForm.jsp");
+		rd.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
-	}
+		request.setCharacterEncoding("UTF-8");
+		 System.out.println("doPost method in imgForm servlet");
+		response.sendRedirect("imgList");
+		}
 
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <style>
 nav {
 	/*display: flex;*/ /* 열면 왼쪽으로 가버림 */
@@ -58,6 +59,7 @@ nav > ul > li > ul > li {
 	display: flex;
 	align-items: center;
 	justify-content: start;
+	padding-left: 10px;
 }
 
 nav:hover > ul > li:hover > ul {
@@ -70,6 +72,8 @@ nav > ul > li > ul > li > a {
 	justify-content: start;
 	width: 100%;
 	white-space: nowrap;
+	margin-left: 20px;
+	margin-right: 10px;
 }
 .fa-solid {
 	font-weight: 900;
@@ -105,7 +109,7 @@ a:-webkit-any-link {
 	<ul>
 		<li>	
 			<div class="menu">
-				<a style="color: inherit; text-decoration: none;" href=/pdsList><img src="./assets/img/instagram.png" alt="601스타그램" width="34" height="auto" style="margin-right: 10px;">601스타그램</a>
+				<a style="color: inherit; text-decoration: none;" href=/imgList><img src="./assets/img/instagram.png" alt="601스타그램" width="34" height="auto" style="margin-right: 10px;">601스타그램</a>
 				<div class="dropdownBtn">
 					<i class="fa-solid fa-caret-up"> </i>
 				</div>	
@@ -128,10 +132,10 @@ a:-webkit-any-link {
 			</div>
 			<ul class="active" style="border: 1px solid blue; padding: 0;">
 				<li style="background-color: inherit; border: 1px solid red">
-					<a style="border: 1px solid black; background-color: #FFDC9F;" href="/best">👍인기글</a>
+					<a style="border: 1px solid black; background-color: #FFDC9F;" href="/login">👍인기글</a>
 				</li >
 				<li style="background-color: inherit; border: 1px solid red">
-					<a style="border: 1px solid black; background-color: #FFDC9F;" href="/best">🏛️알렉산드리아 도서관</a>
+					<a style="border: 1px solid black; background-color: #FFDC9F;" href="/join">🏛️알렉산드리아 도서관</a>
 				</li>
 			</ul>
 		</li>
@@ -142,6 +146,18 @@ a:-webkit-any-link {
 					<i class="fa-solid fa-caret-up"> </i>
 				</div>	
 			</div>
+			<ul class="active" style="padding: 0; ">
+				<c:choose><c:when test="${sessionScope.mname eq null }">
+				<li style="background-color: #FFDC9F; border: 1px solid red;">
+					<a style="background-color: #FFDC9F; color: inherit; text-decoration: none;" href="/login"> 로그인 </a>
+				</li ></c:when><c:otherwise>
+				<li style="background-color: #FFDC9F; border: 1px solid blue;">
+					<a style="background-color: #FFDC9F; color: inherit; text-decoration: none;" href="/logout"> 로그아웃 </a>
+				</li></c:otherwise></c:choose>
+				<li style="background-color: #FFDC9F; border: 1px solid red">
+					<a style="background-color: #FFDC9F; color: inherit; text-decoration: none;" href="/join"> 회원가입 </a>
+				</li>
+			</ul>
 		</li>
 	</ul>
 </nav>
