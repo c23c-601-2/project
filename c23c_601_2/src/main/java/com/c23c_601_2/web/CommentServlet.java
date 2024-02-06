@@ -80,11 +80,9 @@ public class CommentServlet extends HttpServlet {
 		obj.put("mid", dto.getMid());
 		obj.put("comment", dto.getComment());
 		
-		
 		PrintWriter pw = response.getWriter();
 		pw.print(obj);
 	}
-		
 }
 
 	// response.sendRedirect("./imgList");

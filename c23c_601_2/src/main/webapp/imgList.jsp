@@ -9,7 +9,8 @@
 <style type="text/css">
 .container {
 	margin: 0 auto;
-	width: 1115px;
+	/* width: 1115px; */
+		width: 70%;
 	background-color: #F5ECE4;
 }
 
@@ -17,10 +18,14 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
+	margin-top: 10px;
+	margin-left: 5px;
 }
 
 .mainleft {
 	width: 30%;
+	text-align: left;
+	margin-right: auto;
 }
 </style>
 </head>
@@ -117,6 +122,7 @@
 
 	<div class="post">
 		<div class="post-image-container">
+		<div class="post-writer">😀<%=dto.getWname()%> 😀</div>
 			<img class="post-image"
 				src="data:image/jpeg;base64,${imgstr}"
 				alt="Post Image">
@@ -125,10 +131,10 @@
 			<div class="post-icons">
 				<img src="./img/heart.png" alt="Heart Icon"> <img
 					src="./img/speech-bubble.png" alt="말풍선"> <img
-					src="./img/send.png" alt="dm"> <img src="./img/bookmark.png"
-					alt="bookmark"><br>
+					src="./img/send.png" alt="dm"> 
+					<img id="bookmark" src="./img/bookmark.png" alt="bookmark"><br>
 			</div>
-			<div class="post-writer"><%=dto.getWname()%></div>
+			
 			<div class="post-content"><%=dto.getSubject()%></div>
 		</div>
 		<div class="post-comment">
