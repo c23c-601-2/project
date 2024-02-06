@@ -10,6 +10,7 @@
 <meta charset="UTF-8">
 <title>후기 게시판</title>
 <link href="./css/add.css?ver=0.12" rel="stylesheet" />
+<link href="./css/.css?ver=0.12" rel="stylesheet" />
 <script type="text/javascript" src="./js/menu.js"></script>
 
 <script>
@@ -71,7 +72,7 @@ $(function() {
 	                if (result == 1) {
 	                	location.reload();
 	                } else {
-	                    alert("이미 비추천하셨습니다!");
+	                    alert("또 싫어할 수 없습니다.관리자에게 문의하세요.");
 	                }
 	            },
 	            error : function(error){
@@ -97,18 +98,30 @@ $(function() {
 }
 
 .mainstyle {
-	width: 50%;
+	width: 90%;
 	margin: 0 auto;
 }
 tbody>tr>td {
 	text-align: center;
 }
+
+.container{
+	display:flex;
+}
 </style>
 </head>
 <body>
-	<div class="container">
+	<div>
 		<%@ include file="header.jsp"%>
+	</div>
+	<div>
 		<%@ include file="nav.jsp"%>
+		</div>
+	<div class="container">
+	<div class= "chat">
+		<%@ include file="chat.jsp" %>
+		</div>
+		
 		<div class="main">
 			<div class="mainStyle">
 				<article>
