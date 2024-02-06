@@ -9,7 +9,6 @@
 <head>
 <meta charset="UTF-8">
 <title>후기 게시판</title>
-<link href="./css/add.css?ver=0.12" rel="stylesheet" />
 <link href="./css/.css?ver=0.12" rel="stylesheet" />
 <script type="text/javascript" src="./js/menu.js"></script>
 
@@ -23,7 +22,12 @@ $(function() {
 	
 	$('#searchBtn').click(function() {
 		let search = $('#search').val();
-		location.href = "./board?search=" + search;
+		if (search.length < 1) {
+			alert("한글자 이상으로 적어주세요");
+			$("#search").focus();
+		} else {
+			location.href = "./board?search=" + search;
+		}
 	});
 	
 	$('.checkmid').click(function() {
@@ -82,10 +86,74 @@ $(function() {
 	        }
 	});
 	
+	
+	$(".contentupdate").click(function(){
+		//alert("수정하시겠습니까?");
+		if(confirm('수정하시겠습니까?')){
+			//필요한 값 cno 잡기 / 수정한 내용 + 로그인 --> 서블릿에서 정리
+			let no = $(this).parents("tr").find(".d1").text();
+			alert(no);
+			let edit = $(this).parents(".chead").next(); //나중에 html변경 태그는 무조건 object라고 뜸
+			alert(cno + ":" + comment);
+				  function addBR(str) {
+                return str.replaceAll("<br>", "\r\n" );
+            } // 개행태그 문자로 바꿔주기
+            $(this).prev().hide();
+			$(this).hide();
+			comment.css('height','110');
+			comment.css('padding-top','10px');
+			comment.css('backgroundColor','#c1c1c1');
+			let recommentBox = '<div class="recommentBox">';
+			recommentBox += '<textarea class="commentcontent" name="comment">' + addBR(comment.html()) + '</textarea>';
+			recommentBox += '<input type ="hidden" name = "cno" value ="' +cno+ '">';
+			recommentBox += '<button class="comment-btn" type = "submit">댓글 수정</button>';
+			recommentBox += '</div>';
+			
+			comment.html(recommentBox);
+		}
+	});
+	
+	//댓글수정  .comment-btn버튼 눌렀을 때 .cno값, .commentcontent값 가져오는 명령 만들기
+	// 2024-01-25
+	$(document).on('click',".comment-btn", function (){
+		if(confirm('수정하시겠습니까?')){
+			let cno = $(this).prev().val();
+			let recomment = $('.commentcontent').val();
+			let comment = $(this).parents(".ccomment");//댓글 위치
+			$.ajax({
+				url : './recomment',
+				type : 'post',
+				dataType : 'text',
+				data : {'cno': cno, 'comment': recomment},
+				success : function(result){
+					//alert('통신 성공 : ' + result);
+					if(result == 1){
+						//수정된 데이터를 화면에 보여주면 되요.
+						$(this).parent(".recommentBox").remove();
+						comment.css('backgroundColor','#brown');
+						comment.css('min-height','100px');
+						comment.css('height','auto');
+						comment.html(recomment.replace(/(?:\r\n|\r|\n)/g, '<br>'));
+						$(".commentDelete").show();
+						$(".commentEdit").show();
+					} else {
+						alert("문제가 발생했습니다. 화면을 갱신합니다.");
+						//실패 화면 재 로드.
+						//location.href ='./detail?page=${param.page}&no=${param.no}'; 
+						//param url에 나오는 주소 그대로 가져오기
+						location.href='./detail?page=${param.page}&no=${detail.no}';
+					}
+				},
+				error : function(error){
+					alert('문제가 발생했습니다. : ' + error);
+				}
+			});
+		}
+	});
 });
 </script>
 <style>
-.d1 {
+.d1, .likeBtn, .dislikeBtn {
 	width: 10%;
 }
 
@@ -97,16 +165,35 @@ $(function() {
 	width: 30%;
 }
 
-.mainstyle {
-	width: 90%;
-	margin: 0 auto;
+
+.container {
+	display: flex;
 }
-tbody>tr>td {
+
+.chat {
+	width: 200px;
+	overflow: hidden;
+}
+.table {
+	text-align: center;
+	width: 50%;
+	margin: 0 auto;
+	border-collapse: collapse;
+	border-bottom: 1px solid gray;
+}
+
+.paging{
+	margin: 0 auto;
+	width: 500px;
+	height: 30px;
+	/* background-color: gray; */
+	margin-top: 10px;
+	line-height: 30px;
 	text-align: center;
 }
 
-.container{
-	display:flex;
+.main{
+	width: 80%;
 }
 </style>
 </head>
@@ -116,15 +203,14 @@ tbody>tr>td {
 	</div>
 	<div>
 		<%@ include file="nav.jsp"%>
-		</div>
+	</div>
 	<div class="container">
-	<div class= "chat">
-		<%@ include file="chat.jsp" %>
+		<div class="chat">
+			<%@ include file="chat.jsp"%>
 		</div>
-		
+
 		<div class="main">
 			<div class="mainStyle">
-				<article>
 					<form action="./board">
 						<div class="search">
 							가게이름 검색하기 :<input type="text" name="search">
@@ -133,11 +219,11 @@ tbody>tr>td {
 					</form>
 					<c:choose>
 						<c:when test="${fn:length(list1) gt 0 }">
-							<table>
+							<table class="table">
 								<thead>
 									<tr>
 										<th class="d1">번호</th>
-										<th class="d2">가게 이름</th>
+										<th class="d1">가게 이름</th>
 										<th class="d3">후기 내용</th>
 										<th class="d1">작성자</th>
 										<th class="d1">날짜</th>
@@ -150,23 +236,25 @@ tbody>tr>td {
 									<c:forEach items="${list1}" var="row" varStatus="s">
 										<tr>
 											<td class="d1">${s.index+1 }</td>
-											<td class="d3">${row.title }</td>
+											<td class="d1">${row.title }</td>
 											<td class="d3">${row.content }</td>
-											<td class="d1">${row.write }</td>
+											<td class="d1">${row.write }
+											<img alt="edit" src="./img/edit.png" class="contentupdate">
+											</td>
 											<td class="d1">${row.date }</td>
 
-											<td class="likeBtn">${row.like }
-													<input type="hidden" class="likeBtnno" value="${row.no}">
-													<button class="likeBtn1">
-														<img alt="up" src="./img/up.jpg" width="15px;">
-													</button>
+											<td class="likeBtn">${row.like }<input type="hidden"
+												class="likeBtnno" value="${row.no}">
+												<button class="likeBtn1">
+													<img alt="up" src="./img/up.jpg" width="15px;">
+												</button>
 											</td>
 
-											<td class="dislikeBtn">${row.dislike }
-													<input type="hidden" class="dislikeBtnno" value="${row.no}">
-													<button class="dislikeBtn1">
-														<img alt="down" src="./img/down.jpg" width="15px;">
-													</button>
+											<td class="dislikeBtn">${row.dislike }<input
+												type="hidden" class="dislikeBtnno" value="${row.no}">
+												<button class="dislikeBtn1">
+													<img alt="down" src="./img/down.jpg" width="15px;">
+												</button>
 											</td>
 
 											<td class="d1">${row.grade }</td>
@@ -195,8 +283,7 @@ tbody>tr>td {
 
 							<div class="paging">
 								<button onclick="paging(1)"
-									<c:if test="${page lt 2}">disabled="disabled"</c:if>
-								>⏮️</button>
+									<c:if test="${page lt 2}">disabled="disabled"</c:if>>⏮️</button>
 								<button
 									<c:if test="${page - 10 lt 1 }">disabled="disabled"</c:if>
 									onclick="paging(${page - 10 })">◀️</button>
@@ -214,11 +301,10 @@ tbody>tr>td {
 							<h1>출력할 값이 없습니다.</h1>
 						</c:otherwise>
 					</c:choose>
-							<button class="checkmid" onclick="url('./write')">글쓰기</button>
+					<button class="checkmid" onclick="url('./write')">글쓰기</button>
 					<c:if test="${sessionScope.mid ne null }">
 						<br> ${sessionScope.mid}님 반갑습니다.
 					</c:if>
-				</article>
 			</div>
 		</div>
 	</div>
