@@ -1,11 +1,13 @@
 package com.c23c_601_2.daoGR;
 
 import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Base64;
 
 public class PdsDAO extends com.c23c_601_2.daoGR.AbstractDAO{
 	public boolean insert(PdsDTO dto){
@@ -44,7 +46,30 @@ public class PdsDAO extends com.c23c_601_2.daoGR.AbstractDAO{
 	    return flag;
 	}//insert end
 
+	public byte[] getImageData() {
+        Connection conn = db.getConnection();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        byte[] imageData = null;
 
+        try {
+            String sql = "SELECT image_data FROM tb_pds ORDER BY regdate DESC";
+            pstmt = conn.prepareStatement(sql);
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                InputStream inputStream = rs.getBinaryStream("image_data");
+                if (inputStream != null) {
+                    imageData = inputStream.readAllBytes();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+        }
+
+        return imageData;
+    }
 
 	public synchronized ArrayList<PdsDTO> list(){
 		ArrayList<PdsDTO> list=null;
@@ -52,7 +77,7 @@ public class PdsDAO extends com.c23c_601_2.daoGR.AbstractDAO{
 	    	Connection con= db.getConnection();
 	        StringBuilder sql=new StringBuilder();
 	        
-	        sql.append(" SELECT pdsno, wname, subject, readcnt, regdate, filename, filesize ");
+	        sql.append(" SELECT pdsno, wname, subject, readcnt, regdate, filename, filesize, image_data ");
 	        sql.append(" FROM tb_pds ");
 	        sql.append(" ORDER BY regdate DESC ");
 	        
@@ -62,6 +87,9 @@ public class PdsDAO extends com.c23c_601_2.daoGR.AbstractDAO{
 	        	list=new ArrayList<>();
 	            do{
 	            	PdsDTO dto=new PdsDTO();
+	            	InputStream inputStream = rs.getBinaryStream("image_data");
+	            	byte[] imageData = inputStream.readAllBytes();
+	            	String base64ImageData = Base64.getEncoder().encodeToString(imageData);
 	                dto.setPdsno(rs.getInt("pdsno"));
 			dto.setWname(rs.getString("wname"));
 			dto.setSubject(rs.getString("subject"));
@@ -69,7 +97,8 @@ public class PdsDAO extends com.c23c_601_2.daoGR.AbstractDAO{
 			dto.setFilename(rs.getString("filename"));
 			dto.setRegdate(rs.getString("regdate"));
 			dto.setFilesize(rs.getInt("filesize")); // 파일사이즈 int로 추가..?
-
+			dto.setBase64ImageData(base64ImageData);
+			System.out.println(rs.getString("wname"));
 			list.add(dto);
 	            }while(rs.next());
 	        }else{
