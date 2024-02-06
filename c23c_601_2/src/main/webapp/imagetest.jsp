@@ -12,33 +12,26 @@
 <body>
 
     <h2>Image List</h2>
-    
-
 
     <%-- 이미지 목록을 DAO를 통해 가져오기 --%>
     <%
         PdsDAO dao = new PdsDAO();
         ArrayList<PdsDTO> imageList = dao.list();
-        System.out.println(imageList);
-        System.out.println(imageList.get(2));
+        request.setAttribute("imageList", imageList);
     %>
 
     <c:forEach var="dto" items="${imageList}">
-		xptmxm    	
-    </c:forEach>
- <%--    <c:forEach var="dto" items="${imageList}">
         <div>
-        	출력 갑니다.
             <p><strong>${dto.subject}</strong></p>
-            <p>Writer: <sapn>${dto.wname}</sapn></p>
+            <p>Writer: ${dto.wname}</p>
             <p>Upload Date: ${dto.regdate}</p>
             <p>Read Count: ${dto.readcnt}</p>
 
-            Decode Base64 image data and display
+            <%-- Decode Base64 image data and display --%>
             <img src="data:image/jpeg;base64,${dto.base64ImageData}" alt="Image">
             <br><br>
         </div>
     </c:forEach>
- --%>
+ 
 </body>
 </html>

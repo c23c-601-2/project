@@ -110,12 +110,15 @@
 			}
 		}
 		if (dto.getFilename() != null) {
+			
+			String imgstr = dto.getBase64ImageData();
+			request.setAttribute("imgstr", imgstr);
 	%>
 
 	<div class="post">
 		<div class="post-image-container">
 			<img class="post-image"
-				src="<%=request.getContextPath() + "/webapp/storage/" + dto.getFilename()%>"
+				src="data:image/jpeg;base64,${imgstr}"
 				alt="Post Image">
 		</div>
 		<div class="post-info">
