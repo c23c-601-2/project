@@ -59,6 +59,8 @@ public class Food extends HttpServlet {
 		    System.out.println("현재 접속한 사용자의 mname: " + mname);
 		} else {
 		    System.out.println("mname이 세션에 저장되어 있지 않습니다.");
+		    RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
+		    rd.forward(request, response);
 		}
 		
 		FoodDAO dao = new FoodDAO();
