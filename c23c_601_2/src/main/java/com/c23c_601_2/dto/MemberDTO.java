@@ -2,7 +2,15 @@ package com.c23c_601_2.dto;
 
 public class MemberDTO {
 	private int mno,mgrade,count;
-	private String mid,mname,mpw,memail,mphone,maddress,mdate;
+	private String mid,mname,mpw,memail,mphone,maddress,mdate,lastlogin;
+	
+	
+	public String getLastlogin() {
+		return lastlogin;
+	}
+	public void setLastlogin(String lastlogin) {
+		this.lastlogin = lastlogin;
+	}
 	public int getCount() {
 		return count;
 	}
