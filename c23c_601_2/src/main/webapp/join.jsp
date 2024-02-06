@@ -211,9 +211,13 @@ $(function(){
 							<div class="box rounded mb-3">
 								<p class="alert">필수 값을 입력해주세요.</p>
 							</div> */
+						$('.resultbox').show();
 						$('.resultbox').html("<p class='alert'>이미 가입되어있는 아이디입니다.</p>");
 						$('#joinComplete').attr("disabled","disabled");
 						$('#mid').focus();
+						
+
+						
 						return false;
 					}else{
 						//postCode" selectAddr detailAddr
@@ -234,7 +238,7 @@ $(function(){
 							type:'post',
 							data:join,
 							success:function(){
-								window.location.replace(".frontpage");
+								window.location.replace("./frontpage");
 							},
 							error:function(){
 								alert("실패");
