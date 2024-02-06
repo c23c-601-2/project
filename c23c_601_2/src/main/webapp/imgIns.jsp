@@ -53,7 +53,7 @@ try {
         if (flag) {
             out.println("<script>");
             out.println("	alert('사진을 추가했습니다.')");
-            out.println("	location.href='imgList.jsp';");
+            out.println("	location.href='imgList'");
             out.println("</script>");
             out.println("<img src=\"" + dto.getImagePath() + "\" alt=\"Uploaded Image\">");
         } else {

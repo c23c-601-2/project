@@ -17,11 +17,11 @@ public class CommentDAO extends AbstractDAO {
 	        
 	        try {
 	            // 댓글을 데이터베이스에 추가하는 SQL 쿼리
-	            String sql = "INSERT INTO tb_comments (comment) VALUES (?)";
-	            System.out.println("comment : " + dto.getComment());
+	            String sql = "INSERT INTO tb_comments (comment,pdsno) VALUES (?,?)";
+	            
 	            pstmt = conn.prepareStatement(sql);
 	            pstmt.setString(1, dto.getComment());
-	            //pstmt.setInt(2, dto.getMno());
+	            pstmt.setInt(2, dto.getPdsno());
 	            result = pstmt.executeUpdate();
 	            
 
@@ -35,20 +35,19 @@ public class CommentDAO extends AbstractDAO {
 	    }
 
 
-	 public List<CommentDTO> getCommentList() {
+	 public List<CommentDTO> getCommentList(int pdsno) {
 		    Connection conn = db.getConnection();
 		    PreparedStatement pstmt = null;
 		    ResultSet rs = null;
 
 		    List<CommentDTO> commentList = new ArrayList<>();
 
-		    String sql = "SELECT regdate, comment FROM tb_comments" ;
-		    //String sql = "SELECT mid, regdate, comment FROM tb_comments WHERE pdsno = ? AND mid=(SELECT mid FROM member)" ;
+		    String sql = "SELECT regdate, comment FROM tb_comments WHERE pdsno=?" ; // 특정 게시물(pdsno)에 대한 댓글을 데이터베이스에서 가져오기
 
 		    try {
-		        // 특정 게시물(pdsno)에 대한 댓글을 데이터베이스에서 가져오기
+		        
 		        pstmt = conn.prepareStatement(sql);
-		        //pstmt.setInt(1, pdsno);
+		        pstmt.setInt(1, pdsno);
 		        rs = pstmt.executeQuery();
 
 		        while (rs.next()) {
@@ -56,8 +55,7 @@ public class CommentDAO extends AbstractDAO {
 		            //comment.setMname(rs.getString("mid"));
 		            comment.setRegdate(rs.getString("regdate"));
 		            comment.setComment(rs.getString("comment"));
-		            System.out.println("시각 : " + rs.getString("regdate"));
-		            System.out.println("댓글 : " + rs.getString("comment"));
+		            
 		            commentList.add(comment);
 		        }
 

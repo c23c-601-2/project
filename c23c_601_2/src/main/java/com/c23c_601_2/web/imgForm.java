@@ -24,6 +24,9 @@ public class imgForm extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	}
+		request.setCharacterEncoding("UTF-8");
+		 System.out.println("doPost method in imgForm servlet");
+		response.sendRedirect("imgList");
+		}
 
 }
