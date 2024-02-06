@@ -10,8 +10,18 @@ public class PdsDTO {
 	 private String filename;
 	 private long filesize;
 	 private String imagePath;
+	 private String type;
+	 private byte[] imageData;
 	 
-	 public PdsDTO(){}
+	 public byte[] getImageData() {
+		return imageData;
+	}
+
+	public void setImageData(byte[] imageData) {
+		this.imageData = imageData;
+	}
+
+	public PdsDTO(){}
 
 	public int getPdsno() {
 		return pdsno;
@@ -91,6 +101,14 @@ public class PdsDTO {
 
 	public void setImagePath(String imagePath) {
 		this.imagePath = imagePath;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 	
 }//class end

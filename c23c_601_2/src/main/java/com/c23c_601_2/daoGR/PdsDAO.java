@@ -1,5 +1,6 @@
 package com.c23c_601_2.daoGR;
 
+import java.io.ByteArrayInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,8 +16,8 @@ public class PdsDAO extends com.c23c_601_2.daoGR.AbstractDAO{
 	    	Connection con = db.getConnection();
 	        StringBuilder sql = new StringBuilder();
 	        
-	        sql.append("INSERT INTO tb_pds(wname, subject, passwd, filename, filesize, regdate) ");
-	        sql.append("VALUES (?, ?, ?, ?, ?, NOW()) ");
+	        sql.append("INSERT INTO tb_pds(wname, subject, passwd, filename, filesize, regdate, image_data) ");
+	        sql.append("VALUES (?, ?, ?, ?, ?, NOW(), ?)");
 	    
 	        PreparedStatement pstmt = con.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
 	        pstmt.setString(1, dto.getWname());
@@ -24,6 +25,10 @@ public class PdsDAO extends com.c23c_601_2.daoGR.AbstractDAO{
 	        pstmt.setString(3, dto.getPasswd());
 	        pstmt.setString(4, dto.getFilename());
 	        pstmt.setLong(5, dto.getFilesize());
+	        
+	        // 이미지 데이터를 InputStream으로 변환하여 PreparedStatement에 설정
+            ByteArrayInputStream inputStream = new ByteArrayInputStream(dto.getImageData());
+            pstmt.setBinaryStream(6, inputStream, dto.getImageData().length);
 	        
 	        int cnt = pstmt.executeUpdate();
 	        if(cnt == 1){
@@ -47,7 +52,7 @@ public class PdsDAO extends com.c23c_601_2.daoGR.AbstractDAO{
 	    	Connection con= db.getConnection();
 	        StringBuilder sql=new StringBuilder();
 	        
-	        sql.append(" SELECT pdsno, wname, subject, readcnt, regdate, filename ");
+	        sql.append(" SELECT pdsno, wname, subject, readcnt, regdate, filename, filesize ");
 	        sql.append(" FROM tb_pds ");
 	        sql.append(" ORDER BY regdate DESC ");
 	        
@@ -63,6 +68,8 @@ public class PdsDAO extends com.c23c_601_2.daoGR.AbstractDAO{
 			dto.setReadcnt(rs.getInt("readcnt"));
 			dto.setFilename(rs.getString("filename"));
 			dto.setRegdate(rs.getString("regdate"));
+			dto.setFilesize(rs.getInt("filesize")); // 파일사이즈 int로 추가..?
+
 			list.add(dto);
 	            }while(rs.next());
 	        }else{

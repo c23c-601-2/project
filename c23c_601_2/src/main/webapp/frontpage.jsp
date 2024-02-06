@@ -83,14 +83,6 @@
 				</div>
 			</div>
 			<div class="mainright">
-				<div class="account">
-					<div>
-						<input type="hidden" name="_csrf" value="1358311e-a772-408c-8f71-a0ba45d9107a"/>
-						<input type="text" autocapitalize="off" placeholder="아이디" name="userId" value="" class="input_id" spellcheck="false">
-						<input type="password" placeholder="비밀번호" name="userPassword" value="" class="input_pw" spellcheck="false">
-						
-					</div>
-				</div>
 				<div class = rightAd>
 					<img src="./assets/img/ad_right.png" alt="오른쪽 광고 배너" width="100%" height="auto" >
 				</div>

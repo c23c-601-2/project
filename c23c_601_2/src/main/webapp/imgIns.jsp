@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.c23c_601_2.daoGR.PdsDTO" %>
 <%@ page import="java.io.File" %>
+<%@ page import="java.nio.file.Files" %>
 <%@ page import="java.util.Enumeration" %>
 <%@ page import="com.oreilly.servlet.MultipartRequest" %>
 <%@ page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy" %>
@@ -42,6 +43,11 @@ try {
         String imagePath = "/webapp/storage/" + fileSystemName; 
         dto.setFilename(fileSystemName);
         dto.setImagePath(imagePath); // 이미지 파일 경로 저장
+        
+   		// 이미지 데이터를 DTO에 설정
+        File imageFile = new File(saveDir, fileSystemName);
+        byte[] imageData = Files.readAllBytes(imageFile.toPath());
+        dto.setImageData(imageData);        
     }
 
     dto.setWname(wname);
@@ -53,7 +59,7 @@ try {
         if (flag) {
             out.println("<script>");
             out.println("	alert('사진을 추가했습니다.')");
-            out.println("	location.href='imgList.jsp';");
+            out.println("	location.href='imgList'");
             out.println("</script>");
             out.println("<img src=\"" + dto.getImagePath() + "\" alt=\"Uploaded Image\">");
         } else {
