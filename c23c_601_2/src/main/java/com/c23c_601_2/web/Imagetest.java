@@ -13,16 +13,16 @@ import javax.servlet.http.HttpServletResponse;
 import com.c23c_601_2.daoGR.CommentDAO;
 import com.c23c_601_2.daoGR.CommentDTO;
 
-@WebServlet("/imgList")
-public class imgList extends HttpServlet {
+@WebServlet("/imagetest")
+public class Imagetest extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public imgList() {
+    public Imagetest() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		// 댓글 출력부
         CommentDAO commentDAO = new CommentDAO();
         List<CommentDTO> loadCommentList = commentDAO.getCommentList();
@@ -34,7 +34,7 @@ public class imgList extends HttpServlet {
         //RequestDispatcher dispatcher = request.getRequestDispatcher("/imgList.jsp");
         //dispatcher.forward(request, response);
 		
-		RequestDispatcher rd = request.getRequestDispatcher("imgList.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("imagetest.jsp");
 		rd.forward(request, response);
 	}
 
