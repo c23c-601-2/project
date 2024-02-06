@@ -20,6 +20,7 @@ public class PdsDAO extends com.c23c_601_2.daoGR.AbstractDAO{
 	        
 	        sql.append("INSERT INTO tb_pds(wname, subject, passwd, filename, filesize, regdate, image_data) ");
 	        sql.append("VALUES (?, ?, ?, ?, ?, NOW(), ?)");
+	        sql.append(" ORDER BY regdate DESC ");
 	    
 	        PreparedStatement pstmt = con.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
 	        pstmt.setString(1, dto.getWname());
@@ -53,7 +54,7 @@ public class PdsDAO extends com.c23c_601_2.daoGR.AbstractDAO{
         byte[] imageData = null;
 
         try {
-            String sql = "SELECT image_data FROM tb_pds ORDER BY regdate DESC";
+            String sql = "SELECT image_data FROM tb_pds ORDER BY regdate ";
             pstmt = conn.prepareStatement(sql);
             rs = pstmt.executeQuery();
 
@@ -77,9 +78,9 @@ public class PdsDAO extends com.c23c_601_2.daoGR.AbstractDAO{
 	    	Connection con= db.getConnection();
 	        StringBuilder sql=new StringBuilder();
 	        
-	        sql.append(" SELECT pdsno, wname, subject, readcnt, regdate, filename, filesize, image_data ");
+	        sql.append(" SELECT pdsno, wname, subject, readcnt, regdate, filename, filesize, image_data");
 	        sql.append(" FROM tb_pds ");
-	        sql.append(" ORDER BY regdate DESC ");
+	        sql.append(" ORDER BY pdsno DESC ");
 	        
 	        PreparedStatement pstmt=con.prepareStatement(sql.toString());
 	        ResultSet rs=pstmt.executeQuery();
