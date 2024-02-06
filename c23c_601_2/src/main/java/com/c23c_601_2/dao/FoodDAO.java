@@ -20,8 +20,7 @@ public class FoodDAO extends AbDAO{
 		Connection con = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT food_no, food_title, food_content, food_date, food_like, food_dislike, grade " +
-	             "FROM foodmap LIMIT 0,5";
+		String sql = "SELECT food_no, food_title, food_content, food_write, food_date, food_like, food_dislike, grade FROM foodmapview ORDER BY food_date DESC LIMIT 0, 5";
 		
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -32,7 +31,8 @@ public class FoodDAO extends AbDAO{
 	            dto.put("no", rs.getString("food_no"));
 	            dto.put("food_title", rs.getString("food_title"));
 	            dto.put("food_content",rs.getString("food_content"));
-	            dto.put("food_content",rs.getString("food_date"));
+	            dto.put("food_write",rs.getString("food_write"));
+	            dto.put("food_date",rs.getString("food_date"));
 	            dto.put("food_like", rs.getInt("food_like"));
 	            dto.put("food_dislike", rs.getInt("food_dislike"));
 	            dto.put("grade", rs.getInt("grade"));
