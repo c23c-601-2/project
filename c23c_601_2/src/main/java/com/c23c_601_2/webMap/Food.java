@@ -52,6 +52,7 @@ public class Food extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("/food.jsp");
 	    rd.forward(request, response);
 	    */
+		
 		HttpSession session = request.getSession();
 		String mname = (String) session.getAttribute("mname");
 		if (mname != null) {

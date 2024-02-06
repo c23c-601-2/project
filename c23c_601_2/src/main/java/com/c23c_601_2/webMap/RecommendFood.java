@@ -21,8 +21,6 @@ public class RecommendFood extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		
-		
-		
 		RequestDispatcher rd = request.getRequestDispatcher("/recommendFood");
 	    rd.forward(request, response);
 	}
@@ -30,7 +28,8 @@ public class RecommendFood extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 		
-		System.out.println("no");
+		String no = (String) request.getParameter("no");
+		System.out.println(no);
 		
 		
 	}
