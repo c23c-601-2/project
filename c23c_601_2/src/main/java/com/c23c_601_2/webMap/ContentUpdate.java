@@ -1,6 +1,7 @@
 package com.c23c_601_2.webMap;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,28 +30,25 @@ public class ContentUpdate extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		FoodDAO dao = new FoodDAO();
-		String updatecontent = request.getParameter("updateBox");
+		String edit = request.getParameter("edit");
+		System.out.println(edit);
 		String no = request.getParameter("no");
+		System.out.println(no);
 		
-		updatecontent = Util.addBR(updatecontent);
-		updatecontent = Util.removeTag(updatecontent);
+		edit = Util.addBR(edit);
+		edit = Util.removeTag(edit);
+		int result = 0;
 		
-		if (session.getAttribute("mid") != null && updatecontent != null && no != null ) {
+		if (session.getAttribute("mid") != null && edit != null && no != null ) {
 			FoodDTO dto = new FoodDTO();
-			dto.setContent(updatecontent);
+			dto.setContent(edit);
 			dto.setNo(Util.str2Int2(no));
 			dto.setMid((String)session.getAttribute("mid"));
-			int result = dao.UpdateContent(dto);
-			
-			if (result == 1) {
-				response.sendRedirect("./board?no="+no);
-//				System.out.println("처리 결과 :" + result);
-			} else {
-				response.sendRedirect("./error.jsp");
-			}
-		} else {
-			response.sendRedirect("./error.jsp");
+			result = dao.UpdateContent(dto);
+			System.out.println(result);
 		}
 		
+		PrintWriter pw = response.getWriter();
+		pw.print(result);
 	}
 }

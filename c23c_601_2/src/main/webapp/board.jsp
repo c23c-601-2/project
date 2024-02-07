@@ -112,13 +112,17 @@ $(function() {
 			
 			$(document).on('keyup', '.updateBox1', function() {
 			    let text = $(this).val();
-			    let remainingCharacters = 3 - text.length;
-			    if (remainingCharacters < 0) {
-			        remainingCharacters = 0;
+			    //alert(text);
+			    let max = 35;
+			    let remaining = max - text.length;
+			    //alert(remaining);
+			    if (remaining < 0) {
+			    	remaining = 0;
 			        $(this).val(text.substr(0, 35));
 			        alert("35자를 초과했습니다.");
+			        //alert(remaining);
 			    }
-			    $(this).siblings('.update-count').text("남은 글자: " + remainingCharacters);
+			    $(this).siblings('.update-count').text("남은 글자: " + remaining);
 			});
 			
 			$('#cancelButton').click(function() {
@@ -130,28 +134,26 @@ $(function() {
 	$(document).on('click',".update-btn", function (){
 		if(confirm('수정하시겠습니까?')){
 			let no = $(this).closest('.updateBox').find('input[name="no"]').val();
-			//alert(no);
-			let edit = $('.updateBox1').val();
-			alert(edit);
-			let updateBox = $(this).parents(".updateBox");//댓글 위치
-			alert(updateBox);
+			let edit = $(this).closest('.updateBox').find('.updateBox1').val();
+			let updateBox = $(this).parents(".updateBox");
+			let content = $(this).parents(".updateBox").val();
 			$.ajax({
 				url : './contentUpdate',
 				type : 'post',
 				dataType : 'text',
-				data : {'no': no, 'updateBox': updateBox},
+				data : {'no': no, 'edit': edit},
 				success : function(result){
-					alert('통신 성공 : ' + result);
+					//alert('통신 성공 : ' + result);
 					if(result == 1){
-						//수정된 데이터를 화면에 보여주면 되요.
-						$(this).parent(".updateBox").remove();
+						updateBox.remove();
+						content
 						comment.css('backgroundColor','#brown');
 						comment.css('min-height','100px');
 						comment.css('height','auto');
 						comment.html(recomment.replace(/(?:\r\n|\r|\n)/g, '<br>'));
 						$(".contentupdate").show();
 					} else {
-						alert("문제가 발생했습니다. 화면을 갱신합니다.");
+						alert("문제가 발생했습니다. 화면을 갱신합니다." + result);
 					}
 				},
 				error : function(error){
@@ -160,6 +162,7 @@ $(function() {
 			});
 		}
 	});
+
 	
 });
 </script>
@@ -252,7 +255,7 @@ $(function() {
 											<td class="d3">${row.content }</td>
 											<td class="d1">${row.write }
 											<input type = "hidden" class="no" value="${row.no}">
-											<img alt="edit" src="./img/edit.png" class="contentupdate">
+											<img alt="edit" src="./img/edit1.png" class="contentupdate">
 											</td>
 											<td class="d1">${row.date }</td>
 

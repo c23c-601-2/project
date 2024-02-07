@@ -291,7 +291,7 @@ public class FoodDAO extends AbDAO{
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, dto.getContent());
 			pstmt.setInt(2, dto.getNo());
-			pstmt.executeUpdate();
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
