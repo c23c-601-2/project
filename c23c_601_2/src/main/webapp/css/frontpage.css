@@ -44,6 +44,7 @@
 	flex-direction: row;
 	justify-content: space-between;
 	background-color: ffffea;
+	border:  1px solid green;
 }
 
 .youtubeleftbox {
@@ -99,22 +100,69 @@
 }
 
 
-.boxleft {
+.restaurant {
 	width: 50%;
 	margin-right: 2px;
 	display: flex;
 	flex-direction: column;
+	border: 1px solid black;
 }
 
-.boxright {
+.boxlink {
+	
+}
+
+.boxlink img {
+	
+}
+.boxlink a {
+	color: inherit;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.thirdboxrow {
+	margin: 10px;
+	height: 400px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	background-color: ffffea;
+	border:  1px solid green;	
+}
+
+.sixzeroonwstagram {
+	border: 1px solid red;
+	flex: 0 0 auto;
 	width: 50%;
 	margin-left: 2px;
 	display: flex;
 	flex-direction: column;
 }
-
-.sixzeroonestagram {
-	flex: 0 0 auto;
+.instarow-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.instarow {
+	border: 1px solid blue;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	margin: 10px;
+}
+.insta-image-container {
+    flex: 1;
+    margin: 0 5px;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.insta-image-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    max-height: 150px;
 }
 .mainright {
 	width: 18%

@@ -54,7 +54,7 @@
 					</div>
 				</div>
 				<div class="boxrow2">
-					<a href="/newsBoard" target="_blank">
+					<a href="/newsBoard" target="_self">
 						<div class="boxrow2title">
 							<img src="./assets/img/jobnews.png" alt="뉴스" height="20" style="margin-right: 10px; vertical-align: middle;">뉴스
 							<i style="float: right;">
@@ -66,20 +66,37 @@
 						<%@ include file="frontNewsBoard.jsp" %>
 					</div>
 				</div>
-				<div class="boxrow">
-					<div class="boxleft">
-						<div class="sixzeroonestagram">
-							제목	
+				<div class="thirdboxrow">
+					<div class="restaurant">
+						<div class="boxlink">
+							<img src="./assets/img/restaurant.jpg" alt="" height="20" style="margin-right: 10px; vertical-align: middle;"><a href="/food" target="_self">601맛집</a>
 						</div>
-						<iframe src="https://blog.naver.com/wisejia" style="width:100%; height:100%">
-						</iframe>
+						<div>
+							
+						</div>
 					</div>
-					<div class="boxright">
-						<div class="sixzeroonwstagram">
-							제목	
+					<div class="sixzeroonwstagram" style="border: 1px solide red;">
+						<div class="boxlink">
+							<img src="./assets/img/instagram.png" alt="" height="20" style="margin-right: 10px; vertical-align: middle;"><a href="/imgList" target="_self">601스타그램</a>
+						</div>						
+						<div class="instarow-container">
+							<div class= "instarow">
+								<div class="insta-image-container">
+								 	<img src="data:image/jpeg;base64,${img1}" alt="Image 1">
+								</div>
+								<div class="insta-image-container">
+									<img src="data:image/jpeg;base64,${img2}" alt="Image 2">
+								</div>
+							</div>
+							<div class= "instarow">
+								<div class="insta-image-container">
+									<img src="data:image/jpeg;base64,${img3}" alt="Image 3">
+								</div>								
+								<div class="insta-image-container">
+									<img src="data:image/jpeg;base64,${img4}" alt="Image 4">
+								</div>								
+							</div>
 						</div>
-						<iframe src="https://www.jumpit.co.kr/" style="width:100%; height:100%">
-						</iframe>
 					</div>
 				</div>
 			</div>
