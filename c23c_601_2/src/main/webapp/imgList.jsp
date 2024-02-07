@@ -196,7 +196,7 @@
 							ccomment = cdao.getCommentList(dto.getPdsno());
 							%>
 							<c:forEach items="<%=ccomment%>" var="comment">
-								<li>${comment.mid}님:${comment.comment}</li>
+								<li>${comment.mid}님    :    ${comment.comment}</li>
 							</c:forEach>
 						</ul>
 						<c:if test="${empty sessionScope.mid}">
@@ -217,6 +217,9 @@
 											class="comment-button">댓글쓰기</button>
 									</div>
 									<div>
+										<%-- <div class="listcount1"> <!-- 로그인 후  -->
+											전체 글 개수 :<%=list.size()%>
+										</div> --%>
 									</div>
 								</div>
 							</div>
