@@ -20,7 +20,7 @@ public class FoodDAO extends AbDAO{
 		Connection con = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT food_no, food_title, food_content, food_write, food_date, food_like, food_dislike, grade FROM foodmapview ORDER BY food_date DESC LIMIT 0, 23";
+		String sql = "SELECT food_no, food_title, food_content, food_write, food_date, food_like, food_dislike, grade FROM foodmapview ORDER BY food_no DESC LIMIT 0, 23";
 		
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -50,7 +50,7 @@ public class FoodDAO extends AbDAO{
 		Connection con = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT food_no, food_title, food_content, food_write, food_date, food_like, food_dislike, grade FROM foodmapview ORDER BY food_date DESC LIMIT ?, 10";
+		String sql = "SELECT food_no, food_title, food_content, food_write, food_date, food_like, food_dislike, grade FROM foodmapview ORDER BY food_no DESC LIMIT ?, 10";
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, (page - 1) * 10);
@@ -82,7 +82,7 @@ public class FoodDAO extends AbDAO{
 		ResultSet rs = null;
 		String sql = "SELECT food_no, food_title, food_content, food_write, food_date, food_like, food_dislike, grade"
 	            + " FROM foodmapview"
-	            + " WHERE food_title LIKE CONCAT('%', ?, '%') ORDER BY food_date DESC";
+	            + " WHERE food_title LIKE CONCAT('%', ?, '%') ORDER BY food_no DESC";
 
 		try {
 			pstmt = con.prepareStatement(sql);
