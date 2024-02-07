@@ -45,11 +45,7 @@
 						<img src="./img/insta601.png" alt="Instagram 601 Logo" width="300"
 							height="56" style="margin-top: 50px;">
 					</h3>
-					<c:if test="${sessionScope.mid ne null}">
-						<p class="writebutton">
-							<a href="./imgForm">글쓰기</a>
-						</p>
-					</c:if>
+
 
 					<c:if test="${empty sessionScope.mid}">
 						<div class="comment-loginBtn">
@@ -57,7 +53,11 @@
 								onclick="alert('로그인 해주세요'); window.location.href = './login';">글쓰기</button>
 						</div>
 					</c:if>
-
+						 <c:if test="${sessionScope.mid ne null}">
+						<div class="writebutton">
+							<a href="./imgForm">글쓰기</a>
+						</p>
+					</c:if> 
 				</div>
 				<script>
     function addComment(pdsno) {

@@ -59,8 +59,7 @@
 .listcount{
 	font-weight: bold;
 	font-size: 20px;
-	margin-left: 190px;
-	margin-top : 50px;
+	margin-left: -420px;
 }
 
 /* 게시물 내용 */
@@ -152,14 +151,13 @@
 }
 
 
-
-.comment-loginframe {
+.comment-loginframe { /* 로그인 하라는 안내메세지 프레임 */
 	border: 1px dashed #DDC9BC;
 	color : #8E7C68 ;
 	padding: 5px;
 	margin-bottom: 10px;
 }
-.comment-loginplz{
+.comment-loginplz{ /* 로그인하라는 메세지 */
 	text-align: center;
 	font-weight: bold;
 	font-size: 17px;
@@ -175,7 +173,9 @@
     text-decoration: none;
     border-radius: 5px;
     font-weight: bold;
-    margin-left: 490px; /* 원하는 가로 위치로 조절 */
+    margin-left: 300px; /* 원하는 가로 위치로 조절 */
+    margin-bottom: 150px;
+    border: none;
 }
 
 .comment-loginBtn button:hover {
@@ -193,9 +193,9 @@
     text-decoration: none;
     border-radius: 5px;
     font-weight: bold;
-    margin-left: 490px;
+    margin-left:240px;
     position: relative;
-    bottom: -50px; /* 원하는 위치로 조절, 필요에 따라 값 조절 */
+    top: 100px; /* 원하는 위치로 조절, 필요에 따라 값 조절 */
 }
 
 .writebutton a:hover {
