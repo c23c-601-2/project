@@ -152,21 +152,31 @@ a:-webkit-any-link {
 		</li> -->
 		<li>	
 			<div class="menu">
-			<c:choose><c:when test="${sessionScope.mname eq null }">
-            <a style="color: inherit; text-decoration: none;" href=/login><img src=".//assets/img/login.png" alt="로그인" width="34" height="auto" style="margin-right: 10px;">로그인</a></c:when><c:otherwise>
-            <a style="color: inherit; text-decoration: none;" href=/login><img src=".//assets/img/login.png" alt="로그인" width="34" height="auto" style="margin-right: 10px;">로그아웃</a></c:otherwise></c:choose>
+			<c:choose>
+				<c:when test="${sessionScope.mid eq null }">
+	            	<a style="color: inherit; text-decoration: none;" href=/login><img src=".//assets/img/login.png" alt="로그인" width="34" height="auto" style="margin-right: 10px;">로그인</a>
+	            </c:when>
+	            <c:otherwise>
+	            	<a style="color: inherit; text-decoration: none;" href=/login><img src=".//assets/img/login.png" alt="로그인" width="34" height="auto" style="margin-right: 10px;">로그아웃</a>
+	            </c:otherwise>
+            </c:choose>
             <div class="dropdownBtn">
                <i class="fa-solid fa-caret-up"> </i>
             </div>   
          </div>
          <ul class="active" style="padding: 0;">
-            <c:choose><c:when test="${sessionScope.mname eq null }">
+            <c:choose><c:when test="${sessionScope.mid eq null }">
             <li style="background-color: #FFDC9F;">
                <a style="background-color: #FFDC9F; color: inherit; text-decoration: none;" href="/login"> 로그인 </a>
             </li ></c:when><c:otherwise>
             <li style="background-color: #FFDC9F;">
                <a style="background-color: #FFDC9F; color: inherit; text-decoration: none;" href="/logout"> 로그아웃 </a>
-            </li></c:otherwise></c:choose>
+            </li>
+            <li style="background-color: #FFDC9F;">
+               <a style="background-color: #FFDC9F; color: inherit; text-decoration: none;" href="/mypage"> 마이페이지 </a>
+            </li>
+            
+            </c:otherwise></c:choose>
             <li style="background-color: #FFDC9F;">
                <a style="background-color: #FFDC9F; color: inherit; text-decoration: none;" href="/join"> 회원가입 </a>
             </li>

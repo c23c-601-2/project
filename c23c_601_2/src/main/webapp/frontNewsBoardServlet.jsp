@@ -1,45 +1,23 @@
+<%@page import="com.c23c_601_2.daoITboard.ItboardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>IT뉴스 게시판</title>
+<title>Insert title here</title>
 <link href="./css/board.css?ver=0.12" rel="stylesheet" />
 <link href="./css/menu.css?ver=0.12" rel="stylesheet" />
-<style>
-body {
-	background-color: black;
-	color: white;
-}
+<Style>
 
-.chat {
-	width: 230px;
-	margin-left: 5px;
-}
-
-.container {
-	display: flex;
-}
-
-</style>
-
+</Style>
 </head>
-<body style= "background-color: #F5ECE4">
+<body>
 	<div>
-		<%@ include file="./header.jsp"%>
-		<%@ include file="./nav.jsp"%>
-	</div>
-	<div class="container">
-		<div class="chat">
-			<%@ include file="chat.jsp"%>
-		</div>
-		
-		<table class="table" border="1">
+		<table class="table" border="1" style="text-align: center; width: 50%; margin: 0 auto; border-collapse: collapse; border-bottom: 1px solid #8E7C68">
 			<caption class="caption">IT뉴스</caption>
 			<caption class="caption1">출처 : 네이버</caption>
 			<tr>
@@ -47,7 +25,7 @@ body {
 				<th>제목</th>
 				<th>날짜</th>
 			</tr>
-			<c:forEach items="${headlines}" var="h" varStatus="status">
+			<c:forEach items="${headlines}" var="h" varStatus="status" end="6">
 				<tr>
 					<td>${status.count}</td>
 					<td class="newssource"

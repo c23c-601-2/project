@@ -13,11 +13,15 @@
 .verticalmain {
 	display: flex;
 	flex-direction: row;
-	justify-content: space-between;
+	justify-content: center;
+	margin-top: 10px;
+	margin-left: 5px;
 }
 
 .mainleft {
 	width: 30%;
+	align-items: left;
+	text-align: left;
 }
 </style>
 </head>

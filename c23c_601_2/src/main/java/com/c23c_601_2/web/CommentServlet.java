@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import com.c23c_601_2.daoGR.CommentDAO;
 import com.c23c_601_2.daoGR.CommentDTO;
 
@@ -41,7 +44,8 @@ public class CommentServlet extends HttpServlet {
             throws ServletException, IOException {
     	
     	request.setCharacterEncoding("UTF-8");
-
+    	
+    	HttpSession session = request.getSession();
         // 클라이언트에서 전송한 댓글 내용과 게시물 번호 가져오기
         
         String pdsnoStr = request.getParameter("pdsno"); // 글 번호
@@ -56,24 +60,33 @@ public class CommentServlet extends HttpServlet {
 		//}
 		// 저장하기
 		CommentDTO dto = new CommentDTO();
+		dto.setMid((String)session.getAttribute("mid"));
 		dto.setComment(commentContent);		
 		dto.setPdsno(Integer.parseInt(pdsnoStr)); // 게시물 번호 설정
         
-		int result = dao.commentWrite(dto);
+		dao.commentWrite(dto);
 		
 		/*
 		 * CommentDAO commentDAO = new CommentDAO(); List<CommentDTO> loadCommentList =
 		 * commentDAO.getCommentList(Integer.parseInt(pdsnoStr));
 		 */
-		HttpSession session = request.getSession();
+	
+	    response.setCharacterEncoding("UTF-8");
+	    response.setContentType("application/json;charset=UTF-8");
+		
 		request.setAttribute("mid", (String)session.getAttribute("mid"));
 		request.setAttribute("mname", (String) session.getAttribute("mname"));
 		request.setAttribute("commentList", dao.getCommentList(Integer.parseInt(pdsnoStr)));
 		
-		PrintWriter pw = response.getWriter();
-		pw.print(result);
-	}
 		
+		JSONObject obj = new JSONObject();
+		
+		obj.put("mid", dto.getMid());
+		obj.put("comment", dto.getComment());
+		
+		PrintWriter pw = response.getWriter();
+		pw.print(obj);
+	}
 }
 
 	// response.sendRedirect("./imgList");

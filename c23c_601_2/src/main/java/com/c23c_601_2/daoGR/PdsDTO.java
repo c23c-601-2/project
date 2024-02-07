@@ -28,7 +28,7 @@ public class PdsDTO {
 	}
 
 	public void setBase64ImageData(String base64ImageData) {
-		base64ImageData = base64ImageData;
+		this.base64ImageData = base64ImageData;
 	}
 
 	public byte[] getImageData() {

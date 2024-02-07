@@ -9,7 +9,8 @@
 <style type="text/css">
 .container {
 	margin: 0 auto;
-	width: 1115px;
+	/* width: 1115px; */
+		width: 70%;
 	background-color: #F5ECE4;
 }
 
@@ -17,10 +18,14 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
+	margin-top: 10px;
+	margin-left: 5px;
 }
 
 .mainleft {
 	width: 30%;
+	text-align: left;
+	margin-right: auto;
 }
 </style>
 </head>
@@ -47,19 +52,16 @@
          $.ajax({
             type: "post",
             url: "./commentServlet", // CommentServlet 또는 CommentController와 같은 서버 측 핸들러 URL
-            dataType : 'text',
+            dataType : 'json',
             data: {"pdsno": pdsno, "commentContent": commentContent
             },
             success: function (result) {
                 // 서버에서 성공적으로 응답을 받았을 때 실행되는 코드
                 // 새로운 댓글을 목록에 추가
-               if(result==1){
-	               		var newContents = "<li>${sessionScope.mid}님 : " +commentContent+"</li>";
-	               		$('#comment-list'+pdsno).append(newContents);
-	                
-               }else{
-            	   alert("실패");
-               }
+                
+	            var newContents = "<li>"+result.mid+" : " +result.comment+"</li>";
+	            $('#comment-list'+pdsno).append(newContents);
+	          
             },
             error: function (error) {
                 // 서버에서 오류 응답을 받았을 때 실행되는 코드
@@ -113,22 +115,26 @@
 			}
 		}
 		if (dto.getFilename() != null) {
+			
+			String imgstr = dto.getBase64ImageData();
+			request.setAttribute("imgstr", imgstr);
 	%>
 
 	<div class="post">
 		<div class="post-image-container">
+		<div class="post-writer">😀<%=dto.getWname()%> 😀</div>
 			<img class="post-image"
-				src="<%=request.getContextPath() + "/webapp/storage/" + dto.getFilename()%>"
+				src="data:image/jpeg;base64,${imgstr}"
 				alt="Post Image">
 		</div>
 		<div class="post-info">
 			<div class="post-icons">
 				<img src="./img/heart.png" alt="Heart Icon"> <img
 					src="./img/speech-bubble.png" alt="말풍선"> <img
-					src="./img/send.png" alt="dm"> <img src="./img/bookmark.png"
-					alt="bookmark"><br>
+					src="./img/send.png" alt="dm"> 
+					<img id="bookmark" src="./img/bookmark.png" alt="bookmark"><br>
 			</div>
-			<div class="post-writer"><%=dto.getWname()%></div>
+			
 			<div class="post-content"><%=dto.getSubject()%></div>
 		</div>
 		<div class="post-comment">
@@ -140,7 +146,7 @@
 				ccomment = cdao.getCommentList(dto.getPdsno());
 				%>
 				<c:forEach items="<%=ccomment%>" var="comment">
-					<li>${comment.cname}님:${comment.comment}</li>
+					<li>${comment.mid}님:${comment.comment}</li>
 				</c:forEach>
 			</ul>
 
