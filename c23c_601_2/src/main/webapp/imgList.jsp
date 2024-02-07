@@ -31,7 +31,7 @@
 </style>
 </head>
 <body>
-	<div class="container">
+	<div class="container" id="container">
 		<%@ include file="header.jsp"%>
 		<%@ include file="nav.jsp"%>
 		<div class="verticalmain">
@@ -45,20 +45,21 @@
 						<img src="./img/insta601.png" alt="Instagram 601 Logo" width="300"
 							height="56" style="margin-top: 50px;">
 					</h3>
-
-
+				</div>
+				
+				
 					<c:if test="${empty sessionScope.mid}">
 						<div class="comment-loginBtn">
 							<button
 								onclick="alert('로그인 해주세요'); window.location.href = './login';">글쓰기</button>
 						</div>
 					</c:if>
-						 <c:if test="${sessionScope.mid ne null}">
+					<c:if test="${sessionScope.mid ne null}">
+						<!-- 로그인 후 -->
 						<div class="writebutton">
 							<a href="./imgForm">글쓰기</a>
-						</p>
-					</c:if> 
-				</div>
+						</div>
+					</c:if>
 				<script>
     function addComment(pdsno) {
         var commentContent = document.getElementById('commentcontent'+pdsno).value;
@@ -132,6 +133,7 @@
 					// 반복문 밖에서 선언
 				%>
 				<div class="listcount">
+					<!-- 로그인 전 -->
 					전체 글 개수 :
 					<%=list.size()%>
 				</div>
@@ -169,18 +171,19 @@
 					</div>
 					<div class="post-info">
 						<div class="post-icons" style="display: flex;">
-						    <div class="icon" onclick="toggleLike(<%=dto.getPdsno()%>)">
-						    	<img id="like-icon<%=dto.getPdsno()%>" src="./img/heart.png" alt="Heart Icon">
-						    </div>
-						    <div class="icon">
-						        <img src="./img/speech-bubble.png" alt="말풍선">
-						    </div>
-						    <div class="icon">
-						        <img src="./img/send.png" alt="dm"> 
-						    </div>
-						    <div class="icon">
-						        <img id="bookmark" src="./img/bookmark.png" alt="bookmark">
-						    </div>
+							<div class="icon" onclick="toggleLike(<%=dto.getPdsno()%>)">
+								<img id="like-icon<%=dto.getPdsno()%>" src="./img/heart.png"
+									alt="Heart Icon">
+							</div>
+							<div class="icon">
+								<img src="./img/speech-bubble.png" alt="말풍선">
+							</div>
+							<div class="icon">
+								<img src="./img/send.png" alt="dm">
+							</div>
+							<div class="icon">
+								<img id="bookmark" src="./img/bookmark.png" alt="bookmark">
+							</div>
 						</div>
 						<div class="post-content"><%=dto.getSubject()%></div>
 					</div>
@@ -213,6 +216,8 @@
 											onclick="addComment(<%=dto.getPdsno()%>)"
 											class="comment-button">댓글쓰기</button>
 									</div>
+									<div>
+									</div>
 								</div>
 							</div>
 						</c:if>
@@ -231,6 +236,9 @@
 			</div>
 		</div>
 	</div>
-
+	<!-- TOP 버튼 -->
+	<div style="position: fixed; bottom: 5px; right: 5px">
+		<a href="#container">[맨 위로]</a>
+	</div>
 </body>
 </html>
