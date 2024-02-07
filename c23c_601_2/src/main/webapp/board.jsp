@@ -319,7 +319,7 @@ footer {
 							<c:set var="startPage" value="${page - 5 }" />
 						</c:if>
 
-						<c:set var="endPage" value="${startPage + 9 }" />${endPage }
+						<c:set var="endPage" value="${startPage + 9 }" />
 							<c:if test="${endPage gt totalPage  }">
 							<c:set var="endPage" value="${totalPage }" />
 						</c:if>
@@ -329,14 +329,14 @@ footer {
 								<c:if test="${page lt 2}">disabled="disabled"</c:if>>⏮️</button>
 							<button
 								<c:if test="${page - 10 lt 1 }">disabled="disabled"</c:if>
-								onclick="paging(${page - 10 })">◀️</button>
+								onclick="paging(${page - 10 })">◀</button>
 							<c:forEach begin="${startPage }" end="${endPage }" var="p">
 								<button <c:if test="${page eq p }"> class ="currentBtn" </c:if>
 									onclick="paging(${p})">${p }</button>
 							</c:forEach>
 							<button
 								<c:if test="${page + 10 gt totalPage }">disabled="disabled"</c:if>
-								onclick="paging(${page + 10 })">▶️</button>
+								onclick="paging(${page + 10 })">▶</button>
 							<button onclick="paging(${totalPage })">⏭️</button>
 						</div>
 					</c:when>

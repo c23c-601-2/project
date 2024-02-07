@@ -25,7 +25,7 @@ public class Board extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("sdfsd");
+		System.out.println("보드");
 		request.setCharacterEncoding("UTF-8");
 		FoodDAO dao = new FoodDAO();
 		int page = 1;
