@@ -14,11 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 import com.c23c_601_2.daoGR.PdsDAO;
 import com.c23c_601_2.daoGR.PdsDTO;
 
-@WebServlet("/frontpage")
-public class FrontPage extends HttpServlet {
+@WebServlet("/frontinsta")
+public class FrontInsta extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public FrontPage() {
+    public FrontInsta() {
         super();
     }
 
@@ -46,15 +46,16 @@ public class FrontPage extends HttpServlet {
 		request.setAttribute("img1", img1);
 		request.setAttribute("img2", img2);
 		request.setAttribute("img3", img3);
-		request.setAttribute("img4", img4);		
+		request.setAttribute("img4", img4);
 		
+		RequestDispatcher rd = request.getRequestDispatcher("frontinsta.jsp");
+		rd.forward(request, response);		
 		
-		RequestDispatcher rd = request.getRequestDispatcher("frontpage.jsp");
-		rd.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//doGet(request, response);
+		// TODO Auto-generated method stub
+		
 	}
 
 }

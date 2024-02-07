@@ -1,3 +1,4 @@
+<%@page import="com.c23c_601_2.dao.StaLikeDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="com.c23c_601_2.daoGR.PdsDTO"%>
@@ -23,7 +24,7 @@
 }
 
 .mainleft {
-	width: 30%;
+	width: 28%;
 	text-align: left;
 	margin-right: auto;
 	margin-top: 60px;
@@ -171,10 +172,22 @@
 					</div>
 					<div class="post-info">
 						<div class="post-icons" style="display: flex;">
-							<div class="icon" onclick="toggleLike(<%=dto.getPdsno()%>)">
-								<img id="like-icon<%=dto.getPdsno()%>" src="./img/heart.png"
-									alt="Heart Icon">
-							</div>
+							<%
+							StaLikeDAO sdao = new StaLikeDAO();
+							int heart = sdao.getLikeStatus((String)session.getAttribute("mid"), dto.getPdsno());
+							request.setAttribute("heart", heart);
+							%>
+						    <div class="icon" onclick="toggleLike(<%=dto.getPdsno()%>)">
+						    	<c:if test="${heart eq 1}">
+						    	<img id="like-icon<%=dto.getPdsno()%>" src="./img/fullheart.png" alt="Heart Icon">
+						    	</c:if>
+						    	<c:if test="${heart eq 0}">
+						    	<img id="like-icon<%=dto.getPdsno()%>" src="./img/heart.png" alt="Heart Icon">
+						    	</c:if>
+						    	<c:if test="${heart eq -1}">
+						    	<img id="like-icon<%=dto.getPdsno()%>" src="./img/heart.png" alt="Heart Icon">
+						    	</c:if>
+						    </div>
 							<div class="icon">
 								<img src="./img/speech-bubble.png" alt="말풍선">
 							</div>
