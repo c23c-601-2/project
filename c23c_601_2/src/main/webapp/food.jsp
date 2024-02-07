@@ -237,6 +237,31 @@ footer {
     z-index: 9999; /* Adjust the z-index as needed */
 }
 
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr{
+	white-space: nowrap; /* 요소 내부의 공백을 제거하고, 텍스트를 줄바꿈하지 않도록 설정합니다. */
+    overflow: hidden; /* 넘치는 컨텐츠를 숨깁니다. */
+    text-overflow: ellipsis; /* 넘치는 텍스트를 생략 부호(...)로 표시합니다. */
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
 </style>
 
 <script>
