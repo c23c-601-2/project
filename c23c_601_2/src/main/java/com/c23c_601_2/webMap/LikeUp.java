@@ -31,14 +31,10 @@ public class LikeUp extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		int result = 0 ;
-		System.out.println(result);
 		LikeCountDTO dto = new LikeCountDTO();
 		FoodDAO dao = new FoodDAO();
-		
 		String no = request.getParameter("no");
-		System.out.println(no);
 		String mid = (String)session.getAttribute("mid");
-		System.out.println(mid);
 		
 		dto.setLno(Integer.parseInt(no));
 		dto.setLmid(mid);

@@ -17,11 +17,12 @@ public class CommentDAO extends AbstractDAO {
 	        
 	        try {
 	            // 댓글을 데이터베이스에 추가하는 SQL 쿼리
-	            String sql = "INSERT INTO tb_comments (comment,pdsno) VALUES (?,?)";
+	            String sql = "INSERT INTO tb_comments (comment,pdsno,mid) VALUES (?,?,?)";
 	            
 	            pstmt = conn.prepareStatement(sql);
 	            pstmt.setString(1, dto.getComment());
 	            pstmt.setInt(2, dto.getPdsno());
+	            pstmt.setString(3, dto.getMid());
 	            result = pstmt.executeUpdate();
 	            
 
@@ -42,7 +43,7 @@ public class CommentDAO extends AbstractDAO {
 
 		    List<CommentDTO> commentList = new ArrayList<>();
 
-		    String sql = "SELECT regdate, comment FROM tb_comments WHERE pdsno=?" ; // 특정 게시물(pdsno)에 대한 댓글을 데이터베이스에서 가져오기
+		    String sql = "SELECT mid, comment, regdate FROM tb_comments WHERE pdsno=?" ; // 특정 게시물(pdsno)에 대한 댓글을 데이터베이스에서 가져오기
 
 		    try {
 		        
@@ -53,8 +54,9 @@ public class CommentDAO extends AbstractDAO {
 		        while (rs.next()) {
 		            CommentDTO comment = new CommentDTO();
 		            //comment.setMname(rs.getString("mid"));
-		            comment.setRegdate(rs.getString("regdate"));
+		            comment.setMid(rs.getString("mid"));
 		            comment.setComment(rs.getString("comment"));
+		            comment.setRegdate(rs.getString("regdate"));
 		            
 		            commentList.add(comment);
 		        }

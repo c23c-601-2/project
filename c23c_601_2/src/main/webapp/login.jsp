@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="styleSheet" href="./css/join.css?ver=1.1">
+<link rel="styleSheet" href="./css/join.css?ver=1.3">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 <script
@@ -13,6 +13,8 @@
 	integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
 	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <title>로그인</title>
+<link href="./css/frontpage.css" rel="stylesheet"/>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <style type="text/css">
 	.temp {
 		width:250px;
@@ -184,8 +186,11 @@
 </head>
 <body>
 	<div class="main">
+	<div>
+		<%@ include file="header.jsp" %>
+		<%@ include file="nav.jsp" %>
+	</div>
 		<div class="mainStyle">
-			<article>
 			<div class="everylogin">
 				<div class="login shadow-lg bg-body rounded">
 					<div class="loginform">
@@ -216,8 +221,11 @@
 					<p>처음이세요? <a href="./join" style="font-weight:bold;">회원가입</a></p>		
 				</div>
 			</div>
-			</article>
 		</div>
+		
+		<footer>
+			<%@ include file="footer.jsp" %>
+		</footer>
 	</div>
 
 

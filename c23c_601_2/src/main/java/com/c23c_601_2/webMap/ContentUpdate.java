@@ -11,15 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.c23c_601_2.dao.FoodDAO;
-import com.c23c_601_2.dto.DisLikeCountDTO;
-import com.c23c_601_2.dto.LikeCountDTO;
+import com.c23c_601_2.dto.FoodDTO;
 import com.c23c_601_2.util.Util;
 
-@WebServlet("/disLikeUp")
-public class DisLikeUp extends HttpServlet {
+@WebServlet("/contentUpdate")
+public class ContentUpdate extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public DisLikeUp() {
+    public ContentUpdate() {
         super();
     }
 
@@ -27,19 +26,29 @@ public class DisLikeUp extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		
-		int result = 0 ;
-		DisLikeCountDTO dto = new DisLikeCountDTO();
 		FoodDAO dao = new FoodDAO();
-		
+		String edit = request.getParameter("edit");
+		//System.out.println(edit);
 		String no = request.getParameter("no");
-		String mid = (String)session.getAttribute("mid");
+		//System.out.println(no);
 		
-		dto.setDno(Util.str2Int2(no));
-		dto.setDmid(mid);
-		result = dao.dislikeUp(dto);
-		System.out.println(result);
+		edit = Util.removeBR(edit);
+		edit= Util.removeP(edit);
+		edit= Util.removeP2(edit);
+		edit = Util.removeTag(edit);
+		int result = 0;
+		
+		if (session.getAttribute("mid") != null && edit != null && no != null ) {
+			FoodDTO dto = new FoodDTO();
+			dto.setContent(edit);
+			dto.setNo(Util.str2Int2(no));
+			dto.setMid((String)session.getAttribute("mid"));
+			result = dao.UpdateContent(dto);
+			//System.out.println(result);
+		}
 		
 		PrintWriter pw = response.getWriter();
 		pw.print(result);

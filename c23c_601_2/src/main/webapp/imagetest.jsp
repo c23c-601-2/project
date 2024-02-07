@@ -1,24 +1,37 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.util.Base64"%>
+<%@ page import="java.util.ArrayList"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
+<%@ page import="com.c23c_601_2.daoGR.PdsDTO"%>
+<%@ page import="com.c23c_601_2.daoGR.PdsDAO"%>
+
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    <title>Image List</title>
 </head>
 <body>
 
-테스트
-${commentList }
-<c:forEach items="${commentList}" var="comment">
-    <c:if test="${not empty comment.regdate}">
-        <p>regdate: ${comment.regdate}</p>
-    </c:if>
-    <c:if test="${not empty comment.comment}">
-        <p>comment: ${comment.comment}</p>
-    </c:if>
-</c:forEach>
+    <h2>Image List</h2>
 
+    <%-- 이미지 목록을 DAO를 통해 가져오기 --%>
+    <%
+        PdsDAO dao = new PdsDAO();
+        ArrayList<PdsDTO> imageList = dao.list();
+        request.setAttribute("imageList", imageList);
+    %>
+
+    <c:forEach var="dto" items="${imageList}">
+        <div>
+            <p><strong>${dto.subject}</strong></p>
+            <p>Writer: ${dto.wname}</p>
+            <p>Upload Date: ${dto.regdate}</p>
+            <p>Read Count: ${dto.readcnt}</p>
+
+            <%-- Decode Base64 image data and display --%>
+            <img src="data:image/jpeg;base64,${dto.base64ImageData}" alt="Image">
+            <br><br>
+        </div>
+    </c:forEach>
+ 
 </body>
 </html>

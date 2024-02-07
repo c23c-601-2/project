@@ -20,8 +20,7 @@ public class FoodDAO extends AbDAO{
 		Connection con = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT food_no, food_title, food_content, food_date, food_like, food_dislike, grade " +
-	             "FROM foodmap LIMIT 0,5";
+		String sql = "SELECT food_no, food_title, food_content, food_write, food_date, food_like, food_dislike, grade FROM foodmapview ORDER BY food_date DESC LIMIT 0, 5";
 		
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -29,10 +28,11 @@ public class FoodDAO extends AbDAO{
 			
 			while(rs.next()) {
 	            Map<String, Object> dto = new HashMap<String, Object>();
-	            dto.put("no", rs.getString("food_no"));
+	            dto.put("food_no", rs.getString("food_no"));
 	            dto.put("food_title", rs.getString("food_title"));
 	            dto.put("food_content",rs.getString("food_content"));
-	            dto.put("food_content",rs.getString("food_date"));
+	            dto.put("food_write",rs.getString("food_write"));
+	            dto.put("food_date",rs.getString("food_date"));
 	            dto.put("food_like", rs.getInt("food_like"));
 	            dto.put("food_dislike", rs.getInt("food_dislike"));
 	            dto.put("grade", rs.getInt("grade"));
@@ -50,7 +50,7 @@ public class FoodDAO extends AbDAO{
 		Connection con = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT food_no, food_title, food_content, food_write, food_date, food_like, food_dislike, grade FROM foodmapview LIMIT ?, 10";
+		String sql = "SELECT food_no, food_title, food_content, food_write, food_date, food_like, food_dislike, grade FROM foodmapview ORDER BY food_date DESC LIMIT ?, 10";
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, (page - 1) * 10);
@@ -82,7 +82,7 @@ public class FoodDAO extends AbDAO{
 		ResultSet rs = null;
 		String sql = "SELECT food_no, food_title, food_content, food_write, food_date, food_like, food_dislike, grade"
 	            + " FROM foodmapview"
-	            + " WHERE food_title LIKE CONCAT('%', ?, '%')";
+	            + " WHERE food_title LIKE CONCAT('%', ?, '%') ORDER BY food_date DESC";
 
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -149,10 +149,10 @@ public class FoodDAO extends AbDAO{
 	         
 	         while(rs.next()) {
 	            Map<String, Object> dto = new HashMap<String, Object>();
-	            dto.put("title", rs.getString("food_title"));
-	            dto.put("content", rs.getString("food_title"));
-	            dto.put("like", rs.getInt("food_like"));
-	            dto.put("dislike", rs.getInt("food_dislike"));
+	            dto.put("food_title", rs.getString("food_title"));
+	            dto.put("food_content", rs.getString("food_content"));
+	            dto.put("food_like", rs.getInt("food_like"));
+	            dto.put("food_dislike", rs.getInt("food_dislike"));
 	            dto.put("grade", rs.getInt("grade"));
 	            list.add(dto);
 	         }
@@ -190,7 +190,35 @@ public class FoodDAO extends AbDAO{
 		int result = 0;
 		Connection con = db.getConnection();
 		PreparedStatement pstmt = null;
-		String sql = "INSERT INTO likecount (lno, lmid) VALUES(?,?)";
+		ResultSet rs = null;
+		String sql = "SELECT COUNT(*) FROM likecount "
+				+ "WHERE lno=? AND lmid=(SELECT mid FROM member WHERE mid=?) ";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, dto.getLno());
+			pstmt.setString(2, dto.getLmid());
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				if (rs.getInt(1) == 0) {
+					result = realLikeUp(dto);
+				}
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(null, pstmt, con);
+		}
+		
+		return result;
+	}
+	
+	public int realLikeUp(LikeCountDTO dto) {
+		int result = 0;
+		Connection con = db.getConnection();
+		PreparedStatement pstmt = null;
+		String sql = "INSERT INTO likecount (lno, lmid) VALUES(?,(SELECT mid FROM member WHERE mid=?))";
 		
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -202,13 +230,43 @@ public class FoodDAO extends AbDAO{
 		} finally {
 			close(null, pstmt, con);
 		}
+		
 		return result;
 	}
+	
 	public int dislikeUp(DisLikeCountDTO dto) {
-		int result = 0 ;
+		int result = 0;
 		Connection con = db.getConnection();
 		PreparedStatement pstmt = null;
-		String sql = "INSERT INTO dislikecount (dno, dmid) VALUES(?,?)";
+		ResultSet rs = null;
+		String sql = "SELECT COUNT(*) FROM dislikecount "
+				+ "WHERE dno=? AND dmid=(SELECT mid FROM member WHERE mid=?) ";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, dto.getDno());
+			pstmt.setString(2, dto.getDmid());
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				if (rs.getInt(1) == 0) {
+					result = realDislikeUp(dto);
+				}
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(null, pstmt, con);
+		}
+		
+		return result;
+	}
+	
+	public int realDislikeUp(DisLikeCountDTO dto) {
+		int result = 0;
+		Connection con = db.getConnection();
+		PreparedStatement pstmt = null;
+		String sql = "INSERT INTO dislikecount (dno, dmid) VALUES(?,(SELECT mid FROM member WHERE mid=?))";
 		
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -220,6 +278,26 @@ public class FoodDAO extends AbDAO{
 		} finally {
 			close(null, pstmt, con);
 		}
+		
+		return result;
+	}
+	public int UpdateContent(FoodDTO dto) {
+		int result = 0;
+		Connection con = db.getConnection();
+		PreparedStatement pstmt = null;
+		String sql = "UPDATE foodmap SET food_content = ? WHERE food_no = ?";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, dto.getContent());
+			pstmt.setInt(2, dto.getNo());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(null, pstmt, con);
+		}
+		
 		return result;
 	}
 }

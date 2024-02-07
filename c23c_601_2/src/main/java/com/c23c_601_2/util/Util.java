@@ -2,6 +2,24 @@ package com.c23c_601_2.util;
 
 public class Util {
 
+	public static String changeEmailMasking(String str) {
+		
+		String[] email = str.split("@");
+		String result = email[0].substring(0,2)+"*******@"+email[1].substring(0,1)+"*******.com";
+		
+		
+		return result;
+	}
+	
+	public static String changephoneMasking(String str) {
+		
+		String[] phone = str.split("-");
+		
+		String result = phone[0]+"-"+phone[1].substring(0,1)+"***-"+phone[2].substring(0,1)+"***";
+		
+		return result;
+	}
+	
 	public static int str2Int(String str) {
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < str.length(); i++) {
@@ -56,6 +74,17 @@ public class Util {
 	   public static String addBR(String str) {
 		      return str.replaceAll("(\r\n|\r|\n|\n\r)", "<br>");
 		   }
+	   
+	   public static String removeBR(String str) {
+		   return str.replaceAll("<br>", "");
+	   }
+	   public static String removeP(String str) {
+		   return str.replaceAll("<p>", "");
+	   }
+	   public static String removeP2(String str) {
+		   return str.replaceAll("</p>", "");
+	   }
+	   
 	   
 	   
 	   public static String ipChange(String ip) {

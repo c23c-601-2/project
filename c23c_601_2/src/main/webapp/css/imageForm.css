@@ -1,8 +1,11 @@
 @charset "UTF-8";
 
+
+
 .h3 { /* 사진 올리기 */
+	margin-top: 30px;
 	text-align: center;
-	color: green;
+	color : pink;
 	font-size: 50px;
 }
 

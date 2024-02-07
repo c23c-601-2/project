@@ -1,45 +1,55 @@
 @charset "UTF-8";
 
-.maintitle{
-	color : white;
+.maintitle {
+	color: white;
 	text-align: center;
 	width: 50%;
-	margin : 0 auto;
-	margin-top : 150px;
+	margin: 0 auto;
+	margin-top: 150px;
 	background-color: black;
 }
 
-.table{
+.table {
 	text-align: center;
-	width:60%;
-	margin : 0 auto;
-	margin-top : 50px;
+	width: 50%;
+	margin: 0 auto;
 	border-collapse: collapse;
 	border-bottom: 1px solid gray;
 }
-.head{
-	width:50%;
-	margin : 0 auto;
-}
-.caption{
-	width:60%;
-	margin-right: auto;
-	margin-left : 0;
-	text-align: left;
-	font-size: 2em;
-}
-.caption1{
-	width:60%;
-	margin-right : 0;
-	margin-left : auto;
-	text-align: right;
+
+.head {
+	width: 50%;
+	margin: 0 auto;
 }
 
-.newssource{
-	margin-left : auto;
-	margin-right : 0;
+.caption {
+	caption-side: top;
+	width: 60%;
+	margin-right: auto;
+	margin-left: 0;
+	text-align: left;
+	font-size: 2em;
+	top: 0;
+	color: gray;
 }
+
+.caption1 {
+	caption-side: top;
+	width: 60%;
+	margin-right: 0;
+	margin-left: auto;
+	text-align: right;
+	top: 0;
+	color: gray;
+}
+
+.newssource {
+	margin-left: auto;
+	margin-right: 0;
+}
+
 .newssource:hover {
-    text-decoration: underline;
-    color: yellow;
+	text-decoration: underline;
+	color: red;
 }
+
