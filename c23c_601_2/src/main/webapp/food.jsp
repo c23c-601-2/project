@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-	
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,8 +13,8 @@
 <link rel="stylesheet"
 	href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <link href="./css/menu.css?ver=0.12" rel="stylesheet" />
-<link href="./css/add.css?ver=0.12" rel="stylesheet" />
 <link href="./css/frontpage.css" rel="stylesheet" />
+
 <style>
 .verticalmain {
 	display: flex;
@@ -215,13 +215,84 @@
 	cursor: default;
 	color: #777;
 }
+
+.d1{
+	width: 40%;
+	text-align: center;
+}
+
+.d2{
+	width: 30%;
+	text-align: center;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    /* background-color: #f8f9fa; */
+    /* background-color: #F5ECE4; */
+    padding: 20px 0;
+    text-align: center;
+    z-index: 9999; /* Adjust the z-index as needed */
+}
+
 </style>
+
+<script>
+function listCheck() {
+    var title = $('#search').val();
+	let p1 = $('.mainsearch .c1 .dfg');
+	let p2 = $('.mainsearch .c1 .asd');
+	//let p1 = $(this).parents.('.mainsearch').child('.c1');
+	
+	// this를 통해 mainsearch찾는다.
+    /* var mainElement = $(this).parent('.mainsearch');
+    var p2 = mainElement.children('.c1').children('table.write').children('tbody.asd');
+	var p1 = p2.children('.dfg'); */
+    
+    $.ajax({
+       url : './food',
+       type : 'post',
+       dataType : 'json',
+       data : {title : title},
+       success : function(response) {
+    	   //alert("json받아오니?" + list);
+    	   var list = response.list;
+          if (list.length > 0) {
+			alert("아래 리스트를 확인해보십시오. " + list.length + " : " + p2.html());
+			p1.remove();
+			// tr은 리무브 시켜서 없애고, tbody는 appendtrtd를 foreach문으로 돌린다.
+			let data = '';
+			for(let i=0; i< list.length; i++){
+				data += '<tr class="dfg" style="text-align: center;"><td>' + list[i].food_title + '</td>';
+				data += '<td style=text-align: center;">' + list[i].food_like + '/' + list[i].food_dislike + '</td>';
+				data += '<td style=text-align: center;">' + list[i].grade + '</td></tr>';
+				/* 서버에서 jstl 자바 ,el 에서 결과값이 나오고
+				나온 상태로 브라우저html, 제이커리, css, 자바스크립트 */
+			}
+			//data += '</tbody>';
+            alert("리무브 됐니?" + p1.html());
+         // 위에서 생성한 HTML 코드를 jQuery를 사용하여 tbody 요소를 가진 특정 요소에 추가할 수 있습니다.
+            p2.append(data);
+            
+          } else {
+            alert("현재 작성된 후기가 없습니다. 후기 작성 페이지로 가겠습니다.");
+            window.location.href = './write';
+          }
+       },
+       error : function(request, status, error) {
+          alert("상호를 입력하세요.");
+       }
+    });
+ }
+</script>
+
 </head>
 <script type="text/javascript" src="./js/menu.js"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=07c74fda752bcdd18b45e54e39e95411&libraries=services"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=07c74fda752bcdd18b45e54e39e95411&libraries=services"></script>
 <body>
 	<div>
 		<%@ include file="header.jsp"%>
@@ -233,60 +304,61 @@
 		</div>
 
 		<div class="mainsearch">
-			<form action="./food" method="post">
-				<img alt="login" src="./img/search.png" width="24px;"> <input
-					type="text" name="search" placeholder="음식점 상호를 입력하세요.">
-				<button type="submit" id="searchTitle">후기 리스트 검색하기</button>
-			</form>
-		
-		<hr>
+			<div class="llist">
+				<img alt="login" src="./img/search.png" width="24px;">
+				<input type="text" id="search" name="search" placeholder="음식점 상호를 입력하세요.">
+				<button onclick="return listCheck()">후기 리스트 검색하기</button>
+			</div>
+			<hr>
+			<h3>${sessionScope.mname }님을위한오늘의추천</h3>
+			<hr>
 
-		<h3>${sessionScope.mname }님을위한오늘의추천</h3><hr>
-		
-		<div>
-						<table class="write">
-							<h2>후기 리스트</h2>
-							<div>
-								<button onclick="url('./board')">후기 게시판으로</button>
-							</div>
-							<thead>
-								<tr style="font-size: 16px">
-									<th>가게 이름</th>
-									<th>좋아요 / 싫어요</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach items="${list }" var="row">
-									<tr>
-										<td class="d2">${row.food_title }</td>
-										<td class="d3">${row.food_like } / ${row.food_dislike }</td>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
+			<div class="c1">
+				<table class="write">
+					<div style="font-size: 30px; text-align: center;"> ★☆ 후기 리스트 ☆★ </div>
+					<div style="text-align: right;">
+						<button onclick="url('./board')">후기 게시판으로</button>
 					</div>
-		</div>
-
-		<div class="map_wrap">
-				<div id="map"
-					style="width: 1200px; height: 100vh; position: relative; overflow: hidden;"></div>
-
-				<div id="menu_wrap" class="bg_white">
-					<div class="option">
-						<div>
-							<form onsubmit="searchPlaces(); return false;">
-								키워드 : <input type="text" value="이대역 맛집" id="keyword" size="15">
-								<button type="submit">검색하기</button>
-							</form>
-						</div>
-					</div>
-					<hr>
-					<ul id="placesList"></ul>
-					<div id="pagination"></div>
-				</div>
+					<thead>
+						<tr style="font-size: 16px">
+							<th class="d1">가게 이름</th>
+							<th class="d2">좋아요 / 싫어요</th>
+							<th class="d2">평점</th>
+						</tr>
+					</thead>
+					<tbody class="asd">
+						<c:forEach items="${list }" var="row">
+							<!-- tr은 리무브 시켜서 없애고, tbody는 appendtrtd를 foreach문으로 돌린다. -->
+							<tr class="dfg">
+								<td class="d1">${row.food_title }</td>
+								<td class="d2">${row.food_like }/ ${row.food_dislike }</td>
+								<td class="d2">${row.grade }</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	
-			<script>
+		<div class="map_wrap">
+			<div id="map" style="width: 1200px; height: 100vh; position: relative; overflow: hidden;"></div>
+
+			<div id="menu_wrap" class="bg_white">
+				<div class="option">
+					<div>
+						<form onsubmit="searchPlaces(); return false;">
+							키워드 : <input type="text" value="이대역 맛집" id="keyword" size="15">
+							<button type="submit">검색하기</button>
+						</form>
+					</div>
+				</div>
+				<hr>
+				<ul id="placesList"></ul>
+				<div id="pagination"></div>
+			</div>
+		</div>
+
+		<script>
 				// 마커를 담을 배열입니다
 				var markers = [];
 
@@ -511,6 +583,9 @@
 					}
 				}
 			</script>
-		</div>
+	</div>
+	<footer>
+			<%@ include file="footer.jsp" %>
+	</footer>
 </body>
 </html>
