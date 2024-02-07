@@ -35,8 +35,12 @@ public class Join extends HttpServlet {
 		dto.setMname(request.getParameter("name"));
 		dto.setMemail(request.getParameter("email"));
 		dto.setMphone(request.getParameter("phone"));
-		dto.setMaddress("("+request.getParameter("postCode")+") "+request.getParameter("selectAddr")
-		+", "+request.getParameter("detailAddr"));
+		if(request.getParameter("postCode")!="") {
+			dto.setMaddress("("+request.getParameter("postCode")+") "+request.getParameter("selectAddr")
+			+", "+request.getParameter("detailAddr"));		
+		} else {
+			dto.setMaddress("");
+		}
 		
 		int result = dao.insertMember(dto);
 		

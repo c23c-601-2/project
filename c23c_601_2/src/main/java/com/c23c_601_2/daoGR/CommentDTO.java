@@ -2,7 +2,23 @@ package com.c23c_601_2.daoGR;
 
 public class CommentDTO {
 	private int cno, clike, mno, del, Pdsno;
-	private String comment, mid, mname, cdate, cname,  Regdate ;
+	private String comment, mid, mname,subject, cdate, cname,  regdate ;
+
+	public String getSubject() {
+		return subject;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+
+	public String getRegdate() {
+		return regdate;
+	}
+
+	public void setRegdate(String regdate) {
+		this.regdate = regdate;
+	}
 
 	public int getCno() {
 		return cno;
@@ -69,15 +85,6 @@ public class CommentDTO {
 	public void setDel(int del) {
 		this.del = del;
 	}
-
-	public String getRegdate() {
-		return Regdate;
-	}
-
-	public void setRegdate(String regdate) {
-		Regdate = regdate;
-	}
-
 
 	public int getPdsno() {
 		return Pdsno;
