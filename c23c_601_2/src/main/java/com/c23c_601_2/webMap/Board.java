@@ -28,8 +28,6 @@ public class Board extends HttpServlet {
 		System.out.println("sdfsd");
 		request.setCharacterEncoding("UTF-8");
 		FoodDAO dao = new FoodDAO();
-		HttpSession session = request.getSession();
-		session.getAttribute("mid");
 		int page = 1;
 		
 		if (request.getParameter("page") != null && request.getParameter("page") != "") {
