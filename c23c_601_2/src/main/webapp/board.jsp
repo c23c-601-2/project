@@ -87,7 +87,7 @@ $(function() {
 	
 	
 	$(".contentupdate").click(function(){
-		if(confirm('수정하시겠습니까?')){
+		if(confirm('내용을 수정하시겠습니까?')){
 			let no = $(this).prev().val();
 			let edit = $(this).closest('tr').find('.d3');
 			//alert(edit);
@@ -159,7 +159,29 @@ $(function() {
 			});
 		}
 	});
-
+	
+	$(".contentdelete").click(function(){
+		if(confirm('내용을 삭제하시겠습니까?')){
+			let no = $(this).prev().prev().val();
+			alert(no);
+			$.ajax({
+				url : './contentDelete',
+				type : 'post',
+				dataType : 'text',
+				data : {'no' : no},
+				success : function(result) {
+					if (result == 1) {
+						location.reload();
+					} else {
+					alert('문제가 발생했습니다.');
+					}
+				},
+				error : function (error) {
+					alert('문제가 발생했습니다.');
+				}
+			});
+		}
+	});
 	
 });
 </script>
@@ -169,7 +191,7 @@ $(function() {
 }
 
 .d2 {
-	width: 20%;
+	width: 15%;
 }
 
 .d3 {
@@ -251,10 +273,11 @@ $(function() {
 										<td class="d1">${s.index+1 }</td>
 										<td class="d1">${row.title }</td>
 										<td class="d3">${row.content }</td>
-										<td class="d1">${row.write }<c:if
+										<td class="d2">${row.write }<c:if
 												test="${sessionScope.mid ne null && row.write eq sessionScope.mid }">
 												<input type="hidden" class="no" value="${row.no}">
 												<img alt="edit" src="./img/edit1.png" class="contentupdate">
+												<img alt="delete" src="./img/delete.png" class="contentdelete">
 											</c:if>
 										</td>
 										<td class="d1">${row.date }</td>
