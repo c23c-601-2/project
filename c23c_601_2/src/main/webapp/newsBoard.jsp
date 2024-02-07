@@ -25,7 +25,14 @@ body {
 .container {
 	display: flex;
 }
+footer {
+	background-color: #F2E3CF;
+}
 
+.footercontent{
+	text-align: center;
+	padding: 5px;
+}
 </style>
 
 </head>
@@ -57,5 +64,8 @@ body {
 			</c:forEach>
 		</table>
 	</div>
+<footer>
+	<%@ include file="footer.jsp" %>
+	</footer>
 </body>
 </html>
