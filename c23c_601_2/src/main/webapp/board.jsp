@@ -112,15 +112,12 @@ $(function() {
 			
 			$(document).on('keyup', '.updateBox1', function() {
 			    let text = $(this).val();
-			    //alert(text);
 			    let max = 35;
 			    let remaining = max - text.length;
-			    //alert(remaining);
 			    if (remaining < 0) {
 			    	remaining = 0;
 			        $(this).val(text.substr(0, 35));
 			        alert("35자를 초과했습니다.");
-			        //alert(remaining);
 			    }
 			    $(this).siblings('.update-count').text("남은 글자: " + remaining);
 			});
@@ -135,8 +132,9 @@ $(function() {
 		if(confirm('수정하시겠습니까?')){
 			let no = $(this).closest('.updateBox').find('input[name="no"]').val();
 			let edit = $(this).closest('.updateBox').find('.updateBox1').val();
-			let updateBox = $(this).parents(".updateBox");
-			let content = $(this).parents(".updateBox").val();
+			let updateBox = $(this).parents('.d3').find('.updateBox'); //태그부모위치
+			//let updateEdit = $(this).parents('.updateBox').siblings('.d3');
+			let updateEdit = $(this).parents('.d3');
 			$.ajax({
 				url : './contentUpdate',
 				type : 'post',
@@ -146,11 +144,10 @@ $(function() {
 					//alert('통신 성공 : ' + result);
 					if(result == 1){
 						updateBox.remove();
-						content
-						comment.css('backgroundColor','#brown');
-						comment.css('min-height','100px');
-						comment.css('height','auto');
-						comment.html(recomment.replace(/(?:\r\n|\r|\n)/g, '<br>'));
+						updateEdit.css('backgroundColor','#brown');
+						updateEdit.css('min-height','100px');
+						updateEdit.css('height','auto');
+						updateEdit.append(edit.replace(/(?:\r|\n)/g, '<br>'));
 						$(".contentupdate").show();
 					} else {
 						alert("문제가 발생했습니다. 화면을 갱신합니다." + result);
@@ -254,8 +251,10 @@ $(function() {
 											<td class="d1">${row.title }</td>
 											<td class="d3">${row.content }</td>
 											<td class="d1">${row.write }
+											<c:if test="${sessionScope.mid ne null && row.write eq sessionScope.mid }">
 											<input type = "hidden" class="no" value="${row.no}">
 											<img alt="edit" src="./img/edit1.png" class="contentupdate">
+											</c:if>
 											</td>
 											<td class="d1">${row.date }</td>
 
