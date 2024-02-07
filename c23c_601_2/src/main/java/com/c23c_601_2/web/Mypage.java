@@ -35,57 +35,62 @@ public class Mypage extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
-		int page=0;
-		
-		if(request.getParameter("page") == null) {
-			page =1;
+		if(session.getAttribute("mid")!=null) {
+			int page=0;
+			
+			if(request.getParameter("page") == null) {
+				page =1;
+			} else {
+				page = Util.str2Int2(request.getParameter("page"));
+			}
+			
+			MemberDAO dao = new MemberDAO();
+			MemberDTO dto = dao.detailId((String)session.getAttribute("mid"));
+			
+			dto.setMid(dto.getMid()+"@naver.com");
+			dto.setMemail(Util.changeEmailMasking(dto.getMemail()));
+			dto.setMphone(Util.changephoneMasking(dto.getMphone()));
+			
+			List<TotalboardDTO> list = dao.detailBoard((String)session.getAttribute("mid"),page);
+			
+			request.setAttribute("page", page);
+			request.setAttribute("totalcount", dao.totalcount((String)session.getAttribute("mid")));
+			request.setAttribute("dto", dto);
+			request.setAttribute("detail", list);
+			
+			RequestDispatcher rd = request.getRequestDispatcher("mypage.jsp");
+			rd.forward(request, response);
+						
 		} else {
-			page = Util.str2Int2(request.getParameter("page"));
+			response.sendRedirect("./frontpage");
 		}
-		
-		MemberDAO dao = new MemberDAO();
-		MemberDTO dto = dao.detailId((String)session.getAttribute("mid"));
-		
-		List<TotalboardDTO> list = dao.detailBoard((String)session.getAttribute("mid"),page);
-		
-		request.setAttribute("page", page);
-		request.setAttribute("totalcount", dao.totalcount((String)session.getAttribute("mid")));
-		request.setAttribute("dto", dto);
-		request.setAttribute("detail", list);
-		
-		RequestDispatcher rd = request.getRequestDispatcher("mypage.jsp");
-		rd.forward(request, response);
-		
 	}
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		HttpSession session = request.getSession();
-		int page = Util.str2Int2( request.getParameter("page"));
-		MemberDAO dao = new MemberDAO();
-		
-		List<TotalboardDTO> list = dao.detailBoard((String)session.getAttribute("mid"),page);
-		
-		JSONArray arr = new JSONArray();
-		
-		for(TotalboardDTO dto : list) {
-			JSONObject obj = new JSONObject();
-			obj.put("regdate", dto.getRegdate());
-			obj.put("subject", dto.getSubject());
-			obj.put("mid", dto.getMid());
-			obj.put("type", dto.getType());
-			
-			arr.add(obj);
-		}
-		
-		
-		
-		
-		
-		response.setContentType("application/x-json; charset=utf-8");
-		PrintWriter pw = response.getWriter();
-		pw.print(arr);
+		/*
+		 * HttpSession session = request.getSession(); int page = Util.str2Int2(
+		 * request.getParameter("page")); MemberDAO dao = new MemberDAO();
+		 * 
+		 * List<TotalboardDTO> list =
+		 * dao.detailBoard((String)session.getAttribute("mid"),page);
+		 * 
+		 * JSONArray arr = new JSONArray();
+		 * 
+		 * for(TotalboardDTO dto : list) { JSONObject obj = new JSONObject();
+		 * obj.put("regdate", dto.getRegdate()); obj.put("subject", dto.getSubject());
+		 * obj.put("mid", dto.getMid()); obj.put("type", dto.getType());
+		 * 
+		 * arr.add(obj); }
+		 * 
+		 * 
+		 * 
+		 * request.setAttribute("page", page);
+		 * 
+		 * response.setContentType("application/x-json; charset=utf-8"); PrintWriter pw
+		 * = response.getWriter(); pw.print(arr);
+		 */
 	}
 
 }

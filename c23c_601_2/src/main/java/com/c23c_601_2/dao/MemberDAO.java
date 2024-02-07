@@ -12,6 +12,49 @@ import com.c23c_601_2.dto.TotalboardDTO;
 
 public class MemberDAO extends AbstractDAO{
 	
+	public int delMember(String id) {
+		int result = 0;
+		Connection conn = db.getConnection();
+		String sql="UPDATE member SET mdel=0 WHERE mid =?";
+		
+		PreparedStatement pstmt = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	public int updateMember(MemberDTO dto) {
+		
+		int result =0;
+		
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		String sql= "UPDATE member SET mpw =?, memail=?,mphone=?,maddress=?,updatedate =? WHERE mid =?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dto.getMpw());
+			pstmt.setString(2, dto.getMemail());
+			pstmt.setString(3, dto.getMphone());
+			pstmt.setString(4, dto.getMaddress());
+			pstmt.setString(5, dto.getUpdatedate());
+			pstmt.setString(6, dto.getMid());
+			result =pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
 	//totalpage 
 	public int totalcount(String mid) {
 		int result =0;
@@ -46,7 +89,7 @@ public class MemberDAO extends AbstractDAO{
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT mid,subject,regdate,type FROM totalboard "
+		String sql = "SELECT mid,subject,regdate,if(type='F','Foodmap','Instargram') AS type FROM totalboard "
 				+ "WHERE mid =? "
 				+ "LIMIT ?, 5";
 		
@@ -90,12 +133,31 @@ public class MemberDAO extends AbstractDAO{
 		}
 	}
 	
+	public String changeEmailMasking(String str) {
+		
+		String[] email = str.split("@");
+		String result = email[0].substring(0,2)+"*******@"+email[1].substring(0,1)+"*******.com";
+		
+		System.out.println(result);
+		
+		return result;
+	}
+	
+	public String changephoneMasking(String str) {
+		
+		String[] phone = str.split("-");
+		
+		String result = phone[0]+"-"+phone[1].substring(0,1)+"***-"+phone[2].substring(0,1)+"***";
+		
+		return result;
+	}
+	
 	public MemberDTO detailId(String mid) {
 		MemberDTO dto = new MemberDTO();
 		
 		Connection conn = db.getConnection();
 		
-		String sql ="SELECT mid,mname,mphone,memail,lastlogin FROM member WHERE mid =?";
+		String sql ="SELECT mid,mname,mphone,memail,maddress,lastlogin FROM member WHERE mid =?";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -111,6 +173,7 @@ public class MemberDAO extends AbstractDAO{
 				dto.setMname(rs.getString("mname"));
 				dto.setMphone(rs.getString("mphone"));
 				dto.setMemail(rs.getString("memail"));
+				dto.setMaddress(rs.getString("maddress"));
 				dto.setLastlogin(rs.getString("lastlogin"));
 			}
 			
@@ -130,7 +193,7 @@ public class MemberDAO extends AbstractDAO{
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT COUNT(*) AS count, mid, mname FROM member WHERE mid =? AND mpw =?";
+		String sql = "SELECT COUNT(*) AS count, mid, mname FROM member WHERE mid =? AND mpw =? AND mdel=1";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -150,6 +213,30 @@ public class MemberDAO extends AbstractDAO{
 		
 		
 		return dto2;
+	}
+	
+	public int pwCheck(String pw,String id) {
+		int result = 0;
+		
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT COUNT(*) AS count FROM member WHERE mpw = ? AND mid=?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, pw);
+			pstmt.setString(2, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt("count");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return result;
 	}
 	
 	

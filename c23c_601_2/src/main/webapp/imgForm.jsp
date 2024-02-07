@@ -14,7 +14,7 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
-	margin-top: 10px;
+	margin-top: 50px;
 	margin-left: 5px;
 }
 
@@ -22,6 +22,7 @@
 	width: 30%;
 	align-items: left;
 	text-align: left;
+/* 	margin-top: 60px; */
 }
 </style>
 </head>
@@ -35,18 +36,20 @@
 			</div>
 			<div>
 				<!-- 본문시작 pdsForm.jsp -->
-				<h3 class="h3">이미지</h3>
+				<h2 class="h2">🧡 이미지를 업로드해주세요 🧡</h2><br>
+				
+				<h3 class = "h3">게시글은 삭제가 불가능하오니 신중하게 작성해주세요 😉</h3>
 				<form name="photoForm" method="post" enctype="multipart/form-data"
 					action="imgIns.jsp" onsubmit="return pdsCheck(this)">
 					<table class="form_table">
 						<tr>
 							<th>이름</th>
 							<td><input type="text" id="wname" name="wname" size="20"
-								maxlength="30" required autofocus></td>
+								maxlength="30" required autofocus ></td>
 						</tr>
 						<tr>
 							<th>내용</th>
-							<td><textarea rows="5" cols="10" id="content" name="subject"></textarea>
+							<td><textarea rows="5" cols="10" id="content" name="subject" placeholder="png파일만 업로드해주세요."></textarea>
 							</td>
 						</tr>
 						<tr>
@@ -68,10 +71,10 @@
 						</tr>
 					</table>
 				</form>
-				<div style="text-align: right; margin: 10px 500px 0 0;">
-					<button onclick="redirectToPdsList()" id="list_button">글
-						목록</button>
-				</div>
+<div style="text-align: right;">
+    <button onclick="redirectToPdsList()" id="list_button">글 목록</button>
+</div>
+
 			</div>
 		</div>
 		<!-- 본문끝 -->

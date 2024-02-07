@@ -2,9 +2,33 @@ package com.c23c_601_2.dto;
 
 public class MemberDTO {
 	private int mno,mgrade,count;
-	private String mid,mname,mpw,memail,mphone,maddress,mdate,lastlogin;
+	private String updatedate,mid,mname,mpw,memail,mphone,maddress,mdate,lastlogin,postcode,selectaddr,detailaddr;
 	
 	
+	public String getUpdatedate() {
+		return updatedate;
+	}
+	public void setUpdatedate(String updatedate) {
+		this.updatedate = updatedate;
+	}
+	public String getPostcode() {
+		return postcode;
+	}
+	public void setPostcode(String postcode) {
+		this.postcode = postcode;
+	}
+	public String getSelectaddr() {
+		return selectaddr;
+	}
+	public void setSelectaddr(String selectaddr) {
+		this.selectaddr = selectaddr;
+	}
+	public String getDetailaddr() {
+		return detailaddr;
+	}
+	public void setDetailaddr(String detailaddr) {
+		this.detailaddr = detailaddr;
+	}
 	public String getLastlogin() {
 		return lastlogin;
 	}
