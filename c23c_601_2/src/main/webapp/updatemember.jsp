@@ -84,6 +84,8 @@
 	}
 </style>
 
+
+<!-- 수정 -->
 <script type="text/javascript">
 
 $(function(){
