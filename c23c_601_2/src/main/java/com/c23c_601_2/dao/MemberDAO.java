@@ -7,10 +7,69 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.c23c_601_2.daoGR.CommentDTO;
 import com.c23c_601_2.dto.MemberDTO;
 import com.c23c_601_2.dto.TotalboardDTO;
 
 public class MemberDAO extends AbstractDAO{
+	
+	//ctotalpage 
+		public int ctotalcount(String mid) {
+			int result =0;
+			
+			Connection conn = db.getConnection();
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			String sql = "SELECT COUNT(*) AS count FROM tb_comments WHERE mid = ?";
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, mid);
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					result = rs.getInt("count");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			
+			return result;
+		}
+	
+	
+	public List<CommentDTO> selectComment(String mid,int page){
+		List<CommentDTO> list = new ArrayList<CommentDTO>();
+		Connection conn = db.getConnection();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String  sql = "SELECT mid, comment, if(date_format(current_timestamp(),'%Y-%m-%d') = date_format(regdate,'%Y-%m-%d'),date_format(regdate,'%h:%i'),date_format(regdate,'%m-%d')) AS regdate,"
+				+ "(SELECT subject FROM tb_pds A WHERE A.pdsno = B.pdsno) AS subject "
+				+ "FROM tb_comments B WHERE mid =? LIMIT ?,5";
+
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mid);
+			pstmt.setInt(2, (page-1)*5);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				CommentDTO dto = new CommentDTO();
+				dto.setMid(rs.getString("mid"));
+				dto.setComment(rs.getString("comment"));
+				dto.setRegdate(rs.getString("regdate"));
+				dto.setSubject(rs.getString("subject"));
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
 	
 	public int delMember(String id) {
 		int result = 0;

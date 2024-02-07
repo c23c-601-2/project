@@ -74,9 +74,8 @@
 	}
 	.updatemainStyle{
 		width:100%;
-		height:100vh;
 		background-color: #F2F2F2;
-		
+		height:850px;
 		/* 가운데정렬 */
 		display: flex;
 		justify-content: center;
@@ -232,11 +231,13 @@ $(function(){
 							
 							
 							$.ajax({
-								url:'./cancel',
+								url:'./updatemember',
 								type:'post',
 								data:join,
-								success:function(){
-									window.location.replace("./mypage");
+								success:function(result){
+									if(result==1){
+										window.location.replace("./mypage");
+									}
 								},
 								error:function(){
 									alert("실패");
