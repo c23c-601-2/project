@@ -70,6 +70,10 @@ public class CommentServlet extends HttpServlet {
 		 * CommentDAO commentDAO = new CommentDAO(); List<CommentDTO> loadCommentList =
 		 * commentDAO.getCommentList(Integer.parseInt(pdsnoStr));
 		 */
+	
+	    response.setCharacterEncoding("UTF-8");
+	    response.setContentType("application/json;charset=UTF-8");
+		
 		request.setAttribute("mid", (String)session.getAttribute("mid"));
 		request.setAttribute("mname", (String) session.getAttribute("mname"));
 		request.setAttribute("commentList", dao.getCommentList(Integer.parseInt(pdsnoStr)));
