@@ -126,7 +126,7 @@
 					ext = ext.toLowerCase();
 
 					//포토게시판이기 때문에 확장자를 잘라서 이미지 확장자 찾기
-					if (ext == "png" || ext == "jpg" || ext == "gif") {
+					if (ext == "png" || ext == "jpg") {
 						return true;
 					} else {
 						alert("이미지 파일만 가능합니다.");
