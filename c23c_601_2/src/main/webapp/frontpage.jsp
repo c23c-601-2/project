@@ -54,11 +54,14 @@
 					</div>
 				</div>
 				<div class="boxrow2">
-					<div class="boxrow2title">
-						<a href="/newsBoard" target="_blank">
-						<img src="./assets/img/jobnews.png" alt="뉴스" height="20"; style="margin-right: 10px; vertical-align: middle;">뉴스
-						</a>
-					</div>
+					<a href="/newsBoard" target="_blank">
+						<div class="boxrow2title">
+							<img src="./assets/img/jobnews.png" alt="뉴스" height="20" style="margin-right: 10px; vertical-align: middle;">뉴스
+							<i style="float: right;">
+								>
+							</i>
+						</div>
+					</a>
 					<div class="boxrow2content">
 						<%@ include file="frontNewsBoard.jsp" %>
 					</div>
