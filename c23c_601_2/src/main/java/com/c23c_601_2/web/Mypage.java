@@ -61,31 +61,28 @@ public class Mypage extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		HttpSession session = request.getSession();
-		int page = Util.str2Int2( request.getParameter("page"));
-		MemberDAO dao = new MemberDAO();
-		
-		List<TotalboardDTO> list = dao.detailBoard((String)session.getAttribute("mid"),page);
-		
-		JSONArray arr = new JSONArray();
-		
-		for(TotalboardDTO dto : list) {
-			JSONObject obj = new JSONObject();
-			obj.put("regdate", dto.getRegdate());
-			obj.put("subject", dto.getSubject());
-			obj.put("mid", dto.getMid());
-			obj.put("type", dto.getType());
-			
-			arr.add(obj);
-		}
-		
-		
-		
-		
-		
-		response.setContentType("application/x-json; charset=utf-8");
-		PrintWriter pw = response.getWriter();
-		pw.print(arr);
+		/*
+		 * HttpSession session = request.getSession(); int page = Util.str2Int2(
+		 * request.getParameter("page")); MemberDAO dao = new MemberDAO();
+		 * 
+		 * List<TotalboardDTO> list =
+		 * dao.detailBoard((String)session.getAttribute("mid"),page);
+		 * 
+		 * JSONArray arr = new JSONArray();
+		 * 
+		 * for(TotalboardDTO dto : list) { JSONObject obj = new JSONObject();
+		 * obj.put("regdate", dto.getRegdate()); obj.put("subject", dto.getSubject());
+		 * obj.put("mid", dto.getMid()); obj.put("type", dto.getType());
+		 * 
+		 * arr.add(obj); }
+		 * 
+		 * 
+		 * 
+		 * request.setAttribute("page", page);
+		 * 
+		 * response.setContentType("application/x-json; charset=utf-8"); PrintWriter pw
+		 * = response.getWriter(); pw.print(arr);
+		 */
 	}
 
 }

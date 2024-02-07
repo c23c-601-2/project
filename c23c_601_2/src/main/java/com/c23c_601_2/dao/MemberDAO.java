@@ -46,7 +46,7 @@ public class MemberDAO extends AbstractDAO{
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT mid,subject,regdate,type FROM totalboard "
+		String sql = "SELECT mid,subject,regdate,if(type='F','Foodmap','Instargram') AS type FROM totalboard "
 				+ "WHERE mid =? "
 				+ "LIMIT ?, 5";
 		
@@ -90,6 +90,25 @@ public class MemberDAO extends AbstractDAO{
 		}
 	}
 	
+	public String changeEmailMasking(String str) {
+		
+		String[] email = str.split("@");
+		String result = email[0].substring(0,2)+"*******@"+email[1].substring(0,1)+"*******.com";
+		
+		System.out.println(result);
+		
+		return result;
+	}
+	
+	public String changephoneMasking(String str) {
+		
+		String[] phone = str.split("-");
+		
+		String result = phone[0]+"-"+phone[1].substring(0,1)+"***-"+phone[2].substring(0,1)+"***";
+		
+		return result;
+	}
+	
 	public MemberDTO detailId(String mid) {
 		MemberDTO dto = new MemberDTO();
 		
@@ -107,10 +126,10 @@ public class MemberDAO extends AbstractDAO{
 			
 			// id, name, phone, email
 			while(rs.next()) {
-				dto.setMid(rs.getString("mid"));
+				dto.setMid(rs.getString("mid")+"@naver.com");
 				dto.setMname(rs.getString("mname"));
-				dto.setMphone(rs.getString("mphone"));
-				dto.setMemail(rs.getString("memail"));
+				dto.setMphone(changephoneMasking(rs.getString("mphone")));
+				dto.setMemail(changeEmailMasking(rs.getString("memail")));
 				dto.setLastlogin(rs.getString("lastlogin"));
 			}
 			
