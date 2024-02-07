@@ -89,6 +89,7 @@ public class FoodDAO extends AbDAO{
 			pstmt.setString(1, parameter);
 			rs = pstmt.executeQuery();
 
+			
 			while (rs.next()) {
 				FoodDTO e = new FoodDTO();
 				e.setNo(rs.getInt("food_no"));
