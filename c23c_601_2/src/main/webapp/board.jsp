@@ -90,8 +90,6 @@ $(function() {
 		if(confirm('내용을 수정하시겠습니까?')){
 			let no = $(this).prev().val();
 			let edit = $(this).closest('tr').find('.d3');
-			//alert(edit);
-			//alert(no + ":" + edit);
 				  function removeBR(str) {
     return str.replaceAll('<br>', '');
 }
@@ -133,7 +131,6 @@ $(function() {
 			let no = $(this).closest('.updateBox').find('input[name="no"]').val();
 			let edit = $(this).closest('.updateBox').find('.updateBox1').val();
 			let updateBox = $(this).parents('.d3').find('.updateBox'); //태그부모위치
-			//let updateEdit = $(this).parents('.updateBox').siblings('.d3');
 			let updateEdit = $(this).parents('.d3');
 			$.ajax({
 				url : './contentUpdate',
@@ -141,7 +138,6 @@ $(function() {
 				dataType : 'text',
 				data : {'no': no, 'edit': edit},
 				success : function(result){
-					//alert('통신 성공 : ' + result);
 					if(result == 1){
 						updateBox.remove();
 						updateEdit.css('backgroundColor','#brown');
@@ -228,6 +224,15 @@ $(function() {
 
 .main {
 	width: 80%;
+}
+
+footer {
+	background-color: #F2E3CF;
+}
+
+.footercontent{
+	text-align: center;
+	padding: 5px;
 }
 </style>
 </head>
@@ -346,6 +351,9 @@ $(function() {
 			</div>
 		</div>
 	</div>
+	<footer>
+	<%@ include file="footer.jsp" %>
+	</footer>
 	<script type="text/javascript">
 	function paging(no){
 		location.href="./board?page="+no;
