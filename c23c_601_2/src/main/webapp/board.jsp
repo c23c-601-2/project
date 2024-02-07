@@ -93,7 +93,7 @@ $(function() {
 			//alert(edit);
 			//alert(no + ":" + edit);
 				  function addBR(str) {
-                return str.replaceAll("<br>", "\r\n" );
+                return str.replaceAll('" "', "<br>" );
             }
             $(this).prev().hide();
 			$(this).hide();
@@ -147,7 +147,7 @@ $(function() {
 						updateEdit.css('backgroundColor','#brown');
 						updateEdit.css('min-height','100px');
 						updateEdit.css('height','auto');
-						updateEdit.append(edit.replace(/(?:\r|\n)/g, '<br>'));
+						updateEdit.append(edit.replace(/(?:\r\n|\r|\n)/g, '<br>'));
 						$(".contentupdate").show();
 					} else {
 						alert("문제가 발생했습니다. 화면을 갱신합니다." + result);
