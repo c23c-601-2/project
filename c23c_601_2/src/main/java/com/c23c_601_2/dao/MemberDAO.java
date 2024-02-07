@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,13 +76,19 @@ public class MemberDAO extends AbstractDAO{
 	public int delMember(String id) {
 		int result = 0;
 		Connection conn = db.getConnection();
-		String sql="UPDATE member SET mdel=0 WHERE mid =?";
+		String sql="UPDATE member SET mdel=0,updatedate=? WHERE mid =?";
 		
 		PreparedStatement pstmt = null;
 		
 		try {
+			LocalDateTime now = LocalDateTime.now();
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+			
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, id);
+			
+			pstmt.setString(1, now.format(formatter));
+			pstmt.setString(2, id);
+			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
