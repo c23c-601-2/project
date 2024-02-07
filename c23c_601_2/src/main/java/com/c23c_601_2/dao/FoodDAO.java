@@ -28,7 +28,7 @@ public class FoodDAO extends AbDAO{
 			
 			while(rs.next()) {
 	            Map<String, Object> dto = new HashMap<String, Object>();
-	            dto.put("no", rs.getString("food_no"));
+	            dto.put("food_no", rs.getString("food_no"));
 	            dto.put("food_title", rs.getString("food_title"));
 	            dto.put("food_content",rs.getString("food_content"));
 	            dto.put("food_write",rs.getString("food_write"));
@@ -149,10 +149,10 @@ public class FoodDAO extends AbDAO{
 	         
 	         while(rs.next()) {
 	            Map<String, Object> dto = new HashMap<String, Object>();
-	            dto.put("title", rs.getString("food_title"));
-	            dto.put("content", rs.getString("food_title"));
-	            dto.put("like", rs.getInt("food_like"));
-	            dto.put("dislike", rs.getInt("food_dislike"));
+	            dto.put("food_title", rs.getString("food_title"));
+	            dto.put("food_content", rs.getString("food_content"));
+	            dto.put("food_like", rs.getInt("food_like"));
+	            dto.put("food_dislike", rs.getInt("food_dislike"));
 	            dto.put("grade", rs.getInt("grade"));
 	            list.add(dto);
 	         }
@@ -272,6 +272,25 @@ public class FoodDAO extends AbDAO{
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, dto.getDno());
 			pstmt.setString(2, dto.getDmid());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(null, pstmt, con);
+		}
+		
+		return result;
+	}
+	public int UpdateContent(FoodDTO dto) {
+		int result = 0;
+		Connection con = db.getConnection();
+		PreparedStatement pstmt = null;
+		String sql = "UPDATE foodmap SET food_content = ? WHERE food_no = ?";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, dto.getContent());
+			pstmt.setInt(2, dto.getNo());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
