@@ -87,16 +87,17 @@
 	/* border: 1px solid #ED7458; */
 }
 
-.boxrow2title {
-	margin-bottom: 10px;
-}
-
-.boxrow2title a{
+.boxrow2 a{
 	font-weight: bold;
 	color: inherit;
 	text-decoration: none;
 	vertical-align: middle;
 }
+
+.boxrow2title {
+	margin-bottom: 10px;
+}
+
 
 .boxleft {
 	width: 50%;
