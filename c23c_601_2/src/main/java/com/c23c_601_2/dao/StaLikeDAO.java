@@ -62,6 +62,7 @@ public class StaLikeDAO extends AbstractDAO{
 			
 			while (rs.next()) {
 			result = rs.getInt("liked");
+			
 			}
 			
 		} catch (SQLException e) {
