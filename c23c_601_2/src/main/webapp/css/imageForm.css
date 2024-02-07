@@ -2,11 +2,21 @@
 
 
 
-.h3 { /* 사진 올리기 */
-	margin-top: 30px;
+.h2 { 
+	margin-top: 50px;
 	text-align: center;
-	color : pink;
-	font-size: 50px;
+	color : #8E7C68;
+	font-size: 130px;
+	margin-left : 60px;
+	margin-bottom: 150px;
+}
+.h3 { 
+	margin-top: 50px;
+	text-align: center;
+	color : #8E7C68;
+	font-size: 70px;
+	margin-left : 60px;
+	margin-bottom: 150px;
 }
 
 .form_table {
@@ -21,6 +31,8 @@
 th {
 	text-align: center;
 	padding: 25px;
+	font-size: 20px;
+	color : #8E7C68;
 }
 
 td {
@@ -28,17 +40,26 @@ td {
 }
 
 textarea {
-	width: 500px;
+	width: 600px;
 }
 
 #wname, #content { /* 이름 */
-	font-size: xx-large;
-	color: blue;
+	font-size: 30px;
+	color : #8E7C68 ;
 }
 
 #wname {
-	width: 500px;
+	width: 600px;
 }
+
+/* textarea의 placeholder 스타일 */
+#content::placeholder {
+    font-size: 20px; /* 원하는 크기로 조절 */
+    color: #999; /* 원하는 색상으로 조절 */
+    text-align: center;
+    line-height: 10;
+}
+
 
 .button-container {
 	text-align: center; /* 부모 요소를 가운데 정렬 */
@@ -54,15 +75,15 @@ textarea {
 	cursor: pointer;
 	outline: none;
 	display: inline-block; /* 인라인 블록 요소로 배치 */
-	margin: 10px; /* 버튼 간격을 조절하세요 */
+	margin: 10px; 
 }
 
 #submit_button {
-	background-color: #400000;
+	background-color: #ED7458;
 }
 
 #reset_button {
-	background-color: black;
+	background-color:#ED7458;
 }
 
 #list_button {
@@ -72,7 +93,7 @@ textarea {
 	border-radius: 5px;
 	color: white;
 	font-weight: bold;
-	background-color: black;
+	background-color:#8E7C68; 
 	outline: none;
-	align-items: right;
+	margin : 30px 80px 0 0;
 }
