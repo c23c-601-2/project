@@ -84,6 +84,28 @@
             }
         });
     }
+    
+    function toggleLike(pdsno) {
+        $.ajax({
+            type: "post",
+            url: "./staLike",
+            dataType: 'json',
+            data: {"pdsno": pdsno},
+            success: function (result) {
+                if (result.success) {
+                    // 좋아요 상태가 토글된 경우
+                    $('#like-icon' + pdsno).attr('src', './img/fullheart.png');
+                } else {
+                    // 좋아요 상태가 토글되지 않은 경우
+                    $('#like-icon' + pdsno).attr('src', './img/heart.png');
+                }
+            },
+            error: function (error) {
+                alert("문제 발생?!?! 도대체 왜?!?!? " + error);
+            }
+        });
+    }    
+    
 </script>
 
 				<script>
@@ -146,13 +168,20 @@
 							alt="Post Image">
 					</div>
 					<div class="post-info">
-						<div class="post-icons">
-							<img src="./img/heart.png" alt="Heart Icon"> <img
-								src="./img/speech-bubble.png" alt="말풍선"> <img
-								src="./img/send.png" alt="dm"> <img id="bookmark"
-								src="./img/bookmark.png" alt="bookmark"><br>
+						<div class="post-icons" style="display: flex;">
+						    <div class="icon" onclick="toggleLike(<%=dto.getPdsno()%>)">
+						    	<img id="like-icon<%=dto.getPdsno()%>" src="./img/heart.png" alt="Heart Icon">
+						    </div>
+						    <div class="icon">
+						        <img src="./img/speech-bubble.png" alt="말풍선">
+						    </div>
+						    <div class="icon">
+						        <img src="./img/send.png" alt="dm"> 
+						    </div>
+						    <div class="icon">
+						        <img id="bookmark" src="./img/bookmark.png" alt="bookmark">
+						    </div>
 						</div>
-
 						<div class="post-content"><%=dto.getSubject()%></div>
 					</div>
 					<div class="post-comment">
