@@ -192,7 +192,7 @@ td{
 								<div id="com3">${dto.mid }</div>						
 							</div>
 							<div style="width:20%;float:right">
-								<button class="btn pagebtn pageline btn-outline-primary">개인정보 수정</button>
+								<button class="btn pagebtn pageline btn-outline-primary" id="updatebtn" onclick="location.href='./memberCheck'">개인정보 수정</button>
 							</div>
 						</div>
 							<hr>
@@ -219,7 +219,7 @@ td{
 							</c:choose>
 						</div>
 					</div>
-					<a href="./cancel?mid=${sessionScope.mid }">회원탈퇴 &gt;</a>
+					<a href="./cancelCheck">회원탈퇴 &gt;</a>
 				</div>
 			</div>
 			</article>
@@ -229,7 +229,6 @@ td{
 		function page(i){
 			location.href="./mypage?page="+i;
 		}
-		
 		/* $(function(){
 			$('#jumpminuspage').click(function(){
 				let startpage = ${startPage -5};		
