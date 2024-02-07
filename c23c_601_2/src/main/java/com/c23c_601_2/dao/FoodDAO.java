@@ -20,7 +20,7 @@ public class FoodDAO extends AbDAO{
 		Connection con = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT food_no, food_title, food_content, food_write, food_date, food_like, food_dislike, grade FROM foodmapview ORDER BY food_date DESC LIMIT 0, 5";
+		String sql = "SELECT food_no, food_title, food_content, food_write, food_date, food_like, food_dislike, grade FROM foodmapview ORDER BY food_date DESC LIMIT 0, 23";
 		
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -138,10 +138,9 @@ public class FoodDAO extends AbDAO{
 	      PreparedStatement pstmt = null;
 	      ResultSet rs = null;
 	      String sql = "SELECT food_title, food_content, food_like, food_dislike, grade "
-	               + " FROM foodmap"
+	               + " FROM foodmapview"
 	               + " WHERE food_title LIKE CONCAT('%', ?, '%')"
-	               + " ORDER BY food_like"
-	               + " LIMIT 0, 10";
+	               + " ORDER BY food_like";
 	      try {
 	         pstmt = con.prepareStatement(sql);
 	         pstmt.setString(1, parameter);
