@@ -75,6 +75,17 @@ public class Util {
 		      return str.replaceAll("(\r\n|\r|\n|\n\r)", "<br>");
 		   }
 	   
+	   public static String removeBR(String str) {
+		   return str.replaceAll("<br>", "");
+	   }
+	   public static String removeP(String str) {
+		   return str.replaceAll("<p>", "");
+	   }
+	   public static String removeP2(String str) {
+		   return str.replaceAll("</p>", "");
+	   }
+	   
+	   
 	   
 	   public static String ipChange(String ip) {
 		   if (ip.indexOf('.') != -1) {

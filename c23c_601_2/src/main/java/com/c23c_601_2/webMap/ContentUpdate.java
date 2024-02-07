@@ -35,7 +35,9 @@ public class ContentUpdate extends HttpServlet {
 		String no = request.getParameter("no");
 		//System.out.println(no);
 		
-		edit = Util.addBR(edit);
+		edit = Util.removeBR(edit);
+		edit= Util.removeP(edit);
+		edit= Util.removeP2(edit);
 		edit = Util.removeTag(edit);
 		int result = 0;
 		

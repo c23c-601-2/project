@@ -42,9 +42,11 @@ public class Write extends HttpServlet {
 
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
-		title= Util.addBR(title);
+		title= Util.removeBR(title);
 		title= Util.removeTag(title);
-		content= Util.addBR(content);
+		content= Util.removeBR(content);
+		content= Util.removeP(content);
+		content= Util.removeP2(content);
 		content= Util.removeTag(content);
 		int grade = Util.str2Int(request.getParameter("grade"));
 
