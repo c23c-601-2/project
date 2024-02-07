@@ -44,7 +44,6 @@
 	flex-direction: row;
 	justify-content: space-between;
 	background-color: ffffea;
-	border:  1px solid green;
 }
 
 .youtubeleftbox {
@@ -128,11 +127,10 @@
 	flex-direction: row;
 	justify-content: space-between;
 	background-color: ffffea;
-	border:  1px solid green;	
+	/* border:  1px solid green;	 */
 }
 
 .sixzeroonwstagram {
-	border: 1px solid red;
 	flex: 0 0 auto;
 	width: 50%;
 	margin-left: 2px;
@@ -145,24 +143,31 @@
     align-items: center;
 }
 .instarow {
-	border: 1px solid blue;
+	/* border: 1px solid blue; */
 	display: flex;
 	flex-direction: row;
 	justify-content: space-around;
 	margin: 10px;
+	align-items: stretch;
 }
 .insta-image-container {
     flex: 1;
+    width: 50%;
+    box-sizing: border-box;
     margin: 0 5px;
+    padding: 5px;
     overflow: hidden;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 .insta-image-container img {
     width: 100%;
-    height: auto;
+    height: 100%;
+	object-fit: cover;    
     border-radius: 8px;
-    max-height: 150px;
+    max-height: 160px;
+    max-width: 160px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 이미지에 그림자 효과 */
 }
 .mainright {
 	width: 18%
