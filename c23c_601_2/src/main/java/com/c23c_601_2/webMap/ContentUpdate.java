@@ -31,9 +31,9 @@ public class ContentUpdate extends HttpServlet {
 		
 		FoodDAO dao = new FoodDAO();
 		String edit = request.getParameter("edit");
-		System.out.println(edit);
+		//System.out.println(edit);
 		String no = request.getParameter("no");
-		System.out.println(no);
+		//System.out.println(no);
 		
 		edit = Util.addBR(edit);
 		edit = Util.removeTag(edit);
@@ -45,7 +45,7 @@ public class ContentUpdate extends HttpServlet {
 			dto.setNo(Util.str2Int2(no));
 			dto.setMid((String)session.getAttribute("mid"));
 			result = dao.UpdateContent(dto);
-			System.out.println(result);
+			//System.out.println(result);
 		}
 		
 		PrintWriter pw = response.getWriter();
