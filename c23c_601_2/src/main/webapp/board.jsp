@@ -163,7 +163,6 @@ $(function() {
 	$(".contentdelete").click(function(){
 		if(confirm('내용을 삭제하시겠습니까?')){
 			let no = $(this).prev().prev().val();
-			alert(no);
 			$.ajax({
 				url : './contentDelete',
 				type : 'post',
