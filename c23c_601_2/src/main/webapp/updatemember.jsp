@@ -12,17 +12,13 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
 	integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
 	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<title>회원 가입</title>
-
-
+<title>개인 정보 수정</title>
+<link rel="styleSheet" href="./css/join.css?ver=1.3">
 <link href="./css/frontpage.css" rel="stylesheet"/>
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
 <style type="text/css">
-	.mainStyle {
-		height:100vh;
-	}
+
 	.address{
 		display: flex;
   		align-items: center;
@@ -51,7 +47,7 @@
 		width:100%
 	}
 	
-	#joinComplete, #joinBack{
+	#Complete, #joinBack{
 		width:100%;
 	}
 	
@@ -73,9 +69,23 @@
 	.pw-alert .email-alert .phone-alert{
 		width: 626px;
 	}
-
+	.mpwdiv input{
+		width:100%;
+	}
+	.updatemainStyle{
+		width:100%;
+		height:100vh;
+		background-color: #F2F2F2;
+		
+		/* 가운데정렬 */
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
 </style>
 
+
+<!-- 수정 -->
 <script type="text/javascript">
 
 $(function(){
@@ -89,78 +99,59 @@ $(function(){
 	flag[0] = false;
 	flag[1] = false;
 	flag[2] = false;
-	flag[3] = false;
 	
 	
 	$('#address').click(function(){
 		selectAddress();
 	});
-	$('.id-alert, .pw-alert, .name-alert, .email-alert, .phone-alert').hide();
-	
-	//id focus가 벗어났을경우
-	$('#mid').blur(function() {
-		let id = $('#mid').val();
+	$('.id-alert, .pw-alert, .name-alert, .email-alert, .phone-alert, .pw-alert1').hide();
 		
-		const regExp = /^[a-z0-9]{5,15}$/;
+	//기존 비밀번호
+	$('#mpw').blur(function() {
+		let pw = $('#mpw').val();
+		let reg = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/
 		
-		if(!regExp.test(id)){
-			$('.id-alert').show();
-			$('.id-alert').html('<p class="alert idbox">아이디는 영문자 5글자 이상이고 특수문자가 없어야합니다.</p>');
-			$('#mid').focus();
+		if(!reg.test(pw)){
+			$('.pw-alert1').show();
+			$('.pw-alert1').html('<p class="alert">영문, 숫자, 특수문자 포함 8자리 이상을 입력해 주세요.</p>');
+			$('#mpw').focus();
 			return false;
 		} else {
-			$('.id-alert').hide();
+			$('.pw-alert1').hide();
 			flag[0] = true;
 			ableBtn(flag);
 		}
     });
 	
-	//id focus가 벗어났을경우
-	$('#mname').blur(function() {
-		let name = $('#mname').val();
-		const regExp = /^[가-힣]{2,10}$/;
-		
-		if(!regExp.test(name)){
-			$('.id-alert').show();
-			$('.id-alert').html('<p class="alert idbox">올바른 이름을 입력해주세요.</p>');
-			$('#mname').focus();
-			return false;
-		} else {
-			$('.id-alert').hide();
-			flag[1] = true;
-			ableBtn(flag);
-		}
-    });
-	
 	//pw1 focus가 벗어났을경우
-	$('#mpw1').blur(function() {
-		let pw1 = $('#mpw1').val();
+	$('#newpw1').blur(function() {
+		let pw1 = $('#newpw1').val();
 		let reg = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/
 		
 		if(!reg.test(pw1)){
 			$('.pw-alert').show();
 			$('.pw-alert').html('<p class="alert">영문, 숫자, 특수문자 포함 8자리 이상을 입력해 주세요.</p>');
-			$('#mpw1').focus();
+			$('#newpw1').focus();
 			return false;
 		} else {
 			$('.pw-alert').hide();
-			flag[2] = true;
+			flag[1] = true;
 			ableBtn(flag);
 		}
     });
 	
 	//pw2 focus가 벗어났을경우
-	$('#mpw2').blur(function() {
-		let pw2 = $('#mpw2').val();
+	$('#newpw2').blur(function() {
+		let pw2 = $('#newpw2').val();
 		
 		if(pw2.length == 0){
 			$('.pw-alert').show();
 			$('.pw-alert').html('<p class="alert">영문, 숫자, 특수문자 포함 8자리 이상을 입력해 주세요.</p>');
-			$('#mpw2').focus();
+			$('#newpw2').focus();
 			return false;
 		} else {
 			$('.pw-alert').hide();
-			flag[3] = true;
+			flag[2] = true;
 			ableBtn(flag);
 		}
     });
@@ -194,60 +185,64 @@ $(function(){
     });
 	
 	
-	$('#joinComplete').click(function(){
-		$('#mid')
-		let id = $('#mid').val();
-		let pw1 = $('#mpw1').val();
-		let pw2 = $('#mpw2').val();
-		if(pw1 != pw2){
-			$('.pw-alert').show();
-			$('.pw-alert').html('<p class="alert">서로 다른 비밀번호입니다. 다시입력해주세요.</p>');
-			return false;
-		} else{
+	$('#Complete').click(function(){
+		let mid = $('#mid').val();
+		let mpw = $('#mpw').val();
+		let newpw1 = $('#newpw1').val();
+		let newpw2 = $('#newpw2').val();
+		
+		
 			$.ajax({
-				url:'./idCheck',
+				url:'./pwCheck',
 				type:'post',
 				dataType:'text',
-				data:{'id':id},
+				data:{'mpw':mpw,'mid':mid},
 				success:function(result){
-					if(result ==1){
+					if(result ==0){
 						/* 
 							<div class="box rounded mb-3">
 								<p class="alert">필수 값을 입력해주세요.</p>
 							</div> */
-						$('.resultbox').show();
-						$('.resultbox').html("<p class='alert'>이미 가입되어있는 아이디입니다.</p>");
-						$('#joinComplete').attr("disabled","disabled");
-						$('#mid').focus();
-						
-
+						$('.pw-alert1').show();
+						$('.pw-alert1').html("<p class='alert'>기존 비밀번호랑 다릅니다.</p>");
+						$('#Complete').attr("disabled","disabled");
+						$('#mpw').focus();
 						
 						return false;
+						
 					}else{
-						//postCode" selectAddr detailAddr
-						let join = {
-							'id': $('#mid').val(),
-							'pw': $('#mpw1').val(),
-							'name': $('#mname').val(),
-							'email' : $('#memail').val(),
-							'phone' : $('#mphone').val(),
-							'postCode' : $('#postCode').val(),
-							'selectAddr' :$('#selectAddr').val(),
-							'detailAddr' : $('#detailAddr').val()
-						}
 						
-						
-						$.ajax({
-							url:'./join',
-							type:'post',
-							data:join,
-							success:function(){
-								window.location.replace("./frontpage");
-							},
-							error:function(){
-								alert("실패");
+						if(newpw1 != newpw2){
+							$('.pw-alert').show();
+							$('.pw-alert').html("<p class='alert'>새 비밀번호가 서로 다릅니다.</p>");
+							$('#Complete').attr("disabled","disabled");
+							$('#newpw1').focus();
+						}else{
+							//postCode" selectAddr detailAddr
+							let join = {
+								'id': $('#mid').val(),
+								'pw': $('#newpw1').val(),
+								'name': $('#mname').val(),
+								'email' : $('#memail').val(),
+								'phone' : $('#mphone').val(),
+								'postCode' : $('#postCode').val(),
+								'selectAddr' :$('#selectAddr').val(),
+								'detailAddr' : $('#detailAddr').val()
 							}
-						});
+							
+							
+							$.ajax({
+								url:'./cancel',
+								type:'post',
+								data:join,
+								success:function(){
+									window.location.replace("./mypage");
+								},
+								error:function(){
+									alert("실패");
+								}
+							});
+						}
 					}
 					
 				},
@@ -255,8 +250,8 @@ $(function(){
 					alert("실패");
 				}
 			});
-			
-		}
+		
+		
 	});
 	
 	
@@ -264,15 +259,15 @@ $(function(){
 })
 
 function ableBtn(flag){
-	if(flag[0]== true && flag[1]== true && flag[2]== true && flag[3]== true ){
-		$('#joinComplete').removeAttr('disabled');
+	if(flag[0]== true && flag[1]== true && flag[2]== true){
+		$('#Complete').removeAttr('disabled');
 		/* 
 							<div class="resultbox box rounded mb-3">
 								<p class="alert">필수 값을 입력해주세요.</p>
 							</div> */
 		$('.resultbox').hide();
 	} else {
-		$('#joinComplete').attr('disabled','disabled');
+		$('#Complete').attr('disabled','disabled');
 	}
 }
 
@@ -314,19 +309,18 @@ function selectAddress() {
 					<%@ include file="header.jsp" %>
 					<%@ include file="nav.jsp" %>
 				</div>
-		<div class="mainStyle">
-			
+		<div class="updatemainStyle">
 				<div class="join shadow-lg bg-body rounded">
 					<div class="joinform">
-					<div style="margin-bottom:20px"><h2 style ="font-weight:bold;float:left;margin: 5px 0px 20px 0px">회원가입</h2></div>
+					<div style="margin-bottom:20px"><h2 style ="font-weight:bold;float:left;margin: 5px 0px 20px 0px">개인 정보 수정</h2></div>
 						<div class="idName">
 							<div class="joinID">
-								<label><font color="blue" style="font-weight:bold">*</font>아이디</label>
-								<input type="text" class="form-control" placeholder="아이디" id="mid">
+								<label>아이디</label>
+								<input value="${dto.mid }" disabled="disabled" type="text" class="form-control" placeholder="아이디" id="mid">
 							</div>
 							<div class="joinID joinName">
-								<label><font color="blue" style="font-weight:bold">*</font>이름</label>
-								<input type="text" class="form-control" placeholder="이름" id="mname">
+								<label>이름</label>
+								<input value="${dto.mname }" disabled="disabled" type="text" class="form-control" placeholder="이름" id="mname">
 							</div>
 							<div class="id-alert box rounded mt-3">
 								<p class="alert idbox"></p>
@@ -334,13 +328,22 @@ function selectAddress() {
 						</div>
 						
 						<div class="idName">
+							<div class="mpwdiv">
+								<label><font color="blue" style="font-weight:bold">*</font>기존 비밀번호</label>
+								<input type="password" class="form-control" placeholder="비밀번호" id="mpw">
+							</div>
+						</div>
+						<div class="pw-alert1 box rounded mb-3">
+						</div>
+						
+						<div class="idName">
 							<div class="joinID">
-								<label><font color="blue" style="font-weight:bold">*</font>비밀번호</label>
-								<input type="password" class="form-control" placeholder="비밀번호" id="mpw1">
+								<label><font color="blue" style="font-weight:bold">*</font>새 비밀번호</label>
+								<input type="password" class="form-control" placeholder="비밀번호" id="newpw1">
 							</div>
 							<div class="joinID joinName">
-								<label><font color="blue" style="font-weight:bold">*</font>비밀번호 확인</label>
-								<input type="password" class="form-control" placeholder="확인" id="mpw2">
+								<label><font color="blue" style="font-weight:bold">*</font>새 비밀번호 확인</label>
+								<input type="password" class="form-control" placeholder="확인" id="newpw2">
 							</div>
 						</div>
 						<div class="pw-alert box rounded mb-3">
@@ -348,7 +351,7 @@ function selectAddress() {
 						<div class="last">
 							<div class = "mb-3">
 							<label>이메일</label>
-							  <input type="text" class="form-control mb-2" placeholder="c23c@example.com"  id="memail" >
+							  <input value="${dto.memail }" type="text" class="form-control mb-2" placeholder="c23c@example.com"  id="memail" >
 							  <div class="email-alert box rounded mb-3">
 								<p class="alert">올바른 이메일을 입력해주세요.</p>
 							  </div>	
@@ -356,7 +359,7 @@ function selectAddress() {
 							
 							<div class = "mb-3">
 							  <label>휴대폰 번호</label>
-							  <input type="text" class="form-control mb-2" id="mphone">
+							  <input value="${dto.mphone }" type="text" class="form-control mb-2" id="mphone" placeholder="010-XXXX-XXXX" >
 							  <div class="phone-alert box rounded mb-3">
 								<p class="alert">올바른 전화번호를 입력해주세요.</p>
 							  </div>	
@@ -367,26 +370,25 @@ function selectAddress() {
 							  	<label>우편번호</label>
 								<button class="btn btn-outline-primary btn-sm" id="address">찾기</button><br>
 							  </div>							  
-							  <input type="text" class="form-control" id="postCode" disabled="disabled">
+							  <input value="${dto.postcode }" type="text" class="form-control" id="postCode" disabled="disabled">
 							</div>
 							
 							<div class = "mb-3">
 								  <label>주소</label>
-							  <input type="text" class="form-control" disabled="disabled" id="selectAddr">
+							  <input value="${dto.selectaddr }" type="text" class="form-control" disabled="disabled" id="selectAddr">
 							</div>
 							  
 							<div class = "mb-3">
 							  <label>상세 주소</label>
-							  <input type="text" class="form-control" placeholder="상세주소" id="detailAddr">
+							  <input value="${dto.detailaddr }" type="text" class="form-control" placeholder="상세주소" id="detailAddr">
 							</div>
 							<div class="resultbox box rounded mb-3">
 								<p class="alert">필수 값을 입력해주세요.</p>
 							</div>
 							
 							
-							<button type="button" class="btn btn-primary mb-3" id="joinComplete" disabled="disabled">가입 완료</button>
+							<button type="button" class="btn btn-primary mb-3" id="Complete" disabled="disabled">확인</button>
 							<br>
-							<button type="button" class="btn btn-primary mb-4" id="joinBack">뒤로 가기</button>
 						</div>
 					</div>
 				</div>
