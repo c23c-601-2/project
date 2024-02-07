@@ -18,11 +18,11 @@
 
 <link href="./css/frontpage.css" rel="stylesheet"/>
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
-<link rel="styleSheet" href="./css/join.css?ver=1.3">
+<link rel="styleSheet" href="./css/join.css?ver=1.4">
 <style type="text/css">
 .mypagemainStyle{
 	width:100%;
-	height:73.4vh;
+	height:800px;
 	background-color: #F2F2F2;
 
 }
@@ -130,8 +130,9 @@ td{
 		</div>
 		<div class="mypagemainStyle">
 			<div class="mypage">
+			
 				<div class="orderform">
-					<div class="order rounded commonBorder">
+					<div class="order  mb-5 rounded commonBorder">
 						<p style="font-weight:bold;">작성한 게시글</p>
 						<hr>
 						<div class="boardtable">
@@ -172,20 +173,75 @@ td{
 						</c:if>
 						
 						<div class="paging">
-							<button <c:if test="${page eq 1 }"> disabled="disabled"</c:if> class="btn" id="fisrtpage" onclick="page(1)">&lt;&lt;</button>
-							<button <c:if test="${page -5 lt 1 }"> disabled="disabled" </c:if> class="btn" id="jumpminuspage" onclick="page(${page - 5})">&lt;</button>
+							<button <c:if test="${page eq 1 }"> disabled="disabled"</c:if> class="btn" id="fisrtpage" onclick="page(1,${cpage })">&lt;&lt;</button>
+							<button <c:if test="${page -5 lt 1 }"> disabled="disabled" </c:if> class="btn" id="jumpminuspage" onclick="page(${page - 5},${cpage })">&lt;</button>
 							
 							<c:forEach begin="${startPage }" end="${endPage}" var="num">
 								<%-- <input type="hidden" value="${num }"> --%>
-								<button class="pagebtn btn <c:if test="${page eq num }">pageline btn-outline-primary</c:if>" onclick="page(${num})">${num }</button>
+								<button class="pagebtn btn <c:if test="${page eq num }">pageline btn-outline-primary</c:if>" onclick="page(${num},${cpage })">${num }</button>
 							</c:forEach>
 							
-							<button <c:if test="${page + 5 gt totalPage }"> disabled="disabled" </c:if> class="btn" id="jumppage" onclick="page(${page + 5})">&gt;</button>
-							<button <c:if test="${page eq totalPage }"> disabled="disabled"</c:if> class="btn" id="lastpage" onclick="page(${totalPage})">&gt;&gt;</button>
+							<button <c:if test="${page + 5 gt totalPage }"> disabled="disabled" </c:if> class="btn" id="jumppage" onclick="page(${page + 5},${cpage })">&gt;</button>
+							<button <c:if test="${page eq totalPage }"> disabled="disabled"</c:if> class="btn" id="lastpage" onclick="page(${totalPage},${cpage })">&gt;&gt;</button>
 						</div>
 					</div>
 					
+					
+					<!-- 댓글 출력 -->
 					<div class="comment">
+						<div class="order rounded commonBorder">
+							<p style="font-weight:bold;">작성한 댓글</p>
+							<hr>
+							<div class="boardtable">
+								<table>
+									<thead>
+										<tr>
+											<td>일자</td>
+											<td>제목</td>
+											<td>내용</td>
+											<td>글쓴이</td>
+										</tr>
+									</thead>
+									<tbody id="tablebody">
+										<c:forEach items="${clist }" var="co" >								
+											<tr>
+												<td>${co.regdate }</td>
+												<td>${co.subject }</td>
+												<td>${co.comment }</td>
+												<td>${co.mid }</td>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
+							</div>
+							<c:set value="${ctotalcount / 5 }" var="ctotalPage"/>
+							<fmt:parseNumber integerOnly="true" value="${ctotalPage }" var="ctotalPage"  />
+							<c:if test="${ctotalcount %5 gt 0 }">
+								<c:set value="${ctotalPage +1 }" var="ctotalPage"/>
+							</c:if>
+							
+							<c:set value="1" var="cstartPage"/>
+							<c:if test="${cpage gt 3 }">
+								<c:set value="${cpage -2}" var="cstartPage"/>
+							</c:if>
+							<c:set value="${cstartPage +4 }" var="cendPage"/>
+							<c:if test="${cendPage gt ctotalPage }">							
+								<c:set value="${ctotalPage }" var="cendPage"/>
+							</c:if>
+							
+							<div class="paging">
+								<button <c:if test="${cpage eq 1 }"> disabled="disabled"</c:if> class="btn" id="fisrtpage" onclick="page(${cpage },1)">&lt;&lt;</button>
+								<button <c:if test="${cpage -5 lt 1 }"> disabled="disabled" </c:if> class="btn" id="jumpminuspage" onclick="page(${page },${cpage - 5})">&lt;</button>
+								
+								<c:forEach begin="${cstartPage }" end="${cendPage}" var="num">
+									<%-- <input type="hidden" value="${num }"> --%>
+									<button class="pagebtn btn <c:if test="${cpage eq num }">pageline btn-outline-primary</c:if>" onclick="page(${page },${num})">${num }</button>
+								</c:forEach>
+								
+								<button <c:if test="${cpage + 5 gt ctotalPage }"> disabled="disabled" </c:if> class="btn" id="jumppage" onclick="page(${page },${cpage + 5})">&gt;</button>
+								<button <c:if test="${cpage eq ctotalPage }"> disabled="disabled"</c:if> class="btn" id="lastpage" onclick="page(${page },${ctotalPage})">&gt;&gt;</button>
+							</div>
+						</div>
 					</div>
 				</div>
 				
@@ -207,7 +263,7 @@ td{
 						<div>					
 							<c:choose>
 								<c:when test="${dto.mphone eq null || dto.mphone eq ''}">
-									없음 <button>설정</button>
+									휴대폰 번호 없음 <button class="btn pagebtn pageline btn-outline-primary" style="float:right;margin-top: -6.5px" onclick="location.href='./memberCheck'">설정</button>
 								</c:when>
 								<c:otherwise>
 									${dto.mphone }
@@ -215,10 +271,10 @@ td{
 							</c:choose>
 						</div>
 						<hr>
-						<div>
+						<div>	
 							<c:choose>
 								<c:when test="${dto.memail eq null || dto.mphone eq ''}">
-									없음 <button>설정</button>
+									이메일 없음 <button class="btn pagebtn pageline btn-outline-primary" style="float:right;margin-top: -6.5px" onclick="location.href='./memberCheck'">설정</button>
 								</c:when>
 								<c:otherwise>
 									${dto.memail }
@@ -236,8 +292,8 @@ td{
 		</footer>
 	</div>
 	<script type="text/javascript">
-		function page(i){
-			location.href="./mypage?page="+i;
+		function page(p,c){
+			location.href="./mypage?page="+p+"&cpage="+c;
 		}
 		/* $(function(){
 			$('#jumpminuspage').click(function(){

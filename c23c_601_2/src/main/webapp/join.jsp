@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="styleSheet" href="./css/join.css?ver=1.1">
+<link rel="styleSheet" href="./css/join.css?ver=1.2">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 <script
@@ -20,9 +20,6 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <style type="text/css">
-	.mainStyle {
-		height:100vh;
-	}
 	.address{
 		display: flex;
   		align-items: center;
@@ -73,7 +70,9 @@
 	.pw-alert .email-alert .phone-alert{
 		width: 626px;
 	}
-
+	.mainStyle{
+		height:850px;
+	}
 </style>
 
 <script type="text/javascript">
