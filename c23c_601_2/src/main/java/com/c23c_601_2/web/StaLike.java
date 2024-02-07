@@ -35,6 +35,7 @@ public class StaLike extends HttpServlet {
 		//좋아요 상태를 토글
 		StaLikeDAO staLikeDAO = new StaLikeDAO();
 		Boolean currentLikeStatus;
+		
 		int newLikeStatus ;
 		
 		
@@ -45,6 +46,7 @@ public class StaLike extends HttpServlet {
 			currentLikeStatus = false;
 			newLikeStatus = 1;
 		}
+		
 		
 		// 데이터베이스에 좋아요 정보 저장 또는 업데이트
 		if (currentLikeStatus) {
