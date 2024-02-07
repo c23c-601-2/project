@@ -84,6 +84,9 @@
 		justify-content: center;		
 		align-items: center;
 	}
+	.mainStyle{
+		height:76vh;
+	}
 </style>
 <script type="text/javascript">
 	$(function(){

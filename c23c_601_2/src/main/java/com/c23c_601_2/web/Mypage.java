@@ -16,6 +16,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import com.c23c_601_2.dao.MemberDAO;
+import com.c23c_601_2.daoGR.CommentDTO;
 import com.c23c_601_2.dto.MemberDTO;
 import com.c23c_601_2.dto.TotalboardDTO;
 import com.c23c_601_2.util.Util;
@@ -37,6 +38,7 @@ public class Mypage extends HttpServlet {
 		HttpSession session = request.getSession();
 		if(session.getAttribute("mid")!=null) {
 			int page=0;
+			int cpage=0;
 			
 			if(request.getParameter("page") == null) {
 				page =1;
@@ -44,19 +46,37 @@ public class Mypage extends HttpServlet {
 				page = Util.str2Int2(request.getParameter("page"));
 			}
 			
+			if(request.getParameter("cpage") == null) {
+				cpage =1;
+			} else {
+				cpage = Util.str2Int2(request.getParameter("cpage"));
+			}
+			
 			MemberDAO dao = new MemberDAO();
 			MemberDTO dto = dao.detailId((String)session.getAttribute("mid"));
 			
 			dto.setMid(dto.getMid()+"@naver.com");
-			dto.setMemail(Util.changeEmailMasking(dto.getMemail()));
-			dto.setMphone(Util.changephoneMasking(dto.getMphone()));
+			if(dto.getMemail()!=null && !dto.getMemail().equals("")) {
+				dto.setMemail(Util.changeEmailMasking(dto.getMemail()));				
+			}
+			if(dto.getMphone()!=null && !dto.getMemail().equals("")) {
+				dto.setMphone(Util.changephoneMasking(dto.getMphone()));				
+			}
+			
+		
 			
 			List<TotalboardDTO> list = dao.detailBoard((String)session.getAttribute("mid"),page);
+			List<CommentDTO> clist = dao.selectComment((String)session.getAttribute("mid"),cpage);
 			
 			request.setAttribute("page", page);
+			request.setAttribute("cpage", cpage);
+			
 			request.setAttribute("totalcount", dao.totalcount((String)session.getAttribute("mid")));
+			request.setAttribute("ctotalcount", dao.ctotalcount((String)session.getAttribute("mid")));
+			
 			request.setAttribute("dto", dto);
 			request.setAttribute("detail", list);
+			request.setAttribute("clist", clist);
 			
 			RequestDispatcher rd = request.getRequestDispatcher("mypage.jsp");
 			rd.forward(request, response);

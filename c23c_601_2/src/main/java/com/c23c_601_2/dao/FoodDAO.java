@@ -20,7 +20,7 @@ public class FoodDAO extends AbDAO{
 		Connection con = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT food_no, food_title, food_content, food_write, food_date, food_like, food_dislike, grade FROM foodmapview ORDER BY food_date DESC LIMIT 0, 23";
+		String sql = "SELECT food_no, food_title, food_content, food_write, food_date, food_like, food_dislike, grade FROM foodmapview ORDER BY food_no DESC LIMIT 0, 23";
 		
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -50,7 +50,7 @@ public class FoodDAO extends AbDAO{
 		Connection con = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT food_no, food_title, food_content, food_write, food_date, food_like, food_dislike, grade FROM foodmapview ORDER BY food_date DESC LIMIT ?, 10";
+		String sql = "SELECT food_no, food_title, food_content, food_write, food_date, food_like, food_dislike, grade FROM foodmapview ORDER BY food_no DESC LIMIT ?, 10";
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, (page - 1) * 10);
@@ -82,13 +82,14 @@ public class FoodDAO extends AbDAO{
 		ResultSet rs = null;
 		String sql = "SELECT food_no, food_title, food_content, food_write, food_date, food_like, food_dislike, grade"
 	            + " FROM foodmapview"
-	            + " WHERE food_title LIKE CONCAT('%', ?, '%') ORDER BY food_date DESC";
+	            + " WHERE food_title LIKE CONCAT('%', ?, '%') ORDER BY food_no DESC";
 
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, parameter);
 			rs = pstmt.executeQuery();
 
+			
 			while (rs.next()) {
 				FoodDTO e = new FoodDTO();
 				e.setNo(rs.getInt("food_no"));
@@ -297,6 +298,24 @@ public class FoodDAO extends AbDAO{
 			close(null, pstmt, con);
 		}
 		
+		return result;
+	}
+	public int contentDelete(FoodDTO dto) {
+		int result = 0;
+		Connection con = db.getConnection();
+		PreparedStatement pstmt = null;
+		String sql = "UPDATE foodmap SET food_del = '0' WHERE food_no = ?";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, dto.getNo());
+			pstmt.setString(2, dto.getMid());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(null, pstmt, con);
+		}
 		return result;
 	}
 }

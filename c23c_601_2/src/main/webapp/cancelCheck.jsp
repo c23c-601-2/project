@@ -85,6 +85,9 @@
 		justify-content: center;		
 		align-items: center;
 	}
+	.mainStyle{
+		height:76vh;
+	}
 </style>
 <script type="text/javascript">
 $(function(){
@@ -140,12 +143,11 @@ $(function(){
 </script>
 <body>
 	<div class="main">
+		<div>
+			<%@ include file="header.jsp"%>
+			<%@ include file="nav.jsp"%>
+		</div>
 		<div class="mainStyle">
-			<article>
-			<div>
-				<%@ include file="header.jsp"%>
-				<%@ include file="nav.jsp"%>
-			</div>
 			<div class="everylogin">
 				<div class="login shadow-lg bg-body rounded">
 					<div class="loginform">
@@ -170,8 +172,10 @@ $(function(){
 				
 				</div>
 			</div>
-			</article>
 		</div>
+		<footer>
+			<%@ include file="footer.jsp" %>
+		</footer>
 	</div>
 </body>
 </html>

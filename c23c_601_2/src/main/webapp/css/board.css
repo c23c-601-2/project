@@ -9,14 +9,6 @@
 	background-color: black;
 }
 
-.table {
-	text-align: center;
-	width: 50%;
-	margin: 0 auto;
-	border-collapse: collapse;
-	border-bottom: 1px solid gray;
-}
-
 .head {
 	width: 50%;
 	margin: 0 auto;
