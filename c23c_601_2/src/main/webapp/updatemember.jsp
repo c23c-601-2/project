@@ -13,6 +13,9 @@
 	integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
 	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <title>개인 정보 수정</title>
+<link rel="styleSheet" href="./css/join.css?ver=1.3">
+<link href="./css/frontpage.css" rel="stylesheet"/>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <style type="text/css">
 
@@ -68,6 +71,16 @@
 	}
 	.mpwdiv input{
 		width:100%;
+	}
+	.updatemainStyle{
+		width:100%;
+		height:100vh;
+		background-color: #F2F2F2;
+		
+		/* 가운데정렬 */
+		display: flex;
+		justify-content: center;
+		align-items: center;
 	}
 </style>
 
@@ -290,8 +303,11 @@ function selectAddress() {
 </head>
 <body>
 	<div class="main">
-		<div class="mainStyle">
-			<article>
+				<div>
+					<%@ include file="header.jsp" %>
+					<%@ include file="nav.jsp" %>
+				</div>
+		<div class="updatemainStyle">
 				<div class="join shadow-lg bg-body rounded">
 					<div class="joinform">
 					<div style="margin-bottom:20px"><h2 style ="font-weight:bold;float:left;margin: 5px 0px 20px 0px">개인 정보 수정</h2></div>
@@ -374,8 +390,10 @@ function selectAddress() {
 						</div>
 					</div>
 				</div>
-			</article>
 		</div>
+		<footer>
+			<%@ include file="footer.jsp" %>
+		</footer>
 	</div>
 
 

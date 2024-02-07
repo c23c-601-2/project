@@ -14,6 +14,8 @@
 	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <title>Insert title here</title>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<link href="./css/frontpage.css" rel="stylesheet"/>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <style type="text/css">
 
 	.address{
@@ -292,6 +294,10 @@ function selectAddress() {
 	<div class="main">
 		<div class="mainStyle">
 			<article>
+				<div>
+					<%@ include file="header.jsp"%>
+					<%@ include file="nav.jsp"%>
+				</div>
 				<div class="join shadow-lg bg-body rounded">
 					<div class="joinform">
 					<div style="margin-bottom:20px"><h2 style ="font-weight:bold;float:left;margin: 5px 0px 20px 0px">개인 정보 수정</h2></div>

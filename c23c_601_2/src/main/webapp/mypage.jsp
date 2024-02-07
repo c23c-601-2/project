@@ -9,7 +9,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>My Page</title>
-<link rel="styleSheet" href="./css/mypage.css?ver=1.3">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 <script
@@ -17,8 +16,16 @@
 	integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
 	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+<link href="./css/frontpage.css" rel="stylesheet"/>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+<link rel="styleSheet" href="./css/join.css?ver=1.3">
 <style type="text/css">
+.mypagemainStyle{
+	width:100%;
+	height:73.4vh;
+	background-color: #F2F2F2;
 
+}
 body{
 	margin:0px;
 	padding:0px;
@@ -26,8 +33,6 @@ body{
 
 .mypage{
 	margin:0 auto;
-	margin-top:250px;
-	width: 1200px;
 }
 .orderform{
 	padding:15px;
@@ -119,10 +124,12 @@ td{
 </head>
 <body>
 	<div class="main">
-		<div class="mainStyle">
-			<article>
+		<div>
+			<%@ include file="header.jsp"%>
+			<%@ include file="nav.jsp"%>
+		</div>
+		<div class="mypagemainStyle">
 			<div class="mypage">
-				
 				<div class="orderform">
 					<div class="order rounded commonBorder">
 						<p style="font-weight:bold;">작성한 게시글</p>
@@ -222,8 +229,11 @@ td{
 					<a href="./cancelCheck">회원탈퇴 &gt;</a>
 				</div>
 			</div>
-			</article>
 		</div>
+		
+		<footer>
+			<%@ include file="footer.jsp" %>
+		</footer>
 	</div>
 	<script type="text/javascript">
 		function page(i){
