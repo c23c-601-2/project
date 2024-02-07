@@ -14,6 +14,8 @@
 	integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
 	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
+<link href="./css/frontpage.css" rel="stylesheet"/>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <style type="text/css">
 	.temp {
 		width:250px;
@@ -140,6 +142,10 @@ $(function(){
 	<div class="main">
 		<div class="mainStyle">
 			<article>
+			<div>
+				<%@ include file="header.jsp"%>
+				<%@ include file="nav.jsp"%>
+			</div>
 			<div class="everylogin">
 				<div class="login shadow-lg bg-body rounded">
 					<div class="loginform">

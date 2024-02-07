@@ -14,6 +14,9 @@
 	integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
 	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
+<link href="./css/frontpage.css" rel="stylesheet"/>
+<link rel="styleSheet" href="./css/join.css?ver=1.3">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <style type="text/css">
 	.temp {
 		width:250px;
@@ -106,7 +109,7 @@ $(function(){
 				success:function(result){
 					if(result==1){
 						$('.id-alert').hide();
-						window.location.replace("./cancel");
+						window.location.replace("./updatemember");
 					} else{
 						$('.id-alert').show();
 						$('.id-alert').html("<div>비밀번호를 잘못 입력했습니다.</div>");
@@ -124,8 +127,11 @@ $(function(){
 </script>
 <body>
 	<div class="main">
+			<div>
+					<%@ include file="header.jsp"%>
+					<%@ include file="nav.jsp"%>
+			</div>
 		<div class="mainStyle">
-			<article>
 			<div class="everylogin">
 				<div class="login shadow-lg bg-body rounded">
 					<div class="loginform">
@@ -150,8 +156,11 @@ $(function(){
 				
 				</div>
 			</div>
-			</article>
 		</div>
+		
+		<footer>
+			<%@ include file="footer.jsp" %>
+		</footer>
 	</div>
 </body>
 </html>

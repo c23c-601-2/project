@@ -15,10 +15,14 @@
 <title>회원 가입</title>
 
 
+<link href="./css/frontpage.css" rel="stylesheet"/>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <style type="text/css">
-
+	.mainStyle {
+		height:100vh;
+	}
 	.address{
 		display: flex;
   		align-items: center;
@@ -306,8 +310,12 @@ function selectAddress() {
 </head>
 <body>
 	<div class="main">
+				<div>
+					<%@ include file="header.jsp" %>
+					<%@ include file="nav.jsp" %>
+				</div>
 		<div class="mainStyle">
-			<article>
+			
 				<div class="join shadow-lg bg-body rounded">
 					<div class="joinform">
 					<div style="margin-bottom:20px"><h2 style ="font-weight:bold;float:left;margin: 5px 0px 20px 0px">회원가입</h2></div>
@@ -382,8 +390,10 @@ function selectAddress() {
 						</div>
 					</div>
 				</div>
-			</article>
 		</div>
+		<footer>
+			<%@ include file="footer.jsp" %>
+		</footer>
 	</div>
 
 
