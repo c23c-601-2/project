@@ -170,7 +170,7 @@ public class FoodDAO extends AbDAO{
 		Connection con = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT COUNT(*) FROM foodmap";
+		String sql = "SELECT COUNT(*) FROM foodmapview";
 
 		try {
 			pstmt = con.prepareStatement(sql);
