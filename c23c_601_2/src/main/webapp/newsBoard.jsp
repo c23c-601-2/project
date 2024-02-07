@@ -29,7 +29,7 @@ body {
 </style>
 
 </head>
-<body>
+<body style= "background-color: #F5ECE4">
 	<div>
 		<%@ include file="./header.jsp"%>
 		<%@ include file="./nav.jsp"%>

@@ -11,7 +11,6 @@
 <title>후기 게시판</title>
 <link href="./css/.css?ver=0.12" rel="stylesheet" />
 <script type="text/javascript" src="./js/menu.js"></script>
-
 <script>
 $(function() {
 		var mid = "${sessionScope.mid}";
@@ -88,60 +87,73 @@ $(function() {
 	
 	
 	$(".contentupdate").click(function(){
-		//alert("수정하시겠습니까?");
 		if(confirm('수정하시겠습니까?')){
-			//필요한 값 cno 잡기 / 수정한 내용 + 로그인 --> 서블릿에서 정리
-			let no = $(this).parents("tr").find(".d1").text();
-			alert(no);
-			let edit = $(this).parents(".chead").next(); //나중에 html변경 태그는 무조건 object라고 뜸
-			alert(cno + ":" + comment);
+			let no = $(this).prev().val();
+			let edit = $(this).closest('tr').find('.d3');
+			//alert(edit);
+			//alert(no + ":" + edit);
 				  function addBR(str) {
                 return str.replaceAll("<br>", "\r\n" );
-            } // 개행태그 문자로 바꿔주기
+            }
             $(this).prev().hide();
 			$(this).hide();
-			comment.css('height','110');
-			comment.css('padding-top','10px');
-			comment.css('backgroundColor','#c1c1c1');
-			let recommentBox = '<div class="recommentBox">';
-			recommentBox += '<textarea class="commentcontent" name="comment">' + addBR(comment.html()) + '</textarea>';
-			recommentBox += '<input type ="hidden" name = "cno" value ="' +cno+ '">';
-			recommentBox += '<button class="comment-btn" type = "submit">댓글 수정</button>';
-			recommentBox += '</div>';
+			edit.css('height','10');
+			edit.css('padding-top','10px');
+			edit.css('backgroundColor','white');
+			let updateBox = '<div class="updateBox">';
+			updateBox += '<textarea class="updateBox1" name="content1">' + addBR(edit.html()) + '</textarea><br>';
+			updateBox += '<span class="update-count"></span>';
+			updateBox += '<input type ="hidden" name = "no" value ="' +no+ '"><br>';
+			updateBox += '<button class="update-btn" type = "submit">글 수정</button>';
+			updateBox += '<button id="cancelButton" type="button">취소</button>';
+			updateBox += '</div>';
 			
-			comment.html(recommentBox);
+			edit.html(updateBox);
+			
+			$(document).on('keyup', '.updateBox1', function() {
+			    let text = $(this).val();
+			    //alert(text);
+			    let max = 35;
+			    let remaining = max - text.length;
+			    //alert(remaining);
+			    if (remaining < 0) {
+			    	remaining = 0;
+			        $(this).val(text.substr(0, 35));
+			        alert("35자를 초과했습니다.");
+			        //alert(remaining);
+			    }
+			    $(this).siblings('.update-count').text("남은 글자: " + remaining);
+			});
+			
+			$('#cancelButton').click(function() {
+				location.reload();
+			});
 		}
 	});
 	
-	//댓글수정  .comment-btn버튼 눌렀을 때 .cno값, .commentcontent값 가져오는 명령 만들기
-	// 2024-01-25
-	$(document).on('click',".comment-btn", function (){
+	$(document).on('click',".update-btn", function (){
 		if(confirm('수정하시겠습니까?')){
-			let cno = $(this).prev().val();
-			let recomment = $('.commentcontent').val();
-			let comment = $(this).parents(".ccomment");//댓글 위치
+			let no = $(this).closest('.updateBox').find('input[name="no"]').val();
+			let edit = $(this).closest('.updateBox').find('.updateBox1').val();
+			let updateBox = $(this).parents(".updateBox");
+			let content = $(this).parents(".updateBox").val();
 			$.ajax({
-				url : './recomment',
+				url : './contentUpdate',
 				type : 'post',
 				dataType : 'text',
-				data : {'cno': cno, 'comment': recomment},
+				data : {'no': no, 'edit': edit},
 				success : function(result){
 					//alert('통신 성공 : ' + result);
 					if(result == 1){
-						//수정된 데이터를 화면에 보여주면 되요.
-						$(this).parent(".recommentBox").remove();
+						updateBox.remove();
+						content
 						comment.css('backgroundColor','#brown');
 						comment.css('min-height','100px');
 						comment.css('height','auto');
 						comment.html(recomment.replace(/(?:\r\n|\r|\n)/g, '<br>'));
-						$(".commentDelete").show();
-						$(".commentEdit").show();
+						$(".contentupdate").show();
 					} else {
-						alert("문제가 발생했습니다. 화면을 갱신합니다.");
-						//실패 화면 재 로드.
-						//location.href ='./detail?page=${param.page}&no=${param.no}'; 
-						//param url에 나오는 주소 그대로 가져오기
-						location.href='./detail?page=${param.page}&no=${detail.no}';
+						alert("문제가 발생했습니다. 화면을 갱신합니다." + result);
 					}
 				},
 				error : function(error){
@@ -150,10 +162,12 @@ $(function() {
 			});
 		}
 	});
+
+	
 });
 </script>
 <style>
-.d1, .likeBtn, .dislikeBtn {
+.d1, .likeBtn, .dislikeBtn{
 	width: 10%;
 }
 
@@ -165,13 +179,13 @@ $(function() {
 	width: 30%;
 }
 
-
 .container {
 	display: flex;
 }
 
 .chat {
-	width: 200px;
+	width: 230px;
+	height : 900px;
 	overflow: hidden;
 }
 .table {
@@ -180,6 +194,7 @@ $(function() {
 	margin: 0 auto;
 	border-collapse: collapse;
 	border-bottom: 1px solid gray;
+	background-color: white;
 }
 
 .paging{
@@ -197,7 +212,7 @@ $(function() {
 }
 </style>
 </head>
-<body>
+<body style= "background-color: #F5ECE4">
 	<div>
 		<%@ include file="header.jsp"%>
 	</div>
@@ -239,7 +254,8 @@ $(function() {
 											<td class="d1">${row.title }</td>
 											<td class="d3">${row.content }</td>
 											<td class="d1">${row.write }
-											<img alt="edit" src="./img/edit.png" class="contentupdate">
+											<input type = "hidden" class="no" value="${row.no}">
+											<img alt="edit" src="./img/edit1.png" class="contentupdate">
 											</td>
 											<td class="d1">${row.date }</td>
 
