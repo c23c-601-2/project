@@ -193,14 +193,14 @@ $(function() {
 	width: 30%;
 }
 
-.container {
-	display: flex;
+.main {
+	display : flex;
+	width: 80%;
 }
 
 .chat {
-	width: 230px;
-	height: 900px;
-	overflow: hidden;
+	margin-left : 0;
+	width: 250px;
 }
 
 .table {
@@ -222,33 +222,33 @@ $(function() {
 	text-align: center;
 }
 
-.main {
-	width: 80%;
-}
-
 footer {
 	background-color: #F2E3CF;
 }
 
-.footercontent{
+.footercontent {
 	text-align: center;
 	padding: 5px;
 }
+
+.container{
+	background-color: #F2E3CF;
+	height: 800px;
+}
+
+.mainstyle{
+	width: 900px;
+}
 </style>
 </head>
-<body style="background-color: #F5ECE4">
-	<div>
-		<%@ include file="header.jsp"%>
-	</div>
-	<div>
-		<%@ include file="nav.jsp"%>
-	</div>
+<body>
 	<div class="container">
-		<div class="chat">
-			<%@ include file="chat.jsp"%>
-		</div>
-
+		<%@ include file="header.jsp"%>
+		<%@ include file="nav.jsp"%>
 		<div class="main">
+			<div class = "chat">
+			<%@ include file="chat.jsp"%>
+			</div>
 			<div class="mainStyle">
 				<form action="./board">
 					<div class="search">
@@ -281,7 +281,8 @@ footer {
 												test="${sessionScope.mid ne null && row.write eq sessionScope.mid }">
 												<input type="hidden" class="no" value="${row.no}">
 												<img alt="edit" src="./img/edit1.png" class="contentupdate">
-												<img alt="delete" src="./img/delete.png" class="contentdelete">
+												<img alt="delete" src="./img/delete.png"
+													class="contentdelete">
 											</c:if>
 										</td>
 										<td class="d1">${row.date }</td>
@@ -320,7 +321,7 @@ footer {
 						</c:if>
 
 						<c:set var="endPage" value="${startPage + 9 }" />
-							<c:if test="${endPage gt totalPage  }">
+						<c:if test="${endPage gt totalPage  }">
 							<c:set var="endPage" value="${totalPage }" />
 						</c:if>
 
@@ -350,10 +351,10 @@ footer {
 					</c:if>
 			</div>
 		</div>
-	</div>
-	<footer>
-	<%@ include file="footer.jsp" %>
-	</footer>
+		<footer>
+			<%@ include file="footer.jsp"%>
+		</footer>
+		</div>
 	<script type="text/javascript">
 	function paging(no){
 		location.href="./board?page="+no;
