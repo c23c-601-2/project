@@ -51,6 +51,9 @@ textarea {
 #wname {
 	width: 600px;
 }
+#content {
+    white-space: pre-line;
+}
 
 /* textarea의 placeholder 스타일 */
 #content::placeholder {
