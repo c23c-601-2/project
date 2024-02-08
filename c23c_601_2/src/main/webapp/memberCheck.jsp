@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Insert title here</title>
+<title>개인 정보 수정 확인</title>
 <link rel="styleSheet" href="./css/mypage.css?ver=1.3">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
@@ -93,6 +93,41 @@
 <script type="text/javascript">
 $(function(){
 	$('.id-alert').hide();
+	
+	$("#pw").on("keyup",function(key){
+		if(key.keyCode==13) {
+			let id = $('#id').val();
+			let pw = $('#pw').val();
+			
+			if(pw.length ==0){
+
+				$('.id-alert').show();
+				$('.id-alert').html("<div>비밀번호를 입력해주세요.</div>");
+				
+			} else {
+				$.ajax({
+					url:'/cancelCheck',
+					type:'post',
+					dataType:'text',
+					data:{'id':id,'pw':pw},
+					success:function(result){
+						if(result==1){
+							$('.id-alert').hide();
+							window.location.replace("./updatemember");
+						} else{
+							$('.id-alert').show();
+							$('.id-alert').html("<div>비밀번호를 잘못 입력했습니다.</div>");
+						}
+					},
+					error:function(result){
+						alert("실패");
+					}
+					
+				});
+			}
+			}
+		});
+	
 	
 	$('#checkbtn').click(function(){
 		let id = $('#id').val();

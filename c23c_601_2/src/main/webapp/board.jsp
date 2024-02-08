@@ -182,11 +182,11 @@ $(function() {
 </script>
 <style>
 .d1, .likeBtn, .dislikeBtn {
-	width: 10%;
+	width: 9%;
 }
 
 .d2 {
-	width: 15%;
+	width: 21%;
 }
 
 .d3 {
@@ -243,7 +243,7 @@ footer {
 }
 
 .tablediv{
-	width:calc(100% - 235px);
+	width:calc(100% - 200px);
 	float:right;
 	text-align: center;
 	display: flex;
@@ -255,6 +255,13 @@ footer {
 .container{
 	padding-bottom: 10px;
 }
+tr:hover{
+	background-color: silver;
+}
+.search{
+	margin-left : calc(85% - 240px);
+}
+
 </style>
 </head>
 <body>
@@ -262,7 +269,6 @@ footer {
 		<%@ include file="header.jsp"%>
 		<%@ include file="nav.jsp"%>
 		<div class="main">
-		
 		
 			<div class = "chat">
 			<%@ include file="chat.jsp"%>
@@ -284,14 +290,14 @@ footer {
 									<th class="d1">번호</th>
 									<th class="d1">가게 이름</th>
 									<th class="d3">후기 내용</th>
-									<th class="d1">작성자</th>
+									<th class="d2">작성자</th>
 									<th class="d1">날짜</th>
 									<th class="d1">좋아요</th>
 									<th class="d1">싫어요</th>
 									<th class="d2">평점</th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody class="tbody">
 								<c:forEach items="${list1}" var="row" varStatus="s">
 									<tr>
 										<td class="d1">${s.index+1 }</td>
@@ -321,7 +327,7 @@ footer {
 											</button>
 										</td>
 
-										<td class="d1">${row.grade }</td>
+										<td class="d2">${row.grade }</td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -364,8 +370,8 @@ footer {
 					<c:otherwise>
 						<h1>출력할 값이 없습니다.</h1>
 					</c:otherwise>
-				</c:choose>
-				<button class="checkmid" onclick="url('./write')">글쓰기</button>
+				</c:choose><br>
+				<button class="checkmid" onclick="url('./write')">후기 쓰기</button>
 				<c:if test="${sessionScope.mid ne null }">
 					<br> ${sessionScope.mid}님 반갑습니다.
 					</c:if>
