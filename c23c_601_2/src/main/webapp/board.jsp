@@ -193,16 +193,6 @@ $(function() {
 	width: 30%;
 }
 
-.main {
-	display : flex;
-	width: 80%;
-}
-
-.chat {
-	margin-left : 0;
-	width: 250px;
-}
-
 .table {
 	text-align: center;
 	width: 50%;
@@ -221,7 +211,6 @@ $(function() {
 	line-height: 30px;
 	text-align: center;
 }
-
 footer {
 	background-color: #F2E3CF;
 }
@@ -230,26 +219,57 @@ footer {
 	text-align: center;
 	padding: 5px;
 }
-
-.container{
-	background-color: #F2E3CF;
-	height: 800px;
+.wrap {
+	/* display: flex; */
+	background-color: #F5ECE4;
+	width:1308px;
+	margin: 0 auto;
 }
 
-.mainstyle{
-	width: 900px;
+.main{
+	margin:0 auto;
+	background-color:#F5ECE4;
+	min-height: 778px
+}
+.mainStyle{
+	width: 80%;
+	height:700px;
+	float: left;
+}
+.chat {
+	margin-left : 0;
+	width: 230px;
+	float:left;
+}
+
+.tablediv{
+	width:calc(100% - 235px);
+	float:right;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+}
+.tablewidth{
+	width:85%;
+}
+.container{
+	padding-bottom: 10px;
 }
 </style>
 </head>
 <body>
-	<div class="container">
+	<div class="wrap">
 		<%@ include file="header.jsp"%>
 		<%@ include file="nav.jsp"%>
 		<div class="main">
+		
+		
 			<div class = "chat">
 			<%@ include file="chat.jsp"%>
 			</div>
-			<div class="mainStyle">
+			
+			<div class="tablediv">
+				<div class="tablewidth">
 				<form action="./board">
 					<div class="search">
 						가게이름 검색하기 :<input type="text" name="search">
@@ -349,6 +369,7 @@ footer {
 				<c:if test="${sessionScope.mid ne null }">
 					<br> ${sessionScope.mid}님 반갑습니다.
 					</c:if>
+			</div>
 			</div>
 		</div>
 		<footer>
