@@ -89,6 +89,131 @@
 
 $(function(){
 	
+	$("#mpw,#newpw1,#newpw2,#email,#mphone,#detailAddr").on("keyup",function(key){
+		if(key.keyCode==13) {
+			let flag = new Array();
+			
+
+			let mid = $('#mid').val();
+			let mpw = $('#mpw').val();
+			let newpw1 = $('#newpw1').val();
+			let newpw2 = $('#newpw2').val();
+
+			flag[0] = false;
+			flag[1] = false;
+			flag[2] = false;
+			
+			//기존 비밀번호
+			let pw = $('#mpw').val();
+			let reg = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/
+			
+			if(!reg.test(pw)){
+				$('.pw-alert1').show();
+				$('.pw-alert1').html('<p class="alert">영문, 숫자, 특수문자 포함 8자리 이상을 입력해 주세요.</p>');
+				$('#mpw').focus();
+				return false;
+			} else {
+				$('.pw-alert1').hide();
+				flag[0] = true;
+				ableBtn(flag);
+			}
+			
+			//새 빌밀번호 1
+			let pw1 = $('#newpw1').val();
+			
+			if(!reg.test(pw1)){
+				$('.pw-alert').show();
+				$('.pw-alert').html('<p class="alert">영문, 숫자, 특수문자 포함 8자리 이상을 입력해 주세요.</p>');
+				$('#newpw1').focus();
+				return false;
+			} else {
+				$('.pw-alert').hide();
+				flag[1] = true;
+				ableBtn(flag);
+			}
+			
+			//새 비밀번호2
+			let pw2 = $('#newpw2').val();
+			
+			if(!reg.test(pw2)){
+				$('.pw-alert').show();
+				$('.pw-alert').html('<p class="alert">영문, 숫자, 특수문자 포함 8자리 이상을 입력해 주세요.</p>');
+				$('#newpw2').focus();
+				return false;
+			} else {
+				$('.pw-alert').hide();
+				flag[2] = true;
+				ableBtn(flag);
+			}
+			
+			
+			
+				$.ajax({
+					url:'./pwCheck',
+					type:'post',
+					dataType:'text',
+					data:{'mpw':mpw,'mid':mid},
+					success:function(result){
+						if(result ==0){
+							/* 
+								<div class="box rounded mb-3">
+									<p class="alert">필수 값을 입력해주세요.</p>
+								</div> */
+							$('.pw-alert1').show();
+							$('.pw-alert1').html("<p class='alert'>기존 비밀번호랑 다릅니다.</p>");
+							$('#Complete').attr("disabled","disabled");
+							$('#mpw').focus();
+							
+							return false;
+							
+						}else{
+							
+							if(newpw1 != newpw2){
+								$('.pw-alert').show();
+								$('.pw-alert').html("<p class='alert'>새 비밀번호가 서로 다릅니다.</p>");
+								$('#Complete').attr("disabled","disabled");
+								$('#newpw1').focus();
+							}else{
+								//postCode" selectAddr detailAddr
+								let join = {
+									'id': $('#mid').val(),
+									'pw': $('#newpw1').val(),
+									'name': $('#mname').val(),
+									'email' : $('#memail').val(),
+									'phone' : $('#mphone').val(),
+									'postCode' : $('#postCode').val(),
+									'selectAddr' :$('#selectAddr').val(),
+									'detailAddr' : $('#detailAddr').val()
+								}
+								
+								
+								$.ajax({
+									url:'./updatemember',
+									type:'post',
+									data:join,
+									success:function(result){
+										if(result==1){
+											window.location.replace("./mypage");
+										}
+									},
+									error:function(){
+										alert("실패");
+									}
+								});
+							}
+						}
+						
+					},
+					error:function(){
+						alert("실패");
+					}
+				});
+			
+			
+			}
+		});
+
+	
 	$('#joinBack').click(function(){
 		 history.back();
 	})
@@ -142,8 +267,9 @@ $(function(){
 	//pw2 focus가 벗어났을경우
 	$('#newpw2').blur(function() {
 		let pw2 = $('#newpw2').val();
+		let reg = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/
 		
-		if(pw2.length == 0){
+		if(!reg.test(pw2)){
 			$('.pw-alert').show();
 			$('.pw-alert').html('<p class="alert">영문, 숫자, 특수문자 포함 8자리 이상을 입력해 주세요.</p>');
 			$('#newpw2').focus();
