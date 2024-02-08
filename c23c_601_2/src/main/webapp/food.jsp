@@ -24,8 +24,10 @@
 	display: flex;
 	flex-direction: row;
 	width: 1300px;
+	height: 700px;
 	/* justify-content: space-between; */
 	/* border-collapse: collapse; */
+	
 }
 
 #map {
