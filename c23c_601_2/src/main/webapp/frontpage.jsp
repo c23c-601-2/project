@@ -103,7 +103,7 @@
 					</div>
 					<div class="sixzeroonwstagram" style="border: 1px solide red;">
 						<div class="boxlink">
-							<img src="./assets/img/instagram.png" alt="" height="20" style="margin-right: 10px; vertical-align: middle;"><a href="/imgList" target="_self">601스타그램</a>
+							<img src="./assets/img/instagram.png" alt="" height="20" style="margin-right: 10px; margin-left: 36px; vertical-align: middle;"><a href="/imgList" target="_self">601스타그램</a>
 						</div>						
 						<div class="instarow-container">
 							<div class= "instarow">
