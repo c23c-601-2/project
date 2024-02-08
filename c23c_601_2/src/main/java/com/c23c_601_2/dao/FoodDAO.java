@@ -45,6 +45,30 @@ public class FoodDAO extends AbDAO{
 		}
 		return list;
 	}
+
+	   public String foodRand() {
+	      /* List<Map<String, Object>> list = new ArrayList<Map<String,Object>>(); */
+	      String st = null;
+	      Connection con = db.getConnection();
+	      PreparedStatement pstmt = null;
+	      ResultSet rs = null;
+	      String sql = "SELECT food_title FROM foodmapview ORDER BY RAND() LIMIT 1";
+	      
+	      try {
+	         pstmt = con.prepareStatement(sql);
+	         rs = pstmt.executeQuery();
+	         
+	         if(rs.next()) {
+	            st = rs.getString("food_title");
+	         }
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      } finally {
+	         close(rs, pstmt, con);
+	      }
+	      return st;
+	   }
+	   
 	public List<FoodDTO> foodListAll(int page) {
 		List<FoodDTO> list = new ArrayList<FoodDTO>();
 		Connection con = db.getConnection();
