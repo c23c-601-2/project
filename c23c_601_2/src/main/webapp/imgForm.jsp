@@ -55,7 +55,7 @@
 						</tr>
 						<tr>
 							<th>내용</th>
-							<td><textarea rows="50" cols="100" id="content" name="subject" placeholder="게시글은 삭제가 불가능하오니 신중하게 작성해주세요 😉" onkeydown="enterToBr(event)" oninput="autoResizeTextarea(this)"></textarea>
+							<td><textarea rows="5" cols="50" id="content" name="subject" placeholder="게시글은 삭제가 불가능하오니 신중하게 작성해주세요 😉" onkeydown="enterToBr(event)"></textarea>
 							</td>
 						</tr>
 						<tr>

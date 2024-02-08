@@ -73,7 +73,7 @@
 .post-content {
 	text-align: left;
 	margin-top: 10px;
-	line-height: 1.5px;
+/* 	line-height: 1.5px; */
 	margin-bottom: 20px;
 	margin-left: 25px;
 	font-size: 25px;
@@ -124,7 +124,6 @@
 	margin: 20px;
 	margin-right: 10px;
 	padding: 10px;
-	line-height: 2.0;
 }
 
 .comment-write {
@@ -132,6 +131,8 @@
 }
 .comment-form {
   display: flex;
+  flex-direction: column; /* flex-direction을 column으로 설정 */
+    align-items: center; /* 아이템을 중앙 정렬 */
 }
 
 .comment-inner {
@@ -147,6 +148,7 @@
   border: 1px solid #ddd;
   border-radius: 5px;
   margin-right: 10px;
+  margin-bottom: 20px;
 }
 
 .comment-button {
@@ -156,7 +158,9 @@
   background-color: #fff;
   color: #333;
   cursor: pointer;
+  margin-bottom: 20px;
 }
+
 
 
 .comment-loginframe { /* 로그인 하라는 안내메세지 프레임 */

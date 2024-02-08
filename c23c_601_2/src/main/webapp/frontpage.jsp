@@ -41,7 +41,7 @@
 							<img src="./assets/img/youtube.png" alt="유투브"> <a href="https://www.youtube.com/@poseidon5349/featured" target="_blank">선생님 유투브</a>
 						</div>
 						<div class ="youtubeplay">
-							<iframe  width="100%" height="100%" src="https://www.youtube.com/embed/YkVyu_uXB3Y" frameborder="0" allowfullscreen></iframe>
+							<iframe  width="100%" height="100%" src="https://www.youtube.com/embed/tLTvZaAh1eE" frameborder="0" allowfullscreen></iframe>
 						</div>
 					</div>
 					
