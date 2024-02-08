@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="css/bootstrap.css">
 <link rel="stylesheet" href="css/custom.css">
+<link rel="stylesheet" href="css/chat.css">
 <title>실시간 익명 채팅</title>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
@@ -93,7 +94,7 @@
 </script>
 </head>
 <body>
-<div class="chatcontainer" style=" position: fixed; width: 260px; padding: 0 0 0 10px;">
+<div class="chatcontainer">
 	<div class="container bootstrap snippet">
 		<div class="row">
 			<div class="col-xs-12" style="padding: 0 0 0 10px;" >
