@@ -24,6 +24,11 @@
 	/* border-collapse: collapse; */
 }
 
+#map {
+    width: 50%;
+    height: 50%;
+}
+
 #map_wrap {
 	width: 500px; /* 원하는 너비로 조절 */
 	height: 500px; /* 원하는 높이로 조절 */
@@ -227,12 +232,12 @@
 }
 
 footer {
-    position: fixed;
+    /* position: fixed; */
     bottom: 0;
     width: 100%;
     /* background-color: #f8f9fa; */
     /* background-color: #F5ECE4; */
-    padding: 20px 0;
+    /* padding: 20px 0; */
     text-align: center;
     z-index: 9999; /* Adjust the z-index as needed */
 }
@@ -269,13 +274,8 @@ function listCheck() {
     var title = $('#search').val();
 	let p1 = $('.mainsearch .c1 .dfg');
 	let p2 = $('.mainsearch .c1 .asd');
-	//let p1 = $(this).parents.('.mainsearch').child('.c1');
 	
-	// this를 통해 mainsearch찾는다.
-    /* var mainElement = $(this).parent('.mainsearch');
-    var p2 = mainElement.children('.c1').children('table.write').children('tbody.asd');
-	var p1 = p2.children('.dfg'); */
-    
+	
     $.ajax({
        url : './food',
        type : 'post',
@@ -285,19 +285,15 @@ function listCheck() {
     	   //alert("json받아오니?" + list);
     	   var list = response.list;
           if (list.length > 0) {
-			alert("아래 리스트를 확인해보십시오. " + list.length + " : " + p2.html());
 			p1.remove();
-			// tr은 리무브 시켜서 없애고, tbody는 appendtrtd를 foreach문으로 돌린다.
 			let data = '';
 			for(let i=0; i< list.length; i++){
-				data += '<tr class="dfg" style="text-align: center;"><td>' + list[i].food_title + '</td>';
-				data += '<td style=text-align: center;">' + list[i].food_like + '/' + list[i].food_dislike + '</td>';
-				data += '<td style=text-align: center;">' + list[i].grade + '</td></tr>';
+				data += '<tr class="dfg"><td style="text-align: center;">' + list[i].food_title + '</td>';
+				data += '<td style="text-align: center;">' + list[i].food_like + '/' + list[i].food_dislike + '</td>';
+				data += '<td style="text-align: center;">' + list[i].grade + '</td></tr>';
 				/* 서버에서 jstl 자바 ,el 에서 결과값이 나오고
 				나온 상태로 브라우저html, 제이커리, css, 자바스크립트 */
 			}
-			//data += '</tbody>';
-            alert("리무브 됐니?" + p1.html());
          // 위에서 생성한 HTML 코드를 jQuery를 사용하여 tbody 요소를 가진 특정 요소에 추가할 수 있습니다.
             p2.append(data);
             
@@ -330,7 +326,7 @@ function listCheck() {
 
 		<div class="mainsearch">
 			<div class="llist">
-				<img alt="login" src="./img/search.png" width="24px;">
+				<img alt="search1" src="./img/search2.png" width="32px;">
 				<input type="text" id="search" name="search" placeholder="음식점 상호를 입력하세요.">
 				<button onclick="return listCheck()">후기 리스트 검색하기</button>
 			</div>
@@ -396,7 +392,7 @@ function listCheck() {
 
 				// 지도를 생성합니다    
 				var map = new kakao.maps.Map(mapContainer, mapOption);
-
+		
 				// 장소 검색 객체를 생성합니다
 				var ps = new kakao.maps.services.Places();
 
@@ -420,6 +416,13 @@ function listCheck() {
 
 					// 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
 					ps.keywordSearch(keyword, placesSearchCB);
+					resizeMap();
+				}
+				
+				function resizeMap() {
+				    var map = document.getElementById('map');
+				    map.style.width = '1200px';
+				    map.style.height = '90vh';
 				}
 
 				// 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
@@ -610,7 +613,7 @@ function listCheck() {
 			</script>
 	</div>
 	<footer>
-			<%@ include file="footer.jsp" %>
+		<%@ include file="footer.jsp" %>
 	</footer>
 </body>
 </html>
