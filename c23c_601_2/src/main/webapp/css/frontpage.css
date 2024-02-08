@@ -99,13 +99,6 @@
 }
 
 
-.restaurant {
-	width: 50%;
-	margin-right: 2px;
-	display: flex;
-	flex-direction: column;
-	border: 1px solid black;
-}
 
 .boxlink {
 	
@@ -128,6 +121,12 @@
 	justify-content: space-between;
 	background-color: ffffea;
 	/* border:  1px solid green;	 */
+}
+.restaurant {
+	width: 50%;
+	margin-right: 2px;
+	display: flex;
+	flex-direction: column;
 }
 
 .sixzeroonwstagram {
