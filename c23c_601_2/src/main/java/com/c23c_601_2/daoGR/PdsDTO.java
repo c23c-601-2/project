@@ -128,6 +128,8 @@ public class PdsDTO {
 	public void setType(String type) {
 		this.type = type;
 	}
+
+
 	
 }//class end
 

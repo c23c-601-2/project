@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <link href="./css/imageForm.css" rel="stylesheet">
+
+<title>Instagram 601 글쓰기</title>
+
 <style type="text/css">
 .container {
 	margin: 0 auto;
@@ -25,6 +29,8 @@
 /* 	margin-top: 60px; */
 }
 </style>
+
+
 </head>
 <body>
 	<div class="container">
@@ -38,7 +44,7 @@
 				<!-- 본문시작 pdsForm.jsp -->
 				<h2 class="h2">🧡 이미지를 업로드해주세요 🧡</h2><br>
 				
-				<h3 class = "h3">게시글은 삭제가 불가능하오니 신중하게 작성해주세요 😉</h3>
+				<!-- <h3 class = "h3"></h3> -->
 				<form name="photoForm" method="post" enctype="multipart/form-data"
 					action="imgIns.jsp" onsubmit="return pdsCheck(this)">
 					<table class="form_table">
@@ -49,7 +55,7 @@
 						</tr>
 						<tr>
 							<th>내용</th>
-							<td><textarea rows="5" cols="10" id="content" name="subject" placeholder="png파일만 업로드해주세요."></textarea>
+							<td><textarea rows="50" cols="100" id="content" name="subject" placeholder="게시글은 삭제가 불가능하오니 신중하게 작성해주세요 😉" onkeydown="enterToBr(event)" oninput="autoResizeTextarea(this)"></textarea>
 							</td>
 						</tr>
 						<tr>
@@ -65,9 +71,8 @@
 								<div class="button2">
 									<input type="submit" id="submit_button" value="전송"> <input
 										type="reset" id="reset_button" value="취소">
-								</div>
+</div>
 							</td>
-
 						</tr>
 					</table>
 				</form>
@@ -83,6 +88,19 @@
 			function redirectToPdsList() {
 				window.location.href = './imgList';
 			}
+		</script>
+		
+		<script>
+		/* JavaScript 함수 수정 */
+		function enterToBr(event) {
+		    if (event.keyCode === 13) {  // 엔터 키 코드
+		        event.preventDefault();  // 기본 엔터 기능 방지
+		        var content = document.getElementById("content");
+		        var value = content.value;
+		        value += "\n";  // 개행 문자 추가
+		        content.value = value;
+		    }
+		}
 		</script>
 
 

@@ -174,7 +174,7 @@ h1 {
 
 @media(min-width:768px) {
     .portlet {
-        margin-bottom: 30px;
+        /* margin-bottom: 30px; */
     }
 }
 

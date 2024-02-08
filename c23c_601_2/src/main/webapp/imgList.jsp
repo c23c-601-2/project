@@ -7,6 +7,7 @@
 <%@ include file="ssi.jsp"%>
 <link href="./css/imageList.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<title>Instagram 601</title>
 <style type="text/css">
 .container {
 	margin: 0 auto;
@@ -36,7 +37,7 @@
 		<%@ include file="header.jsp"%>
 		<%@ include file="nav.jsp"%>
 		<div class="verticalmain">
-			<div class="mainleft">
+			<div class="mainleft" style="margin-top: 0">
 				<%@ include file="chat.jsp"%>
 			</div>
 			<div class="post-div">
@@ -47,21 +48,26 @@
 							height="56" style="margin-top: 50px;">
 					</h3>
 				</div>
-				
-				
-					<c:if test="${empty sessionScope.mid}">
-						<div class="comment-loginBtn">
-							<button
-								onclick="alert('로그인 해주세요'); window.location.href = './login';">글쓰기</button>
-						</div>
-					</c:if>
-					<c:if test="${sessionScope.mid ne null}">
-						<!-- 로그인 후 -->
-						<div class="writebutton">
-							<a href="./imgForm">글쓰기</a>
-						</div>
-					</c:if>
-				<script>
+
+
+				<c:if test="${empty sessionScope.mid}">
+					<div class="comment-loginBtn">
+						<button
+							onclick="alert('로그인 해주세요'); window.location.href = './login';">글쓰기</button>
+					</div>
+				</c:if>
+				<c:if test="${sessionScope.mid ne null}">
+					<!-- 로그인 후 -->
+					<div class="writebutton">
+						<a href="./imgForm">글쓰기</a>
+					</div>
+				</c:if>
+
+
+
+<script>
+function update(){if(confirm("수정하시겠습니까?")){location.href="./update?no=${subject.pdsno }";}}
+
     function addComment(pdsno) {
         var commentContent = document.getElementById('commentcontent'+pdsno).value;
         // AJAX를 사용하여 서버에 댓글 추가 요청 보내기
@@ -167,6 +173,14 @@
 							🆔
 							<%=dto.getWname()%>
 						</div>
+						
+										<div class="update">
+						${subject.pdsno }<c:if
+							test="${sessionScope.mname ne null && detail.mid eq sessionScope.mid }">
+							<img alt="수정" src="./img/update5.png" width="18px" height="18px"
+								onclick="update()">
+						</c:if>
+					</div>
 						<img class="post-image" src="data:image/jpeg;base64,${imgstr}"
 							alt="Post Image">
 					</div>
@@ -174,20 +188,23 @@
 						<div class="post-icons" style="display: flex;">
 							<%
 							StaLikeDAO sdao = new StaLikeDAO();
-							int heart = sdao.getLikeStatus((String)session.getAttribute("mid"), dto.getPdsno());
+							int heart = sdao.getLikeStatus((String) session.getAttribute("mid"), dto.getPdsno());
 							request.setAttribute("heart", heart);
 							%>
-						    <div class="icon" onclick="toggleLike(<%=dto.getPdsno()%>)">
-						    	<c:if test="${heart eq 1}">
-						    	<img id="like-icon<%=dto.getPdsno()%>" src="./img/fullheart.png" alt="Heart Icon">
-						    	</c:if>
-						    	<c:if test="${heart eq 0}">
-						    	<img id="like-icon<%=dto.getPdsno()%>" src="./img/heart.png" alt="Heart Icon">
-						    	</c:if>
-						    	<c:if test="${heart eq -1}">
-						    	<img id="like-icon<%=dto.getPdsno()%>" src="./img/heart.png" alt="Heart Icon">
-						    	</c:if>
-						    </div>
+							<div class="icon" onclick="toggleLike(<%=dto.getPdsno()%>)">
+								<c:if test="${heart eq 1}">
+									<img id="like-icon<%=dto.getPdsno()%>"
+										src="./img/fullheart.png" alt="Heart Icon">
+								</c:if>
+								<c:if test="${heart eq 0}">
+									<img id="like-icon<%=dto.getPdsno()%>" src="./img/heart.png"
+										alt="Heart Icon">
+								</c:if>
+								<c:if test="${heart eq -1}">
+									<img id="like-icon<%=dto.getPdsno()%>" src="./img/heart.png"
+										alt="Heart Icon">
+								</c:if>
+							</div>
 							<div class="icon">
 								<img src="./img/speech-bubble.png" alt="말풍선">
 							</div>
@@ -199,7 +216,11 @@
 							</div>
 						</div>
 						<div class="post-content"><%=dto.getSubject()%></div>
+						
 					</div>
+	
+
+
 					<div class="post-comment">
 						<ul id="comment-list<%=dto.getPdsno()%>">
 							<!-- 댓글 목록을 출력하는 부분 -->
@@ -209,7 +230,7 @@
 							ccomment = cdao.getCommentList(dto.getPdsno());
 							%>
 							<c:forEach items="<%=ccomment%>" var="comment">
-								<li>${comment.mid}님    :    ${comment.comment}</li>
+								<li>${comment.mid}님: ${comment.comment}</li>
 							</c:forEach>
 						</ul>
 						<c:if test="${empty sessionScope.mid}">

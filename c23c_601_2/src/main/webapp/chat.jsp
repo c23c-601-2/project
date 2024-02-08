@@ -93,7 +93,7 @@
 </script>
 </head>
 <body>
-<div class="container" style="position: fixed; width: 260px; padding: 0 0 0 10px;">
+<div class="chatcontainer" style=" position: fixed; width: 260px; padding: 0 0 0 10px;">
 	<div class="container bootstrap snippet">
 		<div class="row">
 			<div class="col-xs-12" style="padding: 0 0 0 10px;" >

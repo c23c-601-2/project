@@ -74,7 +74,7 @@ public class Food extends HttpServlet {
 			jObj.put("list", list);
 			
 			 //json 형식으로 잘 바뀌었는지 확인 테스트
-			System.out.println("생성된 JSON 데이터: " + jObj.toString()); // 생성된 JSON 데이터 출력
+			 System.out.println("생성된 JSON 데이터: " + jObj.toString()); // 생성된 JSON 데이터 출력
 			
 			 //json 데이터를 클라이언트로 전송
 			 response.setContentType("application/x-json; charset=utf-8");
