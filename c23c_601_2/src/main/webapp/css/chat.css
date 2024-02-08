@@ -1,0 +1,5 @@
+@charset "UTF-8";
+
+.chatcontainer {
+	position: fixed; width: 260px; padding: 0 0 0 10px;
+}

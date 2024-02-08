@@ -5,6 +5,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
+<%@ page import="com.c23c_601_2.dao.FoodDAO" %>
+<%@ page import="com.c23c_601_2.dto.FoodDTO" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.Map" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -332,6 +336,7 @@ function listCheck() {
 			</div>
 			<hr>
 			<h3>${sessionScope.mname }님을위한오늘의추천</h3>
+			<h4>${st }</h4>
 			<hr>
 
 			<div class="c1">
@@ -424,7 +429,7 @@ function listCheck() {
 				function resizeMap() {
 				    var map = document.getElementById('map');
 				    map.style.width = '1200px';
-				    map.style.height = '90vh';
+				    map.style.height = '70vh';
 				}
 
 				// 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
@@ -614,8 +619,10 @@ function listCheck() {
 				}
 			</script>
 	</div>
+	<div>
 	<footer>
 		<%@ include file="footer.jsp" %>
 	</footer>
+	</div>
 </body>
 </html>

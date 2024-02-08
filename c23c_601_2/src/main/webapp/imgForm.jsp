@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <link href="./css/imageForm.css" rel="stylesheet">
 
-
+<title>Instagram 601 글쓰기</title>
 
 <style type="text/css">
 .container {
