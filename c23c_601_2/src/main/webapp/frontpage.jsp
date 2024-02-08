@@ -80,7 +80,7 @@
 								<div style="text-align: right;">
 									<button onclick="url('./board')">후기 게시판으로</button>
 								</div>
-								<thead>
+								<thead style="border-bottom: 1px solid #FFDC9F">
 									<tr style="font-size: 16px">
 										<th class="d1">가게 이름</th>
 										<th class="d2">좋아요 / 싫어요</th>
@@ -106,20 +106,26 @@
 						<div class="instarow-container">
 							<div class= "instarow">
 								<div class="insta-image-container">
-									<a href:./imgList>
+									<a href="./imgList">
 								 		<img src="data:image/jpeg;base64,${img1}" alt="Image 1">
 								 	</a>
 								</div>
 								<div class="insta-image-container">
-									<img src="data:image/jpeg;base64,${img2}" alt="Image 2">
+									<a href="./imgList">
+										<img src="data:image/jpeg;base64,${img2}" alt="Image 2">
+									</a>
 								</div>
 							</div>
 							<div class= "instarow">
 								<div class="insta-image-container">
-									<img src="data:image/jpeg;base64,${img3}" alt="Image 3">
+									<a href="./imgList">
+										<img src="data:image/jpeg;base64,${img3}" alt="Image 3">
+									</a>
 								</div>								
 								<div class="insta-image-container">
-									<img src="data:image/jpeg;base64,${img4}" alt="Image 4">
+									<a href="./imgList">
+										<img src="data:image/jpeg;base64,${img4}" alt="Image 4">
+									</a>
 								</div>								
 							</div>
 						</div>
