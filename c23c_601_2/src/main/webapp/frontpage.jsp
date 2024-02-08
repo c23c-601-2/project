@@ -74,9 +74,11 @@
 						</div>
 						<div style="background-color: white">
 							<table class="write" style="padding: 0">
-								<div style="font-size: 30px; text-align: center;">
-									<img alt="reviewlist1" src="./img/reviewlist1.png" width="30px;">&nbsp; 후기 리스트
-								</div>
+								<a href=./food style="text-decoration: none; color: inherit; ">
+									<div style="font-size: 30px; text-align: center">
+										<img alt="reviewlist1" src="./img/reviewlist1.png" width="30px;">&nbsp; 후기 리스트
+									</div>
+								</a>
 								<div style="text-align: right;">
 									<button onclick="url('./board')">후기 게시판으로</button>
 								</div>
