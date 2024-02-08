@@ -35,10 +35,13 @@ public class Updatemember extends HttpServlet {
 			
 			MemberDAO dao = new MemberDAO();
 			MemberDTO dto = dao.detailId(session.getAttribute("mid").toString());
+
 			
-			dto.setPostcode(dto.getMaddress().substring(dto.getMaddress().indexOf("(")+1,dto.getMaddress().indexOf(")")));
-			dto.setSelectaddr(dto.getMaddress().substring(dto.getMaddress().indexOf(")")+2,dto.getMaddress().indexOf(",")));
-			dto.setDetailaddr(dto.getMaddress().substring(dto.getMaddress().indexOf(",")+2));
+			if(dto.getMaddress().length()!=0) {
+				dto.setPostcode(dto.getMaddress().substring(dto.getMaddress().indexOf("(")+1,dto.getMaddress().indexOf(")")));
+				dto.setSelectaddr(dto.getMaddress().substring(dto.getMaddress().indexOf(")")+2,dto.getMaddress().indexOf(",")));
+				dto.setDetailaddr(dto.getMaddress().substring(dto.getMaddress().indexOf(",")+2));				
+			}
 			
 			
 			request.setAttribute("dto", dto);
