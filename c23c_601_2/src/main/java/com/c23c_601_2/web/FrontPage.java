@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.c23c_601_2.dao.FoodDAO;
 import com.c23c_601_2.daoGR.PdsDAO;
 import com.c23c_601_2.daoGR.PdsDTO;
+import com.c23c_601_2.dto.FoodDTO;
 
 @WebServlet("/frontpage")
 public class FrontPage extends HttpServlet {
@@ -47,6 +49,15 @@ public class FrontPage extends HttpServlet {
 		request.setAttribute("img2", img2);
 		request.setAttribute("img3", img3);
 		request.setAttribute("img4", img4);		
+		
+		//DAO랑 연결
+		FoodDAO fooddao = new FoodDAO();
+		FoodDTO dto = new FoodDTO();
+		List<java.util.Map<String, Object>> foodlist = null;
+		foodlist = fooddao.foodList();
+
+		request.setAttribute("foodlist", foodlist);
+		// 서블릿을 통과한 "list"를 jsp로 넘겨준다.
 		
 		
 		RequestDispatcher rd = request.getRequestDispatcher("frontpage.jsp");

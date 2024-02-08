@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <title>601 FrontPage</title>
 <link href="./css/frontpage.css" rel="stylesheet"/>
+<link href="./css/food.css" rel="stylesheet"/>
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <script type="text/javascript" src="./js/frontmenu.js"></script>
 </head>
@@ -72,7 +73,30 @@
 							<img src="./assets/img/restaurant.jpg" alt="" height="20" style="margin-right: 10px; vertical-align: middle;"><a href="/food" target="_self">601맛집</a>
 						</div>
 						<div>
-							
+							${list }
+							<table class="write">
+								<div style="font-size: 30px; text-align: center;"> ★☆ 후기 리스트 ☆★ </div>
+								<div style="text-align: right;">
+									<button onclick="url('./board')">후기 게시판으로</button>
+								</div>
+								<thead>
+									<tr style="font-size: 16px">
+										<th class="d1">가게 이름</th>
+										<th class="d2">좋아요 / 싫어요</th>
+										<th class="d2">평점</th>
+									</tr>
+								</thead>
+								<tbody class="asd">
+									<c:forEach items="${foodlist }" var="row2" varStatus="status" end="5">
+										<tr class="dfg">
+											<td class="d1">${row2.food_title }</td>
+											<td class="d2">${row2.food_like }/ ${row2.food_dislike }</td>
+											<td class="d2">${row2.grade }</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+							<%-- <%@ include file="frontfood.jsp" %> --%>
 						</div>
 					</div>
 					<div class="sixzeroonwstagram" style="border: 1px solide red;">
