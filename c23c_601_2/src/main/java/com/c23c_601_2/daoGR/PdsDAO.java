@@ -101,7 +101,6 @@ public class PdsDAO extends com.c23c_601_2.daoGR.AbstractDAO{
 			dto.setRegdate(rs.getString("regdate"));
 			dto.setFilesize(rs.getInt("filesize")); // 파일사이즈 int로 추가..?
 			dto.setBase64ImageData(base64ImageData);
-			System.out.println(rs.getString("wname"));
 			list.add(dto);
 	            }while(rs.next());
 	        }else{
