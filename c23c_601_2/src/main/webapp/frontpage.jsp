@@ -74,7 +74,7 @@
 						</div>
 						<div style="background-color: white">
 							<table class="write" style="padding: 0">
-								<a href=./food style="text-decoration: none; color: inherit; ">
+								<a href=./food style="text-decoration: none; color: inherit;">
 									<div style="font-size: 30px; text-align: center">
 										<img alt="reviewlist1" src="./img/reviewlist1.png" width="30px;">&nbsp; 후기 리스트
 									</div>
