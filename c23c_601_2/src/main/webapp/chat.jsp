@@ -93,10 +93,10 @@
 </script>
 </head>
 <body>
-<div class="container">
+<div class="container" style="position: fixed; width: 260px; padding: 0 0 0 10px;">
 	<div class="container bootstrap snippet">
 		<div class="row">
-			<div class="col-xs-12">
+			<div class="col-xs-12" style="padding: 0 0 0 10px;" >
 				<div class="portlet portlet-default">
 					<div class="portlet-heading">
 						<div class="portlet-title">
@@ -105,7 +105,7 @@
 						<div class="clearfix"></div> 
 					</div>
 					<div id="chat" class="panel-collase collase in">
-						<div id="chatList" class="portlet-body chat-widget" style="overflow-y: auto; height:600px;">
+						<div id="chatList" class="portlet-body chat-widget" style="overflow-y: auto; height: 540px;">
 						</div>
 						<div class="portlet-footer" style="height: 200px;">
 							<div class="row">
@@ -115,7 +115,7 @@
 							</div>
 							<div class="row" style="height: 90px">
 								<div class="form-group col-xs-10">
-									<textarea style="height: 80px;" id="chatContent" class="form-control" placeholder="메시지를 입력하세요." maxlength="100"></textarea>
+									<textarea style="height: 100px;" id="chatContent" class="form-control" placeholder="메시지를 입력하세요." maxlength="100"></textarea>
 								</div>
 								<div class="form-group col xs-2">
 									<button type="button" class="btn btn-default pull-right" onclick="submitFunction();">전송</button>
