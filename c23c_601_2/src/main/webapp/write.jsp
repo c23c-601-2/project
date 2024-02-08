@@ -79,11 +79,14 @@ footer {
 #review{
 	font-size: 36px;
 }
+#grade{
+	width: 50px;
+}
 </style>
 <script>
 	$(document).ready(function() {
 		$(document).on('keyup', '#title', function() {
-			let text = $(this).val();
+			let text = $(this).val().replace(/\s/g, "");
 			if (text.length > 10) {
 				alert("10자 넘었어요.");
 				$(this).val(text.substr(0, 10));
@@ -92,12 +95,12 @@ footer {
 		});
 
 		$(document).on('keyup', '#content', function() {
-			let text = $(this).val();
-			if (text.length > 40) {
-				alert("40자 넘었어요.");
-				$(this).val(text.substr(0, 40));
+			let text = $(this).val().replace(/\s/g, "");
+			if (text.length > 50) {
+				alert("50자 넘었어요.");
+				$(this).val(text.substr(0, 50));
 			}
-			$(".textarea1").text("글쓰기 " + text.length + "/40");
+			$(".textarea1").text("글쓰기 " + text.length + "/50");
 		});
 
 	});
@@ -105,8 +108,18 @@ footer {
 	function titlecheck() {
 		let title = document.getElementById("title").value.replace(/\s/g, "");
 		if (title.length < 1) {
-			alert("1글자 이상 입력해주세요.");
+			alert("제목은 최소 1글자 이상 입력해주세요.");
 			$("#title").focus();
+			return false;
+		}
+		return true;
+	}
+	
+	function contentcheck() {
+		let content = document.getElementById("content").value.replace(/\s/g, "");
+		if (content.length < 5) {
+			alert("내용은 최소 5글자 이상 입력해주세요.");
+			$("#content").focus();
 			return false;
 		}
 		return true;
@@ -118,16 +131,17 @@ footer {
 		<%@ include file="header.jsp"%>
 		<%@ include file="nav.jsp"%>
 		<div>
+		<%@ include file="chat.jsp" %>
 			<div>
 				<article class="writeall">
 					<span id="review">후기 쓰기</span>
-					<form action="./write" method="post" onsubmit="return titlecheck()">
+					<form action="./write" method="post" onsubmit="return titlecheck() && contentcheck()">
 						<div class="write">
 							<span id="title2">가게 이름 :</span><input type="text" id="title"
 								name="title" placeholder="10자 이하로 입력 해 주세요."><label
-								class="title1"></label>
+								class="title1"></label><br>
 						</div>
-						평점 : <select name="grade">
+						평점 : <select id = "grade" name="grade">
 							<optgroup label="평점">
 								<option
 									<c:if test="${row.grade eq 1}">selected="selected"</c:if>
@@ -148,7 +162,7 @@ footer {
 						</select>
 						<div>
 							<input type="text" id="content" name="content"
-								placeholder="35자 이하로 입력 해 주세요."><br> <label
+								placeholder="50자 이하로 입력 해 주세요."><br> <label
 								class="textarea1"></label>
 							<button class="textarea" type="submit">등록하기</button>
 						</div>
