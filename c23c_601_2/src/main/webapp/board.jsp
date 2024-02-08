@@ -255,6 +255,13 @@ footer {
 .container{
 	padding-bottom: 10px;
 }
+tr:hover{
+	background-color: silver;
+}
+.search{
+	margin-left : calc(85% - 240px);
+}
+
 </style>
 </head>
 <body>
@@ -262,7 +269,6 @@ footer {
 		<%@ include file="header.jsp"%>
 		<%@ include file="nav.jsp"%>
 		<div class="main">
-		
 		
 			<div class = "chat">
 			<%@ include file="chat.jsp"%>
@@ -291,7 +297,7 @@ footer {
 									<th class="d2">평점</th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody class="tbody">
 								<c:forEach items="${list1}" var="row" varStatus="s">
 									<tr>
 										<td class="d1">${s.index+1 }</td>
@@ -364,8 +370,8 @@ footer {
 					<c:otherwise>
 						<h1>출력할 값이 없습니다.</h1>
 					</c:otherwise>
-				</c:choose>
-				<button class="checkmid" onclick="url('./write')">글쓰기</button>
+				</c:choose><br>
+				<button class="checkmid" onclick="url('./write')">후기 쓰기</button>
 				<c:if test="${sessionScope.mid ne null }">
 					<br> ${sessionScope.mid}님 반갑습니다.
 					</c:if>
