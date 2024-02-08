@@ -15,6 +15,7 @@
 	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <link href="./css/frontpage.css" rel="stylesheet"/>
+<link rel="styleSheet" href="./css/join.css?ver=1.2">
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <style type="text/css">
 	.temp {
@@ -92,6 +93,56 @@
 <script type="text/javascript">
 $(function(){
 	$('.id-alert').hide();
+	
+	
+	$("#pw").on("keyup",function(key){
+		if(key.keyCode==13) {
+			 let id = $('#id').val();
+			let pw = $('#pw').val();
+			
+			if(pw.length ==0){
+
+				$('.id-alert').show();
+				$('.id-alert').html("<div>비밀번호를 입력해주세요.</div>");
+				
+			} else {
+				$.ajax({
+					url:'/cancelCheck',
+					type:'post',
+					dataType:'text',
+					data:{'id':id,'pw':pw},
+					success:function(result){
+						if(result==1){
+							$.ajax({
+								url:'/cancel',
+								type:'post',
+								dataType:'text',
+								data:{'id':id,'pw':pw},
+								success:function(result){
+									if(result==1){
+										window.location.replace("./frontpage");
+									} else{
+										alert("delete 실패");
+									}
+								},
+								error:function(){
+									alert("실패");
+								}
+							});
+						} else{
+							$('.id-alert').show();
+							$('.id-alert').html("<div>비밀번호를 잘못 입력했습니다.</div>");
+						}
+					},
+					error:function(result){
+						alert("실패");
+					}
+					
+				});
+			}
+			}
+		});
+	
 	
 	$('#checkbtn').click(function(){
 		let id = $('#id').val();
