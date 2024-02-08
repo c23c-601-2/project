@@ -336,7 +336,9 @@ function listCheck() {
 
 			<div class="c1">
 				<table class="write">
-					<div style="font-size: 30px; text-align: center;"> ★☆ 후기 리스트 ☆★ </div>
+					<div style="font-size: 30px; text-align: center;">
+					<img alt="reviewlist1" src="./img/reviewlist1.png" width="50px;">&nbsp; 후기 리스트
+					</div>
 					<div style="text-align: right;">
 						<button onclick="url('./board')">후기 게시판으로</button>
 					</div>
