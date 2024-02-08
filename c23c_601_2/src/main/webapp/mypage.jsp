@@ -22,8 +22,9 @@
 <style type="text/css">
 .mypagemainStyle{
 	width:100%;
-	height:800px;
 	background-color: #F2F2F2;
+	min-height:770px;
+	overflow:hidden;
 
 }
 body{
