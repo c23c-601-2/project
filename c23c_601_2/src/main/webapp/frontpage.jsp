@@ -106,7 +106,9 @@
 						<div class="instarow-container">
 							<div class= "instarow">
 								<div class="insta-image-container">
-								 	<img src="data:image/jpeg;base64,${img1}" alt="Image 1">
+									<a href:./imgList>
+								 		<img src="data:image/jpeg;base64,${img1}" alt="Image 1">
+								 	</a>
 								</div>
 								<div class="insta-image-container">
 									<img src="data:image/jpeg;base64,${img2}" alt="Image 2">
