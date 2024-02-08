@@ -49,7 +49,7 @@ public class MemberDAO extends AbstractDAO{
 		ResultSet rs = null;
 		String  sql = "SELECT mid, comment, if(date_format(current_timestamp(),'%Y-%m-%d') = date_format(regdate,'%Y-%m-%d'),date_format(regdate,'%h:%i'),date_format(regdate,'%m-%d')) AS regdate,"
 				+ "(SELECT subject FROM tb_pds A WHERE A.pdsno = B.pdsno) AS subject "
-				+ "FROM tb_comments B WHERE mid =? LIMIT ?,5";
+				+ "FROM tb_comments B WHERE mid =? ORDER BY regdate DESC LIMIT ?,5";
 
 		
 		try {

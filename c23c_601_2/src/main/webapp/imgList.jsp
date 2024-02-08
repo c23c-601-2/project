@@ -1,3 +1,4 @@
+<%@page import="com.c23c_601_2.dao.StaLikeDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="com.c23c_601_2.daoGR.PdsDTO"%>
@@ -23,7 +24,7 @@
 }
 
 .mainleft {
-	width: 30%;
+	width: 28%;
 	text-align: left;
 	margin-right: auto;
 	margin-top: 60px;
@@ -31,7 +32,7 @@
 </style>
 </head>
 <body>
-	<div class="container">
+	<div class="container" id="container">
 		<%@ include file="header.jsp"%>
 		<%@ include file="nav.jsp"%>
 		<div class="verticalmain">
@@ -45,20 +46,21 @@
 						<img src="./img/insta601.png" alt="Instagram 601 Logo" width="300"
 							height="56" style="margin-top: 50px;">
 					</h3>
-
-
+				</div>
+				
+				
 					<c:if test="${empty sessionScope.mid}">
 						<div class="comment-loginBtn">
 							<button
 								onclick="alert('로그인 해주세요'); window.location.href = './login';">글쓰기</button>
 						</div>
 					</c:if>
-						 <c:if test="${sessionScope.mid ne null}">
+					<c:if test="${sessionScope.mid ne null}">
+						<!-- 로그인 후 -->
 						<div class="writebutton">
 							<a href="./imgForm">글쓰기</a>
-						</p>
-					</c:if> 
-				</div>
+						</div>
+					</c:if>
 				<script>
     function addComment(pdsno) {
         var commentContent = document.getElementById('commentcontent'+pdsno).value;
@@ -132,6 +134,7 @@
 					// 반복문 밖에서 선언
 				%>
 				<div class="listcount">
+					<!-- 로그인 전 -->
 					전체 글 개수 :
 					<%=list.size()%>
 				</div>
@@ -169,18 +172,31 @@
 					</div>
 					<div class="post-info">
 						<div class="post-icons" style="display: flex;">
+							<%
+							StaLikeDAO sdao = new StaLikeDAO();
+							int heart = sdao.getLikeStatus((String)session.getAttribute("mid"), dto.getPdsno());
+							request.setAttribute("heart", heart);
+							%>
 						    <div class="icon" onclick="toggleLike(<%=dto.getPdsno()%>)">
+						    	<c:if test="${heart eq 1}">
+						    	<img id="like-icon<%=dto.getPdsno()%>" src="./img/fullheart.png" alt="Heart Icon">
+						    	</c:if>
+						    	<c:if test="${heart eq 0}">
 						    	<img id="like-icon<%=dto.getPdsno()%>" src="./img/heart.png" alt="Heart Icon">
+						    	</c:if>
+						    	<c:if test="${heart eq -1}">
+						    	<img id="like-icon<%=dto.getPdsno()%>" src="./img/heart.png" alt="Heart Icon">
+						    	</c:if>
 						    </div>
-						    <div class="icon">
-						        <img src="./img/speech-bubble.png" alt="말풍선">
-						    </div>
-						    <div class="icon">
-						        <img src="./img/send.png" alt="dm"> 
-						    </div>
-						    <div class="icon">
-						        <img id="bookmark" src="./img/bookmark.png" alt="bookmark">
-						    </div>
+							<div class="icon">
+								<img src="./img/speech-bubble.png" alt="말풍선">
+							</div>
+							<div class="icon">
+								<img src="./img/send.png" alt="dm">
+							</div>
+							<div class="icon">
+								<img id="bookmark" src="./img/bookmark.png" alt="bookmark">
+							</div>
 						</div>
 						<div class="post-content"><%=dto.getSubject()%></div>
 					</div>
@@ -193,7 +209,7 @@
 							ccomment = cdao.getCommentList(dto.getPdsno());
 							%>
 							<c:forEach items="<%=ccomment%>" var="comment">
-								<li>${comment.mid}님:${comment.comment}</li>
+								<li>${comment.mid}님    :    ${comment.comment}</li>
 							</c:forEach>
 						</ul>
 						<c:if test="${empty sessionScope.mid}">
@@ -213,6 +229,11 @@
 											onclick="addComment(<%=dto.getPdsno()%>)"
 											class="comment-button">댓글쓰기</button>
 									</div>
+									<div>
+										<%-- <div class="listcount1"> <!-- 로그인 후  -->
+											전체 글 개수 :<%=list.size()%>
+										</div> --%>
+									</div>
 								</div>
 							</div>
 						</c:if>
@@ -231,6 +252,9 @@
 			</div>
 		</div>
 	</div>
-
+	<!-- TOP 버튼 -->
+	<div style="position: fixed; bottom: 5px; right: 5px">
+		<a href="#container">[맨 위로]</a>
+	</div>
 </body>
 </html>

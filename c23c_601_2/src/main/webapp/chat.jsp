@@ -100,7 +100,7 @@
 				<div class="portlet portlet-default">
 					<div class="portlet-heading">
 						<div class="portlet-title">
-							<h4 style="color: #ED7458;"><i class="fa fa-circle text-green"></i>실시간 채팅방</h4>
+							<h4 style="color: #ED7458;"><i class="fa fa-circle text-green"></i>실시간 익명 채팅방</h4>
 						</div>
 						<div class="clearfix"></div> 
 					</div>
