@@ -69,13 +69,14 @@
 				</div>
 				<div class="thirdboxrow">
 					<div class="restaurant">
-						<div class="boxlink">
+						<div class="boxlink" >
 							<img src="./assets/img/restaurant.jpg" alt="" height="20" style="margin-right: 10px; vertical-align: middle;"><a href="/food" target="_self">601맛집</a>
 						</div>
-						<div>
-							${list }
-							<table class="write">
-								<div style="font-size: 30px; text-align: center;"> ★☆ 후기 리스트 ☆★ </div>
+						<div style="background-color: white">
+							<table class="write" style="padding: 0">
+								<div style="font-size: 30px; text-align: center;">
+									<img alt="reviewlist1" src="./img/reviewlist1.png" width="30px;">&nbsp; 후기 리스트
+								</div>
 								<div style="text-align: right;">
 									<button onclick="url('./board')">후기 게시판으로</button>
 								</div>
@@ -96,7 +97,6 @@
 									</c:forEach>
 								</tbody>
 							</table>
-							<%-- <%@ include file="frontfood.jsp" %> --%>
 						</div>
 					</div>
 					<div class="sixzeroonwstagram" style="border: 1px solide red;">

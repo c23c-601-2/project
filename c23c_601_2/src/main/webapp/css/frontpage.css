@@ -100,13 +100,6 @@
 
 
 
-.boxlink {
-	
-}
-
-.boxlink img {
-	
-}
 .boxlink a {
 	color: inherit;
 	text-decoration: none;
@@ -127,6 +120,12 @@
 	margin-right: 2px;
 	display: flex;
 	flex-direction: column;
+}
+.boxlink {
+}
+
+.boxlink img {
+	
 }
 
 .sixzeroonwstagram {
