@@ -97,7 +97,7 @@
 <div class="chatcontainer" style="position: fixed; width: 240px; padding: 0 0 0 10px;">
 	<div class="container bootstrap snippet" style="padding: 0;">
 		<div class="row">
-			<div class="col-xs-12" style="padding: 0 0 0 10px; background-color: none;" >
+			<div class="col-xs-12" style="padding: 0 0 0 10px; height: 720px;" >
 				<div class="portlet portlet-default">
 					<div class="portlet-heading">
 						<div class="portlet-title">
@@ -111,7 +111,7 @@
 						<div class="portlet-footer" style="height: 200px;">
 							<div class="row">
 								<div class="form-group col-xs-4">
-									<input style="height: 40px;" type="text" id="chatName" class="form-control" placeholder="이름" maxlength="8">
+									<input style="height: 40px;" type="text" id="chatName" class="form-control" placeholder="이름" maxlength="20">
 								</div>
 							</div>
 							<div class="row" style="height: 90px">
