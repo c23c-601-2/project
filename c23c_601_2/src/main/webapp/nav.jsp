@@ -157,7 +157,7 @@ a:-webkit-any-link {
 	            	<a style="color: inherit; text-decoration: none;" href=/login><img src=".//assets/img/login.png" alt="로그인" width="34" height="auto" style="margin-right: 10px;">로그인</a>
 	            </c:when>
 	            <c:otherwise>
-	            	<a style="color: inherit; text-decoration: none;" href=/logout><img src=".//assets/img/login.png" alt="로그아웃" width="34" height="auto" style="margin-right: 10px;">로그아웃</a>
+	            	<a style="color: inherit; text-decoration: none;" href=/logout><img src=".//assets/img/logout.jpg" alt="로그아웃" width="34" height="auto" style="margin-right: 10px;">로그아웃</a>
 	            </c:otherwise>
             </c:choose>
             <div class="dropdownBtn">
