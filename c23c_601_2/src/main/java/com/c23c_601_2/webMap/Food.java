@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import org.json.JSONObject;
 
 import com.c23c_601_2.dao.FoodDAO;
+import com.c23c_601_2.dto.FoodDTO;
 
 @WebServlet("/food")
 public class Food extends HttpServlet {
@@ -33,7 +34,14 @@ public class Food extends HttpServlet {
 		//FoodDTO dto = new FoodDTO();
 		List<java.util.Map<String, Object>> list = null;
 		list= dao.foodList();
-
+		
+		FoodDTO dto = new FoodDTO();
+		   
+       // foodRand() 메소드 호출하여 랜덤 음식 정보 가져오기
+       String st = dao.foodRand();
+       request.setAttribute("st", st);
+       // 메소드에서 나온 st를 jsp에 "st"로 넘겨준다. -> ${st }
+		
 		request.setAttribute("list", list);
 		// 서블릿을 통과한 "list"를 jsp로 넘겨준다.
 		
