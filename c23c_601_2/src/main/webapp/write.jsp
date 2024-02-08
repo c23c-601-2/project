@@ -79,6 +79,7 @@ footer {
 #review{
 	font-size: 36px;
 }
+
 #grade{
 	width: 50px;
 }
