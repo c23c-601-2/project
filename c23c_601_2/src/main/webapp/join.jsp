@@ -79,6 +79,138 @@
 
 $(function(){
 	
+	$("#mid,#mname,#mpw1,#mpw2,#memail,#mphone,#detailAddr").on("keyup",function(key){ 
+		if(key.keyCode==13) {
+			
+			let flag = new Array();
+
+			flag[0] = false;
+			flag[1] = false;
+			flag[2] = false;
+			flag[3] = false;
+			
+			
+			let id = $('#mid').val();
+			let name = $('#mname').val();
+			let pw1 = $('#mpw1').val();
+			let pw2 = $('#mpw2').val();
+			
+			//id 체크
+			const idRegExp = /^[a-z0-9]{5,15}$/;
+			
+			if(!idRegExp.test(id)){
+				$('.id-alert').show();
+				$('.id-alert').html('<p class="alert idbox">아이디는 영문자 5글자 이상이고 특수문자가 없어야합니다.</p>');
+				$('#mid').focus();
+				return false;
+			} else {
+				$('.id-alert').hide();
+				flag[0] = true;
+				ableBtn(flag);
+			}
+			
+			//name 체크
+			const nameRegExp = /^[가-힣]{2,10}$/;
+			
+			if(!nameRegExp.test(name)){
+				$('.id-alert').show();
+				$('.id-alert').html('<p class="alert idbox">올바른 이름을 입력해주세요.</p>');
+				$('#mname').focus();
+				return false;
+			} else {
+				$('.id-alert').hide();
+				flag[1] = true;
+				ableBtn(flag);
+			}
+			
+			//pw1
+			let reg = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/
+				
+			if(!reg.test(pw1)){
+				$('.pw-alert').show();
+				$('.pw-alert').html('<p class="alert">영문, 숫자, 특수문자 포함 8자리 이상을 입력해 주세요.</p>');
+				$('#mpw1').focus();
+				return false;
+			} else {
+				$('.pw-alert').hide();
+				flag[2] = true;
+				ableBtn(flag);
+			}
+			
+			//pw2				
+			if(!reg.test(pw2)){
+				$('.pw-alert').show();
+				$('.pw-alert').html('<p class="alert">영문, 숫자, 특수문자 포함 8자리 이상을 입력해 주세요.</p>');
+				$('#mpw2').focus();
+				return false;
+			} else {
+				$('.pw-alert').hide();
+				flag[3] = true;
+				ableBtn(flag);
+			}
+			
+			if(pw1 != pw2){
+				$('.pw-alert').show();
+				$('.pw-alert').html('<p class="alert">서로 다른 비밀번호입니다. 다시입력해주세요.</p>');
+				return false;
+			} else{
+				$.ajax({
+					url:'./idCheck',
+					type:'post',
+					dataType:'text',
+					data:{'id':id},
+					success:function(result){
+						if(result ==1){
+							/* 
+								<div class="box rounded mb-3">
+									<p class="alert">필수 값을 입력해주세요.</p>
+								</div> */
+							$('.resultbox').show();
+							$('.resultbox').html("<p class='alert'>이미 가입되어있는 아이디입니다.</p>");
+							$('#joinComplete').attr("disabled","disabled");
+							$('#mid').focus();
+							
+
+							
+							return false;
+						}else{
+							//postCode" selectAddr detailAddr
+							let join = {
+								'id': $('#mid').val(),
+								'pw': $('#mpw1').val(),
+								'name': $('#mname').val(),
+								'email' : $('#memail').val(),
+								'phone' : $('#mphone').val(),
+								'postCode' : $('#postCode').val(),
+								'selectAddr' :$('#selectAddr').val(),
+								'detailAddr' : $('#detailAddr').val()
+							}
+							
+							
+							$.ajax({
+								url:'./join',
+								type:'post',
+								data:join,
+								success:function(){
+									window.location.replace("./frontpage");
+								},
+								error:function(){
+									alert("실패");
+								}
+							});
+						}
+						
+					},
+					error:function(){
+						alert("실패");
+					}
+				});
+				
+			}
+		}
+	});
+	
+	
 	$('#joinBack').click(function(){
 		 history.back();
 	})
@@ -151,8 +283,9 @@ $(function(){
 	//pw2 focus가 벗어났을경우
 	$('#mpw2').blur(function() {
 		let pw2 = $('#mpw2').val();
+		let reg = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/
 		
-		if(pw2.length == 0){
+		if(!reg.test(pw2)){
 			$('.pw-alert').show();
 			$('.pw-alert').html('<p class="alert">영문, 숫자, 특수문자 포함 8자리 이상을 입력해 주세요.</p>');
 			$('#mpw2').focus();

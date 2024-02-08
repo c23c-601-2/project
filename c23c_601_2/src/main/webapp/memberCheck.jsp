@@ -94,6 +94,41 @@
 $(function(){
 	$('.id-alert').hide();
 	
+	$("#pw").on("keyup",function(key){
+		if(key.keyCode==13) {
+			let id = $('#id').val();
+			let pw = $('#pw').val();
+			
+			if(pw.length ==0){
+
+				$('.id-alert').show();
+				$('.id-alert').html("<div>비밀번호를 입력해주세요.</div>");
+				
+			} else {
+				$.ajax({
+					url:'/cancelCheck',
+					type:'post',
+					dataType:'text',
+					data:{'id':id,'pw':pw},
+					success:function(result){
+						if(result==1){
+							$('.id-alert').hide();
+							window.location.replace("./updatemember");
+						} else{
+							$('.id-alert').show();
+							$('.id-alert').html("<div>비밀번호를 잘못 입력했습니다.</div>");
+						}
+					},
+					error:function(result){
+						alert("실패");
+					}
+					
+				});
+			}
+			}
+		});
+	
+	
 	$('#checkbtn').click(function(){
 		let id = $('#id').val();
 		let pw = $('#pw').val();

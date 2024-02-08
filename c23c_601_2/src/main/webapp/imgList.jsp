@@ -65,8 +65,8 @@
 
 
 
-<script>
-function update(){if(confirm("수정하시겠습니까?")){location.href="./update?no=${subject.pdsno }";}}
+				<script>
+//function update(){if(confirm("수정하시겠습니까?")){location.href="./update?no=${subject.pdsno }";}}
 
     function addComment(pdsno) {
         var commentContent = document.getElementById('commentcontent'+pdsno).value;
@@ -115,20 +115,6 @@ function update(){if(confirm("수정하시겠습니까?")){location.href="./upda
     }    
     
 </script>
-
-				<script>
-	
-	//id="commentcontent"
-	//id="comment-btn"
-	//댓글쓰기 창에 쓸 수 있는 글자 표시해주고 넘어가면 더이상 입력 불가로 바꾸기
-	$("#commentcontent").keyup(function(){
-        let text = $(this).val();
-        if(text.length > 100){alert("100자 넘었어요.");$(this).val(text.substr(0, 100));}
-        $("#comment-btn").text("글쓰기 " + text.length +  "/100");
-     });
-	
-
-</script>
 				<%
 				CommentDAO cdao = new CommentDAO();
 				List<CommentDTO> ccomment = null;
@@ -173,14 +159,15 @@ function update(){if(confirm("수정하시겠습니까?")){location.href="./upda
 							🆔
 							<%=dto.getWname()%>
 						</div>
-						
-										<div class="update">
-						${subject.pdsno }<c:if
-							test="${sessionScope.mname ne null && detail.mid eq sessionScope.mid }">
-							<img alt="수정" src="./img/update5.png" width="18px" height="18px"
-								onclick="update()">
-						</c:if>
-					</div>
+
+						<div class="update">
+							${subject.pdsno }
+							<c:if
+								test="${sessionScope.mname ne null && detail.mid eq sessionScope.mid }">
+								<img alt="수정" src="./img/update5.png" width="18px" height="18px"
+									onclick="update()">
+							</c:if>
+						</div>
 						<img class="post-image" src="data:image/jpeg;base64,${imgstr}"
 							alt="Post Image">
 					</div>
@@ -216,9 +203,9 @@ function update(){if(confirm("수정하시겠습니까?")){location.href="./upda
 							</div>
 						</div>
 						<div class="post-content"><%=dto.getSubject()%></div>
-						
+
 					</div>
-	
+
 
 
 					<div class="post-comment">
@@ -230,7 +217,7 @@ function update(){if(confirm("수정하시겠습니까?")){location.href="./upda
 							ccomment = cdao.getCommentList(dto.getPdsno());
 							%>
 							<c:forEach items="<%=ccomment%>" var="comment">
-								<li>${comment.mid}님: ${comment.comment}</li>
+								<li>${comment.mid}님:${comment.comment}</li>
 							</c:forEach>
 						</ul>
 						<c:if test="${empty sessionScope.mid}">

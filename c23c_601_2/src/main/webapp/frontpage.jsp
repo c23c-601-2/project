@@ -41,7 +41,7 @@
 							<img src="./assets/img/youtube.png" alt="유투브"> <a href="https://www.youtube.com/@poseidon5349/featured" target="_blank">선생님 유투브</a>
 						</div>
 						<div class ="youtubeplay">
-							<iframe  width="100%" height="100%" src="https://www.youtube.com/embed/YkVyu_uXB3Y" frameborder="0" allowfullscreen></iframe>
+							<iframe  width="100%" height="100%" src="https://www.youtube.com/embed/tLTvZaAh1eE" frameborder="0" allowfullscreen></iframe>
 						</div>
 					</div>
 					
@@ -74,9 +74,11 @@
 						</div>
 						<div style="background-color: white">
 							<table class="write" style="padding: 0">
-								<div style="font-size: 30px; text-align: center;">
-									<img alt="reviewlist1" src="./img/reviewlist1.png" width="30px;">&nbsp; 후기 리스트
-								</div>
+								<a href=./food style="text-decoration: none; color: inherit;">
+									<div style="font-size: 30px; text-align: center">
+										<img alt="reviewlist1" src="./img/reviewlist1.png" width="30px;">&nbsp; 후기 리스트
+									</div>
+								</a>
 								<div style="text-align: right;">
 									<button onclick="url('./board')">후기 게시판으로</button>
 								</div>
