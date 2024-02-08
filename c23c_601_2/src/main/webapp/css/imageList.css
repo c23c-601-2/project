@@ -1,3 +1,4 @@
+
 /* 게시물 컨테이너 */
 
 	
@@ -78,6 +79,7 @@
 	font-size: 25px;
 	font-weight: bold;
 	color : #400000 ;
+    white-space: pre-wrap;
 }
 
 .post-icons img {
