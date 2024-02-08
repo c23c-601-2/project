@@ -101,7 +101,53 @@
 			$("#idSaveCheck").attr("checked", true); 
 		}
 		
-		
+		$("#id,#pw").on("keyup",function(key){ 
+			if(key.keyCode==13) {
+				if($("#idSaveCheck").is(":checked")){ 
+					setCookie("idChk", $("#id").val(), 7); 
+				}else{ 
+					deleteCookie("idChk");
+				}
+				
+				
+				let id = $('#id').val();
+				let pw = $('#pw').val();
+				
+				if(id.length ==0){
+					
+					$('.id-alert').show();
+					$('.id-alert').html("<div>아이디를 입력해주세요.</div>");
+					
+					
+				}else if(pw.length ==0){
+
+					$('.id-alert').show();
+					$('.id-alert').html("<div>비밀번호를 입력해주세요.</div>");
+					
+				} else {
+					$.ajax({
+						url:'/login',
+						type:'post',
+						dataType:'text',
+						data:{'id':id,'pw':pw},
+						success:function(result){
+							if(result==1){
+								$('.id-alert').hide();
+								window.location.replace("./frontpage");
+							} else{
+								$('.id-alert').show();
+								$('.id-alert').html("<div>아이디 또는 비밀번호를 잘못 입력했습니다.</div>");
+							}
+						},
+						error:function(result){
+							alert("실패");
+						}
+						
+					});
+				}
+			}
+		});
+
 		
 		
 		$("#join").click(function(){
@@ -109,6 +155,7 @@
 		})
 		
 		$("#loginbtn").click(function(){
+			
 			if($("#idSaveCheck").is(":checked")){ 
 				setCookie("idChk", $("#id").val(), 7); 
 			}else{ 
