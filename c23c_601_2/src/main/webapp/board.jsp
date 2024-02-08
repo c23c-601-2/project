@@ -182,11 +182,11 @@ $(function() {
 </script>
 <style>
 .d1, .likeBtn, .dislikeBtn {
-	width: 10%;
+	width: 9%;
 }
 
 .d2 {
-	width: 15%;
+	width: 21%;
 }
 
 .d3 {
@@ -243,7 +243,7 @@ footer {
 }
 
 .tablediv{
-	width:calc(100% - 235px);
+	width:calc(100% - 200px);
 	float:right;
 	text-align: center;
 	display: flex;
@@ -290,7 +290,7 @@ tr:hover{
 									<th class="d1">번호</th>
 									<th class="d1">가게 이름</th>
 									<th class="d3">후기 내용</th>
-									<th class="d1">작성자</th>
+									<th class="d2">작성자</th>
 									<th class="d1">날짜</th>
 									<th class="d1">좋아요</th>
 									<th class="d1">싫어요</th>
@@ -327,7 +327,7 @@ tr:hover{
 											</button>
 										</td>
 
-										<td class="d1">${row.grade }</td>
+										<td class="d2">${row.grade }</td>
 									</tr>
 								</c:forEach>
 							</tbody>
