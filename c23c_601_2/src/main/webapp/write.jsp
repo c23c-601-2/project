@@ -273,7 +273,8 @@ function getInfiniteChat() {
 			</div>
 			<div>
 				<article class="writeall">
-					<span id="review">후기 쓰기</span>
+					<br><span id="review">후기 쓰기</span><br>
+			<br><h2 class="h2">🧡 여러분의 소중한 후기 감사드립니다. 🧡</h2><br><br>
 					<form action="./write" method="post"
 						onsubmit="return titlecheck() && contentcheck()">
 						<div class="write">
@@ -305,13 +306,11 @@ function getInfiniteChat() {
 								class="textarea1"></label><br>
 							<button class="textarea" type="submit">등록하기</button>
 						</div>
-						
-						
-						
-					</form>
+					</form><br>
 					<div class="buttonarea">
 						<button onclick="url('./board')">게시판으로</button>
 					</div>
+					
 				</article>
 			</div>
 		</div>
