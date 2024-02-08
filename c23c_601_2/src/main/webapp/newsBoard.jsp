@@ -43,14 +43,14 @@ footer {
 	display: flex;
 	justify-content: center;
 }
-
-.table{
-	background-color: white;
-	width:90%;
 }
 .tablewidth{
 	width:90%;
 }
+
+.table{
+	background-color: white;
+	width:90%;
 </style>
 
 </head>
