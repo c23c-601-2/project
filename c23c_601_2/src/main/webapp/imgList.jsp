@@ -49,7 +49,6 @@
 					</h3>
 				</div>
 
-
 				<c:if test="${empty sessionScope.mid}">
 					<div class="comment-loginBtn">
 						<button
@@ -62,8 +61,6 @@
 						<a href="./imgForm">글쓰기</a>
 					</div>
 				</c:if>
-
-
 
 				<script>
 //function update(){if(confirm("수정하시겠습니까?")){location.href="./update?no=${subject.pdsno }";}}
@@ -114,7 +111,7 @@
         });
     }    
     
-</script>
+				</script>
 				<%
 				CommentDAO cdao = new CommentDAO();
 				List<CommentDTO> ccomment = null;
@@ -152,7 +149,7 @@
 						String imgstr = dto.getBase64ImageData();
 						request.setAttribute("imgstr", imgstr);
 				%>
-
+			<div id="targetSection<%=idx%>">
 				<div class="post">
 					<div class="post-image-container">
 						<div class="post-writer">
@@ -178,6 +175,7 @@
 							int heart = sdao.getLikeStatus((String) session.getAttribute("mid"), dto.getPdsno());
 							request.setAttribute("heart", heart);
 							%>
+							<div id="targetSection<%=idx%>">
 							<div class="icon" onclick="toggleLike(<%=dto.getPdsno()%>)">
 								<c:if test="${heart eq 1}">
 									<img id="like-icon<%=dto.getPdsno()%>"
@@ -191,6 +189,7 @@
 									<img id="like-icon<%=dto.getPdsno()%>" src="./img/heart.png"
 										alt="Heart Icon">
 								</c:if>
+							</div>
 							</div>
 							<div class="icon">
 								<img src="./img/speech-bubble.png" alt="말풍선">

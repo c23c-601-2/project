@@ -148,6 +148,7 @@
 	justify-content: space-around;
 	margin: 10px;
 	align-items: stretch;
+	width: 360px;
 }
 .insta-image-container {
     flex: 1;

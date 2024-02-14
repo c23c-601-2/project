@@ -24,10 +24,8 @@
 	display: flex;
 	flex-direction: row;
 	width: 1300px;
-	height: 700px;
 	/* justify-content: space-between; */
 	/* border-collapse: collapse; */
-	
 }
 
 #map {
@@ -288,8 +286,8 @@ function listCheck() {
        dataType : 'json',
        data : {title : title},
        success : function(response) {
-    	   //alert("json받아오니?" + list);
     	   var list = response.list;
+    	   //alert("json받아오니?" + list);
           if (list.length > 0) {
 			p1.remove();
 			let data = '';

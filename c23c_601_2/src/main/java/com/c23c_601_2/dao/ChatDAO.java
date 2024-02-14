@@ -35,17 +35,24 @@ public class ChatDAO extends AbstractDAO {
 				chat.setChatTime(rs.getString("chatTime").substring(0, 11) + " " + timeType + " " + chatTime + ":" + rs.getString("chatTime").substring(14, 16) + "");
 				chatList.add(chat);
 			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
+			
 		} finally {
+			
 			try {
 				if(rs != null) rs.close();
 				if(pstmt != null) pstmt.close();
 			} catch (Exception e) {
 				e.printStackTrace();
+				
 			}
+			
 		}
+		
 		return chatList;
+		
 	}
 	
 	public ArrayList<ChatDTO> getChatListByRecent(int number) {
