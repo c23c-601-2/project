@@ -108,24 +108,24 @@
 						<div class="instarow-container">
 							<div class= "instarow">
 								<div class="insta-image-container">
-									<a href="./imgList">
+									<a href="./imgList.jsp#targetSection5">
 								 		<img src="data:image/jpeg;base64,${img1}" alt="Image 1">
 								 	</a>
 								</div>
 								<div class="insta-image-container">
-									<a href="./imgList">
+									<a href="./imgList#targetSection1">
 										<img src="data:image/jpeg;base64,${img2}" alt="Image 2">
 									</a>
 								</div>
 							</div>
 							<div class= "instarow">
 								<div class="insta-image-container">
-									<a href="./imgList">
+									<a href="./imgList#targetSection2">
 										<img src="data:image/jpeg;base64,${img3}" alt="Image 3">
 									</a>
 								</div>								
 								<div class="insta-image-container">
-									<a href="./imgList">
+									<a href="./imgList#targetSection3">
 										<img src="data:image/jpeg;base64,${img4}" alt="Image 4">
 									</a>
 								</div>								
