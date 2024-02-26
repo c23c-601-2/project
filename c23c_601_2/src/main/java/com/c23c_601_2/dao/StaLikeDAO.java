@@ -48,7 +48,7 @@ public class StaLikeDAO extends AbstractDAO{
 	}	
 	
 	public int getLikeStatus(String mid, int pdsno) {
-		int result = 2; 
+		int result = 0; 
 		Connection con = db.getConnection();
 		PreparedStatement pstmt = null;
 		String sql = "SELECT liked FROM staLike WHERE pdsno=? AND mid=?";
@@ -60,11 +60,8 @@ public class StaLikeDAO extends AbstractDAO{
 			pstmt.setString(2, mid);
 			rs = pstmt.executeQuery();
 			
-			if (rs.next()) {
+			while (rs.next()) {
 			result = rs.getInt("liked");
-			
-			} else {
-				return -1;
 			}
 			
 		} catch (SQLException e) {

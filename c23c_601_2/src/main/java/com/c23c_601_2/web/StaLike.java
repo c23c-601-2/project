@@ -29,36 +29,30 @@ public class StaLike extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		String mid = (String) session.getAttribute("mid");
-		request.setAttribute("mid", mid);
 		int pdsno = Integer.parseInt(request.getParameter("pdsno"));
 //		int pdsno = 9;
 		
 		//좋아요 상태를 토글
 		StaLikeDAO staLikeDAO = new StaLikeDAO();
-		
-		int result;
-		int currentLikeStatus;
+		Boolean currentLikeStatus;
 		int newLikeStatus ;
-		result = staLikeDAO.getLikeStatus(mid, pdsno);
 		
-		if (result == 1 ) {
-			currentLikeStatus = 1;
+		
+		if (staLikeDAO.getLikeStatus(mid, pdsno) == 1 ) {
+			currentLikeStatus = true;
 			newLikeStatus = 0;
-		} else if (result == -1 ) {
-			currentLikeStatus = -1;
-			newLikeStatus = 1;
 		} else {
-			currentLikeStatus = 0;
+			currentLikeStatus = false;
 			newLikeStatus = 1;
 		}
 		
 		// 데이터베이스에 좋아요 정보 저장 또는 업데이트
-		if (currentLikeStatus ==  -1 ) {
-			staLikeDAO.addLike(mid, pdsno);
-		} else {
+		if (currentLikeStatus) {
 			staLikeDAO.updateLike(mid, pdsno, newLikeStatus);
+		} else {
+			staLikeDAO.addLike(mid, pdsno);
 		}
-		
+
         // JSON 응답 생성
         JSONObject jsonResponse = new JSONObject();
         jsonResponse.put("success", newLikeStatus);
